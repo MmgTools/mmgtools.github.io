@@ -93,11 +93,11 @@ II/ Memory management: dynamic allocations and deallocations</h1>
 <p>For example, the following allocation: </p><div class="fragment"><div class="line">Increase_memory_count(5*<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));</div>
 <div class="line">ptr = (<span class="keywordtype">double</span> *) malloc (5*<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));</div>
 <div class="line"><span class="keywordflow">if</span> ( !ptr ) {</div>
-<div class="line">   fprintf(stdout,<span class="stringliteral">&quot;  ## Error: unable to allocate my array.&quot;</span>);  </div>
+<div class="line">   fprintf(stdout,<span class="stringliteral">&quot;  ## Error: unable to allocate my array.&quot;</span>);</div>
 <div class="line">   exit(EXIT_FAILURE);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>must be replaced by the following one in the <b>Mmg</b> code: </p><div class="fragment"><div class="line"><a class="code" href="mmgcommon_8h.html#a5119d3bed2b1273e7741600bb22b2088">MMG5_ADD_MEM</a>(<a class="code" href="API__functionsf__2d_8c.html#ada14f706b6d7a565d1eeb593fa0ae492">mesh</a>,5*<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>),<span class="stringliteral">&quot;my array&quot;</span>,exit(EXIT_FAILURE));</div>
-<div class="line"><a class="code" href="mmgcommon_8h.html#acdeadc8c5aa177b193c4568cb5984559">MMG5_SAFE_MALLOC</a>(ptr,5,<span class="keywordtype">double</span>,exit(EXIT_FAILURE)); </div>
+<div class="line"><a class="code" href="mmgcommon_8h.html#acdeadc8c5aa177b193c4568cb5984559">MMG5_SAFE_MALLOC</a>(ptr,5,<span class="keywordtype">double</span>,exit(EXIT_FAILURE));</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md28"></a>
 2) Deallocations</h2>
 <p>To decrement the memory counter, to deallocate your pointer and to leave it pointing toward <code>NULL</code>, you just need to call the <code><a class="el" href="mmgcommon_8h.html#afcb0359c0182a916e54e9470e5dd7eea">MMG5_DEL_MEM(mesh,ptr)</a></code> macro.</p>
@@ -124,13 +124,13 @@ III/ Coding style</h1>
 <div class="ttc" id="ammgcommon_8h_html_acdeadc8c5aa177b193c4568cb5984559"><div class="ttname"><a href="mmgcommon_8h.html#acdeadc8c5aa177b193c4568cb5984559">MMG5_SAFE_MALLOC</a></div><div class="ttdeci">#define MMG5_SAFE_MALLOC(ptr, size, type, law)</div><div class="ttdef"><b>Definition:</b> <a href="mmgcommon_8h_source.html#l00311">mmgcommon.h:311</a></div></div>
 <div class="ttc" id="aAPI__functionsf__2d_8c_html_ada14f706b6d7a565d1eeb593fa0ae492"><div class="ttname"><a href="API__functionsf__2d_8c.html#ada14f706b6d7a565d1eeb593fa0ae492">mesh</a></div><div class="ttdeci">MMG5_pMesh * mesh</div><div class="ttdef"><b>Definition:</b> <a href="API__functionsf__2d_8c_source.html#l00063">API_functionsf_2d.c:63</a></div></div>
 <div class="ttc" id="ammgcommon_8h_html_a5119d3bed2b1273e7741600bb22b2088"><div class="ttname"><a href="mmgcommon_8h.html#a5119d3bed2b1273e7741600bb22b2088">MMG5_ADD_MEM</a></div><div class="ttdeci">#define MMG5_ADD_MEM(mesh, size, message, law)</div><div class="ttdef"><b>Definition:</b> <a href="mmgcommon_8h_source.html#l00287">mmgcommon.h:287</a></div></div>
-<div class="ttc" id="ainout__3d_8c_html_a5b1548618359fda03ce50c5fa34e9598"><div class="ttname"><a href="inout__3d_8c.html#a5b1548618359fda03ce50c5fa34e9598">MMG3D_saveMesh</a></div><div class="ttdeci">int MMG3D_saveMesh(MMG5_pMesh mesh, const char *filename)</div><div class="ttdef"><b>Definition:</b> <a href="inout__3d_8c_source.html#l01324">inout_3d.c:1324</a></div></div>
+<div class="ttc" id="ainout__3d_8c_html_a5b1548618359fda03ce50c5fa34e9598"><div class="ttname"><a href="inout__3d_8c.html#a5b1548618359fda03ce50c5fa34e9598">MMG3D_saveMesh</a></div><div class="ttdeci">int MMG3D_saveMesh(MMG5_pMesh mesh, const char *filename)</div><div class="ttdef"><b>Definition:</b> <a href="inout__3d_8c_source.html#l01398">inout_3d.c:1398</a></div></div>
 <div class="ttc" id="astructMMG5__Mesh_html"><div class="ttname"><a href="structMMG5__Mesh.html">MMG5_Mesh</a></div><div class="ttdoc">MMG mesh structure.</div><div class="ttdef"><b>Definition:</b> <a href="libmmgtypes_8h_source.html#l00575">libmmgtypes.h:575</a></div></div>
 <div class="ttc" id="ammgcommon_8h_html_afcb0359c0182a916e54e9470e5dd7eea"><div class="ttname"><a href="mmgcommon_8h.html#afcb0359c0182a916e54e9470e5dd7eea">MMG5_DEL_MEM</a></div><div class="ttdeci">#define MMG5_DEL_MEM(mesh, ptr)</div><div class="ttdef"><b>Definition:</b> <a href="mmgcommon_8h_source.html#l00278">mmgcommon.h:278</a></div></div>
 <div class="ttc" id="aAPI__functionsf__3d_8c_html_a539b7c333f2633a43adfe1fcb5b0430b"><div class="ttname"><a href="API__functionsf__3d_8c.html#a539b7c333f2633a43adfe1fcb5b0430b">filename</a></div><div class="ttdeci">MMG5_pMesh char * filename</div><div class="ttdef"><b>Definition:</b> <a href="API__functionsf__3d_8c_source.html#l01014">API_functionsf_3d.c:1014</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 28 2021 10:19:36 for Mmg by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 28 2021 10:52:37 for Mmg by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.16
 </small></address>
