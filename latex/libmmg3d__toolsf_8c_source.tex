@@ -1,0 +1,179 @@
+\hypertarget{libmmg3d__toolsf_8c_source}{}\doxysection{libmmg3d\+\_\+toolsf.\+c}
+\label{libmmg3d__toolsf_8c_source}\index{src/mmg3d/libmmg3d\_toolsf.c@{src/mmg3d/libmmg3d\_toolsf.c}}
+\mbox{\hyperlink{libmmg3d__toolsf_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00044}00044 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg3d__private_8h}{libmmg3d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00045}00045 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg3d_8h}{libmmg3d.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00050}\mbox{\hyperlink{libmmg3d__toolsf_8c_a1c3465c43c95bdd26b05f36c29b5bd03}{00050}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_SETFUNC,mmg3d\_setfunc,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00051}00051              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00052}00052              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met)) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00053}00053   \mbox{\hyperlink{libmmg3d_8h_ab62a86f9900e77418ebaa7a4991f3e74}{MMG3D\_setfunc}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00054}00054   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00055}00055 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00060}\mbox{\hyperlink{libmmg3d__toolsf_8c_a93fc20bb21866457a01fafdc3148103d}{00060}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_GET\_NUMBEROFNONBDYTRIANGLES,mmg3d\_get\_numberofnonbdytriangles,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00061}00061              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int* nb\_tria, \textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00062}00062              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},nb\_tria,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00063}00063   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} =  \mbox{\hyperlink{libmmg3d_8h_a7ad5af7fbbfbd54ff772ca48ef2d950e}{MMG3D\_Get\_numberOfNonBdyTriangles}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},nb\_tria);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00064}00064   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00065}00065 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00070}\mbox{\hyperlink{libmmg3d__toolsf_8c_a84a41c5c95640d158042f81335929456}{00070}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_GET\_NONBDYTRIANGLE,mmg3d\_get\_nonbdytriangle,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00071}00071              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int* v0, MMG5\_int* v1,MMG5\_int* v2,MMG5\_int *ref,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00072}00072               MMG5\_int* idx,\textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00073}00073              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},v0,v1,v2,ref,idx,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00074}00074   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} =  \mbox{\hyperlink{libmmg3d_8h_af692c1c73006fe7d1b1b0697054aa472}{MMG3D\_Get\_nonBdyTriangle}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},v0,v1,v2,ref,*idx);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00075}00075   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00076}00076 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00078}00078 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00082}\mbox{\hyperlink{libmmg3d__toolsf_8c_af16a94aaba76cec08f7d53baf04c59c3}{00082}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_USAGE,mmg3d\_usage,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00083}00083              (\textcolor{keywordtype}{char} *prog, \textcolor{keywordtype}{int} *strlen),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00084}00084              (prog,strlen)) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00085}00085   \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}} = NULL;}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00087}00087   \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}} = (\textcolor{keywordtype}{char}*)malloc((*strlen+1)*\textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00088}00088   \mbox{\hyperlink{API__functionsf__2d_8c_a14bfee113563620ee532c52283791e7a}{strncpy}}(\mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}},prog,*strlen);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00089}00089   \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}}[*strlen] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00090}00090   \mbox{\hyperlink{libmmg3d_8h_afa0314e6937035028e73a9164514d8b5}{MMG3D\_usage}}(\mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}});}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00091}00091   \mbox{\hyperlink{mmgcommon__private_8h_af4d5e437466b48a931cc2ad480bc3a8d}{MMG5\_SAFE\_FREE}}(\mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}});}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00093}00093   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00094}00094 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00099}\mbox{\hyperlink{libmmg3d__toolsf_8c_a7c6f637af291ad77e5491fa7f5a3e84a}{00099}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_PARSOP,mmg3d\_parsop,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00100}00100              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met,\textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00101}00101              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00103}00103   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_a1c263e3d0a2b43f8bcde49e9ac1cf8ad}{MMG3D\_parsop}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, *met);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00105}00105   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00106}00106 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00107}00107 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00111}\mbox{\hyperlink{libmmg3d__toolsf_8c_a07472f905bab09e6ca682f424b3da606}{00111}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_DEFAULTVALUES,mmg3d\_defaultvalues,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00112}00112              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00113}00113              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00114}00114   \mbox{\hyperlink{libmmg3d_8h_ae2d1cd9534369a81cf5e9f1334719989}{MMG3D\_defaultValues}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}});}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00115}00115   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00116}00116 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00117}00117 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00121}\mbox{\hyperlink{libmmg3d__toolsf_8c_a65ca5bde79e4184dd85e799198fce1d4}{00121}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_STOCKOPTIONS,mmg3d\_stockoptions,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00122}00122              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Info}{MMG5\_Info}} *\mbox{\hyperlink{boulep_8c_a6f965dc34f7deedba7598e47c401773a}{info}}, \textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00123}00123              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{boulep_8c_a6f965dc34f7deedba7598e47c401773a}{info}},\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00124}00124   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_ae2a169aad970f2dd8185549690794ca7}{MMG3D\_stockOptions}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{boulep_8c_a6f965dc34f7deedba7598e47c401773a}{info}});}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00125}00125   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00126}00126 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00127}00127 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00131}\mbox{\hyperlink{libmmg3d__toolsf_8c_a663717bb02f4eac3d84c648737303bc0}{00131}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_DESTOCKOPTIONS,mmg3d\_destockoptions,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00132}00132                (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Info}{MMG5\_Info}} *\mbox{\hyperlink{boulep_8c_a6f965dc34f7deedba7598e47c401773a}{info}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00133}00133              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{boulep_8c_a6f965dc34f7deedba7598e47c401773a}{info}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00134}00134   \mbox{\hyperlink{libmmg3d_8h_a4d247b10e83b5536f4150ebb581e91ad}{MMG3D\_destockOptions}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{boulep_8c_a6f965dc34f7deedba7598e47c401773a}{info}});}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00135}00135   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00136}00136 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00137}00137 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00141}\mbox{\hyperlink{libmmg3d__toolsf_8c_adad97a78bf2ba5f818adc833501efd3c}{00141}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_MMG3DCHECK,mmg3d\_mmg3dcheck,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00142}00142              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met,\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keywordtype}{double} *critmin, \textcolor{keywordtype}{double} *lmin,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00143}00143               \textcolor{keywordtype}{double} *lmax, MMG5\_int *eltab,\textcolor{keywordtype}{int} *metRidTyp,\textcolor{keywordtype}{int} *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00144}00144              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},critmin,lmin,lmax,eltab,metRidTyp,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00145}00145   int8\_t \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}} = (int8\_t)(*metRidTyp);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00147}00147   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_ac2662feefe6df93b76f3dac2070c569a}{MMG3D\_mmg3dcheck}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met,*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},*critmin,*lmin,*lmax,eltab,\mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}});}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00148}00148 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00149}00149   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00150}00150 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00152}00152 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00156}\mbox{\hyperlink{libmmg3d__toolsf_8c_a78bc72acd1468cb4a3dc00c65c6cfd21}{00156}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_SEARCHQUA,mmg3d\_searchqua,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00157}00157              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met,\textcolor{keywordtype}{double} *critmin,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00158}00158               MMG5\_int *eltab,int8\_t *metRidTyp),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00159}00159              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,critmin,eltab,metRidTyp)) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00160}00160   \mbox{\hyperlink{libmmg3d_8h_a6112a62b06fd8715265caf68082aeeb8}{MMG3D\_searchqua}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met,*critmin,eltab,*metRidTyp);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00161}00161   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00162}00162 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00163}00163 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00167}\mbox{\hyperlink{libmmg3d__toolsf_8c_a8c9e78577fe14d8488d529d2e2d6df0f}{00167}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_SEARCHLEN,mmg3d\_searchlen,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00168}00168              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met, \textcolor{keywordtype}{double} *lmin,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00169}00169               \textcolor{keywordtype}{double} *lmax, MMG5\_int *eltab,int8\_t *metRidTyp,\textcolor{keywordtype}{int} *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00170}00170              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,lmin,lmax,eltab,metRidTyp,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00171}00171   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_a4a624cc38f208ac2126de887d7d15231}{MMG3D\_searchlen}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met,*lmin,*lmax,eltab,*metRidTyp);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00172}00172   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00173}00173 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00174}00174 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00178}\mbox{\hyperlink{libmmg3d__toolsf_8c_ace987dc9d6c1d741b266db473f685b06}{00178}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_GET\_TETFROMTRIA,mmg3d\_get\_tetfromtria,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00179}00179              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int *ktri, MMG5\_int *ktet, \textcolor{keywordtype}{int} *iface,\textcolor{keywordtype}{int} *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00180}00180              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ktri,ktet,iface,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00181}00181 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00182}00182   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_ae021e118401977737bdf69e2f30ef49e}{MMG3D\_Get\_tetFromTria}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*ktri,ktet,iface);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00183}00183   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00184}00184 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00185}00185 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00189}\mbox{\hyperlink{libmmg3d__toolsf_8c_a093e6e0997d327c4c3dce2b417d1178f}{00189}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_GET\_TETSFROMTRIA,mmg3d\_get\_tetsfromtria,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00190}00190              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int *ktri, MMG5\_int ktet[2], \textcolor{keywordtype}{int} iface[2],\textcolor{keywordtype}{int} *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00191}00191              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ktri,ktet,iface,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00192}00192 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00193}00193   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_ac261ed99ab1adfcbeac1451f8c4ff644}{MMG3D\_Get\_tetsFromTria}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*ktri,ktet,iface);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00194}00194   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00195}00195 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00200}\mbox{\hyperlink{libmmg3d__toolsf_8c_a836899cbdd7b250806cc0b23e533f8a4}{00200}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_GET\_ADJATET,mmg3d\_get\_adjatet,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00201}00201                (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int* kel, MMG5\_int listet[4], \textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00202}00202                (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},kel,listet,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00203}00203   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} =  \mbox{\hyperlink{libmmg3d_8h_ac2cc1f2010715b8fdd14b89b60625fb2}{MMG3D\_Get\_adjaTet}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*kel,listet);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00204}00204   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00205}00205 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00206}00206 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00210}\mbox{\hyperlink{libmmg3d__toolsf_8c_aa158878029ea133d438f4ea0f7b6f05c}{00210}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_FREE\_SOLUTIONS,mmg3d\_free\_solutions,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00211}00211              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}),(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00213}00213   \mbox{\hyperlink{libmmg3d_8h_abf9aabe1a1b94a3b904b112d2be885d3}{MMG3D\_Free\_solutions}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}});}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00214}00214 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00215}00215   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00216}00216 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00217}00217 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00221}\mbox{\hyperlink{libmmg3d__toolsf_8c_a539dc4af4d19e6b3a79d8700017cd825}{00221}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_DOSOL,mmg3d\_dosol,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00222}00222              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met,\textcolor{keywordtype}{int} *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00223}00223              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00224}00224   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_a60ab1acf860e6d699ab006102f015df6}{MMG3D\_doSol}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00225}00225   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00226}00226 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00227}00227 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00231}\mbox{\hyperlink{libmmg3d__toolsf_8c_a9369a1aae45c303bcc216f98b8b76c13}{00231}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_SET\_CONSTANTSIZE,mmg3d\_set\_constantsize,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00232}00232              (\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met,\textcolor{keywordtype}{int} *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00233}00233              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00234}00234   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} =  \mbox{\hyperlink{libmmg3d_8h_a236757ab0f19bbcd40ea01de2c9749e4}{MMG3D\_Set\_constantSize}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00235}00235   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00236}00236 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00241}\mbox{\hyperlink{libmmg3d__toolsf_8c_a722b5df54b0ae8465d8b8c76abf7975c}{00241}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_COMPUTE\_EIGENV,mmg3d\_compute\_eigenv,}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00242}00242              (\textcolor{keywordtype}{double} m[6],\textcolor{keywordtype}{double} lambda[3],\textcolor{keywordtype}{double} vp[3][3],\textcolor{keywordtype}{int} *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00243}00243              (m,lambda,vp,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}})) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00245}00245   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8h_a4b3b834c02bce471bdc2eae2ddb583a8}{MMG3D\_Compute\_eigenv}}(m,lambda,vp);}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00246}00246   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3d__toolsf_8c_source_l00247}00247 \}}
+
+\end{DoxyCode}

@@ -1,0 +1,62 @@
+\hypertarget{libmmg3df_8c_source}{}\doxysection{libmmg3df.\+c}
+\label{libmmg3df_8c_source}\index{src/mmg3d/libmmg3df.c@{src/mmg3d/libmmg3df.c}}
+\mbox{\hyperlink{libmmg3df_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00044}00044 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg3d_8h}{libmmg3d.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00045}00045 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00050}\mbox{\hyperlink{libmmg3df_8c_abb4c13640f2e91fd2ed88424bf2cfe39}{00050}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_MMG3DLIB,mmg3d\_mmg3dlib,(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met,}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00051}00051                                             \textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00052}00052              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}))\{}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00054}00054   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8c_a8488f2b5bd529342c5453824319d9ee0}{MMG3D\_mmg3dlib}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met);}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00056}00056   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00057}00057 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00062}\mbox{\hyperlink{libmmg3df_8c_a0e21810bcf3cacd9df14dc9612197e8c}{00062}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_MMG3DLS,mmg3d\_mmg3dls,(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00063}00063                                           \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met,\textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00064}00064              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},met,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}))\{}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00065}00065 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00066}00066   \textcolor{keywordflow}{if} ( met ) \{}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00067}00067     *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8c_a5e5ba3b22988898b378fa774ff6b09ac}{MMG3D\_mmg3dls}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},*met);}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00068}00068   \}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00069}00069   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00070}00070     *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8c_a5e5ba3b22988898b378fa774ff6b09ac}{MMG3D\_mmg3dls}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},NULL);}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00071}00071   \}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00072}00072   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00073}00073 \}}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00074}00074 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00078}\mbox{\hyperlink{libmmg3df_8c_a6cfbee6cc9b09ed458bd68674a6693ec}{00078}} \mbox{\hyperlink{mmgcommon__private_8h_a9a5c2101c19e3c141a70c8f492353c33}{FORTRAN\_NAME}}(MMG3D\_MMG3DMOV,mmg3d\_mmg3dmov,(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} *\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *met}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00079}00079                                             ,\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *disp,\textcolor{keywordtype}{int}* \mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}),}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00080}00080              (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,disp,\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}}))\{}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00081}00081 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00082}00082   *\mbox{\hyperlink{API__functionsf__2d_8c_a1068241ef2af147c2a2506ed2c8ca408}{retval}} = \mbox{\hyperlink{libmmg3d_8c_ae252a1d7a139df5e9cad5f82cc4aaa30}{MMG3D\_mmg3dmov}}(*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*met,*disp);}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00084}00084   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{libmmg3df_8c_source_l00085}00085 \}}
+
+\end{DoxyCode}

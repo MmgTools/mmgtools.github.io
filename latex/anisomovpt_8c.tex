@@ -1,0 +1,96 @@
+\hypertarget{anisomovpt_8c}{}\doxysection{src/common/anisomovpt.c File Reference}
+\label{anisomovpt_8c}\index{src/common/anisomovpt.c@{src/common/anisomovpt.c}}
+
+
+Functions to move a point in the mesh (with anisotropic metric).  
+
+
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for anisomovpt.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{anisomovpt_8c_a9af878bacdda84894d6e28bb26b6043b}{MMG5\+\_\+element\+Weight}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} pt, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p0, \mbox{\hyperlink{structMMG5__Bezier}{MMG5\+\_\+\+Bezier}} $\ast$pb, double r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double gv\mbox{[}2\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions to move a point in the mesh (with anisotropic metric). 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{anisomovpt_8c_source}{anisomovpt.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{anisomovpt_8c_a9af878bacdda84894d6e28bb26b6043b}\label{anisomovpt_8c_a9af878bacdda84894d6e28bb26b6043b}} 
+\index{anisomovpt.c@{anisomovpt.c}!MMG5\_elementWeight@{MMG5\_elementWeight}}
+\index{MMG5\_elementWeight@{MMG5\_elementWeight}!anisomovpt.c@{anisomovpt.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_elementWeight()}{MMG5\_elementWeight()}}
+{\footnotesize\ttfamily int MMG5\+\_\+element\+Weight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{pt,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p0,  }\item[{\mbox{\hyperlink{structMMG5__Bezier}{MMG5\+\_\+\+Bezier}} $\ast$}]{pb,  }\item[{double}]{r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{gv\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em pt} & pointer toward the tria on which we integrate. \\
+\hline
+{\em p0} & pointer toward the point that we want to move. \\
+\hline
+{\em pb} & bezier patch of the triangle. \\
+\hline
+{\em r} & rotation matrix that sends the normal at point {\itshape p0} to e\+\_\+z. \\
+\hline
+{\em gv} & centre of mass that we want to update using the computed element weight.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Compute integral of sqrt(T$^\wedge$J(xi) M(\+P(xi)) J(xi)) $\ast$ P(xi) over the triangle. 
+
+Definition at line \mbox{\hyperlink{anisomovpt_8c_source_l00053}{53}} of file \mbox{\hyperlink{anisomovpt_8c_source}{anisomovpt.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt_8c_a9af878bacdda84894d6e28bb26b6043b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt_8c_a9af878bacdda84894d6e28bb26b6043b_icgraph}
+\end{center}
+\end{figure}

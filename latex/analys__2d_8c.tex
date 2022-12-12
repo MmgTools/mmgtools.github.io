@@ -1,0 +1,320 @@
+\hypertarget{analys__2d_8c}{}\doxysection{src/mmg2d/analys\+\_\+2d.c File Reference}
+\label{analys__2d_8c}\index{src/mmg2d/analys\_2d.c@{src/mmg2d/analys\_2d.c}}
+
+
+Analysis routine for an input mesh without structure passing through a point.  
+
+
+{\ttfamily \#include \char`\"{}libmmg2d\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for analys\+\_\+2d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{analys__2d_8c_abfe76d4f3cdba1ba1fbc888162f48be2}{MMG2\+D\+\_\+setadj}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, int8\+\_\+t init\+\_\+cc)
+\item 
+int \mbox{\hyperlink{analys__2d_8c_a045b4ffe0da80c475e0c4627497ed23a}{MMG2\+D\+\_\+singul}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int ref)
+\item 
+int \mbox{\hyperlink{analys__2d_8c_af7c7209a8643f4d3716621e40c4e8c70}{MMG2\+D\+\_\+norver}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int ref)
+\item 
+int \mbox{\hyperlink{analys__2d_8c_a93f0341110ef01065aa9eecc4aa8096f}{MMG2\+D\+\_\+regnor}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+static int \mbox{\hyperlink{analys__2d_8c_ac024dfdd420747291138302c06c8f4c3}{MMG2\+D\+\_\+dichotomy}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} pt, MMG5\+\_\+int k, double $\ast$c)
+\item 
+int \mbox{\hyperlink{analys__2d_8c_a593f8577a9cf51cbe4d3ef33b19b327f}{MMG2\+D\+\_\+regver}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{analys__2d_8c_aaa5b241d79e056753ee77be38391da23}{MMG2\+D\+\_\+analys}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{analys__2d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Analysis routine for an input mesh without structure passing through a point. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{analys__2d_8c_aaa5b241d79e056753ee77be38391da23}\label{analys__2d_8c_aaa5b241d79e056753ee77be38391da23}} 
+\index{analys\_2d.c@{analys\_2d.c}!MMG2D\_analys@{MMG2D\_analys}}
+\index{MMG2D\_analys@{MMG2D\_analys}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_analys()}{MMG2D\_analys()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+analys (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+preprocessing stage\+: mesh analysis \begin{DoxyWarning}{Warning}
+possible time improvment here\+: in lssurf mode, the second call of \mbox{\hyperlink{analys__2d_8c_abfe76d4f3cdba1ba1fbc888162f48be2}{MMG2\+D\+\_\+setadj}} only adds BDY tag to points that have been inserted by the level-\/set splitting (the rest of the job of setadj has alredy be done by the first call). ~\newline
+
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l01010}{1010}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_aaa5b241d79e056753ee77be38391da23_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_aaa5b241d79e056753ee77be38391da23_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{analys__2d_8c_ac024dfdd420747291138302c06c8f4c3}\label{analys__2d_8c_ac024dfdd420747291138302c06c8f4c3}} 
+\index{analys\_2d.c@{analys\_2d.c}!MMG2D\_dichotomy@{MMG2D\_dichotomy}}
+\index{MMG2D\_dichotomy@{MMG2D\_dichotomy}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_dichotomy()}{MMG2D\_dichotomy()}}
+{\footnotesize\ttfamily static int MMG2\+D\+\_\+dichotomy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{pt,  }\item[{MMG5\+\_\+int}]{k,  }\item[{double $\ast$}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer towards the mesh \\
+\hline
+{\em pt} & pointer towards current triangle \\
+\hline
+{\em k} & number of current point \\
+\hline
+{\em c} & newly computed coordinates (giving negative area)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+In coordinate regularization, performs a dichotomy between previous point / and newly computed point in the case of negative area 
+
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00783}{783}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{analys__2d_8c_ac024dfdd420747291138302c06c8f4c3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_ac024dfdd420747291138302c06c8f4c3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{analys__2d_8c_af7c7209a8643f4d3716621e40c4e8c70}\label{analys__2d_8c_af7c7209a8643f4d3716621e40c4e8c70}} 
+\index{analys\_2d.c@{analys\_2d.c}!MMG2D\_norver@{MMG2D\_norver}}
+\index{MMG2D\_norver@{MMG2D\_norver}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_norver()}{MMG2D\_norver()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+norver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{ref }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em ref} & reference of the boundary to analyze (analyze all the boundaries if MMG5\+\_\+\+UNSET)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Calculate normal vectors at vertices of the mesh. Mark the points that we don\textquotesingle{}t want to analyze
+
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00410}{410}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_af7c7209a8643f4d3716621e40c4e8c70_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_af7c7209a8643f4d3716621e40c4e8c70_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{analys__2d_8c_a93f0341110ef01065aa9eecc4aa8096f}\label{analys__2d_8c_a93f0341110ef01065aa9eecc4aa8096f}} 
+\index{analys\_2d.c@{analys\_2d.c}!MMG2D\_regnor@{MMG2D\_regnor}}
+\index{MMG2D\_regnor@{MMG2D\_regnor}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_regnor()}{MMG2D\_regnor()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+regnor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+Regularize normal vectors at boundary non singular edges with a Laplacian / antilaplacian smoothing 
+
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00515}{515}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{analys__2d_8c_a93f0341110ef01065aa9eecc4aa8096f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_a93f0341110ef01065aa9eecc4aa8096f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{analys__2d_8c_a593f8577a9cf51cbe4d3ef33b19b327f}\label{analys__2d_8c_a593f8577a9cf51cbe4d3ef33b19b327f}} 
+\index{analys\_2d.c@{analys\_2d.c}!MMG2D\_regver@{MMG2D\_regver}}
+\index{MMG2D\_regver@{MMG2D\_regver}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_regver()}{MMG2D\_regver()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+regver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+Regularize vertices coordinates at boundary non singular edges with a Laplacian / antilaplacian smoothing 
+
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00849}{849}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_a593f8577a9cf51cbe4d3ef33b19b327f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_a593f8577a9cf51cbe4d3ef33b19b327f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{analys__2d_8c_abfe76d4f3cdba1ba1fbc888162f48be2}\label{analys__2d_8c_abfe76d4f3cdba1ba1fbc888162f48be2}} 
+\index{analys\_2d.c@{analys\_2d.c}!MMG2D\_setadj@{MMG2D\_setadj}}
+\index{MMG2D\_setadj@{MMG2D\_setadj}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_setadj()}{MMG2D\_setadj()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+setadj (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{int8\+\_\+t}]{init\+\_\+cc }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em init\+\_\+cc} & 1 if we need to reinitialized {\itshape cc} field of tria because setadj has already been called (isosurf mode)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+Set tags GEO, BDY and REF to triangles and points by traveling the mesh; count number of subdomains or connected components Step 1\+: Tags setting from triangles analysis
+
+Step 2\+: Mark the edges at interface between tria and quads as nosurf and required
+
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00050}{50}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_abfe76d4f3cdba1ba1fbc888162f48be2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{analys__2d_8c_a045b4ffe0da80c475e0c4627497ed23a}\label{analys__2d_8c_a045b4ffe0da80c475e0c4627497ed23a}} 
+\index{analys\_2d.c@{analys\_2d.c}!MMG2D\_singul@{MMG2D\_singul}}
+\index{MMG2D\_singul@{MMG2D\_singul}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_singul()}{MMG2D\_singul()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+singul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{ref }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em ref} & reference of the boundary to analyze (analyze all the boundaries if MMG5\+\_\+\+UNSET)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Identify singularities in the mesh. Mark the points that we don\textquotesingle{}t want to analyze
+
+Singularity identification
+
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00276}{276}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{analys__2d_8c_a045b4ffe0da80c475e0c4627497ed23a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{analys__2d_8c_a045b4ffe0da80c475e0c4627497ed23a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{analys__2d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{analys__2d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{analys\_2d.c@{analys\_2d.c}!ddb@{ddb}}
+\index{ddb@{ddb}!analys\_2d.c@{analys\_2d.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+

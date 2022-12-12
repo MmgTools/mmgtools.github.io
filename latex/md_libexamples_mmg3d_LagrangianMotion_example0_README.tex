@@ -1,0 +1,37 @@
+\hypertarget{md_libexamples_mmg3d_LagrangianMotion_example0_README_autotoc_md83}{}\doxysection{I/ Implementation}\label{md_libexamples_mmg3d_LagrangianMotion_example0_README_autotoc_md83}
+We read the mesh and displacement in files and then, we compute the volume displacement.\hypertarget{md_libexamples_mmg3d_LagrangianMotion_example0_README_autotoc_md84}{}\doxysection{II/ Compilation}\label{md_libexamples_mmg3d_LagrangianMotion_example0_README_autotoc_md84}
+
+\begin{DoxyEnumerate}
+\item Prerequisite\+: you must have build and install the SUsc\+Elas library (\href{https://github.com/SUscTools/SUscElas}{\texttt{ https\+://github.\+com/\+SUsc\+Tools/\+SUsc\+Elas}})
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Build and install the {\bfseries{mmg3d}} shared and/or static library with the {\bfseries{USE\+\_\+\+SUSCELAS}} CMake\textquotesingle{}s flag set to {\bfseries{ON}}. We suppose in the following that you have installed the {\bfseries{mmg3d}} library in the $\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory (see the \href{https://github.com/MmgTools/Mmg/wiki/Setup-guide\#iii-installation}{\texttt{ installation}} section of the setup guide);
+\item compile the main.\+c file specifying\+:
+\begin{DoxyItemize}
+\item the {\bfseries{mmg3d}} include directory with the {\bfseries{-\/I}} option;
+\item the {\bfseries{mmg3d}} library location with the {\bfseries{-\/L}} option;
+\item the {\bfseries{mmg3d}} library name with the {\bfseries{-\/l}} option;
+\item for the static library you must also link the executable with the {\bfseries{Elas}} library, the math library and, if used for the {\bfseries{mmg3d}} library compilation, the {\bfseries{scotch}} and {\bfseries{scotcherr}} libraries;
+\item with the shared library, you must add the $\ast$$\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory to your {\bfseries{LD\+\_\+\+LIBRARY\+\_\+\+PATH}}.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\begin{quote}
+Example 1 ~\newline
+ Command line to link the application with the {\bfseries{mmg3d}} static library (we supposed here that the scotch library is installed in the $\ast$$\ast$\+\_\+\$\+SCOTCH\+\_\+\+PATH\+\_\+$\ast$$\ast$ directory)\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg3d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/L\$SCOTCH\_PATH -\/L\$SUSCELAS\_PATH -\/lmmg3d -\/lElas -\/lscotch -\/lscotcherr -\/lm}
+
+\end{DoxyCode}
+ \end{quote}
+\begin{quote}
+Example 2 ~\newline
+ Command line to link the application with the {\bfseries{mmg3d}} shared library\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg3d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/lmmg3d}
+\DoxyCodeLine{export LD\_LIBRARY\_PATH=\$CMAKE\_INSTALL\_PREFIX/lib:\$LD\_LIBRARY\_PATH}
+
+\end{DoxyCode}
+ \end{quote}

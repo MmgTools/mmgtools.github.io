@@ -1,0 +1,197 @@
+\hypertarget{hash__s_8c}{}\doxysection{src/mmgs/hash\+\_\+s.c File Reference}
+\label{hash__s_8c}\index{src/mmgs/hash\_s.c@{src/mmgs/hash\_s.c}}
+
+
+Functions for hash tables management and triangle packing.  
+
+
+{\ttfamily \#include \char`\"{}libmmgs\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for hash\+\_\+s.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{hash__s_8c_a1625747fa7d19e39a1e2192d2e506c71}{paktri}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9}{MMGS\+\_\+hash\+Tria}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{hash__s_8c_a0bacd760c9cb29dc284f0ed24ccaa623}{MMGS\+\_\+assign\+Edge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{hash__s_8c_a0d67dcea9e54e970fde1ad4475341655}{MMGS\+\_\+bdry\+Update}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for hash tables management and triangle packing. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000044}{Todo}}]doxygen documentation. \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{hash__s_8c_source}{hash\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hash__s_8c_a0bacd760c9cb29dc284f0ed24ccaa623}\label{hash__s_8c_a0bacd760c9cb29dc284f0ed24ccaa623}} 
+\index{hash\_s.c@{hash\_s.c}!MMGS\_assignEdge@{MMGS\_assignEdge}}
+\index{MMGS\_assignEdge@{MMGS\_assignEdge}!hash\_s.c@{hash\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_assignEdge()}{MMGS\_assignEdge()}}
+{\footnotesize\ttfamily int MMGS\+\_\+assign\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0.
+\end{DoxyReturn}
+Copy the properties (ref and tag) of the declared edges to the triangles, where they are assigned to the individual corners of the triangle. First a hash is created for rapid lookup of the edges. Then in a loop over all edges of all triangles, the hash is probed for each edge, and if it exists its properties are copied. Thus, declared edges that do not occur in any triangle will be silently ignored.
+
+\begin{DoxyRemark}{Remarks}
+this function handle all the provided edges. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{hash__s_8c_source_l00113}{113}} of file \mbox{\hyperlink{hash__s_8c_source}{hash\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c_a0bacd760c9cb29dc284f0ed24ccaa623_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c_a0bacd760c9cb29dc284f0ed24ccaa623_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__s_8c_a0d67dcea9e54e970fde1ad4475341655}\label{hash__s_8c_a0d67dcea9e54e970fde1ad4475341655}} 
+\index{hash\_s.c@{hash\_s.c}!MMGS\_bdryUpdate@{MMGS\_bdryUpdate}}
+\index{MMGS\_bdryUpdate@{MMGS\_bdryUpdate}!hash\_s.c@{hash\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_bdryUpdate()}{MMGS\_bdryUpdate()}}
+{\footnotesize\ttfamily int MMGS\+\_\+bdry\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0.
+\end{DoxyReturn}
+Copy the edge tags stored in triangles in the other triangles sharing the edge. 
+
+Definition at line \mbox{\hyperlink{hash__s_8c_source_l00169}{169}} of file \mbox{\hyperlink{hash__s_8c_source}{hash\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c_a0d67dcea9e54e970fde1ad4475341655_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c_a0d67dcea9e54e970fde1ad4475341655_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9}\label{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9}} 
+\index{hash\_s.c@{hash\_s.c}!MMGS\_hashTria@{MMGS\_hashTria}}
+\index{MMGS\_hashTria@{MMGS\_hashTria}!hash\_s.c@{hash\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_hashTria()}{MMGS\_hashTria()}}
+{\footnotesize\ttfamily int MMGS\+\_\+hash\+Tria (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Create adjacency table. 
+
+Definition at line \mbox{\hyperlink{hash__s_8c_source_l00077}{77}} of file \mbox{\hyperlink{hash__s_8c_source}{hash\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__s_8c_a1625747fa7d19e39a1e2192d2e506c71}\label{hash__s_8c_a1625747fa7d19e39a1e2192d2e506c71}} 
+\index{hash\_s.c@{hash\_s.c}!paktri@{paktri}}
+\index{paktri@{paktri}!hash\_s.c@{hash\_s.c}}
+\doxysubsubsection{\texorpdfstring{paktri()}{paktri()}}
+{\footnotesize\ttfamily static int paktri (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+tria packing 
+
+Definition at line \mbox{\hyperlink{hash__s_8c_source_l00045}{45}} of file \mbox{\hyperlink{hash__s_8c_source}{hash\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{hash__s_8c_a1625747fa7d19e39a1e2192d2e506c71_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__s_8c_a1625747fa7d19e39a1e2192d2e506c71_icgraph}
+\end{center}
+\end{figure}

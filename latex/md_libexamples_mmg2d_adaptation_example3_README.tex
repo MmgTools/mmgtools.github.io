@@ -1,0 +1,30 @@
+\hypertarget{md_libexamples_mmg2d_adaptation_example3_README_autotoc_md58}{}\doxysection{Adaptation example 3}\label{md_libexamples_mmg2d_adaptation_example3_README_autotoc_md58}
+No mesh or sol file necessary, only compilation of main.\+c.\hypertarget{md_libexamples_mmg2d_adaptation_example3_README_autotoc_md59}{}\doxysection{Compilation}\label{md_libexamples_mmg2d_adaptation_example3_README_autotoc_md59}
+
+\begin{DoxyEnumerate}
+\item Build and install the {\bfseries{mmg2d}} shared and static library. We suppose in the following that you have installed the {\bfseries{mmg2d}} library in the $\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory (see the \href{https://github.com/MmgTools/Mmg/wiki/Setup-guide\#iii-installation}{\texttt{ installation}} section of the setup guide);
+\item compile the main.\+c file specifying\+:
+\begin{DoxyItemize}
+\item the {\bfseries{mmg2d}} include directory with the {\bfseries{-\/I}} option;
+\item the {\bfseries{mmg2d}} library location with the {\bfseries{-\/L}} option;
+\item the {\bfseries{mmg2d}} library name with the {\bfseries{-\/l}} option;
+\item with the shared library, you must add the $\ast$$\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory to your {\bfseries{LD\+\_\+\+LIBRARY\+\_\+\+PATH}}.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\begin{quote}
+ Command line to link the application with the {\bfseries{mmg2d}} static library 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg2d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/lmmg2d -\/lm}
+
+\end{DoxyCode}
+ \end{quote}
+\begin{quote}
+ Command line to link the application with the {\bfseries{mmg2d}} shared library\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg2d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/lmmg2d -\/lm}
+\DoxyCodeLine{export LD\_LIBRARY\_PATH=\$CMAKE\_INSTALL\_PREFIX/lib:\$LD\_LIBRARY\_PATH}
+
+\end{DoxyCode}
+ \end{quote}

@@ -1,0 +1,386 @@
+\hypertarget{mmg2d9_8c}{}\doxysection{src/mmg2d/mmg2d9.c File Reference}
+\label{mmg2d9_8c}\index{src/mmg2d/mmg2d9.c@{src/mmg2d/mmg2d9.c}}
+
+
+Lagrangian meshing.  
+
+
+{\ttfamily \#include \char`\"{}libmmg2d\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for mmg2d9.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mmg2d9_8c_ab2955931c183bbc61af009cb1e499c55}{MMG2\+D\+\_\+\+DEGTOL}}~5.e-\/1
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{mmg2d9_8c_a1a5c2f286a10d06ec0323f580202b594}{MMG2\+D\+\_\+estavglen}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{mmg2d9_8c_a69f8e1ca6ec566c9690a9461ad1d7d92}{MMG2\+D\+\_\+chkmovmesh}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp, short t, MMG5\+\_\+int $\ast$tri\+Idx)
+\item 
+int \mbox{\hyperlink{mmg2d9_8c_a8e9244eb4cf207208c38fb9e202202ab}{MMG2\+D\+\_\+dispmesh}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp, short t, int itdeg)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{mmg2d9_8c_a8ccb3a1cb471004e291e2d547c75d776}{MMG2\+D\+\_\+spllag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int itdeg, int $\ast$warn)
+\item 
+static int \mbox{\hyperlink{mmg2d9_8c_acc040defea6606a635fd6883e7304179}{MMG2\+D\+\_\+coleltlag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int itdeg)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{mmg2d9_8c_ad7342f97a3091309d9da60d0e24890a4}{MMG2\+D\+\_\+swpmshlag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, double crit, int itdeg)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{mmg2d9_8c_ab0e745225c8433d4c9a05e0126c8be20}{MMG2\+D\+\_\+movtrilag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int itdeg)
+\item 
+int \mbox{\hyperlink{mmg2d9_8c_ac1a3dc72b238dd7afc1677f249b08f47}{MMG2\+D\+\_\+mmg2d9}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$$\ast$invalid\+Trias)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Lagrangian meshing. 
+
+Velocity extension for Lagrangian meshing.
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000008}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000009}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{mmg2d9_8c_ab2955931c183bbc61af009cb1e499c55}\label{mmg2d9_8c_ab2955931c183bbc61af009cb1e499c55}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_DEGTOL@{MMG2D\_DEGTOL}}
+\index{MMG2D\_DEGTOL@{MMG2D\_DEGTOL}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_DEGTOL}{MMG2D\_DEGTOL}}
+{\footnotesize\ttfamily \#define MMG2\+D\+\_\+\+DEGTOL~5.e-\/1}
+
+
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00037}{37}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg2d9_8c_a69f8e1ca6ec566c9690a9461ad1d7d92}\label{mmg2d9_8c_a69f8e1ca6ec566c9690a9461ad1d7d92}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_chkmovmesh@{MMG2D\_chkmovmesh}}
+\index{MMG2D\_chkmovmesh@{MMG2D\_chkmovmesh}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_chkmovmesh()}{MMG2D\_chkmovmesh()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG2\+D\+\_\+chkmovmesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp,  }\item[{short}]{t,  }\item[{MMG5\+\_\+int $\ast$}]{tri\+Idx }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em disp} & pointer toward the displacement structure. \\
+\hline
+{\em t} & fraction of displacement to test \\
+\hline
+{\em tet\+Idx} & to fill with the list of non valid tria if provided.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success (movement can be achieved), 1 or the number of invalid tria otherwise.
+\end{DoxyReturn}
+Check if moving mesh with disp for a fraction t yields a valid mesh. 
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00086}{86}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{mmg2d9_8c_a69f8e1ca6ec566c9690a9461ad1d7d92_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_a69f8e1ca6ec566c9690a9461ad1d7d92_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg2d9_8c_acc040defea6606a635fd6883e7304179}\label{mmg2d9_8c_acc040defea6606a635fd6883e7304179}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_coleltlag@{MMG2D\_coleltlag}}
+\index{MMG2D\_coleltlag@{MMG2D\_coleltlag}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_coleltlag()}{MMG2D\_coleltlag()}}
+{\footnotesize\ttfamily static int MMG2\+D\+\_\+coleltlag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int}]{itdeg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em itdeg} & degraded elements. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed. 
+
+number of collapsed points.
+\end{DoxyReturn}
+Attempt to collapse small internal edges in the Lagrangian mode; only affects tria with cc itdeg. 
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00286}{286}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_acc040defea6606a635fd6883e7304179_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_acc040defea6606a635fd6883e7304179_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg2d9_8c_a8e9244eb4cf207208c38fb9e202202ab}\label{mmg2d9_8c_a8e9244eb4cf207208c38fb9e202202ab}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_dispmesh@{MMG2D\_dispmesh}}
+\index{MMG2D\_dispmesh@{MMG2D\_dispmesh}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_dispmesh()}{MMG2D\_dispmesh()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+dispmesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp,  }\item[{short}]{t,  }\item[{int}]{itdeg }\end{DoxyParamCaption})}
+
+Perform mesh motion along disp, for a fraction t, and the corresponding updates 
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00124}{124}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{mmg2d9_8c_a8e9244eb4cf207208c38fb9e202202ab_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_a8e9244eb4cf207208c38fb9e202202ab_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg2d9_8c_a1a5c2f286a10d06ec0323f580202b594}\label{mmg2d9_8c_a1a5c2f286a10d06ec0323f580202b594}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_estavglen@{MMG2D\_estavglen}}
+\index{MMG2D\_estavglen@{MMG2D\_estavglen}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_estavglen()}{MMG2D\_estavglen()}}
+{\footnotesize\ttfamily double MMG2\+D\+\_\+estavglen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00040}{40}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_a1a5c2f286a10d06ec0323f580202b594_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg2d9_8c_ac1a3dc72b238dd7afc1677f249b08f47}\label{mmg2d9_8c_ac1a3dc72b238dd7afc1677f249b08f47}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_mmg2d9@{MMG2D\_mmg2d9}}
+\index{MMG2D\_mmg2d9@{MMG2D\_mmg2d9}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_mmg2d9()}{MMG2D\_mmg2d9()}}
+{\footnotesize\ttfamily int MMG2\+D\+\_\+mmg2d9 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$$\ast$}]{invalid\+Trias }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & mesh structure \\
+\hline
+{\em disp} & displacement structure \\
+\hline
+{\em met} & metric structure \\
+\hline
+{\em invalid\+Trias} & array to store the list of invalid tria if we are unable to move\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success to move, the opposite of the number of non valid trias if we can\textquotesingle{}t move (-\/ninvalid\+Trias).
+\end{DoxyReturn}
+Lagrangian node displacement and meshing. Code for options\+: info.\+lag \texorpdfstring{$>$}{>}= 0 -\/\texorpdfstring{$>$}{>} displacement, info.\+lag \texorpdfstring{$>$}{>} 0 -\/\texorpdfstring{$>$}{>} displacement+remeshing with swap and moves info.\+lag \texorpdfstring{$>$}{>} 1 -\/\texorpdfstring{$>$}{>} displacement+remeshing with split+collapse+swap+move 
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00459}{459}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_ac1a3dc72b238dd7afc1677f249b08f47_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_ac1a3dc72b238dd7afc1677f249b08f47_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg2d9_8c_ab0e745225c8433d4c9a05e0126c8be20}\label{mmg2d9_8c_ab0e745225c8433d4c9a05e0126c8be20}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_movtrilag@{MMG2D\_movtrilag}}
+\index{MMG2D\_movtrilag@{MMG2D\_movtrilag}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_movtrilag()}{MMG2D\_movtrilag()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG2\+D\+\_\+movtrilag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int}]{itdeg }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em itdeg} & degraded elements. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed, number of moved points otherwise.
+\end{DoxyReturn}
+Analyze trias with cc = itdeg and move internal points so as to make mesh more uniform. 
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00394}{394}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_ab0e745225c8433d4c9a05e0126c8be20_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_ab0e745225c8433d4c9a05e0126c8be20_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg2d9_8c_a8ccb3a1cb471004e291e2d547c75d776}\label{mmg2d9_8c_a8ccb3a1cb471004e291e2d547c75d776}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_spllag@{MMG2D\_spllag}}
+\index{MMG2D\_spllag@{MMG2D\_spllag}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_spllag()}{MMG2D\_spllag()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG2\+D\+\_\+spllag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{itdeg,  }\item[{int $\ast$}]{warn }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em disp} & pointer toward the displacement structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em itdeg} & degraded elements. \\
+\hline
+{\em $\ast$warn} & {\itshape warn} is set to 1 if not enough memory is available to complete mesh. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed. 
+
+number of new points.
+\end{DoxyReturn}
+Split edges of length bigger than MMG5\+\_\+\+LOPTL, in the Lagrangian mode. Only affects triangles with cc itdeg 
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00191}{191}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_a8ccb3a1cb471004e291e2d547c75d776_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_a8ccb3a1cb471004e291e2d547c75d776_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg2d9_8c_ad7342f97a3091309d9da60d0e24890a4}\label{mmg2d9_8c_ad7342f97a3091309d9da60d0e24890a4}} 
+\index{mmg2d9.c@{mmg2d9.c}!MMG2D\_swpmshlag@{MMG2D\_swpmshlag}}
+\index{MMG2D\_swpmshlag@{MMG2D\_swpmshlag}!mmg2d9.c@{mmg2d9.c}}
+\doxysubsubsection{\texorpdfstring{MMG2D\_swpmshlag()}{MMG2D\_swpmshlag()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG2\+D\+\_\+swpmshlag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{double}]{crit,  }\item[{int}]{itdeg }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em crit} & coefficient of quality improvment. \\
+\hline
+{\em itdeg} & degraded elements.\\
+\hline
+\end{DoxyParams}
+Internal edge flipping in the Lagrangian mode; only affects trias with cc itdeg 
+
+Definition at line \mbox{\hyperlink{mmg2d9_8c_source_l00350}{350}} of file \mbox{\hyperlink{mmg2d9_8c_source}{mmg2d9.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_ad7342f97a3091309d9da60d0e24890a4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg2d9_8c_ad7342f97a3091309d9da60d0e24890a4_icgraph}
+\end{center}
+\end{figure}

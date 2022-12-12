@@ -1,0 +1,300 @@
+\hypertarget{variadic__s_8c}{}\doxysection{src/mmgs/variadic\+\_\+s.c File Reference}
+\label{variadic__s_8c}\index{src/mmgs/variadic\_s.c@{src/mmgs/variadic\_s.c}}
+
+
+C variadic functions definitions for MMGS library.  
+
+
+{\ttfamily \#include \char`\"{}libmmgs\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}libmmgs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgsexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for variadic\+\_\+s.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{variadic__s_8c_a1f33d4f6562b7f789c44061188089845}{MMGS\+\_\+\+Alloc\+\_\+mesh}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} $\ast$\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$met, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$ls)
+\item 
+static void \mbox{\hyperlink{variadic__s_8c_a90d961e1e5b42a241b5310ac21f3dab7}{MMGS\+\_\+\+Init\+\_\+woalloc\+\_\+mesh}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$met, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$ls)
+\item 
+int \mbox{\hyperlink{variadic__s_8c_a25a2d35896c8419cc05fb3c703e25d7d}{MMGS\+\_\+\+Init\+\_\+mesh\+\_\+var}} (va\+\_\+list \mbox{\hyperlink{API__functionsf__2d_8c_af519a68620ca420c17e02333f9d25c01}{argptr}})
+\item 
+int \mbox{\hyperlink{variadic__s_8c_a843401c408da701015a047bf65dd5434}{MMGS\+\_\+\+Free\+\_\+all\+\_\+var}} (va\+\_\+list \mbox{\hyperlink{API__functionsf__2d_8c_af519a68620ca420c17e02333f9d25c01}{argptr}})
+\item 
+int \mbox{\hyperlink{variadic__s_8c_ae7029f3d85b77eff5b8b810933e863fa}{MMGS\+\_\+\+Free\+\_\+structures\+\_\+var}} (va\+\_\+list \mbox{\hyperlink{API__functionsf__2d_8c_af519a68620ca420c17e02333f9d25c01}{argptr}})
+\item 
+int \mbox{\hyperlink{variadic__s_8c_aadfca90e7757a7b8fc5b978fa7137e4b}{MMGS\+\_\+\+Free\+\_\+names\+\_\+var}} (va\+\_\+list \mbox{\hyperlink{API__functionsf__2d_8c_af519a68620ca420c17e02333f9d25c01}{argptr}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+C variadic functions definitions for MMGS library. 
+
+\begin{DoxyAuthor}{Author}
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01 2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License.
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+This file contains some internal functions for the API, see the \mbox{\hyperlink{libmmgs_8h}{mmgs/libmmgs.\+h}} header file for the documentation of all the usefull user\textquotesingle{}s API functions.
+\end{DoxyNote}
+variadic functions definitions for MMGS library. 
+
+Definition in file \mbox{\hyperlink{variadic__s_8c_source}{variadic\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{variadic__s_8c_a1f33d4f6562b7f789c44061188089845}\label{variadic__s_8c_a1f33d4f6562b7f789c44061188089845}} 
+\index{variadic\_s.c@{variadic\_s.c}!MMGS\_Alloc\_mesh@{MMGS\_Alloc\_mesh}}
+\index{MMGS\_Alloc\_mesh@{MMGS\_Alloc\_mesh}!variadic\_s.c@{variadic\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_Alloc\_mesh()}{MMGS\_Alloc\_mesh()}}
+{\footnotesize\ttfamily static int MMGS\+\_\+\+Alloc\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} $\ast$}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$}]{ls }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the sol structure. \\
+\hline
+{\em ls} & pointer toward the sol structure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+Allocate the mesh and solutions structures at {\itshape MMGS} format. 
+
+Definition at line \mbox{\hyperlink{variadic__s_8c_source_l00055}{55}} of file \mbox{\hyperlink{variadic__s_8c_source}{variadic\+\_\+s.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_a1f33d4f6562b7f789c44061188089845_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{variadic__s_8c_a843401c408da701015a047bf65dd5434}\label{variadic__s_8c_a843401c408da701015a047bf65dd5434}} 
+\index{variadic\_s.c@{variadic\_s.c}!MMGS\_Free\_all\_var@{MMGS\_Free\_all\_var}}
+\index{MMGS\_Free\_all\_var@{MMGS\_Free\_all\_var}!variadic\_s.c@{variadic\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_Free\_all\_var()}{MMGS\_Free\_all\_var()}}
+{\footnotesize\ttfamily int MMGS\+\_\+\+Free\+\_\+all\+\_\+var (\begin{DoxyParamCaption}\item[{va\+\_\+list}]{argptr }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em argptr} & list of the mmg structures that must be deallocated. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG} preprocessor variable that allow to identify it.\\
+\hline
+\end{DoxyParams}
+{\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword).
+
+To call the {\itshape MMGS\+\_\+mmgslib} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
+
+To call the {\itshape MMGS\+\_\+mmgsls} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the level-\/set function and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Ls keyword).
+
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+Internal function for deallocations before return (taking a va\+\_\+list as argument).
+
+\begin{DoxyRemark}{Remarks}
+we pass the structures by reference in order to have argument compatibility between the library call from a Fortran code and a C code. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{variadic__s_8c_source_l00225}{225}} of file \mbox{\hyperlink{variadic__s_8c_source}{variadic\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_a843401c408da701015a047bf65dd5434_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_a843401c408da701015a047bf65dd5434_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{variadic__s_8c_aadfca90e7757a7b8fc5b978fa7137e4b}\label{variadic__s_8c_aadfca90e7757a7b8fc5b978fa7137e4b}} 
+\index{variadic\_s.c@{variadic\_s.c}!MMGS\_Free\_names\_var@{MMGS\_Free\_names\_var}}
+\index{MMGS\_Free\_names\_var@{MMGS\_Free\_names\_var}!variadic\_s.c@{variadic\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_Free\_names\_var()}{MMGS\_Free\_names\_var()}}
+{\footnotesize\ttfamily int MMGS\+\_\+\+Free\+\_\+names\+\_\+var (\begin{DoxyParamCaption}\item[{va\+\_\+list}]{argptr }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em argptr} & list of the mmg structures for whose we want to deallocate the name. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG} preprocessor variable that allow to identify it.\\
+\hline
+\end{DoxyParams}
+{\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword).
+
+To call the {\itshape MMGS\+\_\+mmgslib} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
+
+To call the {\itshape MMGS\+\_\+mmgsls} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the level-\/set function and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Ls keyword).
+
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+Internal function for name deallocations before return (taking a va\+\_\+list as argument).
+
+\begin{DoxyRemark}{Remarks}
+we pass the structures by reference in order to have argument compatibility between the library call from a Fortran code and a C code. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{variadic__s_8c_source_l00426}{426}} of file \mbox{\hyperlink{variadic__s_8c_source}{variadic\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_aadfca90e7757a7b8fc5b978fa7137e4b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_aadfca90e7757a7b8fc5b978fa7137e4b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{variadic__s_8c_ae7029f3d85b77eff5b8b810933e863fa}\label{variadic__s_8c_ae7029f3d85b77eff5b8b810933e863fa}} 
+\index{variadic\_s.c@{variadic\_s.c}!MMGS\_Free\_structures\_var@{MMGS\_Free\_structures\_var}}
+\index{MMGS\_Free\_structures\_var@{MMGS\_Free\_structures\_var}!variadic\_s.c@{variadic\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_Free\_structures\_var()}{MMGS\_Free\_structures\_var()}}
+{\footnotesize\ttfamily int MMGS\+\_\+\+Free\+\_\+structures\+\_\+var (\begin{DoxyParamCaption}\item[{va\+\_\+list}]{argptr }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em argptr} & list of the mmg structures that must be deallocated. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG$\ast$} preprocessor variable that allow to identify it.\\
+\hline
+\end{DoxyParams}
+{\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword).
+
+To call the {\itshape MMGS\+\_\+mmgslib} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
+
+To call the {\itshape MMGS\+\_\+mmgsls} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the level-\/set function and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Ls keyword).
+
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+Internal function for structures deallocations before return (taking a va\+\_\+list as argument).
+
+\begin{DoxyRemark}{Remarks}
+we pass the structures by reference in order to have argument compatibility between the library call from a Fortran code and a C code. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{variadic__s_8c_source_l00324}{324}} of file \mbox{\hyperlink{variadic__s_8c_source}{variadic\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_ae7029f3d85b77eff5b8b810933e863fa_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_ae7029f3d85b77eff5b8b810933e863fa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{variadic__s_8c_a25a2d35896c8419cc05fb3c703e25d7d}\label{variadic__s_8c_a25a2d35896c8419cc05fb3c703e25d7d}} 
+\index{variadic\_s.c@{variadic\_s.c}!MMGS\_Init\_mesh\_var@{MMGS\_Init\_mesh\_var}}
+\index{MMGS\_Init\_mesh\_var@{MMGS\_Init\_mesh\_var}!variadic\_s.c@{variadic\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_Init\_mesh\_var()}{MMGS\_Init\_mesh\_var()}}
+{\footnotesize\ttfamily int MMGS\+\_\+\+Init\+\_\+mesh\+\_\+var (\begin{DoxyParamCaption}\item[{va\+\_\+list}]{argptr }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em argptr} & list of the mmg structures that must be initialized. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG$\ast$} preprocessor variable that allow to identify it.\\
+\hline
+\end{DoxyParams}
+{\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword).
+
+To call the {\itshape MMGS\+\_\+mmgslib} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
+
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success
+\end{DoxyReturn}
+To call the {\itshape MMGS\+\_\+mmgsls} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the level-\/set function and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Ls keyword).
+
+Internal function for structure allocations (taking a va\+\_\+list argument). 
+
+Definition at line \mbox{\hyperlink{variadic__s_8c_source_l00149}{149}} of file \mbox{\hyperlink{variadic__s_8c_source}{variadic\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_a25a2d35896c8419cc05fb3c703e25d7d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_a25a2d35896c8419cc05fb3c703e25d7d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{variadic__s_8c_a90d961e1e5b42a241b5310ac21f3dab7}\label{variadic__s_8c_a90d961e1e5b42a241b5310ac21f3dab7}} 
+\index{variadic\_s.c@{variadic\_s.c}!MMGS\_Init\_woalloc\_mesh@{MMGS\_Init\_woalloc\_mesh}}
+\index{MMGS\_Init\_woalloc\_mesh@{MMGS\_Init\_woalloc\_mesh}!variadic\_s.c@{variadic\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_Init\_woalloc\_mesh()}{MMGS\_Init\_woalloc\_mesh()}}
+{\footnotesize\ttfamily static void MMGS\+\_\+\+Init\+\_\+woalloc\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$}]{ls }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward a sol structure (metric). \\
+\hline
+{\em ls} & pointer toward the level-\/set (in ls-\/mode).\\
+\hline
+\end{DoxyParams}
+Initialization of mesh and solution structures to their default values (default names, versions, dimensions...). 
+
+Definition at line \mbox{\hyperlink{variadic__s_8c_source_l00086}{86}} of file \mbox{\hyperlink{variadic__s_8c_source}{variadic\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_a90d961e1e5b42a241b5310ac21f3dab7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{variadic__s_8c_a90d961e1e5b42a241b5310ac21f3dab7_icgraph}
+\end{center}
+\end{figure}

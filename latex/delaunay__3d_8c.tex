@@ -1,0 +1,369 @@
+\hypertarget{delaunay__3d_8c}{}\doxysection{src/mmg3d/delaunay\+\_\+3d.c File Reference}
+\label{delaunay__3d_8c}\index{src/mmg3d/delaunay\_3d.c@{src/mmg3d/delaunay\_3d.c}}
+
+
+Functions for mesh modifications in Delaunay mode.  
+
+
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+3d\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for delaunay\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{delaunay__3d_8c_a9b71c088eeb51f399356f8ce9dc7851c}{MMG3\+D\+\_\+\+EPSRAD}}~1.\+00005
+\item 
+\#define \mbox{\hyperlink{delaunay__3d_8c_a0677ef82ad7591ca9f5df8cd6c484857}{MMG3\+D\+\_\+\+EPSCON}}~1e-\/5
+\item 
+\#define \mbox{\hyperlink{delaunay__3d_8c_a838844c61c8ee1663599f98892a5ede0}{MMG3\+D\+\_\+\+LONMAX}}~4096
+\item 
+\#define \mbox{\hyperlink{delaunay__3d_8c_aa1d47705d35523f3db5d22df9c628995}{MMG3\+D\+\_\+\+KTA}}~7
+\item 
+\#define \mbox{\hyperlink{delaunay__3d_8c_ace2e706a43b72e8cba788495777ae6b8}{MMG3\+D\+\_\+\+KTB}}~11
+\item 
+\#define \mbox{\hyperlink{delaunay__3d_8c_ad8dfc6cfc26e19fb7e64313d516e3c22}{MMG3\+D\+\_\+\+KTC}}~13
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{delaunay__3d_8c_a97ba0809881d9aa559bb3f602a3ac71c}{MMG5\+\_\+hash\+Edge\+Delone}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int iel, int i, MMG5\+\_\+int $\ast$v)
+\item 
+int \mbox{\hyperlink{delaunay__3d_8c_acff545046e6e542c41b39aa1b9c9e0da}{MMG5\+\_\+delone}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, MMG5\+\_\+int ip, int64\+\_\+t $\ast$list, int ilist)
+\item 
+static int \mbox{\hyperlink{delaunay__3d_8c_aa065a8deb61d7cfcb661ccf1e4990d3e}{MMG5\+\_\+correction\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int ip, int64\+\_\+t $\ast$list, int ilist, int nedep, double volmin)
+\item 
+static int \mbox{\hyperlink{delaunay__3d_8c_a5f6cb83c1bd9d35c403859d9058d4a16}{MMG5\+\_\+correction\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, int ip, int64\+\_\+t $\ast$list, int ilist, int nedep, double volmin)
+\item 
+int \mbox{\hyperlink{delaunay__3d_8c_aeacdaa5ea5f7a8b8c370e3a4c4f9c994}{MMG5\+\_\+cavity\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int iel, int ip, int64\+\_\+t $\ast$list, int lon, double volmin)
+\item 
+int \mbox{\hyperlink{delaunay__3d_8c_a4378f93aa7de677a1ab4273e27320706}{MMG5\+\_\+cavity\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, MMG5\+\_\+int iel, int ip, int64\+\_\+t $\ast$list, int lon, double volmin)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for mesh modifications in Delaunay mode. 
+
+\begin{DoxyAuthor}{Author}
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+Delaunay mode only ({\itshape MMG\+\_\+\+PATTERN} flag set to {\itshape OFF}). 
+\end{DoxyRemark}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000019}{Todo}}]doxygen documentation. \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{delaunay__3d_8c_a0677ef82ad7591ca9f5df8cd6c484857}\label{delaunay__3d_8c_a0677ef82ad7591ca9f5df8cd6c484857}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG3D\_EPSCON@{MMG3D\_EPSCON}}
+\index{MMG3D\_EPSCON@{MMG3D\_EPSCON}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_EPSCON}{MMG3D\_EPSCON}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+EPSCON~1e-\/5}
+
+
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00043}{43}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+\mbox{\Hypertarget{delaunay__3d_8c_a9b71c088eeb51f399356f8ce9dc7851c}\label{delaunay__3d_8c_a9b71c088eeb51f399356f8ce9dc7851c}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG3D\_EPSRAD@{MMG3D\_EPSRAD}}
+\index{MMG3D\_EPSRAD@{MMG3D\_EPSRAD}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_EPSRAD}{MMG3D\_EPSRAD}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+EPSRAD~1.\+00005}
+
+
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00039}{39}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+\mbox{\Hypertarget{delaunay__3d_8c_aa1d47705d35523f3db5d22df9c628995}\label{delaunay__3d_8c_aa1d47705d35523f3db5d22df9c628995}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG3D\_KTA@{MMG3D\_KTA}}
+\index{MMG3D\_KTA@{MMG3D\_KTA}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_KTA}{MMG3D\_KTA}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+KTA~7}
+
+
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00050}{50}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+\mbox{\Hypertarget{delaunay__3d_8c_ace2e706a43b72e8cba788495777ae6b8}\label{delaunay__3d_8c_ace2e706a43b72e8cba788495777ae6b8}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG3D\_KTB@{MMG3D\_KTB}}
+\index{MMG3D\_KTB@{MMG3D\_KTB}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_KTB}{MMG3D\_KTB}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+KTB~11}
+
+
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00051}{51}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+\mbox{\Hypertarget{delaunay__3d_8c_ad8dfc6cfc26e19fb7e64313d516e3c22}\label{delaunay__3d_8c_ad8dfc6cfc26e19fb7e64313d516e3c22}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG3D\_KTC@{MMG3D\_KTC}}
+\index{MMG3D\_KTC@{MMG3D\_KTC}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_KTC}{MMG3D\_KTC}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+KTC~13}
+
+
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00052}{52}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+\mbox{\Hypertarget{delaunay__3d_8c_a838844c61c8ee1663599f98892a5ede0}\label{delaunay__3d_8c_a838844c61c8ee1663599f98892a5ede0}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG3D\_LONMAX@{MMG3D\_LONMAX}}
+\index{MMG3D\_LONMAX@{MMG3D\_LONMAX}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_LONMAX}{MMG3D\_LONMAX}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+LONMAX~4096}
+
+
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00044}{44}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{delaunay__3d_8c_aeacdaa5ea5f7a8b8c370e3a4c4f9c994}\label{delaunay__3d_8c_aeacdaa5ea5f7a8b8c370e3a4c4f9c994}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG5\_cavity\_ani@{MMG5\_cavity\_ani}}
+\index{MMG5\_cavity\_ani@{MMG5\_cavity\_ani}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_cavity\_ani()}{MMG5\_cavity\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+cavity\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{iel,  }\item[{int}]{ip,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{lon,  }\item[{double}]{volmin }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the sol structure. \\
+\hline
+{\em iel} & tetra index. \\
+\hline
+{\em ip} & point local index in {\itshape iel}. \\
+\hline
+{\em list} & pointer toward the list of tetra in the shell of edge where ip will be inserted. \\
+\hline
+{\em lon} & number of tetra in the list. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ilist number of tetra inside the cavity or -\/ilist if one of the tet of the cavity is required.
+\end{DoxyReturn}
+Mark elements in cavity and update the list of tetra in the cavity. 
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00581}{581}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{delaunay__3d_8c_aeacdaa5ea5f7a8b8c370e3a4c4f9c994_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c_aeacdaa5ea5f7a8b8c370e3a4c4f9c994_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{delaunay__3d_8c_a4378f93aa7de677a1ab4273e27320706}\label{delaunay__3d_8c_a4378f93aa7de677a1ab4273e27320706}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG5\_cavity\_iso@{MMG5\_cavity\_iso}}
+\index{MMG5\_cavity\_iso@{MMG5\_cavity\_iso}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_cavity\_iso()}{MMG5\_cavity\_iso()}}
+{\footnotesize\ttfamily int MMG5\+\_\+cavity\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{MMG5\+\_\+int}]{iel,  }\item[{int}]{ip,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{lon,  }\item[{double}]{volmin }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the sol structure. \\
+\hline
+{\em iel} & tetra index. \\
+\hline
+{\em ip} & point local index in {\itshape iel}. \\
+\hline
+{\em list} & pointer toward the list of tetra in the shell of edge where ip will be inserted. \\
+\hline
+{\em lon} & number of tetra in the list. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ilist number of tetra inside the cavity or -\/ilist if one of the tet of the cavity is required.
+\end{DoxyReturn}
+Mark elements in cavity and update the list of tetra in the cavity. 
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00741}{741}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{delaunay__3d_8c_a4378f93aa7de677a1ab4273e27320706_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c_a4378f93aa7de677a1ab4273e27320706_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{delaunay__3d_8c_aa065a8deb61d7cfcb661ccf1e4990d3e}\label{delaunay__3d_8c_aa065a8deb61d7cfcb661ccf1e4990d3e}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG5\_correction\_ani@{MMG5\_correction\_ani}}
+\index{MMG5\_correction\_ani@{MMG5\_correction\_ani}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_correction\_ani()}{MMG5\_correction\_ani()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+correction\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int}]{ip,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ilist,  }\item[{int}]{nedep,  }\item[{double}]{volmin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em met} & pointer toward the met structure \\
+\hline
+{\em ip} & index of the point to insert \\
+\hline
+{\em list} & poiner toward the cavity of the point \\
+\hline
+{\em ilist} & number of elts in the cavity \\
+\hline
+{\em nedep} & ??? \\
+\hline
+{\em volmin} & minimal authorized volume\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail (unused point), the size of the corrected cavity otherwise
+\end{DoxyReturn}
+Cavity correction for quality (aniso). 
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00352}{352}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c_aa065a8deb61d7cfcb661ccf1e4990d3e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{delaunay__3d_8c_a5f6cb83c1bd9d35c403859d9058d4a16}\label{delaunay__3d_8c_a5f6cb83c1bd9d35c403859d9058d4a16}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG5\_correction\_iso@{MMG5\_correction\_iso}}
+\index{MMG5\_correction\_iso@{MMG5\_correction\_iso}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_correction\_iso()}{MMG5\_correction\_iso()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+correction\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{int}]{ip,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ilist,  }\item[{int}]{nedep,  }\item[{double}]{volmin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em met} & pointer toward the met structure \\
+\hline
+{\em ip} & index of the point to insert \\
+\hline
+{\em list} & poiner toward the cavity of the point \\
+\hline
+{\em ilist} & number of elts in the cavity \\
+\hline
+{\em nedep} & ??? \\
+\hline
+{\em volmin} & minimal authorized volume\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail (unused point), the size of the corrected cavity otherwise
+\end{DoxyReturn}
+Cavity correction for quality (iso). 
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00479}{479}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c_a5f6cb83c1bd9d35c403859d9058d4a16_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{delaunay__3d_8c_acff545046e6e542c41b39aa1b9c9e0da}\label{delaunay__3d_8c_acff545046e6e542c41b39aa1b9c9e0da}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG5\_delone@{MMG5\_delone}}
+\index{MMG5\_delone@{MMG5\_delone}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_delone()}{MMG5\_delone()}}
+{\footnotesize\ttfamily int MMG5\+\_\+delone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{MMG5\+\_\+int}]{ip,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ilist }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the solution structure. \\
+\hline
+{\em ip} & index of the point to insert. \\
+\hline
+{\em list} & pointer toward the list of the tetra in the cavity (computed by MMG5\+\_\+cavity). \\
+\hline
+{\em ilist} & number of tetra inside the cavity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if sucess, 0 or -\/1 if fail.
+\end{DoxyReturn}
+Insertion of the vertex {\itshape ip}. The cavity of {\itshape ip} become its ball. 
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00140}{140}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c_acff545046e6e542c41b39aa1b9c9e0da_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c_acff545046e6e542c41b39aa1b9c9e0da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{delaunay__3d_8c_a97ba0809881d9aa559bb3f602a3ac71c}\label{delaunay__3d_8c_a97ba0809881d9aa559bb3f602a3ac71c}} 
+\index{delaunay\_3d.c@{delaunay\_3d.c}!MMG5\_hashEdgeDelone@{MMG5\_hashEdgeDelone}}
+\index{MMG5\_hashEdgeDelone@{MMG5\_hashEdgeDelone}!delaunay\_3d.c@{delaunay\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashEdgeDelone()}{MMG5\_hashEdgeDelone()}}
+{\footnotesize\ttfamily int MMG5\+\_\+hash\+Edge\+Delone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{iel,  }\item[{int}]{i,  }\item[{MMG5\+\_\+int $\ast$}]{v }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{delaunay__3d_8c_source_l00055}{55}} of file \mbox{\hyperlink{delaunay__3d_8c_source}{delaunay\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{delaunay__3d_8c_a97ba0809881d9aa559bb3f602a3ac71c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delaunay__3d_8c_a97ba0809881d9aa559bb3f602a3ac71c_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,160 @@
+\hypertarget{adaptation__example0_2main_8c}{}\doxysection{libexamples/mmg/adaptation\+\_\+example0/main.c File Reference}
+\label{adaptation__example0_2main_8c}\index{libexamples/mmg/adaptation\_example0/main.c@{libexamples/mmg/adaptation\_example0/main.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mmg/libmmg.\+h\char`\"{}}\newline
+Include dependency graph for main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{adaptation__example0_2main_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{adaptation__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{adaptation__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{adaptation__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Example of use of the mmg library that gathers the mmg2d, mmgs and mmg3d libraries (basic use of mesh adaptation).
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (LJLL, UPMC) 
+
+Cécile Dobrzynski (Inria / IMB, Université de Bordeaux) 
+
+Pascal Frey (LJLL, UPMC) 
+
+Algiane Froehly (Inria / IMB, Université de Bordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. Include the mmg library hader file 
+\end{DoxyCopyright}
+================== 2d remeshing using the mmg2d library ==========
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP I -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+1) Initialisation of mesh and sol structures
+
+2) Build mesh in MMG5 format
+
+Two solutions\+: just use the MMG3\+D\+\_\+load\+Mesh function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh(b)}} file formatted or manually set your mesh using the MMG2\+D\+\_\+\+Set$\ast$ functions
+
+with MMG2\+D\+\_\+load\+Mesh function
+
+3) Build sol in MMG5 format
+
+Two solutions\+: just use the MMG2\+D\+\_\+load\+Sol function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol(b)}} file formatted or manually set your sol using the MMG2\+D\+\_\+\+Set$\ast$ functions
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP II -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+remesh function
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP III -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+get results
+
+Two solutions\+: just use the MMG2\+D\+\_\+save\+Mesh/\+MMG2\+D\+\_\+save\+Sol functions that will write .\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh(b)}}/.sol formatted files or manually get your mesh/sol using the MMG2\+D\+\_\+get\+Mesh/\+MMG2\+D\+\_\+get\+Sol functions
+
+1) Automatically save the mesh
+
+2) Free the MMG2D structures
+
+================ surface remeshing using the mmgs library ========
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP I -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+1) Initialisation of mesh and sol structures
+
+2) Build mesh in MMG5 format
+
+Two solutions\+: just use the MMGS\+\_\+load\+Mesh function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh(b)}} file formatted or manually set your mesh using the MMGS\+\_\+\+Set$\ast$ functions
+
+with MMGS\+\_\+load\+Mesh function
+
+function calling
+
+3) Build sol in MMG5 format
+
+Two solutions\+: just use the MMGS\+\_\+load\+Sol function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol(b)}} file formatted or manually set your sol using the MMGS\+\_\+\+Set$\ast$ functions
+
+With MMGS\+\_\+load\+Sol function
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP II -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+remesh function
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP III -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+get results
+
+Two solutions\+: just use the MMGS\+\_\+save\+Mesh/\+MMGS\+\_\+save\+Sol functions that will write .\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh(b)}}/.sol formatted files or manually get your mesh/sol using the MMGS\+\_\+get\+Mesh/\+MMGS\+\_\+get\+Sol functions
+
+1) Automatically save the mesh
+
+2) Automatically save the solution
+
+3) Free the MMGS structures
+
+================== 3d remeshing using the mmg3d library ==========
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP I -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+1) Initialisation of mesh and sol structures
+
+2) Build mesh in MMG5 format
+
+Two solutions\+: just use the MMG3\+D\+\_\+load\+Mesh function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh(b)}} file formatted or manually set your mesh using the MMG3\+D\+\_\+\+Set$\ast$ functions
+
+with MMG3\+D\+\_\+load\+Mesh function
+
+3) Build sol in MMG5 format
+
+Two solutions\+: just use the MMG3\+D\+\_\+load\+Sol function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol(b)}} file formatted or manually set your sol using the MMG3\+D\+\_\+\+Set$\ast$ functions
+
+With MMG3\+D\+\_\+load\+Sol function
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP II -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+remesh function
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- STEP III -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+get results
+
+Two solutions\+: just use the MMG3\+D\+\_\+save\+Mesh/\+MMG3\+D\+\_\+save\+Sol functions that will write .\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh(b)}}/.sol formatted files or manually get your mesh/sol using the MMG3\+D\+\_\+get\+Mesh/\+MMG3\+D\+\_\+get\+Sol functions
+
+1) Automatically save the mesh
+
+2) Automatically save the solution
+
+3) Free the MMG3D structures
+
+Definition at line \mbox{\hyperlink{adaptation__example0_2main_8c_source_l00051}{51}} of file \mbox{\hyperlink{adaptation__example0_2main_8c_source}{main.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{adaptation__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}

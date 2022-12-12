@@ -1,0 +1,212 @@
+\hypertarget{adaptation__example0_2main_8c_source}{}\doxysection{main.\+c}
+\label{adaptation__example0_2main_8c_source}\index{libexamples/mmg/adaptation\_example0/main.c@{libexamples/mmg/adaptation\_example0/main.c}}
+\mbox{\hyperlink{adaptation__example0_2main_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/Inria/UBordeaux/UPMC, 2004-\/ .}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00036}00036 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00037}00037 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00038}00038 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00039}00039 \textcolor{preprocessor}{\#include <signal.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00040}00040 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00041}00041 \textcolor{preprocessor}{\#include <ctype.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00042}00042 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00043}00043 \textcolor{preprocessor}{\#include <float.h>}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00046}00046 \textcolor{comment}{// if the "{}include/mmg"{} dir is in your include path}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00047}00047 \textcolor{comment}{//\#include "{}libmmg.h"{}}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00048}00048 \textcolor{comment}{// if your include path do not contain the "{}mmg"{} subdirectories}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00049}00049 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg_8h}{mmg/libmmg.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00051}\mbox{\hyperlink{adaptation__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}{00051}} \textcolor{keywordtype}{int} \mbox{\hyperlink{adaptation__example0__fortran_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}(\textcolor{keywordtype}{int} argc,\textcolor{keywordtype}{char} *argv[]) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00052}00052   \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}      mmgMesh;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00053}00053   \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}       mmgSol;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00054}00054   \textcolor{keywordtype}{int}             \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00055}00055   \textcolor{keywordtype}{char}            *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},*filename\_o2d,*filename\_os,*filename\_o3d,*ptr;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00057}00057   fprintf(stdout,\textcolor{stringliteral}{"{}  -\/-\/ TEST MMGLIB \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00059}00059   \textcolor{keywordflow}{if} ( argc != 4 ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00060}00060     printf(\textcolor{stringliteral}{"{} Usage: \%s 2d\_filein 3d\_filein fileout\(\backslash\)n"{}},argv[0]);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00061}00061     \textcolor{keywordflow}{return}(1);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00062}00062   \}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00066}00066   \textcolor{comment}{/* Name and path of the mesh file */}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00067}00067   \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[1]) + 1, \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00068}00068   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} == NULL ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00069}00069     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00070}00070     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00071}00071   \}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00072}00072   strcpy(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},argv[1]);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00074}00074  \textcolor{comment}{/* Name and path of the mesh file */}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00078}00078   \textcolor{comment}{/* args of InitMesh:}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00079}00079 \textcolor{comment}{   * MMG5\_ARG\_start: we start to give the args of a variadic func}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00080}00080 \textcolor{comment}{   * MMG5\_ARG\_ppMesh: next arg will be a pointer over a MMG5\_pMesh}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00081}00081 \textcolor{comment}{   * \&mmgMesh: pointer toward your MMG5\_pMesh (that store your mesh)}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00082}00082 \textcolor{comment}{   * MMG5\_ARG\_ppMet: next arg will be a pointer over a MMG5\_pSol storing a metric}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00083}00083 \textcolor{comment}{   * \&mmgSol: pointer toward your MMG5\_pSol (that store your metric) */}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00084}00084   mmgMesh = NULL;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00085}00085   mmgSol  = NULL;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00086}00086   \mbox{\hyperlink{API__functions__2d_8c_a34d42982555797a0c6ba089f674279f4}{MMG2D\_Init\_mesh}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00087}00087                   \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh, \mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00088}00088                   \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00089}00089 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00095}00095   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_aa1b89c52440c3f359d0081e56200308c}{MMG2D\_loadMesh}}(mmgMesh,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00099}00099   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_ac92405634d0ba6b42c3c8387e5587077}{MMG2D\_loadSol}}(mmgMesh,mmgSol,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00103}00103   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmg2d_8c_a002bd2252bae7f66816a43da71049560}{MMG2D\_mmg2dlib}}(mmgMesh,mmgSol);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00105}00105   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a2ed44e9232d89d6464b89b86652f1090}{MMG5\_STRONGFAILURE}} ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00106}00106     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMG2DLIB: UNABLE TO SAVE MESH\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00107}00107     \textcolor{keywordflow}{return}(\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00108}00108   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\_LOWFAILURE}} )}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00109}00109     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMG2DLIB\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00110}00110 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00118}00118   \textcolor{comment}{/*save result*/}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00119}00119   filename\_o2d = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[3]) + 4, \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00120}00120   \textcolor{keywordflow}{if} ( filename\_o2d == NULL ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00121}00121     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00122}00122     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00123}00123   \}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00124}00124   strcpy(filename\_o2d,argv[3]);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00125}00125   ptr = strstr(filename\_o2d,\textcolor{stringliteral}{"{}.mesh"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00126}00126   \textcolor{keywordflow}{if} ( !ptr )  ptr = strstr(filename\_o2d,\textcolor{stringliteral}{"{}.msh"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00127}00127   \textcolor{keywordflow}{if} ( ptr ) *ptr = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00128}00128   strcat(filename\_o2d,\textcolor{stringliteral}{"{}.2d"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00129}00129 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00130}00130   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_a2d6241f92b0eb89b4f55ae402aebf571}{MMG2D\_saveMesh}}(mmgMesh,filename\_o2d) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00131}00131   \textcolor{comment}{/*save metric*/}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00132}00132   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_a9c104e177e141b7396288e1018bf59db}{MMG2D\_saveSol}}(mmgMesh,mmgSol,filename\_o2d) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00133}00133 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00135}00135   \mbox{\hyperlink{API__functions__2d_8c_ae54958922cfa83be04e5b76f4dad570c}{MMG2D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00136}00136                  \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh, \mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00137}00137                  \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00138}00138 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00139}00139   free(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00140}00140   \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} = NULL;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00143}00143   \textcolor{comment}{/* Name and path of the mesh file */}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00144}00144   \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[2]) + 1, \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00145}00145   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} == NULL ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00146}00146     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00147}00147     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00148}00148   \}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00149}00149   strcpy(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},argv[2]);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00150}00150 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00151}00151   filename\_os = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[3]) + 3, \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00152}00152   \textcolor{keywordflow}{if} ( filename\_os == NULL ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00153}00153     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00154}00154     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00155}00155   \}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00156}00156   strcpy(filename\_os,argv[3]);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00157}00157   ptr = strstr(filename\_os,\textcolor{stringliteral}{"{}.mesh"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00158}00158   \textcolor{keywordflow}{if} ( !ptr )  ptr = strstr(filename\_os,\textcolor{stringliteral}{"{}.msh"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00159}00159   \textcolor{keywordflow}{if} ( ptr ) *ptr = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00160}00160   strcat(filename\_os,\textcolor{stringliteral}{"{}.s"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00161}00161 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00164}00164   \textcolor{comment}{/* args of InitMesh}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00165}00165 \textcolor{comment}{   * MMG5\_ARG\_start: we start to give the args of a variadic func}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00166}00166 \textcolor{comment}{   * MMG5\_ARG\_ppMesh: next arg will be a pointer over a MMG5\_pMesh}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00167}00167 \textcolor{comment}{   * \&mmgMesh: pointer toward your MMG5\_pMesh (that store your mesh)}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00168}00168 \textcolor{comment}{   * MMG5\_ARG\_ppMet: next arg will be a pointer over a MMG5\_pSol storing a metric}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00169}00169 \textcolor{comment}{   * \&mmgSol: pointer toward your MMG5\_pSol (that store your metric) */}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00171}00171   mmgMesh = NULL;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00172}00172   mmgSol  = NULL;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00173}00173   \mbox{\hyperlink{API__functions__s_8c_a30741f0d1b895b92e6ea43f6370b0367}{MMGS\_Init\_mesh}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00174}00174                  \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh, \mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00175}00175                  \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00176}00176 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00183}00183   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__s_8c_af58a002f9c9fb3b0756f5359a33c85e8}{MMGS\_loadMesh}}(mmgMesh,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00189}00189   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__s_8c_a1c1de2d0043e7060fca163a7f14597a5}{MMGS\_loadSol}}(mmgMesh,mmgSol,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00190}00190 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00193}00193   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmgs_8c_a734fba39f5d78f79b63c0a4bc2df973c}{MMGS\_mmgslib}}(mmgMesh,mmgSol);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00194}00194 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00195}00195   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a2ed44e9232d89d6464b89b86652f1090}{MMG5\_STRONGFAILURE}} ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00196}00196     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMGSLIB: UNABLE TO SAVE MESH\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00197}00197     \textcolor{keywordflow}{return}(\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00198}00198   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\_LOWFAILURE}} )}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00199}00199     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMGSLIB\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00200}00200 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00208}00208   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__s_8c_a41b588168fba8de32f83d723e6d40a9c}{MMGS\_saveMesh}}(mmgMesh,filename\_os) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00209}00209 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00211}00211   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__s_8c_ae81e47130aa038280501a193bd337bad}{MMGS\_saveSol}}(mmgMesh,mmgSol,filename\_os) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00214}00214   \mbox{\hyperlink{API__functions__s_8c_a701ec871c9f0aa7c8086ba74e217e331}{MMGS\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00215}00215                 \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh, \mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00216}00216                 \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00217}00217 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00219}00219   filename\_o3d = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[3]) + 4, \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00220}00220   \textcolor{keywordflow}{if} ( filename\_o3d == NULL ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00221}00221     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00222}00222     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00223}00223   \}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00224}00224   strcpy(filename\_o3d,argv[3]);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00225}00225   ptr = strstr(filename\_o3d,\textcolor{stringliteral}{"{}.mesh"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00226}00226   \textcolor{keywordflow}{if} ( !ptr )  ptr = strstr(filename\_o3d,\textcolor{stringliteral}{"{}.msh"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00227}00227   \textcolor{keywordflow}{if} ( ptr ) *ptr = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00228}00228   strcat(filename\_o3d,\textcolor{stringliteral}{"{}.3d"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00229}00229 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00232}00232   \textcolor{comment}{/* args of InitMesh:}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00233}00233 \textcolor{comment}{   * MMG5\_ARG\_start: we start to give the args of a variadic func}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00234}00234 \textcolor{comment}{   * MMG5\_ARG\_ppMesh: next arg will be a pointer over a MMG5\_pMesh}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00235}00235 \textcolor{comment}{   * \&mmgMesh: pointer toward your MMG5\_pMesh (that store your mesh)}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00236}00236 \textcolor{comment}{   * MMG5\_ARG\_ppMet: next arg will be a pointer over a MMG5\_pSol storing a metric}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00237}00237 \textcolor{comment}{   * \&mmgSol: pointer toward your MMG5\_pSol (that store your metric) */}}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00238}00238   mmgMesh = NULL;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00239}00239   mmgSol  = NULL;}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00240}00240   \mbox{\hyperlink{API__functions__3d_8c_a00ec28ed5d8e31f7c12cc1749403085c}{MMG3D\_Init\_mesh}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00241}00241                   \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh, \mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00242}00242                   \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00243}00243 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00249}00249   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__3d_8c_a793efe93b4e971a62390c56056a275ff}{MMG3D\_loadMesh}}(mmgMesh,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00250}00250 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00256}00256   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__3d_8c_a71913c679c1626fe181c5f76e77bc5d7}{MMG3D\_loadSol}}(mmgMesh,mmgSol,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00257}00257 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00260}00260   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmg3d_8c_a8488f2b5bd529342c5453824319d9ee0}{MMG3D\_mmg3dlib}}(mmgMesh,mmgSol);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00261}00261 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00262}00262   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a2ed44e9232d89d6464b89b86652f1090}{MMG5\_STRONGFAILURE}} ) \{}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00263}00263     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMG3DLIB: UNABLE TO SAVE MESH\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00264}00264     \textcolor{keywordflow}{return}(\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00265}00265   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\_LOWFAILURE}} )}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00266}00266     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMG3DLIB\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00267}00267 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00275}00275   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__3d_8c_a5b1548618359fda03ce50c5fa34e9598}{MMG3D\_saveMesh}}(mmgMesh,filename\_o3d) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00276}00276 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00278}00278   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__3d_8c_ab81cba89d55f5274756728e801d18b7e}{MMG3D\_saveSol}}(mmgMesh,mmgSol,filename\_o3d) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00279}00279 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00281}00281   \mbox{\hyperlink{API__functions__3d_8c_ad8950da4b0dd5c582c29395515093346}{MMG3D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00282}00282                  \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh,\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00283}00283                  \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00284}00284 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00285}00285   free(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00286}00286   free(filename\_o2d);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00287}00287   free(filename\_os);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00288}00288   free(filename\_o3d);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00289}00289 }
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00290}00290   \textcolor{keywordflow}{return}(0);}
+\DoxyCodeLine{\Hypertarget{adaptation__example0_2main_8c_source_l00291}00291 \}}
+
+\end{DoxyCode}

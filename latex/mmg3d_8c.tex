@@ -1,0 +1,285 @@
+\hypertarget{mmg3d_8c}{}\doxysection{src/mmg3d/mmg3d.c File Reference}
+\label{mmg3d_8c}\index{src/mmg3d/mmg3d.c@{src/mmg3d/mmg3d.c}}
+
+
+Main file for MMG3D executable\+: perform 3d mesh adaptation.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+Include dependency graph for mmg3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{mmg3d_8c_af5628e98707c2b7a49bddade06d5144e}{MMG5\+\_\+endcod}} (void)
+\item 
+int \mbox{\hyperlink{mmg3d_8c_afec8c04a9871faa243fc1c4bd55aeaa0}{MMG5\+\_\+count\+Local\+Param\+At\+Tet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$bdy\+Refs)
+\item 
+int \mbox{\hyperlink{mmg3d_8c_aab65335aae23dcd8316c0299c80c8013}{MMG5\+\_\+write\+Local\+Param\+At\+Tet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$bdry\+Refs, FILE $\ast$out)
+\item 
+int \mbox{\hyperlink{mmg3d_8c_abe3ec0fa7f4c116775004215fcdb94ea}{MMG3\+D\+\_\+write\+Local\+Param}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+static int \mbox{\hyperlink{mmg3d_8c_a10ee7bc9886fe77bfc4b0d4103263f6b}{MMG3\+D\+\_\+default\+Option}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})
+\item 
+int \mbox{\hyperlink{mmg3d_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmytime}{mytime}} \mbox{\hyperlink{mmg3d_8c_ac66636bb2a7b7a2bf30b087b35987a99}{MMG5\+\_\+ctim}} \mbox{[}\mbox{\hyperlink{chrono__private_8h_ae63c6870659f96955fc026b4bd82568d}{TIMEMAX}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main file for MMG3D executable\+: perform 3d mesh adaptation. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg3d_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{mmg3d_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{mmg3d.c@{mmg3d.c}!main@{main}}
+\index{main@{main}!mmg3d.c@{mmg3d.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & number of command line arguments. \\
+\hline
+{\em argv} & command line arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{libmmgtypes_8h_a4a5b6de311b295a697e73d2ba18d951f}{MMG5\+\_\+\+SUCCESS}} if success. 
+
+\mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\+\_\+\+LOWFAILURE}} if failed but a conform mesh is saved. 
+
+\mbox{\hyperlink{libmmgtypes_8h_a2ed44e9232d89d6464b89b86652f1090}{MMG5\+\_\+\+STRONGFAILURE}} if failed and we can\textquotesingle{}t save the mesh.
+\end{DoxyReturn}
+Main program for MMG3D executable\+: perform mesh adaptation. Save files at medit or Gmsh format
+
+Definition at line \mbox{\hyperlink{mmg3d_8c_source_l00297}{297}} of file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{mmg3d_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d_8c_a10ee7bc9886fe77bfc4b0d4103263f6b}\label{mmg3d_8c_a10ee7bc9886fe77bfc4b0d4103263f6b}} 
+\index{mmg3d.c@{mmg3d.c}!MMG3D\_defaultOption@{MMG3D\_defaultOption}}
+\index{MMG3D\_defaultOption@{MMG3D\_defaultOption}!mmg3d.c@{mmg3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_defaultOption()}{MMG3D\_defaultOption()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+default\+Option (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward a sol structure (metric). \\
+\hline
+{\em sol} & pointer toward a sol structure (ls or disp).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{libmmgtypes_8h_a4a5b6de311b295a697e73d2ba18d951f}{MMG5\+\_\+\+SUCCESS}} if success, \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\+\_\+\+LOWFAILURE}} if failed but a conform mesh is saved and \mbox{\hyperlink{libmmgtypes_8h_a2ed44e9232d89d6464b89b86652f1090}{MMG5\+\_\+\+STRONGFAILURE}} if failed and we can\textquotesingle{}t save the mesh.
+\end{DoxyReturn}
+Program to save the local default parameter file\+: read the mesh and metric (needed to compite the hmax/hmin parameters), scale the mesh and compute the hmax/hmin param, unscale the mesh and write the default parameter file. 
+
+Definition at line \mbox{\hyperlink{mmg3d_8c_source_l00198}{198}} of file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{mmg3d_8c_a10ee7bc9886fe77bfc4b0d4103263f6b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{mmg3d_8c_a10ee7bc9886fe77bfc4b0d4103263f6b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d_8c_abe3ec0fa7f4c116775004215fcdb94ea}\label{mmg3d_8c_abe3ec0fa7f4c116775004215fcdb94ea}} 
+\index{mmg3d.c@{mmg3d.c}!MMG3D\_writeLocalParam@{MMG3D\_writeLocalParam}}
+\index{MMG3D\_writeLocalParam@{MMG3D\_writeLocalParam}!mmg3d.c@{mmg3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_writeLocalParam()}{MMG3D\_writeLocalParam()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+write\+Local\+Param (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+Write a DEFAULT.\+mmg3d file containing the default values of parameters that can be locally defined. Save the local parameters file
+
+Write local param at triangles
+
+Write local param at tetra
+
+Definition at line \mbox{\hyperlink{mmg3d_8c_source_l00130}{130}} of file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_8c_abe3ec0fa7f4c116775004215fcdb94ea_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_8c_abe3ec0fa7f4c116775004215fcdb94ea_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d_8c_afec8c04a9871faa243fc1c4bd55aeaa0}\label{mmg3d_8c_afec8c04a9871faa243fc1c4bd55aeaa0}} 
+\index{mmg3d.c@{mmg3d.c}!MMG5\_countLocalParamAtTet@{MMG5\_countLocalParamAtTet}}
+\index{MMG5\_countLocalParamAtTet@{MMG5\_countLocalParamAtTet}!mmg3d.c@{mmg3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_countLocalParamAtTet()}{MMG5\_countLocalParamAtTet()}}
+{\footnotesize\ttfamily int MMG5\+\_\+count\+Local\+Param\+At\+Tet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$}]{bdy\+Refs }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em bdy\+Refs} & pointer toward the list of the boundary references. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+npar, the number of local parameters at tetrahedra if success, 0 otherwise.
+\end{DoxyReturn}
+Count the local default values at tetrahedra and fill the list of the boundary references. Count the number of different boundary references and list it
+
+Definition at line \mbox{\hyperlink{mmg3d_8c_source_l00061}{61}} of file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_8c_afec8c04a9871faa243fc1c4bd55aeaa0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_8c_afec8c04a9871faa243fc1c4bd55aeaa0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d_8c_af5628e98707c2b7a49bddade06d5144e}\label{mmg3d_8c_af5628e98707c2b7a49bddade06d5144e}} 
+\index{mmg3d.c@{mmg3d.c}!MMG5\_endcod@{MMG5\_endcod}}
+\index{MMG5\_endcod@{MMG5\_endcod}!mmg3d.c@{mmg3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_endcod()}{MMG5\_endcod()}}
+{\footnotesize\ttfamily static void MMG5\+\_\+endcod (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Print elapsed time at end of process. 
+
+Definition at line \mbox{\hyperlink{mmg3d_8c_source_l00043}{43}} of file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{mmg3d_8c_af5628e98707c2b7a49bddade06d5144e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{mmg3d_8c_af5628e98707c2b7a49bddade06d5144e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d_8c_aab65335aae23dcd8316c0299c80c8013}\label{mmg3d_8c_aab65335aae23dcd8316c0299c80c8013}} 
+\index{mmg3d.c@{mmg3d.c}!MMG5\_writeLocalParamAtTet@{MMG5\_writeLocalParamAtTet}}
+\index{MMG5\_writeLocalParamAtTet@{MMG5\_writeLocalParamAtTet}!mmg3d.c@{mmg3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_writeLocalParamAtTet()}{MMG5\_writeLocalParamAtTet()}}
+{\footnotesize\ttfamily int MMG5\+\_\+write\+Local\+Param\+At\+Tet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$}]{bdry\+Refs,  }\item[{FILE $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em bdry\+Refs} & pointer toward the list of the boundary references. \\
+\hline
+{\em out} & pointer toward the file in which to write. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+Write the local default values at tetrahedra in the parameter file. 
+
+Definition at line \mbox{\hyperlink{mmg3d_8c_source_l00105}{105}} of file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_8c_aab65335aae23dcd8316c0299c80c8013_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_8c_aab65335aae23dcd8316c0299c80c8013_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{mmg3d_8c_ac66636bb2a7b7a2bf30b087b35987a99}\label{mmg3d_8c_ac66636bb2a7b7a2bf30b087b35987a99}} 
+\index{mmg3d.c@{mmg3d.c}!MMG5\_ctim@{MMG5\_ctim}}
+\index{MMG5\_ctim@{MMG5\_ctim}!mmg3d.c@{mmg3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_ctim}{MMG5\_ctim}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmytime}{mytime}} MMG5\+\_\+ctim\mbox{[}\mbox{\hyperlink{chrono__private_8h_ae63c6870659f96955fc026b4bd82568d}{TIMEMAX}}\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d_8c_source_l00038}{38}} of file \mbox{\hyperlink{mmg3d_8c_source}{mmg3d.\+c}}.
+

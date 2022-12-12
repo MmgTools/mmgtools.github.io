@@ -1,0 +1,456 @@
+\hypertarget{eigenv_8c}{}\doxysection{src/common/eigenv.c File Reference}
+\label{eigenv_8c}\index{src/common/eigenv.c@{src/common/eigenv.c}}
+
+
+Find eigenvalues and eigenvectors of matrix.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}eigenv\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for eigenv.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eigenv_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_aa44458a5daeb31f825a904d17c5d25cc}{MG\+\_\+\+EIGENV\+\_\+\+EPS27}}~1.e-\/27
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_a1e875cd089ab2aea9bfbbcf7955d2886}{MG\+\_\+\+EIGENV\+\_\+\+EPS13}}~1.e-\/13
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_ae49e20e6fdcaa546c7b16363ef259116}{MG\+\_\+\+EIGENV\+\_\+\+EPS10}}~1.e-\/10
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_a268a9f149f9e4cc45626d94afe40a974}{MG\+\_\+\+EIGENV\+\_\+\+EPS5e6}}~5.e-\/06
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_af860d1c7737f1f1faf2edf6226af1b04}{MG\+\_\+\+EIGENV\+\_\+\+EPS6}}~1.e-\/06
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_ab09211ea2b27ad5d59bd95302ead6677}{MG\+\_\+\+EIGENV\+\_\+\+EPS2e6}}~2.e-\/06
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_ab1a2aae0975a6322ab3e48fef2be1a3f}{MG\+\_\+\+EIGENV\+\_\+\+EPS5}}~1.e-\/05
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_a2e67a1b2ecaf65855494097ca089f2f0}{MAXTOU}}~50
+\item 
+\#define \mbox{\hyperlink{eigenv_8c_a184601378f7fa2b43aa1b4333b53bf8b}{egal}}(x,  y)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{eigenv_8c_acbe5390238636fc4b0684cd2d070f570}{newton3}} (double p\mbox{[}4\mbox{]}, double x\mbox{[}3\mbox{]})
+\begin{DoxyCompactList}\small\item\em Find root(s) of a polynomial of degree 3. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{eigenv_8c_af002d8cc5e820dccdd034925c51128f2}{MMG5\+\_\+check\+\_\+accuracy}} (double mat\mbox{[}6\mbox{]}, double lambda\mbox{[}3\mbox{]}, double v\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double w1\mbox{[}3\mbox{]}, double w2\mbox{[}3\mbox{]}, double w3\mbox{[}3\mbox{]}, double maxm, int order, int symmat)
+\item 
+int \mbox{\hyperlink{eigenv_8c_a33a2a006517b178fa2dfeb28f38a0d53}{MMG5\+\_\+eigenv3d}} (int symmat, double $\ast$mat, double lambda\mbox{[}3\mbox{]}, double v\mbox{[}3\mbox{]}\mbox{[}3\mbox{]})
+\begin{DoxyCompactList}\small\item\em Find eigenvalues and vectors of a 3x3 matrix. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{eigenv_8c_a94147fbaabcf86a5559e9792f988f68c}{MMG5\+\_\+eigenv2d}} (int symmat, double $\ast$mat, double lambda\mbox{[}2\mbox{]}, double vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Find eigenvalues and vectors of a 2x2 matrix. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{eigenv_8c_a1f28036e768b1239e1cdd7454d3c8ba1}{MMG5\+\_\+eigen2}} (double $\ast$mm, double $\ast$lambda, double vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Find eigenvalues and vectors of a 2x2 matrix. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{eigenv_8c_a17b8479b752c743a51f4a86d853518ca}{MMG5\+\_\+eigensym}} (double m\mbox{[}3\mbox{]}, double lambda\mbox{[}2\mbox{]}, double vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{eigenv_8c_ab1bb4d57c4833cf0a77ff04ae3dd5906}{Id}} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Identity matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Find eigenvalues and eigenvectors of matrix. 
+
+\begin{DoxyAuthor}{Author}
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License.
+\end{DoxyCopyright}
+Find eigenvalues and eigenvectors of 2x2 or 3x3 symetric definite positive matrix. 
+
+Definition in file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{eigenv_8c_a184601378f7fa2b43aa1b4333b53bf8b}\label{eigenv_8c_a184601378f7fa2b43aa1b4333b53bf8b}} 
+\index{eigenv.c@{eigenv.c}!egal@{egal}}
+\index{egal@{egal}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{egal}{egal}}
+{\footnotesize\ttfamily \#define egal(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    (                                             \(\backslash\)}
+\DoxyCodeLine{    (  ((x) == 0.0f) ? (fabs(y) < \mbox{\hyperlink{eigenv_8c_af860d1c7737f1f1faf2edf6226af1b04}{MG\_EIGENV\_EPS6}}) :                      \(\backslash\)}
+\DoxyCodeLine{       ( ((y) == 0.0f) ? (fabs(x) < \mbox{\hyperlink{eigenv_8c_af860d1c7737f1f1faf2edf6226af1b04}{MG\_EIGENV\_EPS6}}) :                    \(\backslash\)}
+\DoxyCodeLine{         (fabs((x)-\/(y)) / (fabs(x) + fabs(y)) < \mbox{\hyperlink{eigenv_8c_ab09211ea2b27ad5d59bd95302ead6677}{MG\_EIGENV\_EPS2e6}}) )  ) )}
+
+\end{DoxyCode}
+Check if numbers {\itshape x} and {\itshape y} are equal. 
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00059}{59}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_a2e67a1b2ecaf65855494097ca089f2f0}\label{eigenv_8c_a2e67a1b2ecaf65855494097ca089f2f0}} 
+\index{eigenv.c@{eigenv.c}!MAXTOU@{MAXTOU}}
+\index{MAXTOU@{MAXTOU}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MAXTOU}{MAXTOU}}
+{\footnotesize\ttfamily \#define MAXTOU~50}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00053}{53}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_ae49e20e6fdcaa546c7b16363ef259116}\label{eigenv_8c_ae49e20e6fdcaa546c7b16363ef259116}} 
+\index{eigenv.c@{eigenv.c}!MG\_EIGENV\_EPS10@{MG\_EIGENV\_EPS10}}
+\index{MG\_EIGENV\_EPS10@{MG\_EIGENV\_EPS10}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MG\_EIGENV\_EPS10}{MG\_EIGENV\_EPS10}}
+{\footnotesize\ttfamily \#define MG\+\_\+\+EIGENV\+\_\+\+EPS10~1.e-\/10}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00048}{48}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_a1e875cd089ab2aea9bfbbcf7955d2886}\label{eigenv_8c_a1e875cd089ab2aea9bfbbcf7955d2886}} 
+\index{eigenv.c@{eigenv.c}!MG\_EIGENV\_EPS13@{MG\_EIGENV\_EPS13}}
+\index{MG\_EIGENV\_EPS13@{MG\_EIGENV\_EPS13}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MG\_EIGENV\_EPS13}{MG\_EIGENV\_EPS13}}
+{\footnotesize\ttfamily \#define MG\+\_\+\+EIGENV\+\_\+\+EPS13~1.e-\/13}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00047}{47}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_aa44458a5daeb31f825a904d17c5d25cc}\label{eigenv_8c_aa44458a5daeb31f825a904d17c5d25cc}} 
+\index{eigenv.c@{eigenv.c}!MG\_EIGENV\_EPS27@{MG\_EIGENV\_EPS27}}
+\index{MG\_EIGENV\_EPS27@{MG\_EIGENV\_EPS27}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MG\_EIGENV\_EPS27}{MG\_EIGENV\_EPS27}}
+{\footnotesize\ttfamily \#define MG\+\_\+\+EIGENV\+\_\+\+EPS27~1.e-\/27}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00046}{46}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_ab09211ea2b27ad5d59bd95302ead6677}\label{eigenv_8c_ab09211ea2b27ad5d59bd95302ead6677}} 
+\index{eigenv.c@{eigenv.c}!MG\_EIGENV\_EPS2e6@{MG\_EIGENV\_EPS2e6}}
+\index{MG\_EIGENV\_EPS2e6@{MG\_EIGENV\_EPS2e6}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MG\_EIGENV\_EPS2e6}{MG\_EIGENV\_EPS2e6}}
+{\footnotesize\ttfamily \#define MG\+\_\+\+EIGENV\+\_\+\+EPS2e6~2.e-\/06}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00051}{51}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_ab1a2aae0975a6322ab3e48fef2be1a3f}\label{eigenv_8c_ab1a2aae0975a6322ab3e48fef2be1a3f}} 
+\index{eigenv.c@{eigenv.c}!MG\_EIGENV\_EPS5@{MG\_EIGENV\_EPS5}}
+\index{MG\_EIGENV\_EPS5@{MG\_EIGENV\_EPS5}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MG\_EIGENV\_EPS5}{MG\_EIGENV\_EPS5}}
+{\footnotesize\ttfamily \#define MG\+\_\+\+EIGENV\+\_\+\+EPS5~1.e-\/05}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00052}{52}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_a268a9f149f9e4cc45626d94afe40a974}\label{eigenv_8c_a268a9f149f9e4cc45626d94afe40a974}} 
+\index{eigenv.c@{eigenv.c}!MG\_EIGENV\_EPS5e6@{MG\_EIGENV\_EPS5e6}}
+\index{MG\_EIGENV\_EPS5e6@{MG\_EIGENV\_EPS5e6}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MG\_EIGENV\_EPS5e6}{MG\_EIGENV\_EPS5e6}}
+{\footnotesize\ttfamily \#define MG\+\_\+\+EIGENV\+\_\+\+EPS5e6~5.e-\/06}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00049}{49}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+\mbox{\Hypertarget{eigenv_8c_af860d1c7737f1f1faf2edf6226af1b04}\label{eigenv_8c_af860d1c7737f1f1faf2edf6226af1b04}} 
+\index{eigenv.c@{eigenv.c}!MG\_EIGENV\_EPS6@{MG\_EIGENV\_EPS6}}
+\index{MG\_EIGENV\_EPS6@{MG\_EIGENV\_EPS6}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MG\_EIGENV\_EPS6}{MG\_EIGENV\_EPS6}}
+{\footnotesize\ttfamily \#define MG\+\_\+\+EIGENV\+\_\+\+EPS6~1.e-\/06}
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00050}{50}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{eigenv_8c_af002d8cc5e820dccdd034925c51128f2}\label{eigenv_8c_af002d8cc5e820dccdd034925c51128f2}} 
+\index{eigenv.c@{eigenv.c}!MMG5\_check\_accuracy@{MMG5\_check\_accuracy}}
+\index{MMG5\_check\_accuracy@{MMG5\_check\_accuracy}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_check\_accuracy()}{MMG5\_check\_accuracy()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+check\+\_\+accuracy (\begin{DoxyParamCaption}\item[{double}]{mat\mbox{[}6\mbox{]},  }\item[{double}]{lambda\mbox{[}3\mbox{]},  }\item[{double}]{v\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{w1\mbox{[}3\mbox{]},  }\item[{double}]{w2\mbox{[}3\mbox{]},  }\item[{double}]{w3\mbox{[}3\mbox{]},  }\item[{double}]{maxm,  }\item[{int}]{order,  }\item[{int}]{symmat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & pointer toward a 3x3 matrix. \\
+\hline
+{\em lambda} & eigenvalues. \\
+\hline
+{\em v} & eigenvectors. \\
+\hline
+{\em w1} & temporary array to perform the matrix cross product. \\
+\hline
+{\em w2} & temporary array to perform the matrix cross product. \\
+\hline
+{\em w3} & temporary array to perform the matrix cross product. \\
+\hline
+{\em maxm} & maximal value of the matrix used for normalization. \\
+\hline
+{\em order} & order of eigenvalues (1,2,3) or 0 if failed. \\
+\hline
+{\em symmat} & 0 if matrix is not symetric, 1 otherwise.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Check the accuracy of the eigenvalues and vectors computation of a 3x3 matrix (symetric). 
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00311}{311}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eigenv_8c_af002d8cc5e820dccdd034925c51128f2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{eigenv_8c_a1f28036e768b1239e1cdd7454d3c8ba1}\label{eigenv_8c_a1f28036e768b1239e1cdd7454d3c8ba1}} 
+\index{eigenv.c@{eigenv.c}!MMG5\_eigen2@{MMG5\_eigen2}}
+\index{MMG5\_eigen2@{MMG5\_eigen2}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_eigen2()}{MMG5\_eigen2()}}
+{\footnotesize\ttfamily int MMG5\+\_\+eigen2 (\begin{DoxyParamCaption}\item[{double $\ast$}]{mm,  }\item[{double $\ast$}]{lambda,  }\item[{double}]{vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Find eigenvalues and vectors of a 2x2 matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mm} & pointer toward the matrix. \\
+\hline
+{\em lambda} & pointer toward the output eigenvalues. \\
+\hline
+{\em vp} & eigenvectors. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+not used for now 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00858}{858}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eigenv_8c_a1f28036e768b1239e1cdd7454d3c8ba1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{eigenv_8c_a17b8479b752c743a51f4a86d853518ca}\label{eigenv_8c_a17b8479b752c743a51f4a86d853518ca}} 
+\index{eigenv.c@{eigenv.c}!MMG5\_eigensym@{MMG5\_eigensym}}
+\index{MMG5\_eigensym@{MMG5\_eigensym}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_eigensym()}{MMG5\_eigensym()}}
+{\footnotesize\ttfamily int MMG5\+\_\+eigensym (\begin{DoxyParamCaption}\item[{double}]{m\mbox{[}3\mbox{]},  }\item[{double}]{lambda\mbox{[}2\mbox{]},  }\item[{double}]{vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & terms of symetric matrix $2x2$. \\
+\hline
+{\em lambda} & eigenvalues of {\itshape m}. \\
+\hline
+{\em vp} & eigenvectors of {\itshape m}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+order of the eigenvalues.
+\end{DoxyReturn}
+Compute eigenelements of a symetric matrix m. Eigenvectors are orthogonal. 
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00973}{973}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eigenv_8c_a17b8479b752c743a51f4a86d853518ca_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{eigenv_8c_a94147fbaabcf86a5559e9792f988f68c}\label{eigenv_8c_a94147fbaabcf86a5559e9792f988f68c}} 
+\index{eigenv.c@{eigenv.c}!MMG5\_eigenv2d@{MMG5\_eigenv2d}}
+\index{MMG5\_eigenv2d@{MMG5\_eigenv2d}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_eigenv2d()}{MMG5\_eigenv2d()}}
+{\footnotesize\ttfamily int MMG5\+\_\+eigenv2d (\begin{DoxyParamCaption}\item[{int}]{symmat,  }\item[{double $\ast$}]{mat,  }\item[{double}]{lambda\mbox{[}2\mbox{]},  }\item[{double}]{vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Find eigenvalues and vectors of a 2x2 matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em symmat} & 0 if matrix is not symetric, 1 otherwise. \\
+\hline
+{\em mat} & pointer toward the matrix. \\
+\hline
+{\em lambda} & eigenvalues. \\
+\hline
+{\em v} & eigenvectors.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+order of eigenvalues (1,2) or 0 if failed.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+the i$^\wedge$\{th\} eigenvector is stored in v\mbox{[}i\mbox{]}\mbox{[}.\mbox{]}. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00780}{780}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{eigenv_8c_a94147fbaabcf86a5559e9792f988f68c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eigenv_8c_a94147fbaabcf86a5559e9792f988f68c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{eigenv_8c_a33a2a006517b178fa2dfeb28f38a0d53}\label{eigenv_8c_a33a2a006517b178fa2dfeb28f38a0d53}} 
+\index{eigenv.c@{eigenv.c}!MMG5\_eigenv3d@{MMG5\_eigenv3d}}
+\index{MMG5\_eigenv3d@{MMG5\_eigenv3d}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_eigenv3d()}{MMG5\_eigenv3d()}}
+{\footnotesize\ttfamily int MMG5\+\_\+eigenv3d (\begin{DoxyParamCaption}\item[{int}]{symmat,  }\item[{double $\ast$}]{mat,  }\item[{double}]{lambda\mbox{[}3\mbox{]},  }\item[{double}]{v\mbox{[}3\mbox{]}\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Find eigenvalues and vectors of a 3x3 matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em symmat} & 0 if matrix is not symetric, 1 otherwise. \\
+\hline
+{\em mat} & pointer toward the matrix. \\
+\hline
+{\em lambda} & eigenvalues. \\
+\hline
+{\em v} & eigenvectors.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+order of eigenvalues (1,2,3) or 0 if failed.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+the i$^\wedge$\{th\} eigenvector is stored in v\mbox{[}i\mbox{]}\mbox{[}.\mbox{]}. 
+\end{DoxyRemark}
+rows of A-\/lambda\mbox{[}2\mbox{]}$\ast$I
+
+rows of A-\/lambda\mbox{[}0\mbox{]}$\ast$I
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00385}{385}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{eigenv_8c_a33a2a006517b178fa2dfeb28f38a0d53_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eigenv_8c_a33a2a006517b178fa2dfeb28f38a0d53_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{eigenv_8c_acbe5390238636fc4b0684cd2d070f570}\label{eigenv_8c_acbe5390238636fc4b0684cd2d070f570}} 
+\index{eigenv.c@{eigenv.c}!newton3@{newton3}}
+\index{newton3@{newton3}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{newton3()}{newton3()}}
+{\footnotesize\ttfamily static int newton3 (\begin{DoxyParamCaption}\item[{double}]{p\mbox{[}4\mbox{]},  }\item[{double}]{x\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find root(s) of a polynomial of degree 3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & polynomial coefficients (b=p\mbox{[}2\mbox{]}, c=p\mbox{[}1\mbox{]}, d=p\mbox{[}0\mbox{]}). \\
+\hline
+{\em x} & root(s) of polynomial. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if no roots. 
+
+1 for 3 roots. 
+
+2 for 2 roots. 
+
+3 for 1 root.
+\end{DoxyReturn}
+Find root(s) of a polynomial of degree 3\+: $P(x) = x^3+bx^2+cx+d$. 
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00086}{86}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eigenv_8c_acbe5390238636fc4b0684cd2d070f570_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{eigenv_8c_ab1bb4d57c4833cf0a77ff04ae3dd5906}\label{eigenv_8c_ab1bb4d57c4833cf0a77ff04ae3dd5906}} 
+\index{eigenv.c@{eigenv.c}!Id@{Id}}
+\index{Id@{Id}!eigenv.c@{eigenv.c}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily double Id\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{  \{1.0, 0.0, 0.0\},}
+\DoxyCodeLine{  \{0.0, 1.0, 0.0\},}
+\DoxyCodeLine{  \{0.0, 0.0, 1.0\} \}}
+
+\end{DoxyCode}
+
+
+Identity matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{eigenv_8c_source_l00067}{67}} of file \mbox{\hyperlink{eigenv_8c_source}{eigenv.\+c}}.
+

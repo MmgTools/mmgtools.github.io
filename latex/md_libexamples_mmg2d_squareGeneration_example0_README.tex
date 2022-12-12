@@ -1,0 +1,44 @@
+\hypertarget{md_libexamples_mmg2d_squareGeneration_example0_README_autotoc_md64}{}\doxysection{I/ Implementation}\label{md_libexamples_mmg2d_squareGeneration_example0_README_autotoc_md64}
+To call the {\bfseries{mmg2d}} library, you must\+: ~\newline
+
+\begin{DoxyEnumerate}
+\item build mesh and sol at MMG5 format;
+\item call the MMG2D library ({\bfseries{MMG2\+D\+\_\+mmg2dmesh}} function);
+\item get the final mesh and sol.
+\end{DoxyEnumerate}
+
+We read mesh and solution files using the {\bfseries{MMG2\+D\+\_\+load\+Mesh}} and {\bfseries{MMG2\+D\+\_\+load\+Sol}} functions.
+
+We ask for a maximal edge size of 0.\+1 using the {\bfseries{MMG2\+D\+\_\+\+Set\+\_\+dparameter}} function. We increase the verbosity level using the {\bfseries{MMG2\+D\+\_\+\+Set\+\_\+iparameter}} function.
+
+Results are saved using {\bfseries{MMG2\+D\+\_\+save\+Mesh}} and {\bfseries{MMG2\+D\+\_\+save\+Sol}} functions.\hypertarget{md_libexamples_mmg2d_squareGeneration_example0_README_autotoc_md65}{}\doxysection{II/ Compilation}\label{md_libexamples_mmg2d_squareGeneration_example0_README_autotoc_md65}
+
+\begin{DoxyEnumerate}
+\item Build and install the {\bfseries{mmg2d}} shared and static library. We suppose in the following that you have installed the {\bfseries{mmg2d}} library in the $\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory (see the \href{https://github.com/MmgTools/Mmg/wiki/Setup-guide\#iii-installation}{\texttt{ installation}} section of the setup guide);
+\item compile the main.\+c file specifying\+:
+\begin{DoxyItemize}
+\item the {\bfseries{mmg2d}} include directory with the {\bfseries{-\/I}} option;
+\item the {\bfseries{mmg2d}} library location with the {\bfseries{-\/L}} option;
+\item the {\bfseries{mmg2d}} library name with the {\bfseries{-\/l}} option;
+\item with the shared library, you must add the $\ast$$\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory to your {\bfseries{LD\+\_\+\+LIBRARY\+\_\+\+PATH}}.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\begin{quote}
+Example 1 ~\newline
+ Command line to link the application with the {\bfseries{mmg2d}} static library 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg2d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/lmmg2d -\/lm}
+
+\end{DoxyCode}
+ \end{quote}
+\begin{quote}
+Example 2 ~\newline
+ Command line to link the application with the {\bfseries{mmg2d}} shared library\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg2d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/lmmg2d}
+\DoxyCodeLine{export LD\_LIBRARY\_PATH=\$CMAKE\_INSTALL\_PREFIX/lib:\$LD\_LIBRARY\_PATH}
+
+\end{DoxyCode}
+ \end{quote}

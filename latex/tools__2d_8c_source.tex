@@ -1,0 +1,78 @@
+\hypertarget{tools__2d_8c_source}{}\doxysection{tools\+\_\+2d.\+c}
+\label{tools__2d_8c_source}\index{src/mmg2d/tools\_2d.c@{src/mmg2d/tools\_2d.c}}
+\mbox{\hyperlink{tools__2d_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00034}00034 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00046}\mbox{\hyperlink{libmmg2d__private_8h_ad47d7d672f23f7c99e11c2c5c534e797}{00046}} MMG5\_int \mbox{\hyperlink{tools__2d_8c_ad47d7d672f23f7c99e11c2c5c534e797}{MMG2D\_indElt}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\_int kel) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00047}00047     \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}      pt;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00048}00048     MMG5\_int        ne, k;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00050}00050     ne = 0;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00051}00051     \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00052}00052         pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00053}00053         \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) ) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00054}00054             ne++;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00055}00055             \textcolor{keywordflow}{if} ( k == kel )  \textcolor{keywordflow}{return} ne;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00056}00056         \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00057}00057     \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00058}00058     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00059}00059 \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00070}\mbox{\hyperlink{libmmg2d__private_8h_a24f98f9a8ce783988dab098202ae9a65}{00070}} MMG5\_int \mbox{\hyperlink{tools__2d_8c_a24f98f9a8ce783988dab098202ae9a65}{MMG2D\_indPt}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\_int kp) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00071}00071     \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}} ppt;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00072}00072     MMG5\_int    np, k;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00074}00074     np = 0;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00075}00075     \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00076}00076         ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k];}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00077}00077         \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_aacf41a0e0a3fdf65d77fa5a97fa83bce}{MG\_VOK}}(ppt) ) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00078}00078             np++;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00079}00079             \textcolor{keywordflow}{if} ( k == kp )  \textcolor{keywordflow}{return} np;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00080}00080         \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00081}00081     \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00082}00082     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00083}00083 \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00092}\mbox{\hyperlink{libmmg2d__private_8h_af0b4fe9c8b049e870acef065ef0bdae8}{00092}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools__2d_8c_af0b4fe9c8b049e870acef065ef0bdae8}{MMG2D\_keep\_only1Subdomain}} ( \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\textcolor{keywordtype}{int} nsd ) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00094}00094   \textcolor{keywordflow}{if} ( !nsd ) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00095}00095     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00096}00096   \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00098}00098   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}} > 4 || \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00099}00099     fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n  -\/-\/ ONLY KEEP DOMAIN OF REF \%d\(\backslash\)n"{}},nsd );}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00100}00100   \}}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00101}00101 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00102}00102   \mbox{\hyperlink{mmgcommon__private_8h_a9e8ebfe54780af738a91633dc1380d1b}{MMG5\_mark\_verticesAsUnused}} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}} );}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00104}00104   \mbox{\hyperlink{mmgcommon__private_8h_a42ba99163c119f9324a90c535b1ffce9}{MMG5\_keep\_subdomainElts}} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, nsd, \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}} );}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00106}00106   \mbox{\hyperlink{mmgcommon__private_8h_a760b1f908485300aa2c593f84fcff104}{MMG5\_mark\_usedVertices}} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2D\_delPt}} );}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00107}00107 }
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00108}00108   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tools__2d_8c_source_l00109}00109 \}}
+
+\end{DoxyCode}

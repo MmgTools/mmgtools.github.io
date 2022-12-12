@@ -1,0 +1,575 @@
+\hypertarget{mmg3d1__delone_8c}{}\doxysection{src/mmg3d/mmg3d1\+\_\+delone.c File Reference}
+\label{mmg3d1__delone_8c}\index{src/mmg3d/mmg3d1\_delone.c@{src/mmg3d/mmg3d1\_delone.c}}
+
+
+Perform volume and surface mesh adaptation in delaunay mode.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmg3dexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for mmg3d1\+\_\+delone.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mmg3d1__delone_8c_a9c2ce9b68047e67611ef94deeb1c0e39}{MMG3\+D\+\_\+\+THRES\+\_\+\+DEL}}~1.\+6
+\item 
+\#define \mbox{\hyperlink{mmg3d1__delone_8c_a4c48eea0ad73e803b8bdee1473ccbe1b}{MMG3\+D\+\_\+\+LOPTL\+\_\+\+DEL}}~1.\+41
+\item 
+\#define \mbox{\hyperlink{mmg3d1__delone_8c_a399702d12cf8210c709d77506c9eaa4d}{MMG3\+D\+\_\+\+LFILTS\+\_\+\+DEL}}~0.\+7
+\item 
+\#define \mbox{\hyperlink{mmg3d1__delone_8c_aee734bb9e233a472b0893709a09200b8}{MMG3\+D\+\_\+\+LFILTL\+\_\+\+DEL}}~0.\+2
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_ad66bf722d9d2f78aba0e7f87685d3049}{MMG3\+D\+\_\+mmg3d1\+\_\+delone\+\_\+split}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$PROctree, MMG5\+\_\+int k, int8\+\_\+t imax, double lmax, double lmaxtet, int8\+\_\+t chk\+Rid\+Tet, MMG5\+\_\+int $\ast$ifilt, MMG5\+\_\+int $\ast$ns, int $\ast$warn, int8\+\_\+t $\ast$count\+Mem\+Failure)
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_aa187c143c030bbf54cc6eced3bf58d92}{MMG3\+D\+\_\+mmg3d1\+\_\+delone\+\_\+splcol}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$PROctree, MMG5\+\_\+int k, int8\+\_\+t imin, double lmin, int8\+\_\+t imax, double lmax, double lmaxtet, int8\+\_\+t chk\+Rid\+Tet, MMG5\+\_\+int $\ast$ifilt, MMG5\+\_\+int $\ast$ns, MMG5\+\_\+int $\ast$nc, int $\ast$warn)
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_a1394963c1fc29c42f786512320fa2f19}{MMG5\+\_\+adpsplcol}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$PROctree, MMG5\+\_\+int ne, MMG5\+\_\+int $\ast$ifilt, MMG5\+\_\+int $\ast$ns, MMG5\+\_\+int $\ast$nc, int $\ast$warn)
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_a96c3c2288a91aa21b9acda4e1635bdb0}{MMG5\+\_\+optbad}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree)
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_a07747f51c0df49bdfbef5ca54aea465f}{MMG5\+\_\+adpdel}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$PROctree, int $\ast$warn)
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_aa7b14f852cd3eae57f8d0f9a25f5a382}{MMG5\+\_\+optet\+LES}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree)
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_a26978970372695d8c12d9d115bcb5ccb}{MMG5\+\_\+optet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree)
+\item 
+static int \mbox{\hyperlink{mmg3d1__delone_8c_adf54ac952558b6158d5867fd121f81c2}{MMG5\+\_\+adptet\+\_\+delone}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$PROctree, MMG5\+\_\+int $\ast$perm\+Nod\+Glob)
+\item 
+int \mbox{\hyperlink{mmg3d1__delone_8c_a2c5bb97c4867a0bc2c325d023e6730c8}{MMG5\+\_\+mmg3d1\+\_\+delone}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$perm\+Nod\+Glob)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{mmg3d1__delone_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Perform volume and surface mesh adaptation in delaunay mode. 
+
+\begin{DoxyAuthor}{Author}
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License.
+\end{DoxyCopyright}
+Perform volume and surface mesh adaptation in delaunay mode ({\itshape MMG\+\_\+\+PATTERN} preprocessor flag set to OFF). 
+
+Definition in file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{mmg3d1__delone_8c_aee734bb9e233a472b0893709a09200b8}\label{mmg3d1__delone_8c_aee734bb9e233a472b0893709a09200b8}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG3D\_LFILTL\_DEL@{MMG3D\_LFILTL\_DEL}}
+\index{MMG3D\_LFILTL\_DEL@{MMG3D\_LFILTL\_DEL}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_LFILTL\_DEL}{MMG3D\_LFILTL\_DEL}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+LFILTL\+\_\+\+DEL~0.\+2}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00047}{47}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+\mbox{\Hypertarget{mmg3d1__delone_8c_a399702d12cf8210c709d77506c9eaa4d}\label{mmg3d1__delone_8c_a399702d12cf8210c709d77506c9eaa4d}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG3D\_LFILTS\_DEL@{MMG3D\_LFILTS\_DEL}}
+\index{MMG3D\_LFILTS\_DEL@{MMG3D\_LFILTS\_DEL}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_LFILTS\_DEL}{MMG3D\_LFILTS\_DEL}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+LFILTS\+\_\+\+DEL~0.\+7}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00046}{46}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+\mbox{\Hypertarget{mmg3d1__delone_8c_a4c48eea0ad73e803b8bdee1473ccbe1b}\label{mmg3d1__delone_8c_a4c48eea0ad73e803b8bdee1473ccbe1b}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG3D\_LOPTL\_DEL@{MMG3D\_LOPTL\_DEL}}
+\index{MMG3D\_LOPTL\_DEL@{MMG3D\_LOPTL\_DEL}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_LOPTL\_DEL}{MMG3D\_LOPTL\_DEL}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+LOPTL\+\_\+\+DEL~1.\+41}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00045}{45}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+\mbox{\Hypertarget{mmg3d1__delone_8c_a9c2ce9b68047e67611ef94deeb1c0e39}\label{mmg3d1__delone_8c_a9c2ce9b68047e67611ef94deeb1c0e39}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG3D\_THRES\_DEL@{MMG3D\_THRES\_DEL}}
+\index{MMG3D\_THRES\_DEL@{MMG3D\_THRES\_DEL}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_THRES\_DEL}{MMG3D\_THRES\_DEL}}
+{\footnotesize\ttfamily \#define MMG3\+D\+\_\+\+THRES\+\_\+\+DEL~1.\+6}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00044}{44}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg3d1__delone_8c_aa187c143c030bbf54cc6eced3bf58d92}\label{mmg3d1__delone_8c_aa187c143c030bbf54cc6eced3bf58d92}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG3D\_mmg3d1\_delone\_splcol@{MMG3D\_mmg3d1\_delone\_splcol}}
+\index{MMG3D\_mmg3d1\_delone\_splcol@{MMG3D\_mmg3d1\_delone\_splcol}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_mmg3d1\_delone\_splcol()}{MMG3D\_mmg3d1\_delone\_splcol()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+mmg3d1\+\_\+delone\+\_\+splcol (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$}]{PROctree,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{imin,  }\item[{double}]{lmin,  }\item[{int8\+\_\+t}]{imax,  }\item[{double}]{lmax,  }\item[{double}]{lmaxtet,  }\item[{int8\+\_\+t}]{chk\+Rid\+Tet,  }\item[{MMG5\+\_\+int $\ast$}]{ifilt,  }\item[{MMG5\+\_\+int $\ast$}]{ns,  }\item[{MMG5\+\_\+int $\ast$}]{nc,  }\item[{int $\ast$}]{warn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+{\em k} & index of tetra in which we work. \\
+\hline
+{\em imin} & index in {\itshape k} of edge that we consider for split. \\
+\hline
+{\em lmin} & length of edge {\itshape imax}. \\
+\hline
+{\em imax} & index in {\itshape k} of edge that we consider for split. \\
+\hline
+{\em lmax} & length of edge {\itshape imax}. \\
+\hline
+{\em lmaxtet} & length of largest edge of tetra {\itshape k}. \\
+\hline
+{\em 1} & if we want to check tetra with 4 ridge metrics. \\
+\hline
+{\em ifilt} & pointer to store the number of vertices filtered by the PROctree. \\
+\hline
+{\em ns} & pointer toward count of splits (has to be updated) \\
+\hline
+{\em nc} & pointer toward count of collapses (has to be updated) \\
+\hline
+{\em warn} & pointer to store a flag that warn the user in case of reallocation error.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/2 for low failure (mesh has to be saved).
+
+-\/1 for strong failure.
+
+0 if edge cannot be modified and if we want to pass to next loop step (next element or next tetra edge)
+
+1 if edge cannot be modified and we want to treat next elt
+
+2 if edge has been modified and we want to treat next element.
+
+3 if nothing has been done (no error but no edge modification either).
+\end{DoxyReturn}
+Try to split {\itshape imax} edge if too large and to collapse {\itshape imin} edge if too small. If unable to treat edge with ier==1 return value or if edge has not been splitted but slpit\+\_\+delone has not raised any error\+: try to collapse short edge.
+
+
+\begin{DoxyEnumerate}
+\item Try to merge small edge\+: if collapse is not possible, pass to next element
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00355}{355}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_aa187c143c030bbf54cc6eced3bf58d92_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_aa187c143c030bbf54cc6eced3bf58d92_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_ad66bf722d9d2f78aba0e7f87685d3049}\label{mmg3d1__delone_8c_ad66bf722d9d2f78aba0e7f87685d3049}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG3D\_mmg3d1\_delone\_split@{MMG3D\_mmg3d1\_delone\_split}}
+\index{MMG3D\_mmg3d1\_delone\_split@{MMG3D\_mmg3d1\_delone\_split}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_mmg3d1\_delone\_split()}{MMG3D\_mmg3d1\_delone\_split()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+mmg3d1\+\_\+delone\+\_\+split (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$}]{PROctree,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{imax,  }\item[{double}]{lmax,  }\item[{double}]{lmaxtet,  }\item[{int8\+\_\+t}]{chk\+Rid\+Tet,  }\item[{MMG5\+\_\+int $\ast$}]{ifilt,  }\item[{MMG5\+\_\+int $\ast$}]{ns,  }\item[{int $\ast$}]{warn,  }\item[{int8\+\_\+t $\ast$}]{count\+Mem\+Failure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+{\em k} & index of tetra in which we work. \\
+\hline
+{\em imax} & index in {\itshape k} of edge that we consider for split. \\
+\hline
+{\em lmax} & length of edge {\itshape imax}. \\
+\hline
+{\em lmaxtet} & length of largest edge of tetra {\itshape k}. \\
+\hline
+{\em 1} & if we want to check tetra with 4 ridge metrics. \\
+\hline
+{\em ifilt} & pointer to store the number of vertices filtered by the PROctree. \\
+\hline
+{\em ns} & pointer toward count of splits (has to be updated) \\
+\hline
+{\em warn} & pointer to store a flag that warn the user in case of reallocation error. \\
+\hline
+{\em count\+Mem\+Failure} & number of memory errors (to update)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/2 for low failure (mesh has to be saved).
+
+-\/1 for strong failure.
+
+0 if edge cannot be splitted and if we want to pass to next loop step (next element or next tetra edge)
+
+1 if edge cannot be splitted and we want to try to collapse too long edge.
+
+2 if edge has been splitted and we want to treat next element.
+
+3 if nothing has been done (no error but no split either).
+\end{DoxyReturn}
+Try to split {\itshape imax} if too large. Get edge infos
+
+Check edge length
+
+Edge belongs to a boundary face\+: try to split using patterns
+
+b/ Edge splitting
+
+Case of a tetra without xtetra (no boundary faces)\+: split non-\/bdy edges with Delauney kernel.
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00082}{82}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_ad66bf722d9d2f78aba0e7f87685d3049_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_ad66bf722d9d2f78aba0e7f87685d3049_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_a07747f51c0df49bdfbef5ca54aea465f}\label{mmg3d1__delone_8c_a07747f51c0df49bdfbef5ca54aea465f}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG5\_adpdel@{MMG5\_adpdel}}
+\index{MMG5\_adpdel@{MMG5\_adpdel}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_adpdel()}{MMG5\_adpdel()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+adpdel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$}]{PROctree,  }\item[{int $\ast$}]{warn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+{\em warn} & set to 1 if we can\textquotesingle{}t insert point due to lack of memory. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail and we dont try to end the remesh process, 0 if fail but we try to end the remesh process and 1 if success.
+\end{DoxyReturn}
+Split edges longer than \mbox{\hyperlink{mmg3d1__delone_8c_a4c48eea0ad73e803b8bdee1473ccbe1b}{MMG3\+D\+\_\+\+LOPTL\+\_\+\+DEL}} and collapse edges shorter than \mbox{\hyperlink{libmmg3d__private_8h_a3b1b52e10f1e07ba7f9d6c139c9b6067}{MMG3\+D\+\_\+\+LOPTS}}. 
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00638}{638}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a07747f51c0df49bdfbef5ca54aea465f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a07747f51c0df49bdfbef5ca54aea465f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_a1394963c1fc29c42f786512320fa2f19}\label{mmg3d1__delone_8c_a1394963c1fc29c42f786512320fa2f19}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG5\_adpsplcol@{MMG5\_adpsplcol}}
+\index{MMG5\_adpsplcol@{MMG5\_adpsplcol}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_adpsplcol()}{MMG5\_adpsplcol()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+adpsplcol (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$}]{PROctree,  }\item[{MMG5\+\_\+int}]{ne,  }\item[{MMG5\+\_\+int $\ast$}]{ifilt,  }\item[{MMG5\+\_\+int $\ast$}]{ns,  }\item[{MMG5\+\_\+int $\ast$}]{nc,  }\item[{int $\ast$}]{warn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+{\em ne} & number of elements. \\
+\hline
+{\em ifilt} & pointer to store the number of vertices filtered by the PROctree. \\
+\hline
+{\em ns} & pointer to store the number of vertices insertions. \\
+\hline
+{\em nc} & pointer to store the number of collapse. \\
+\hline
+{\em warn} & pointer to store a flag that warn the user in case of reallocation difficulty. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail and we don\textquotesingle{}t save the mesh, 0 if fail but we try to save the mesh, 1 otherwise.
+\end{DoxyReturn}
+{\itshape adpsplcol} loop\+: split edges longer than \mbox{\hyperlink{mmg3d1__delone_8c_a4c48eea0ad73e803b8bdee1473ccbe1b}{MMG3\+D\+\_\+\+LOPTL\+\_\+\+DEL}} and collapse edges shorter than \mbox{\hyperlink{libmmg3d__private_8h_a3b1b52e10f1e07ba7f9d6c139c9b6067}{MMG3\+D\+\_\+\+LOPTS}}. Step 1\+: find longest and shortest edge (and try to manage them)
+
+Step 2\+: longest and shortest edges are stucked =\texorpdfstring{$>$}{>} try the other edges
+
+
+\begin{DoxyEnumerate}
+\item Try to split too long edge
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00423}{423}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a1394963c1fc29c42f786512320fa2f19_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a1394963c1fc29c42f786512320fa2f19_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_adf54ac952558b6158d5867fd121f81c2}\label{mmg3d1__delone_8c_adf54ac952558b6158d5867fd121f81c2}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG5\_adptet\_delone@{MMG5\_adptet\_delone}}
+\index{MMG5\_adptet\_delone@{MMG5\_adptet\_delone}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_adptet\_delone()}{MMG5\_adptet\_delone()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+adptet\+\_\+delone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$}]{PROctree,  }\item[{MMG5\+\_\+int $\ast$}]{perm\+Nod\+Glob }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+{\em perm\+Nod\+Glob} & if provided, strore the global permutation of nodes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Analyze tetrahedra and split long / collapse short, according to prescribed metric. Step 1\+: few iters of swaps
+
+Step 2\+: few iters of splits, collapses, swaps and moves
+
+Step 3\+: Last wave of improvements\+: few iters of bad elts treatment, swaps and moves
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00955}{955}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_adf54ac952558b6158d5867fd121f81c2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_adf54ac952558b6158d5867fd121f81c2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_a2c5bb97c4867a0bc2c325d023e6730c8}\label{mmg3d1__delone_8c_a2c5bb97c4867a0bc2c325d023e6730c8}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG5\_mmg3d1\_delone@{MMG5\_mmg3d1\_delone}}
+\index{MMG5\_mmg3d1\_delone@{MMG5\_mmg3d1\_delone}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_mmg3d1\_delone()}{MMG5\_mmg3d1\_delone()}}
+{\footnotesize\ttfamily int MMG5\+\_\+mmg3d1\+\_\+delone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{perm\+Nod\+Glob }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em perm\+Nod\+Glob} & if provided, strore the global permutation of nodes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 if success.
+\end{DoxyReturn}
+Main adaptation routine. --- stage 1\+: geometric mesh ~\newline
+
+
+--- stage 2\+: computational mesh
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l01028}{1028}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a2c5bb97c4867a0bc2c325d023e6730c8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a2c5bb97c4867a0bc2c325d023e6730c8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_a96c3c2288a91aa21b9acda4e1635bdb0}\label{mmg3d1__delone_8c_a96c3c2288a91aa21b9acda4e1635bdb0}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG5\_optbad@{MMG5\_optbad}}
+\index{MMG5\_optbad@{MMG5\_optbad}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_optbad()}{MMG5\_optbad()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+optbad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Mesh optimization during insertion phase. 
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00562}{562}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a96c3c2288a91aa21b9acda4e1635bdb0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a96c3c2288a91aa21b9acda4e1635bdb0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_a26978970372695d8c12d9d115bcb5ccb}\label{mmg3d1__delone_8c_a26978970372695d8c12d9d115bcb5ccb}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG5\_optet@{MMG5\_optet}}
+\index{MMG5\_optet@{MMG5\_optet}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_optet()}{MMG5\_optet()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+optet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Mesh optimization using egde swapping and point relocation. 
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00846}{846}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a26978970372695d8c12d9d115bcb5ccb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_a26978970372695d8c12d9d115bcb5ccb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__delone_8c_aa7b14f852cd3eae57f8d0f9a25f5a382}\label{mmg3d1__delone_8c_aa7b14f852cd3eae57f8d0f9a25f5a382}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!MMG5\_optetLES@{MMG5\_optetLES}}
+\index{MMG5\_optetLES@{MMG5\_optetLES}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_optetLES()}{MMG5\_optetLES()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+optet\+LES (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Mesh optimization for LES computation (improve the element skewness). 
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00752}{752}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_aa7b14f852cd3eae57f8d0f9a25f5a382_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__delone_8c_aa7b14f852cd3eae57f8d0f9a25f5a382_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{mmg3d1__delone_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{mmg3d1__delone_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{mmg3d1\_delone.c@{mmg3d1\_delone.c}!ddb@{ddb}}
+\index{ddb@{ddb}!mmg3d1\_delone.c@{mmg3d1\_delone.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+

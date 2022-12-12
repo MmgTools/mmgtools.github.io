@@ -1,0 +1,806 @@
+\hypertarget{hash__3d_8c}{}\doxysection{src/mmg3d/hash\+\_\+3d.c File Reference}
+\label{hash__3d_8c}\index{src/mmg3d/hash\_3d.c@{src/mmg3d/hash\_3d.c}}
+
+
+Functions for hash tables management and tetrahedra packing.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for hash\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{hash__3d_8c_af8b9dc7798d69a5ae42d24d9a0ea1d79}{MMG5\+\_\+\+KC}}~13
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a0151bf873efae26736ad66d3a199bc76}{MMG5\+\_\+paktet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{hash__3d_8c_a6b11fb6c2fb82abd12862f5aa5aefceb}{MMG5\+\_\+hash\+Get\+Face}} (\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int ia, MMG5\+\_\+int ib, MMG5\+\_\+int ic)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a06ecee46ba6f3ab70b4ec73370715e1c}{MMG3\+D\+\_\+hash\+Tetra}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, int pack)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a55d546717ee17bd03f619e025b02834b}{MMG3\+D\+\_\+hash\+Prism}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+static int \mbox{\hyperlink{hash__3d_8c_aa8408b8194c3067c010ac3d49593c5bc}{MMG5\+\_\+set\+Edge\+Nm\+Tag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash)
+\item 
+static int \mbox{\hyperlink{hash__3d_8c_ad2630fbd12bf2bc3d913f3fd581a562a}{MMG5\+\_\+set\+Vertex\+Nm\+Tag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{hash__3d_8c_ac36b8796f8d38ec319d77f68d497aa34}{MMG5\+\_\+set\+Nm\+Tag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_ad238f552441e3e0fbefd702129d28a25}{MMG3\+D\+\_\+hash\+Tria}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_ade946bd1beaec5ca3572611ad8c8c9bf}{MMG5\+\_\+hash\+Pop}} (\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_ae78a2a33274efd1df291ea41cd88e3e7}{MMG5\+\_\+h\+Tag}} (\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b, MMG5\+\_\+int ref, int16\+\_\+t tag)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_ae80a7b94e28996ec1e05986a81a2dd07}{MMG5\+\_\+h\+Pop}} (\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b, MMG5\+\_\+int $\ast$ref, int16\+\_\+t $\ast$tag)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a8338c8f071bab89d1411e97be641a438}{MMG5\+\_\+h\+Get}} (\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b, MMG5\+\_\+int $\ast$ref, int16\+\_\+t $\ast$tag)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_af26c790c83936f0c9b63a625f8901f3c}{MMG5\+\_\+h\+Edge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b, MMG5\+\_\+int ref, int16\+\_\+t tag)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a476fc82527118e55fd11ec8cedcb1a5e}{MMG5\+\_\+h\+New}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$hash, MMG5\+\_\+int hsiz, MMG5\+\_\+int hmax)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a260db1f46212f359e876055dd5d62d6c}{MMG5\+\_\+h\+Geom}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+static int \mbox{\hyperlink{hash__3d_8c_a63df4caff508663eaf01ffb94466c234}{MMG5\+\_\+bdry\+Tria}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int ntmesh)
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a84e72611688f522a2dc95d720b4c53a4}{MMG5\+\_\+chk\+Bdry\+Tria}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{hash__3d_8c_a937e2e06476a70d19a7b77d0fa54eeaf}{MMG5\+\_\+bdry\+Set}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{hash__3d_8c_ac320e6cc6be165f640687a53d6465d32}{MMG5\+\_\+bdry\+Update}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{hash__3d_8c_ae99918b97a81df201123692cbad41ae4}{MMG5\+\_\+bdry\+Perm}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{hash__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for hash tables management and tetrahedra packing. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{hash__3d_8c_af8b9dc7798d69a5ae42d24d9a0ea1d79}\label{hash__3d_8c_af8b9dc7798d69a5ae42d24d9a0ea1d79}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_KC@{MMG5\_KC}}
+\index{MMG5\_KC@{MMG5\_KC}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_KC}{MMG5\_KC}}
+{\footnotesize\ttfamily \#define MMG5\+\_\+\+KC~13}
+
+
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00038}{38}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hash__3d_8c_a55d546717ee17bd03f619e025b02834b}\label{hash__3d_8c_a55d546717ee17bd03f619e025b02834b}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG3D\_hashPrism@{MMG3D\_hashPrism}}
+\index{MMG3D\_hashPrism@{MMG3D\_hashPrism}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_hashPrism()}{MMG3D\_hashPrism()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+hash\+Prism (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Create partial table of adjacency for prisms (prism $ <-> $ prism).
+
+\begin{DoxyRemark}{Remarks}
+Adjacencies between prisms and tetra are not filled here.
+\end{DoxyRemark}
+\begin{DoxyWarning}{Warning}
+check the hashtable efficiency 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00238}{238}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a55d546717ee17bd03f619e025b02834b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a06ecee46ba6f3ab70b4ec73370715e1c}\label{hash__3d_8c_a06ecee46ba6f3ab70b4ec73370715e1c}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG3D\_hashTetra@{MMG3D\_hashTetra}}
+\index{MMG3D\_hashTetra@{MMG3D\_hashTetra}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_hashTetra()}{MMG3D\_hashTetra()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+hash\+Tetra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{int}]{pack }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em pack} & we pack the mesh at function begining if $pack=1$. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Create table of adjacency. Set pack variable to 0 for a compact mesh and to 1 for a mesh that need to be packed. 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00122}{122}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a06ecee46ba6f3ab70b4ec73370715e1c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a06ecee46ba6f3ab70b4ec73370715e1c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ad238f552441e3e0fbefd702129d28a25}\label{hash__3d_8c_ad238f552441e3e0fbefd702129d28a25}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG3D\_hashTria@{MMG3D\_hashTria}}
+\index{MMG3D\_hashTria@{MMG3D\_hashTria}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_hashTria()}{MMG3D\_hashTria()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+hash\+Tria (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em hash} & Edges hash table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if failed.
+\end{DoxyReturn}
+Create surface adjacency table. Allocate the edge hash table {\itshape hash} but don\textquotesingle{}t free it. 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00749}{749}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ad238f552441e3e0fbefd702129d28a25_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ad238f552441e3e0fbefd702129d28a25_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ae99918b97a81df201123692cbad41ae4}\label{hash__3d_8c_ae99918b97a81df201123692cbad41ae4}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_bdryPerm@{MMG5\_bdryPerm}}
+\index{MMG5\_bdryPerm@{MMG5\_bdryPerm}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_bdryPerm()}{MMG5\_bdryPerm()}}
+{\footnotesize\ttfamily int MMG5\+\_\+bdry\+Perm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Make orientation of triangles compatible with tetra faces for external tria and with domain of max ref for interface tria. 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l02135}{2135}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ae99918b97a81df201123692cbad41ae4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ae99918b97a81df201123692cbad41ae4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a937e2e06476a70d19a7b77d0fa54eeaf}\label{hash__3d_8c_a937e2e06476a70d19a7b77d0fa54eeaf}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_bdrySet@{MMG5\_bdrySet}}
+\index{MMG5\_bdrySet@{MMG5\_bdrySet}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_bdrySet()}{MMG5\_bdrySet()}}
+{\footnotesize\ttfamily int MMG5\+\_\+bdry\+Set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 if success.
+\end{DoxyReturn}
+Set the triangles references to the tetrahedra faces and edges. 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l01744}{1744}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a937e2e06476a70d19a7b77d0fa54eeaf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a937e2e06476a70d19a7b77d0fa54eeaf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a63df4caff508663eaf01ffb94466c234}\label{hash__3d_8c_a63df4caff508663eaf01ffb94466c234}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_bdryTria@{MMG5\_bdryTria}}
+\index{MMG5\_bdryTria@{MMG5\_bdryTria}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_bdryTria()}{MMG5\_bdryTria()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+bdry\+Tria (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{ntmesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer to the mesh structure. \\
+\hline
+{\em ntmesh} & number of boundary tria found in the mesh.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Fill tria array with missing triangles\+:
+\begin{DoxyItemize}
+\item if called from the first time, xtetra is not allocated so missing triangles may be founded at domains interface or external boundary.
+\item Otherwise, the tria array is reconstructed from the xtetra infos.
+\end{DoxyItemize}
+
+\begin{DoxyRemark}{Remarks}
+mesh-\/\texorpdfstring{$>$}{>}xtetra is not allocated when \mbox{\hyperlink{hash__3d_8c_a63df4caff508663eaf01ffb94466c234}{MMG5\+\_\+bdry\+Tria}} is called by \mbox{\hyperlink{analys__3d_8c_a5546a5714d3790ef3ffd5e183833a393}{MMG3\+D\+\_\+analys}} in mesh adp mode but it is allocated when called by pack\+Mesh or by analys in ls discretization mode. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l01177}{1177}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a63df4caff508663eaf01ffb94466c234_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a63df4caff508663eaf01ffb94466c234_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ac320e6cc6be165f640687a53d6465d32}\label{hash__3d_8c_ac320e6cc6be165f640687a53d6465d32}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_bdryUpdate@{MMG5\_bdryUpdate}}
+\index{MMG5\_bdryUpdate@{MMG5\_bdryUpdate}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_bdryUpdate()}{MMG5\_bdryUpdate()}}
+{\footnotesize\ttfamily int MMG5\+\_\+bdry\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if successful, 0 if not.
+\end{DoxyReturn}
+Update tag and refs of tetra edges. If tetra is required, set the faces/edges to required.
+
+\begin{DoxyRemark}{Remarks}
+While remeshing\+:
+\begin{DoxyItemize}
+\item A tetra with a boundary face has a xtetra\+:
+\begin{DoxyItemize}
+\item a boundary edge has consistent tags as soon as it has a non 0 tag; \#warning check this case
+\item some boundary edges may have a 0 tag
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyRemark}
+
+\begin{DoxyItemize}
+\item a tetra with a boundary edge but no bdy faces may or may not have a xtetra and boundary edges may have or may not have tags so we can\textquotesingle{}t guess nothing with such xtetra. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l02044}{2044}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ac320e6cc6be165f640687a53d6465d32_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ac320e6cc6be165f640687a53d6465d32_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a84e72611688f522a2dc95d720b4c53a4}\label{hash__3d_8c_a84e72611688f522a2dc95d720b4c53a4}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_chkBdryTria@{MMG5\_chkBdryTria}}
+\index{MMG5\_chkBdryTria@{MMG5\_chkBdryTria}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_chkBdryTria()}{MMG5\_chkBdryTria()}}
+{\footnotesize\ttfamily int MMG5\+\_\+chk\+Bdry\+Tria (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyItemize}
+\item Remove double triangles from tria array.
+\item Remove triangles that do not belong to a boundary (non opnbdy mode) from tria array.
+\item Check the matching between actual and given number of faces in the mesh\+: Count the number of faces in mesh and compare this number to the number of given triangles.
+\item If the founded number exceed the given one, add the missing boundary triangles (call to MMG5\+\_\+bdry\+Tria). Do nothing otherwise.
+\item Fill the adjacency relationship between prisms and tetra (fill adjapr with a negative value to mark this special faces).
+\item Set to required the triangles at interface betwen prisms and tet. 
+\end{DoxyItemize}Step 1\+: scan the mesh and count the boundaries
+
+Step 2\+: detect the extra boundaries (that will be ignored) provided by the user
+
+Step 3\+: add the missing boundary triangles or, if the mesh contains prisms, set to required the triangles at interface betwen prisms and tet
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l01439}{1439}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a84e72611688f522a2dc95d720b4c53a4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a84e72611688f522a2dc95d720b4c53a4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a6b11fb6c2fb82abd12862f5aa5aefceb}\label{hash__3d_8c_a6b11fb6c2fb82abd12862f5aa5aefceb}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hashGetFace@{MMG5\_hashGetFace}}
+\index{MMG5\_hashGetFace@{MMG5\_hashGetFace}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashGetFace()}{MMG5\_hashGetFace()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+hash\+Get\+Face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{ia,  }\item[{MMG5\+\_\+int}]{ib,  }\item[{MMG5\+\_\+int}]{ic }\end{DoxyParamCaption})}
+
+return index of triangle ia ib ic 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00084}{84}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{hash__3d_8c_a6b11fb6c2fb82abd12862f5aa5aefceb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a6b11fb6c2fb82abd12862f5aa5aefceb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ade946bd1beaec5ca3572611ad8c8c9bf}\label{hash__3d_8c_ade946bd1beaec5ca3572611ad8c8c9bf}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hashPop@{MMG5\_hashPop}}
+\index{MMG5\_hashPop@{MMG5\_hashPop}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashPop()}{MMG5\_hashPop()}}
+{\footnotesize\ttfamily int MMG5\+\_\+hash\+Pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b }\end{DoxyParamCaption})}
+
+remove edge from hash table 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00761}{761}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{hash__3d_8c_ade946bd1beaec5ca3572611ad8c8c9bf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ade946bd1beaec5ca3572611ad8c8c9bf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_af26c790c83936f0c9b63a625f8901f3c}\label{hash__3d_8c_af26c790c83936f0c9b63a625f8901f3c}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hEdge@{MMG5\_hEdge}}
+\index{MMG5\_hEdge@{MMG5\_hEdge}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hEdge()}{MMG5\_hEdge()}}
+{\footnotesize\ttfamily int MMG5\+\_\+h\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b,  }\item[{MMG5\+\_\+int}]{ref,  }\item[{int16\+\_\+t}]{tag }\end{DoxyParamCaption})}
+
+store edge on geometry 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00951}{951}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{hash__3d_8c_af26c790c83936f0c9b63a625f8901f3c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_af26c790c83936f0c9b63a625f8901f3c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a260db1f46212f359e876055dd5d62d6c}\label{hash__3d_8c_a260db1f46212f359e876055dd5d62d6c}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hGeom@{MMG5\_hGeom}}
+\index{MMG5\_hGeom@{MMG5\_hGeom}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hGeom()}{MMG5\_hGeom()}}
+{\footnotesize\ttfamily int MMG5\+\_\+h\+Geom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward he mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise
+\end{DoxyReturn}
+Build hashtable for initial mesh edges. 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l01022}{1022}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a260db1f46212f359e876055dd5d62d6c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a260db1f46212f359e876055dd5d62d6c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a8338c8f071bab89d1411e97be641a438}\label{hash__3d_8c_a8338c8f071bab89d1411e97be641a438}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hGet@{MMG5\_hGet}}
+\index{MMG5\_hGet@{MMG5\_hGet}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hGet()}{MMG5\_hGet()}}
+{\footnotesize\ttfamily int MMG5\+\_\+h\+Get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b,  }\item[{MMG5\+\_\+int $\ast$}]{ref,  }\item[{int16\+\_\+t $\ast$}]{tag }\end{DoxyParamCaption})}
+
+get ref and tag to edge on geometry 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00918}{918}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{hash__3d_8c_a8338c8f071bab89d1411e97be641a438_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a8338c8f071bab89d1411e97be641a438_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a476fc82527118e55fd11ec8cedcb1a5e}\label{hash__3d_8c_a476fc82527118e55fd11ec8cedcb1a5e}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hNew@{MMG5\_hNew}}
+\index{MMG5\_hNew@{MMG5\_hNew}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hNew()}{MMG5\_hNew()}}
+{\footnotesize\ttfamily int MMG5\+\_\+h\+New (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{hsiz,  }\item[{MMG5\+\_\+int}]{hmax }\end{DoxyParamCaption})}
+
+to store edge on geometry 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00994}{994}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a476fc82527118e55fd11ec8cedcb1a5e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ae80a7b94e28996ec1e05986a81a2dd07}\label{hash__3d_8c_ae80a7b94e28996ec1e05986a81a2dd07}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hPop@{MMG5\_hPop}}
+\index{MMG5\_hPop@{MMG5\_hPop}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hPop()}{MMG5\_hPop()}}
+{\footnotesize\ttfamily int MMG5\+\_\+h\+Pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b,  }\item[{MMG5\+\_\+int $\ast$}]{ref,  }\item[{int16\+\_\+t $\ast$}]{tag }\end{DoxyParamCaption})}
+
+remove edge from hash table 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00858}{858}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{hash__3d_8c_ae80a7b94e28996ec1e05986a81a2dd07_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ae78a2a33274efd1df291ea41cd88e3e7}\label{hash__3d_8c_ae78a2a33274efd1df291ea41cd88e3e7}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_hTag@{MMG5\_hTag}}
+\index{MMG5\_hTag@{MMG5\_hTag}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hTag()}{MMG5\_hTag()}}
+{\footnotesize\ttfamily int MMG5\+\_\+h\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMMG5__HGeom}{MMG5\+\_\+\+HGeom}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b,  }\item[{MMG5\+\_\+int}]{ref,  }\item[{int16\+\_\+t}]{tag }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & pointer toward the hash table in which edges are stored \\
+\hline
+{\em a} & first edge extremity \\
+\hline
+{\em b} & second edge extremity \\
+\hline
+{\em ref} & reference to assign to the edge \\
+\hline
+{\em tag} & tag to assign\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the edge is not in the hash table, 1 otherwise
+\end{DoxyReturn}
+set tag to edge on geometry 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00825}{825}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{hash__3d_8c_ae78a2a33274efd1df291ea41cd88e3e7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ae78a2a33274efd1df291ea41cd88e3e7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_a0151bf873efae26736ad66d3a199bc76}\label{hash__3d_8c_a0151bf873efae26736ad66d3a199bc76}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_paktet@{MMG5\_paktet}}
+\index{MMG5\_paktet@{MMG5\_paktet}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_paktet()}{MMG5\_paktet()}}
+{\footnotesize\ttfamily int MMG5\+\_\+paktet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+tetra packing. 
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00050}{50}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{hash__3d_8c_a0151bf873efae26736ad66d3a199bc76_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_a0151bf873efae26736ad66d3a199bc76_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_aa8408b8194c3067c010ac3d49593c5bc}\label{hash__3d_8c_aa8408b8194c3067c010ac3d49593c5bc}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_setEdgeNmTag@{MMG5\_setEdgeNmTag}}
+\index{MMG5\_setEdgeNmTag@{MMG5\_setEdgeNmTag}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_setEdgeNmTag()}{MMG5\_setEdgeNmTag()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+set\+Edge\+Nm\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer towar the mesh structure. \\
+\hline
+{\em hash} & edges hash table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if failed.
+\end{DoxyReturn}
+Set non-\/manifold tag at extremities of a non-\/manifold edge. Check if a non-\/manifold edge is at the interface of several distinct domains (thus we can\textquotesingle{}t travel from a domain through another one by adjacency) and in this case, mark the edge and its extremities as required. Free the edge hash table {\itshape hash} if success.
+
+\begin{DoxyWarning}{Warning}
+if fail, the edge hash table {\itshape hash} is not freed. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00456}{456}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_aa8408b8194c3067c010ac3d49593c5bc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_aa8408b8194c3067c010ac3d49593c5bc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ac36b8796f8d38ec319d77f68d497aa34}\label{hash__3d_8c_ac36b8796f8d38ec319d77f68d497aa34}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_setNmTag@{MMG5\_setNmTag}}
+\index{MMG5\_setNmTag@{MMG5\_setNmTag}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_setNmTag()}{MMG5\_setNmTag()}}
+{\footnotesize\ttfamily int MMG5\+\_\+set\+Nm\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer towar the mesh structure. \\
+\hline
+{\em hash} & edges hash table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if failed.
+\end{DoxyReturn}
+Set tags to non-\/manifold edges and vertices. Not done before because we need the \mbox{\hyperlink{structMMG5__xTetra}{MMG5\+\_\+x\+Tetra}} table.
+
+\begin{DoxyWarning}{Warning}
+if fail, the edge hash table {\itshape hash} is not freed. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00727}{727}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ac36b8796f8d38ec319d77f68d497aa34_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ac36b8796f8d38ec319d77f68d497aa34_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash__3d_8c_ad2630fbd12bf2bc3d913f3fd581a562a}\label{hash__3d_8c_ad2630fbd12bf2bc3d913f3fd581a562a}} 
+\index{hash\_3d.c@{hash\_3d.c}!MMG5\_setVertexNmTag@{MMG5\_setVertexNmTag}}
+\index{MMG5\_setVertexNmTag@{MMG5\_setVertexNmTag}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_setVertexNmTag()}{MMG5\_setVertexNmTag()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+set\+Vertex\+Nm\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail. Seek the non-\/required non-\/manifold points and try to analyse whether they are corner or required.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+We don\textquotesingle{}t know how to travel through the shell of a non-\/manifold point by triangle adjacency. Thus the work done here can\textquotesingle{}t be performed in the \mbox{\hyperlink{analys__3d_8c_adf0a0532d8cbbe69168f12a7d0e9dd75}{MMG5\+\_\+singul}} function. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{hash__3d_8c_source_l00624}{624}} of file \mbox{\hyperlink{hash__3d_8c_source}{hash\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ad2630fbd12bf2bc3d913f3fd581a562a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash__3d_8c_ad2630fbd12bf2bc3d913f3fd581a562a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{hash__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{hash__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{hash\_3d.c@{hash\_3d.c}!ddb@{ddb}}
+\index{ddb@{ddb}!hash\_3d.c@{hash\_3d.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+

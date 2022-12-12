@@ -1,0 +1,214 @@
+\hypertarget{mmg3d1__pattern_8c}{}\doxysection{src/mmg3d/mmg3d1\+\_\+pattern.c File Reference}
+\label{mmg3d1__pattern_8c}\index{src/mmg3d/mmg3d1\_pattern.c@{src/mmg3d/mmg3d1\_pattern.c}}
+
+
+Perform volume and surface mesh adaptation with pattern splitting.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmg3dexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for mmg3d1\+\_\+pattern.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{mmg3d1__pattern_8c_a0b76433f77947e704052d0ecb17b8f31}{MMG5\+\_\+adpspl}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int $\ast$warn)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{mmg3d1__pattern_8c_a9f26389d21578b7c0943d2ed19852eea}{MMG5\+\_\+adpcol}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met)
+\item 
+static int \mbox{\hyperlink{mmg3d1__pattern_8c_a208a79b3ba75e905a928f6ff380372d5}{MMG5\+\_\+adptet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$perm\+Nod\+Glob)
+\item 
+int \mbox{\hyperlink{mmg3d1__pattern_8c_afbf7dc78a28bf3705dc7d41fb7a5bdaf}{MMG5\+\_\+mmg3d1\+\_\+pattern}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$perm\+Nod\+Glob)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Perform volume and surface mesh adaptation with pattern splitting. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License.
+\end{DoxyCopyright}
+Perform volume and surface mesh adaptation with pattern splitting ({\itshape MMG\+\_\+\+PATTERN} preprocessor flag set to ON). 
+
+Definition in file \mbox{\hyperlink{mmg3d1__pattern_8c_source}{mmg3d1\+\_\+pattern.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg3d1__pattern_8c_a9f26389d21578b7c0943d2ed19852eea}\label{mmg3d1__pattern_8c_a9f26389d21578b7c0943d2ed19852eea}} 
+\index{mmg3d1\_pattern.c@{mmg3d1\_pattern.c}!MMG5\_adpcol@{MMG5\_adpcol}}
+\index{MMG5\_adpcol@{MMG5\_adpcol}!mmg3d1\_pattern.c@{mmg3d1\_pattern.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_adpcol()}{MMG5\_adpcol()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG5\+\_\+adpcol (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed. 
+
+number of deleted points.
+\end{DoxyReturn}
+Collapse edges of length smaller than MMG3\+D\+\_\+\+LOPTS. Find shortest edge
+
+Try to collapse this edge
+
+Definition at line \mbox{\hyperlink{mmg3d1__pattern_8c_source_l00192}{192}} of file \mbox{\hyperlink{mmg3d1__pattern_8c_source}{mmg3d1\+\_\+pattern.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_a9f26389d21578b7c0943d2ed19852eea_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_a9f26389d21578b7c0943d2ed19852eea_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__pattern_8c_a0b76433f77947e704052d0ecb17b8f31}\label{mmg3d1__pattern_8c_a0b76433f77947e704052d0ecb17b8f31}} 
+\index{mmg3d1\_pattern.c@{mmg3d1\_pattern.c}!MMG5\_adpspl@{MMG5\_adpspl}}
+\index{MMG5\_adpspl@{MMG5\_adpspl}!mmg3d1\_pattern.c@{mmg3d1\_pattern.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_adpspl()}{MMG5\_adpspl()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG5\+\_\+adpspl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int $\ast$}]{warn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em $\ast$warn} & {\itshape warn} is set to 1 if we don\textquotesingle{}t have enough memory to complete mesh. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed. 
+
+number of new points.
+\end{DoxyReturn}
+Split edges of length bigger than MMG3\+D\+\_\+\+LOPTL. 
+
+Definition at line \mbox{\hyperlink{mmg3d1__pattern_8c_source_l00053}{53}} of file \mbox{\hyperlink{mmg3d1__pattern_8c_source}{mmg3d1\+\_\+pattern.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_a0b76433f77947e704052d0ecb17b8f31_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_a0b76433f77947e704052d0ecb17b8f31_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__pattern_8c_a208a79b3ba75e905a928f6ff380372d5}\label{mmg3d1__pattern_8c_a208a79b3ba75e905a928f6ff380372d5}} 
+\index{mmg3d1\_pattern.c@{mmg3d1\_pattern.c}!MMG5\_adptet@{MMG5\_adptet}}
+\index{MMG5\_adptet@{MMG5\_adptet}!mmg3d1\_pattern.c@{mmg3d1\_pattern.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_adptet()}{MMG5\_adptet()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+adptet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{perm\+Nod\+Glob }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em perm\+Nod\+Glob} & if provided, strore the global permutation of nodes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Analyze tetrahedra and split long or collapse short edges according to prescribed metric. 
+
+Definition at line \mbox{\hyperlink{mmg3d1__pattern_8c_source_l00258}{258}} of file \mbox{\hyperlink{mmg3d1__pattern_8c_source}{mmg3d1\+\_\+pattern.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_a208a79b3ba75e905a928f6ff380372d5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_a208a79b3ba75e905a928f6ff380372d5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1__pattern_8c_afbf7dc78a28bf3705dc7d41fb7a5bdaf}\label{mmg3d1__pattern_8c_afbf7dc78a28bf3705dc7d41fb7a5bdaf}} 
+\index{mmg3d1\_pattern.c@{mmg3d1\_pattern.c}!MMG5\_mmg3d1\_pattern@{MMG5\_mmg3d1\_pattern}}
+\index{MMG5\_mmg3d1\_pattern@{MMG5\_mmg3d1\_pattern}!mmg3d1\_pattern.c@{mmg3d1\_pattern.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_mmg3d1\_pattern()}{MMG5\_mmg3d1\_pattern()}}
+{\footnotesize\ttfamily int MMG5\+\_\+mmg3d1\+\_\+pattern (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{perm\+Nod\+Glob }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em perm\+Nod\+Glob} & if provided, strore the global permutation of nodes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 if success.
+\end{DoxyReturn}
+Main adaptation routine. --- stage 1\+: geometric mesh
+
+--- Stage 2\+: computational mesh
+
+Definition at line \mbox{\hyperlink{mmg3d1__pattern_8c_source_l00428}{428}} of file \mbox{\hyperlink{mmg3d1__pattern_8c_source}{mmg3d1\+\_\+pattern.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_afbf7dc78a28bf3705dc7d41fb7a5bdaf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1__pattern_8c_afbf7dc78a28bf3705dc7d41fb7a5bdaf_icgraph}
+\end{center}
+\end{figure}

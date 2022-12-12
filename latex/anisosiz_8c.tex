@@ -1,0 +1,1074 @@
+\hypertarget{anisosiz_8c}{}\doxysection{src/common/anisosiz.c File Reference}
+\label{anisosiz_8c}\index{src/common/anisosiz.c@{src/common/anisosiz.c}}
+
+
+Fonctions for anisotropic size map computation.  
+
+
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgexterns\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for anisosiz.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{anisosiz_8c_a91b40ffa23abc0bfd35fe526e6e75c85}{MMG5\+\_\+surf}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double m\mbox{[}3\mbox{]}\mbox{[}6\mbox{]}, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} ptt)
+\item 
+double \mbox{\hyperlink{anisosiz_8c_aa5e824740e8572bd951028a476000f72}{MMG5\+\_\+surftri\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} ptt)
+\item 
+double \mbox{\hyperlink{anisosiz_8c_a3cf9ed46024b0e81746870a4c8714ce4}{MMG5\+\_\+surftri33\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} ptt, double ma\mbox{[}6\mbox{]}, double mb\mbox{[}6\mbox{]}, double mc\mbox{[}6\mbox{]})
+\item 
+void \mbox{\hyperlink{anisosiz_8c_a8cbf7130be23d609bcc515b0c4c5351a}{MMG5\+\_\+def\+Uninit\+Size}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t ismet)
+\item 
+void \mbox{\hyperlink{anisosiz_8c_a358ab88c88f12024f1d2cf0d468b8efc}{MMG5\+\_\+fill\+Defmetreg\+Sys}} (MMG5\+\_\+int k, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p0, int i0, \mbox{\hyperlink{structMMG5__Bezier}{MMG5\+\_\+\+Bezier}} b, double r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double c\mbox{[}3\mbox{]}, double $\ast$lispoi, double t\+AA\mbox{[}6\mbox{]}, double t\+Ab\mbox{[}3\mbox{]})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a640fc325aa0613ceed42a7b3cfc5ca10}{MMG5\+\_\+solve\+Defmetreg\+Sys}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double c\mbox{[}3\mbox{]}, double t\+AA\mbox{[}6\mbox{]}, double t\+Ab\mbox{[}3\mbox{]}, double $\ast$m, double isqhmin, double isqhmax, double hausd)
+\item 
+int \mbox{\hyperlink{anisosiz_8c_ad2b102344602e5af03a746c227bc2e9c}{MMG5\+\_\+solve\+Defmetref\+Sys}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p0, MMG5\+\_\+int ipref\mbox{[}2\mbox{]}, double r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double c\mbox{[}3\mbox{]}, double t\+AA\mbox{[}6\mbox{]}, double t\+Ab\mbox{[}3\mbox{]}, double $\ast$m, double isqhmin, double isqhmax, double hausd)
+\item 
+double \mbox{\hyperlink{anisosiz_8c_af0b1ee93ffcbf66e79752170f332260c}{MMG5\+\_\+rid\+Size\+In\+Tangent\+Dir}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p0, MMG5\+\_\+int idp, MMG5\+\_\+int $\ast$iprid, double isqhmin, double isqhmax)
+\item 
+double \mbox{\hyperlink{anisosiz_8c_aaa4f68689c18c8010dc68875921911f0}{MMG5\+\_\+rid\+Size\+In\+Normal\+Dir}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, int i0, double $\ast$bcu, \mbox{\hyperlink{structMMG5__Bezier}{MMG5\+\_\+\+Bezier}} $\ast$b, double isqhmin, double isqhmax)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{anisosiz_8c_a9789733ede3f6b760b5e18eb4cdfb48e}{MMG5\+\_\+grad2met\+Surf}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} pt, MMG5\+\_\+int np1, MMG5\+\_\+int np2)
+\item 
+int \mbox{\hyperlink{anisosiz_8c_ad18fde566010b42cd9f6df682bbe78fb}{MMG5\+\_\+simred2d}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double $\ast$m, double $\ast$n, double dm\mbox{[}2\mbox{]}, double dn\mbox{[}2\mbox{]}, double vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a731bd60efc63d28f8485a333f235987d}{MMG5\+\_\+simred3d}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double $\ast$m, double $\ast$n, double dm\mbox{[}3\mbox{]}, double dn\mbox{[}3\mbox{]}, double vp\mbox{[}3\mbox{]}\mbox{[}3\mbox{]})
+\item 
+void \mbox{\hyperlink{anisosiz_8c_a0aa3be564fa81177c560c6a1e6df643b}{MMG5\+\_\+sort\+\_\+simred}} (int8\+\_\+t dim, double $\ast$dm, double $\ast$dn, double $\ast$vp, double $\ast$swap, int8\+\_\+t $\ast$perm)
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a2cccaedde210b78f1957d64bfa593763}{MMG5\+\_\+test\+\_\+simred2d}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double $\ast$mex, double $\ast$nex, double $\ast$dmex, double $\ast$dnex, double vpex\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_ada29bb73a039e85464ce83a8f4207bd8}{MMG5\+\_\+test\+\_\+simred3d}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double $\ast$mex, double $\ast$nex, double $\ast$dmex, double $\ast$dnex, double vpex\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_aa630b9f3cea19ff19a7333240512635d}{MMG5\+\_\+updatemet2d\+\_\+ani}} (double $\ast$m, double $\ast$n, double dm\mbox{[}2\mbox{]}, double dn\mbox{[}2\mbox{]}, double vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}, int8\+\_\+t \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_ac515c1720b31773410bbe20113217d54}{MMG5\+\_\+updatemet3d\+\_\+ani}} (double $\ast$m, double $\ast$n, double dm\mbox{[}3\mbox{]}, double dn\mbox{[}3\mbox{]}, double vp\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, int8\+\_\+t \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a719525c0ded0e0d4f03dd4a7fe86d789}{MMG5\+\_\+test\+\_\+updatemet2d\+\_\+ani}} ()
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a158b878f3427e2c91ed7c4c4b276e69c}{MMG5\+\_\+test\+\_\+updatemet3d\+\_\+ani}} ()
+\item 
+void \mbox{\hyperlink{anisosiz_8c_a859aa83b2c801263c24123bd701255dc}{MMG5\+\_\+grad\+Eigenvreq}} (double $\ast$dm, double $\ast$dn, double difsiz, int8\+\_\+t dir, int8\+\_\+t $\ast$\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a3c09d239eda1cecd408e94ae4686d9a3}{MMG5\+\_\+updatemetreq\+\_\+ani}} (double $\ast$n, double dn\mbox{[}2\mbox{]}, double vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\item 
+int \mbox{\hyperlink{anisosiz_8c_ab30237615f2aa5ffa117e45eae0e3909}{MMG5\+\_\+grad2met\+Surfreq}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} pt, MMG5\+\_\+int npmaster, MMG5\+\_\+int npslave)
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a583208ea7a8766b96d33f34fb1994796}{MMG5\+\_\+compute\+\_\+mean\+Metric\+At\+Marked\+Points\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{anisosiz_8c_ae07f4770282348afda5a5d51edf3c4ed}{MMG5\+\_\+gradsiz\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int $\ast$it)
+\item 
+int \mbox{\hyperlink{anisosiz_8c_a0319bbf7e2ece822b1579a4f621b64a5}{MMG5\+\_\+gradsizreq\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fonctions for anisotropic size map computation. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{anisosiz_8c_a583208ea7a8766b96d33f34fb1994796}\label{anisosiz_8c_a583208ea7a8766b96d33f34fb1994796}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_compute\_meanMetricAtMarkedPoints\_ani@{MMG5\_compute\_meanMetricAtMarkedPoints\_ani}}
+\index{MMG5\_compute\_meanMetricAtMarkedPoints\_ani@{MMG5\_compute\_meanMetricAtMarkedPoints\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_compute\_meanMetricAtMarkedPoints\_ani()}{MMG5\_compute\_meanMetricAtMarkedPoints\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+compute\+\_\+mean\+Metric\+At\+Marked\+Points\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Compute the mean metric at mesh points with a non-\/nul {\itshape s} field. At the beginning, for a given point {\itshape ip}, $ met->m[met->size * ip] $ contains the sum of n metrics and the {\itshape s} field of {\itshape ip} contains the number of metrics summed in the point. Set the flag of the processed points to 3. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l02205}{2205}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a583208ea7a8766b96d33f34fb1994796_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a8cbf7130be23d609bcc515b0c4c5351a}\label{anisosiz_8c_a8cbf7130be23d609bcc515b0c4c5351a}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_defUninitSize@{MMG5\_defUninitSize}}
+\index{MMG5\_defUninitSize@{MMG5\_defUninitSize}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_defUninitSize()}{MMG5\_defUninitSize()}}
+{\footnotesize\ttfamily void MMG5\+\_\+def\+Uninit\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{ismet }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em ismet} & 1 if user provided metric.\\
+\hline
+\end{DoxyParams}
+Search for points with unintialized metric and define anisotropic size at this points. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00228}{228}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{anisosiz_8c_a8cbf7130be23d609bcc515b0c4c5351a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a8cbf7130be23d609bcc515b0c4c5351a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a358ab88c88f12024f1d2cf0d468b8efc}\label{anisosiz_8c_a358ab88c88f12024f1d2cf0d468b8efc}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_fillDefmetregSys@{MMG5\_fillDefmetregSys}}
+\index{MMG5\_fillDefmetregSys@{MMG5\_fillDefmetregSys}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_fillDefmetregSys()}{MMG5\_fillDefmetregSys()}}
+{\footnotesize\ttfamily void MMG5\+\_\+fill\+Defmetreg\+Sys (\begin{DoxyParamCaption}\item[{MMG5\+\_\+int}]{k,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p0,  }\item[{int}]{i0,  }\item[{\mbox{\hyperlink{structMMG5__Bezier}{MMG5\+\_\+\+Bezier}}}]{b,  }\item[{double}]{r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{c\mbox{[}3\mbox{]},  }\item[{double $\ast$}]{lispoi,  }\item[{double}]{t\+AA\mbox{[}6\mbox{]},  }\item[{double}]{t\+Ab\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & index of the tetrahedra from which we come. \\
+\hline
+{\em p0} & pointer toward the point on which we want to def the metric. \\
+\hline
+{\em i0} & pointer toward the local index of the point in tria. \\
+\hline
+{\em b} & control polygon of triangle. \\
+\hline
+{\em r} & rotation matrix. \\
+\hline
+{\em c} & physical coordinates of the curve edge mid-\/point. \\
+\hline
+{\em lispoi} & list of incident vertices to p0 \\
+\hline
+{\em t\+AA} & matrix to fill \\
+\hline
+{\em t\+Ab} & second member\\
+\hline
+\end{DoxyParams}
+Fill matrice \textbackslash{}sum t\+AA and second member \textbackslash{}sum t\+Ab with $ A=( X_{P_i}^2
+Y_{P_i}^2 X_{P_i}Y_{P_i}) $ and $ b= Z_{P_i}$ with P\+\_\+i the physical points at edge \mbox{[}i0;i1\mbox{]} extremities and middle. Compute the physical coor {\itshape c} of the curve edge\textquotesingle{}s mid-\/point for a regular or reference point. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00290}{290}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a358ab88c88f12024f1d2cf0d468b8efc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a9789733ede3f6b760b5e18eb4cdfb48e}\label{anisosiz_8c_a9789733ede3f6b760b5e18eb4cdfb48e}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_grad2metSurf@{MMG5\_grad2metSurf}}
+\index{MMG5\_grad2metSurf@{MMG5\_grad2metSurf}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_grad2metSurf()}{MMG5\_grad2metSurf()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+grad2met\+Surf (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{pt,  }\item[{MMG5\+\_\+int}]{np1,  }\item[{MMG5\+\_\+int}]{np2 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em pt} & pointer toward a triangle. \\
+\hline
+{\em np1} & global index of the first extremity of the edge. \\
+\hline
+{\em np2} & global index of the second extremity of the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if no gradation is needed, else index of graded point.
+\end{DoxyReturn}
+Enforces gradation of metric in one extremity of edge \$f\mbox{[} np1; np2\mbox{]}\$f in tria {\itshape pt} with respect to the other, along the direction of the associated support curve first, then along the normal direction.
+
+\begin{DoxyWarning}{Warning}
+The gradation along the direction normal to the surface is made in an \char`\"{}isotropic way\char`\"{}.
+\end{DoxyWarning}
+\begin{DoxyRemark}{Remarks}
+ALGIANE\+: a mettre à plat \+: dans le cas d\textquotesingle{}une métrique très aniso avec la grande taille quasiment dans la direction de l\textquotesingle{}arête on se retrouve à modifier la grande taille uniquement (car proche de l\textquotesingle{}arête) sauf que cette modification n\textquotesingle{}a quasi pas d\textquotesingle{}influence sur le calcul de la longueur d\textquotesingle{}arête. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00975}{975}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a9789733ede3f6b760b5e18eb4cdfb48e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a9789733ede3f6b760b5e18eb4cdfb48e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_ab30237615f2aa5ffa117e45eae0e3909}\label{anisosiz_8c_ab30237615f2aa5ffa117e45eae0e3909}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_grad2metSurfreq@{MMG5\_grad2metSurfreq}}
+\index{MMG5\_grad2metSurfreq@{MMG5\_grad2metSurfreq}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_grad2metSurfreq()}{MMG5\_grad2metSurfreq()}}
+{\footnotesize\ttfamily int MMG5\+\_\+grad2met\+Surfreq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{pt,  }\item[{MMG5\+\_\+int}]{npmaster,  }\item[{MMG5\+\_\+int}]{npslave }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em pt} & pointer toward the processed triangle. \\
+\hline
+{\em npmaster} & edge extremity that cannot be modified \\
+\hline
+{\em npslave} & edge extremity to modify to respect the gradation.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if no gradation is needed, 1 otherwise.
+\end{DoxyReturn}
+Enforces gradation of metric of the extremity ±a npslave of edge \$f\mbox{[} npmaster; npslave\mbox{]}\$f in tria {\itshape pt} with respect to the other, along the direction of the associated support curve first, then along the normal direction.
+
+\begin{DoxyWarning}{Warning}
+The gradation along the direction normal to the surface is made in an \char`\"{}isotropic way\char`\"{}. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01951}{1951}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ab30237615f2aa5ffa117e45eae0e3909_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ab30237615f2aa5ffa117e45eae0e3909_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a859aa83b2c801263c24123bd701255dc}\label{anisosiz_8c_a859aa83b2c801263c24123bd701255dc}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_gradEigenvreq@{MMG5\_gradEigenvreq}}
+\index{MMG5\_gradEigenvreq@{MMG5\_gradEigenvreq}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_gradEigenvreq()}{MMG5\_gradEigenvreq()}}
+{\footnotesize\ttfamily void MMG5\+\_\+grad\+Eigenvreq (\begin{DoxyParamCaption}\item[{double $\ast$}]{dm,  }\item[{double $\ast$}]{dn,  }\item[{double}]{difsiz,  }\item[{int8\+\_\+t}]{dir,  }\item[{int8\+\_\+t $\ast$}]{ier }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em dm} & eigenvalues of the first matrix (not modified) \\
+\hline
+{\em dn} & eigenvalues of the second matrix (modified) \\
+\hline
+{\em difsiz} & maximal size gap authorized by the gradation. \\
+\hline
+{\em dir} & direction in which the sizes are graded. \\
+\hline
+{\em ier} & 2 if dn has been updated, 0 otherwise.\\
+\hline
+\end{DoxyParams}
+Gradation of size dn = 1/sqrt(eigenv of the tensor) for required points in the {\itshape idir} direction. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01883}{1883}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a859aa83b2c801263c24123bd701255dc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_ae07f4770282348afda5a5d51edf3c4ed}\label{anisosiz_8c_ae07f4770282348afda5a5d51edf3c4ed}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_gradsiz\_ani@{MMG5\_gradsiz\_ani}}
+\index{MMG5\_gradsiz\_ani@{MMG5\_gradsiz\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_gradsiz\_ani()}{MMG5\_gradsiz\_ani()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+gradsiz\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int $\ast$}]{it }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em it} & number of performed iteration (to fill)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nup, the number of points updated.
+\end{DoxyReturn}
+Standard gradation procedure. Mark the edges belonging to a required entity
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l02259}{2259}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ae07f4770282348afda5a5d51edf3c4ed_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ae07f4770282348afda5a5d51edf3c4ed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a0319bbf7e2ece822b1579a4f621b64a5}\label{anisosiz_8c_a0319bbf7e2ece822b1579a4f621b64a5}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_gradsizreq\_ani@{MMG5\_gradsizreq\_ani}}
+\index{MMG5\_gradsizreq\_ani@{MMG5\_gradsizreq\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_gradsizreq\_ani()}{MMG5\_gradsizreq\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+gradsizreq\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1
+\end{DoxyReturn}
+Enforces mesh gradation (on required entities) by truncating metric field. Mark the edges belonging to a required entity (already done if the classic gradation is enabled)
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l02322}{2322}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a0319bbf7e2ece822b1579a4f621b64a5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a0319bbf7e2ece822b1579a4f621b64a5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_aaa4f68689c18c8010dc68875921911f0}\label{anisosiz_8c_aaa4f68689c18c8010dc68875921911f0}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_ridSizeInNormalDir@{MMG5\_ridSizeInNormalDir}}
+\index{MMG5\_ridSizeInNormalDir@{MMG5\_ridSizeInNormalDir}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_ridSizeInNormalDir()}{MMG5\_ridSizeInNormalDir()}}
+{\footnotesize\ttfamily double MMG5\+\_\+rid\+Size\+In\+Normal\+Dir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{int}]{i0,  }\item[{double $\ast$}]{bcu,  }\item[{\mbox{\hyperlink{structMMG5__Bezier}{MMG5\+\_\+\+Bezier}} $\ast$}]{b,  }\item[{double}]{isqhmin,  }\item[{double}]{isqhmax }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em i0} & local index in the face of the point on which we want to compute the metric \\
+\hline
+{\em bcu} & pointer toward the barycentric coordinates of vector {\itshape u} in the looked face. \\
+\hline
+{\em b} & bezier control polygon for the looked face. \\
+\hline
+{\em isqhmin} & minimum edge size. \\
+\hline
+{\em isqhmax} & maximum edge size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the computed ridge size in first or second normal direction (depending of i0).
+\end{DoxyReturn}
+Compute the specific size of a ridge in the direction of the normal of the looked face. This wanted size is computed as using the majoration of the haudorff distance between a triangle and its ideal curve approximation by the Hessian of the signed distance function to the ideal surface. See documentation of \mbox{\hyperlink{anisosiz_8c_af0b1ee93ffcbf66e79752170f332260c}{MMG5\+\_\+rid\+Size\+In\+Tangent\+Dir}} function. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00836}{836}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_aaa4f68689c18c8010dc68875921911f0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_af0b1ee93ffcbf66e79752170f332260c}\label{anisosiz_8c_af0b1ee93ffcbf66e79752170f332260c}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_ridSizeInTangentDir@{MMG5\_ridSizeInTangentDir}}
+\index{MMG5\_ridSizeInTangentDir@{MMG5\_ridSizeInTangentDir}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_ridSizeInTangentDir()}{MMG5\_ridSizeInTangentDir()}}
+{\footnotesize\ttfamily double MMG5\+\_\+rid\+Size\+In\+Tangent\+Dir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p0,  }\item[{MMG5\+\_\+int}]{idp,  }\item[{MMG5\+\_\+int $\ast$}]{iprid,  }\item[{double}]{isqhmin,  }\item[{double}]{isqhmax }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em p0} & pointer toward the point at which we define the metric. \\
+\hline
+{\em idp} & global index of the point at which we define the metric. \\
+\hline
+{\em iprid} & pointer toward the two extremities of the ridge. \\
+\hline
+{\em isqhmin} & minimum edge size. \\
+\hline
+{\em isqhmax} & maximum edge size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the computed ridge size in the tangent direction.
+\end{DoxyReturn}
+Compute the specific size that we want to apply to a ridge in the direction of the tangent of the ridge. This wanted size is computed as using the majoration of the haudorff distance between a triangle and its ideal curve approximation by the Hessian of the signed distance function to the ideal surface.
+
+\[
+d^H(\partial \Omega,S_T) \leq \displaystyle\frac{1}{2}\left(
+\frac{d-1}{d} \right)^2 \max\limits_{T\in S_T} \max\limits_{x \in T
+} \max\limits_{y,z \in T} \langle \left| H(d_\omega)(x) \right|
+yz,yz\rangle.
+\]
+
+where $ d^H(\partial \Omega,S_T) $ is the distance between the triangle $S_T$ and the ideal boundary (reconstructed using cubic Bezier patches) $ \partial \Omega $, $ d$ is the mesh dimension and $
+  H(d_\Omega) $ is the hessian matrix of the signed distance function to $
+  \Omega $.
+
+For all $ x \in \partial \Omega $, $H(d_\omega)(x)$ is the second fundamental form whose eigenvalues are the principal curvatures ( $\kappa_1
+  $ and $ \kappa_2 $) of $ \partial \Omega $ at $ x $ so the previous formula can be rewritten as\+:  \[
+d^H(\partial \Omega,S_T) \leq \displaystyle\frac{1}{2}\left(
+\frac{d-1}{d} \right)^2 \max( \left|\kappa_1\right|,\left|\kappa_2\right|).
+\]
+
+As we want to respect the imposed the {\itshape hausd} threshold and we are interessed to get the wanted size along the tangent direction at the ridge point only, finally, m is computed as
+
+\[
+m = \kappa \frac{1}{2\textrm{hausd}}
+\left(\frac{d-1}{d} \right)^2.
+\]
+
+See Theorem 1 of 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00764}{764}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_af0b1ee93ffcbf66e79752170f332260c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_af0b1ee93ffcbf66e79752170f332260c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_ad18fde566010b42cd9f6df682bbe78fb}\label{anisosiz_8c_ad18fde566010b42cd9f6df682bbe78fb}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_simred2d@{MMG5\_simred2d}}
+\index{MMG5\_simred2d@{MMG5\_simred2d}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_simred2d()}{MMG5\_simred2d()}}
+{\footnotesize\ttfamily int MMG5\+\_\+simred2d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double $\ast$}]{m,  }\item[{double $\ast$}]{n,  }\item[{double}]{dm\mbox{[}2\mbox{]},  }\item[{double}]{dn\mbox{[}2\mbox{]},  }\item[{double}]{vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em m} & first matrix \\
+\hline
+{\em n} & second matrix \\
+\hline
+{\em dm} & eigenvalues of m in the coreduction basis (to fill) \\
+\hline
+{\em dn} & eigenvalues of n in the coreduction basis (to fill) \\
+\hline
+{\em vp} & coreduction basis (to fill)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail 1 otherwise.
+\end{DoxyReturn}
+Perform simultaneous reduction of matrices {\itshape m} and {\itshape n}. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01326}{1326}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ad18fde566010b42cd9f6df682bbe78fb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ad18fde566010b42cd9f6df682bbe78fb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a731bd60efc63d28f8485a333f235987d}\label{anisosiz_8c_a731bd60efc63d28f8485a333f235987d}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_simred3d@{MMG5\_simred3d}}
+\index{MMG5\_simred3d@{MMG5\_simred3d}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_simred3d()}{MMG5\_simred3d()}}
+{\footnotesize\ttfamily int MMG5\+\_\+simred3d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double $\ast$}]{m,  }\item[{double $\ast$}]{n,  }\item[{double}]{dm\mbox{[}3\mbox{]},  }\item[{double}]{dn\mbox{[}3\mbox{]},  }\item[{double}]{vp\mbox{[}3\mbox{]}\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em m} & first matrix \\
+\hline
+{\em n} & second matrix \\
+\hline
+{\em dm} & eigenvalues of m in the coreduction basis (to fill) \\
+\hline
+{\em dn} & eigenvalues of n in the coreduction basis (to fill) \\
+\hline
+{\em vp} & coreduction basis (to fill)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail 1 otherwise.
+\end{DoxyReturn}
+Perform simultaneous reduction of matrices {\itshape m} and {\itshape n}. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01416}{1416}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a731bd60efc63d28f8485a333f235987d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a731bd60efc63d28f8485a333f235987d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_ad2b102344602e5af03a746c227bc2e9c}\label{anisosiz_8c_ad2b102344602e5af03a746c227bc2e9c}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_solveDefmetrefSys@{MMG5\_solveDefmetrefSys}}
+\index{MMG5\_solveDefmetrefSys@{MMG5\_solveDefmetrefSys}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_solveDefmetrefSys()}{MMG5\_solveDefmetrefSys()}}
+{\footnotesize\ttfamily int MMG5\+\_\+solve\+Defmetref\+Sys (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p0,  }\item[{MMG5\+\_\+int}]{ipref\mbox{[}2\mbox{]},  }\item[{double}]{r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{c\mbox{[}3\mbox{]},  }\item[{double}]{t\+AA\mbox{[}6\mbox{]},  }\item[{double}]{t\+Ab\mbox{[}3\mbox{]},  }\item[{double $\ast$}]{m,  }\item[{double}]{isqhmin,  }\item[{double}]{isqhmax,  }\item[{double}]{hausd }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em p0} & pointer toward the point on which we want to define the metric. \\
+\hline
+{\em ipref} & table containing the indices of the edge extremities. \\
+\hline
+{\em r} & pointer toward the rotation matrix. \\
+\hline
+{\em c} & physical coordinates of the curve edge mid-\/point. \\
+\hline
+{\em t\+AA} & matrix of the system to solve. \\
+\hline
+{\em t\+Ab} & second member. \\
+\hline
+{\em m} & pointer toward the metric. \\
+\hline
+{\em isqhmax} & maximum size for edge. \\
+\hline
+{\em isqhmin} & minimum size for edge. \\
+\hline
+{\em hausd} & hausdorff value at point (unused). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Solve t\+AA $\ast$ tmp\+\_\+m = t\+Ab and fill m with tmp\+\_\+m (after rotation) for a ref point. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00538}{538}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ad2b102344602e5af03a746c227bc2e9c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ad2b102344602e5af03a746c227bc2e9c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a640fc325aa0613ceed42a7b3cfc5ca10}\label{anisosiz_8c_a640fc325aa0613ceed42a7b3cfc5ca10}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_solveDefmetregSys@{MMG5\_solveDefmetregSys}}
+\index{MMG5\_solveDefmetregSys@{MMG5\_solveDefmetregSys}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_solveDefmetregSys()}{MMG5\_solveDefmetregSys()}}
+{\footnotesize\ttfamily int MMG5\+\_\+solve\+Defmetreg\+Sys (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double}]{r\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{c\mbox{[}3\mbox{]},  }\item[{double}]{t\+AA\mbox{[}6\mbox{]},  }\item[{double}]{t\+Ab\mbox{[}3\mbox{]},  }\item[{double $\ast$}]{m,  }\item[{double}]{isqhmin,  }\item[{double}]{isqhmax,  }\item[{double}]{hausd }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em r} & pointer toward the rotation matrix. \\
+\hline
+{\em c} & physical coordinates of the curve edge mid-\/point. \\
+\hline
+{\em t\+AA} & matrix of the system to solve. \\
+\hline
+{\em t\+Ab} & second member. \\
+\hline
+{\em m} & pointer toward the metric. \\
+\hline
+{\em isqhmax} & maximum size for edge. \\
+\hline
+{\em isqhmin} & minimum size for edge. \\
+\hline
+{\em hausd} & hausdorff value at point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Solve t\+AA $\ast$ tmp\+\_\+m = t\+Ab and fill m with tmp\+\_\+m (after rotation) for a regular point. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00436}{436}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{anisosiz_8c_a640fc325aa0613ceed42a7b3cfc5ca10_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a640fc325aa0613ceed42a7b3cfc5ca10_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a0aa3be564fa81177c560c6a1e6df643b}\label{anisosiz_8c_a0aa3be564fa81177c560c6a1e6df643b}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_sort\_simred@{MMG5\_sort\_simred}}
+\index{MMG5\_sort\_simred@{MMG5\_sort\_simred}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_sort\_simred()}{MMG5\_sort\_simred()}}
+{\footnotesize\ttfamily void MMG5\+\_\+sort\+\_\+simred (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{dim,  }\item[{double $\ast$}]{dm,  }\item[{double $\ast$}]{dn,  }\item[{double $\ast$}]{vp,  }\item[{double $\ast$}]{swap,  }\item[{int8\+\_\+t $\ast$}]{perm }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em dim} & square matrix size \\
+\hline
+{\em dm} & diagonal values array \\
+\hline
+{\em dn} & diagonal values array \\
+\hline
+{\em vp} & basis vectors array \\
+\hline
+{\em swap} & swap array \\
+\hline
+{\em perm} & permutation array\\
+\hline
+\end{DoxyParams}
+Sort and permute diagonal values (and basis vectors) in increasing order with respect to the first matrix. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01562}{1562}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{anisosiz_8c_a0aa3be564fa81177c560c6a1e6df643b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{anisosiz_8c_a0aa3be564fa81177c560c6a1e6df643b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a91b40ffa23abc0bfd35fe526e6e75c85}\label{anisosiz_8c_a91b40ffa23abc0bfd35fe526e6e75c85}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_surf@{MMG5\_surf}}
+\index{MMG5\_surf@{MMG5\_surf}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_surf()}{MMG5\_surf()}}
+{\footnotesize\ttfamily static double MMG5\+\_\+surf (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double}]{m\mbox{[}3\mbox{]}\mbox{[}6\mbox{]},  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{ptt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em m} & pointer toward the metric at triangle vertices. \\
+\hline
+{\em ptt} & pointer toward the triangle structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The double of the triangle area.
+\end{DoxyReturn}
+Compute the double of the area of the surface triangle {\itshape ptt} with respect to the anisotropic metric {\itshape m}. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00050}{50}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a91b40ffa23abc0bfd35fe526e6e75c85_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a3cf9ed46024b0e81746870a4c8714ce4}\label{anisosiz_8c_a3cf9ed46024b0e81746870a4c8714ce4}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_surftri33\_ani@{MMG5\_surftri33\_ani}}
+\index{MMG5\_surftri33\_ani@{MMG5\_surftri33\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_surftri33\_ani()}{MMG5\_surftri33\_ani()}}
+{\footnotesize\ttfamily double MMG5\+\_\+surftri33\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{ptt,  }\item[{double}]{ma\mbox{[}6\mbox{]},  }\item[{double}]{mb\mbox{[}6\mbox{]},  }\item[{double}]{mc\mbox{[}6\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em ptt} & pointer toward the triangle structure. \\
+\hline
+{\em ma} & metric at triangle vertex. \\
+\hline
+{\em mb} & metric at triangle vertex. \\
+\hline
+{\em mc} & metric at triangle vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The double of the triangle area.
+\end{DoxyReturn}
+Compute the double of the area of the surface triangle {\itshape ptt} with respect to the anisotropic metric {\itshape met} (for classic storage of ridges metrics). 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00171}{171}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a3cf9ed46024b0e81746870a4c8714ce4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_aa5e824740e8572bd951028a476000f72}\label{anisosiz_8c_aa5e824740e8572bd951028a476000f72}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_surftri\_ani@{MMG5\_surftri\_ani}}
+\index{MMG5\_surftri\_ani@{MMG5\_surftri\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_surftri\_ani()}{MMG5\_surftri\_ani()}}
+{\footnotesize\ttfamily double MMG5\+\_\+surftri\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{ptt }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em ptt} & pointer toward the triangle structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The double of the triangle area.
+\end{DoxyReturn}
+Compute the double of the area of the surface triangle {\itshape ptt} with respect to the anisotropic metric {\itshape met} (for special storage of ridges metrics). 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l00124}{124}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{anisosiz_8c_aa5e824740e8572bd951028a476000f72_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_aa5e824740e8572bd951028a476000f72_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a2cccaedde210b78f1957d64bfa593763}\label{anisosiz_8c_a2cccaedde210b78f1957d64bfa593763}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_test\_simred2d@{MMG5\_test\_simred2d}}
+\index{MMG5\_test\_simred2d@{MMG5\_test\_simred2d}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_test\_simred2d()}{MMG5\_test\_simred2d()}}
+{\footnotesize\ttfamily int MMG5\+\_\+test\+\_\+simred2d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double $\ast$}]{mex,  }\item[{double $\ast$}]{nex,  }\item[{double $\ast$}]{dmex,  }\item[{double $\ast$}]{dnex,  }\item[{double}]{vpex\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em mex} & first symmetric test matrix \\
+\hline
+{\em nex} & second symmetric test matrix \\
+\hline
+{\em dm} & diagonalization of the first matrix on the reduction basis \\
+\hline
+{\em dn} & diagonalization of the second matrix on the reduction basis \\
+\hline
+{\em vp} & simultaneous reduction basis (stored by columns) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+For a couple of 2x2 symmetric matrices, Test\+:
+\begin{DoxyItemize}
+\item the computation of the simultaneous reduction values of the matrices;
+\item the computation of the simultaneous reduction basis vectors.. 
+\end{DoxyItemize}Compute simultaneous reduction
+
+Recompose matrices from diagonal values
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01585}{1585}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a2cccaedde210b78f1957d64bfa593763_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_ada29bb73a039e85464ce83a8f4207bd8}\label{anisosiz_8c_ada29bb73a039e85464ce83a8f4207bd8}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_test\_simred3d@{MMG5\_test\_simred3d}}
+\index{MMG5\_test\_simred3d@{MMG5\_test\_simred3d}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_test\_simred3d()}{MMG5\_test\_simred3d()}}
+{\footnotesize\ttfamily int MMG5\+\_\+test\+\_\+simred3d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double $\ast$}]{mex,  }\item[{double $\ast$}]{nex,  }\item[{double $\ast$}]{dmex,  }\item[{double $\ast$}]{dnex,  }\item[{double}]{vpex\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em mex} & first symmetric test matrix \\
+\hline
+{\em nex} & second symmetric test matrix \\
+\hline
+{\em dm} & diagonalization of the first matrix on the reduction basis \\
+\hline
+{\em dn} & diagonalization of the second matrix on the reduction basis \\
+\hline
+{\em vp} & simultaneous reduction basis (stored by columns) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+For a couple of 3x3 symmetric matrices, Test\+:
+\begin{DoxyItemize}
+\item the computation of the simultaneous reduction values of the matrices;
+\item the computation of the simultaneous reduction basis vectors.. 
+\end{DoxyItemize}Compute simultaneous reduction
+
+Recompose matrices from diagonal values
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01663}{1663}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ada29bb73a039e85464ce83a8f4207bd8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a719525c0ded0e0d4f03dd4a7fe86d789}\label{anisosiz_8c_a719525c0ded0e0d4f03dd4a7fe86d789}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_test\_updatemet2d\_ani@{MMG5\_test\_updatemet2d\_ani}}
+\index{MMG5\_test\_updatemet2d\_ani@{MMG5\_test\_updatemet2d\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_test\_updatemet2d\_ani()}{MMG5\_test\_updatemet2d\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+test\+\_\+updatemet2d\+\_\+ani (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Test Update of the metrics = t\+P$^\wedge$-\/1 diag(d0,d1)P$^\wedge$-\/1, P = (vp\mbox{[}0\mbox{]}, vp\mbox{[}1\mbox{]}) stored in columns in 2D. Recompose matrices from exact simultaneous diagonalization
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01805}{1805}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a719525c0ded0e0d4f03dd4a7fe86d789_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a158b878f3427e2c91ed7c4c4b276e69c}\label{anisosiz_8c_a158b878f3427e2c91ed7c4c4b276e69c}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_test\_updatemet3d\_ani@{MMG5\_test\_updatemet3d\_ani}}
+\index{MMG5\_test\_updatemet3d\_ani@{MMG5\_test\_updatemet3d\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_test\_updatemet3d\_ani()}{MMG5\_test\_updatemet3d\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+test\+\_\+updatemet3d\+\_\+ani (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Test Update of the metrics = t\+P$^\wedge$-\/1 diag(d0,d1)P$^\wedge$-\/1, P = (vp\mbox{[}0\mbox{]}, vp\mbox{[}1\mbox{]}) stored in columns in 3D. Recompose matrices from exact simultaneous diagonalization
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01841}{1841}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a158b878f3427e2c91ed7c4c4b276e69c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_aa630b9f3cea19ff19a7333240512635d}\label{anisosiz_8c_aa630b9f3cea19ff19a7333240512635d}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_updatemet2d\_ani@{MMG5\_updatemet2d\_ani}}
+\index{MMG5\_updatemet2d\_ani@{MMG5\_updatemet2d\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_updatemet2d\_ani()}{MMG5\_updatemet2d\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+updatemet2d\+\_\+ani (\begin{DoxyParamCaption}\item[{double $\ast$}]{m,  }\item[{double $\ast$}]{n,  }\item[{double}]{dm\mbox{[}2\mbox{]},  }\item[{double}]{dn\mbox{[}2\mbox{]},  }\item[{double}]{vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]},  }\item[{int8\+\_\+t}]{ier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & first matrix \\
+\hline
+{\em n} & second matrix \\
+\hline
+{\em dm} & eigenvalues of m in the coreduction basis \\
+\hline
+{\em dn} & eigenvalues of n in the coreduction basis \\
+\hline
+{\em vp} & coreduction basis \\
+\hline
+{\em ier} & flag of the updated sizes\+: (ier \& 1) if we dm has been modified, (ier \& 2) if dn has been modified.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise
+\end{DoxyReturn}
+Update of the metrics = t\+P$^\wedge$-\/1 diag(d0,d1)P$^\wedge$-\/1, P = (vp\mbox{[}0\mbox{]}, vp\mbox{[}1\mbox{]}) stored in columns in 2D. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01742}{1742}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_aa630b9f3cea19ff19a7333240512635d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_ac515c1720b31773410bbe20113217d54}\label{anisosiz_8c_ac515c1720b31773410bbe20113217d54}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_updatemet3d\_ani@{MMG5\_updatemet3d\_ani}}
+\index{MMG5\_updatemet3d\_ani@{MMG5\_updatemet3d\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_updatemet3d\_ani()}{MMG5\_updatemet3d\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+updatemet3d\+\_\+ani (\begin{DoxyParamCaption}\item[{double $\ast$}]{m,  }\item[{double $\ast$}]{n,  }\item[{double}]{dm\mbox{[}3\mbox{]},  }\item[{double}]{dn\mbox{[}3\mbox{]},  }\item[{double}]{vp\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{int8\+\_\+t}]{ier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & first matrix \\
+\hline
+{\em n} & second matrix \\
+\hline
+{\em dm} & eigenvalues of m in the coreduction basis \\
+\hline
+{\em dn} & eigenvalues of n in the coreduction basis \\
+\hline
+{\em vp} & coreduction basis \\
+\hline
+{\em ier} & flag of the updated sizes\+: (ier \& 1) if we dm has been modified, (ier \& 2) if dn has been modified.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise
+\end{DoxyReturn}
+Update of the metrics = t\+P$^\wedge$-\/1 diag(d0,d1)P$^\wedge$-\/1, P = (vp\mbox{[}0\mbox{]}, vp\mbox{[}1\mbox{]}) stored in columns in 3D. 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01783}{1783}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{anisosiz_8c_ac515c1720b31773410bbe20113217d54_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_ac515c1720b31773410bbe20113217d54_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisosiz_8c_a3c09d239eda1cecd408e94ae4686d9a3}\label{anisosiz_8c_a3c09d239eda1cecd408e94ae4686d9a3}} 
+\index{anisosiz.c@{anisosiz.c}!MMG5\_updatemetreq\_ani@{MMG5\_updatemetreq\_ani}}
+\index{MMG5\_updatemetreq\_ani@{MMG5\_updatemetreq\_ani}!anisosiz.c@{anisosiz.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_updatemetreq\_ani()}{MMG5\_updatemetreq\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+updatemetreq\+\_\+ani (\begin{DoxyParamCaption}\item[{double $\ast$}]{n,  }\item[{double}]{dn\mbox{[}2\mbox{]},  }\item[{double}]{vp\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & matrix to update \\
+\hline
+{\em dn} & eigenvalues of n in the coreduction basis \\
+\hline
+{\em vp} & coreduction basis\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise
+\end{DoxyReturn}
+Update of the metric n = t\+P$^\wedge$-\/1 diag(dn0,dn1)P$^\wedge$-\/1, P = (vp\mbox{[}0\mbox{]}, vp\mbox{[}1\mbox{]}) stored in columns 
+
+Definition at line \mbox{\hyperlink{anisosiz_8c_source_l01914}{1914}} of file \mbox{\hyperlink{anisosiz_8c_source}{anisosiz.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisosiz_8c_a3c09d239eda1cecd408e94ae4686d9a3_icgraph}
+\end{center}
+\end{figure}

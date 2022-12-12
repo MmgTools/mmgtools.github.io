@@ -1,0 +1,156 @@
+\hypertarget{d_2io__multisols__example0_2main_8c_source}{}\doxysection{main.\+c}
+\label{d_2io__multisols__example0_2main_8c_source}\index{libexamples/mmg2d/io\_multisols\_example0/main.c@{libexamples/mmg2d/io\_multisols\_example0/main.c}}
+\mbox{\hyperlink{d_2io__multisols__example0_2main_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00010}00010 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00011}00011 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00012}00012 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00013}00013 \textcolor{preprocessor}{\#include <signal.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00014}00014 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00015}00015 \textcolor{preprocessor}{\#include <ctype.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00016}00016 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00017}00017 \textcolor{preprocessor}{\#include <float.h>}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00020}00020 \textcolor{comment}{// if the header file is in the "{}include"{} directory}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00021}00021 \textcolor{comment}{// \#include "{}libmmg2d.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00022}00022 \textcolor{comment}{// if the header file is in "{}include/mmg/mmg2d"{}}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00023}00023 \textcolor{preprocessor}{\#include "{}mmg/mmg2d/libmmg2d.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00025}\mbox{\hyperlink{d_2io__multisols__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}{00025}} \textcolor{keywordtype}{int} \mbox{\hyperlink{adaptation__example0__fortran_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}(\textcolor{keywordtype}{int} argc,\textcolor{keywordtype}{char} *argv[]) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00026}00026   \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}      mmgMesh;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00027}00027   \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}       mmgMet,mmgSol,tmpSol;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00028}00028   \textcolor{keywordtype}{int}             i,j,opt;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00030}00030   \textcolor{comment}{/* To manually recover the mesh */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00031}00031   MMG5\_int        np;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00032}00032   \textcolor{keywordtype}{int}             nsol,typSol[\mbox{\hyperlink{libmmgtypes_8h_abf9a0d1bda78166331894c4fa58f4eab}{MMG5\_NSOLS\_MAX}}];}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00033}00033   \textcolor{keywordtype}{double}          *sols;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00035}00035   \textcolor{comment}{/* Filenames */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00036}00036   \textcolor{keywordtype}{char}            *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, *fileout;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00038}00038   fprintf(stdout,\textcolor{stringliteral}{"{}  -\/-\/ TEST MMG2DLIB \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00040}00040   \textcolor{keywordflow}{if} ( argc != 4 ) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00041}00041     printf(\textcolor{stringliteral}{"{} Usage: \%s filein fileout io\_option\(\backslash\)n"{}},argv[0]);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00042}00042     printf(\textcolor{stringliteral}{"{}     io\_option = 0 to Get/Set the solution field by field\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00043}00043     printf(\textcolor{stringliteral}{"{}     io\_option = 1 to Get/Set the solution field by field"{}}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00044}00044            \textcolor{stringliteral}{"{} and vertex by vertex\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00045}00045     \textcolor{keywordflow}{return}(1);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00046}00046   \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00048}00048   \textcolor{comment}{/* Name and path of the mesh file */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00049}00049   \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[1]) + 1, \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00050}00050   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} == NULL ) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00051}00051     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00052}00052     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00053}00053   \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00054}00054   strcpy(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},argv[1]);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00056}00056   fileout = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[2]) + 1, \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00057}00057   \textcolor{keywordflow}{if} ( fileout == NULL ) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00058}00058     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00059}00059     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00060}00060   \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00061}00061   strcpy(fileout,argv[2]);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00063}00063   opt = atoi(argv[3]);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00064}00064 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00067}00067   \textcolor{comment}{/* args of InitMesh:}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00068}00068 \textcolor{comment}{   * MMG5\_ARG\_start: we start to give the args of a variadic func}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00069}00069 \textcolor{comment}{   * MMG5\_ARG\_ppMesh: next arg will be a pointer over a MMG5\_pMesh}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00070}00070 \textcolor{comment}{   * \&mmgMesh: pointer toward your MMG5\_pMesh (that store your mesh)}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00071}00071 \textcolor{comment}{   * MMG5\_ARG\_ppMet: next arg will be a pointer over a MMG5\_pSol storing a metric}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00072}00072 \textcolor{comment}{   * \&mmgMet: pointer toward your MMG5\_pSol (that store your metric) */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00074}00074   mmgMesh = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00075}00075   mmgSol  = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00076}00076   mmgMet  = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00077}00077   tmpSol  = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00078}00078   \mbox{\hyperlink{API__functions__2d_8c_a34d42982555797a0c6ba089f674279f4}{MMG2D\_Init\_mesh}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00079}00079                   \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh,\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgMet,}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00080}00080                   \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00081}00081 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00087}00087   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_aa1b89c52440c3f359d0081e56200308c}{MMG2D\_loadMesh}}(mmgMesh,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )  exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00088}00088 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00089}00089   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_af776e64dd623845a3b2dd3a3e24db90d}{MMG2D\_loadAllSols}}(mmgMesh,\&mmgSol,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) != 1 )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00090}00090     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00096}00096   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functions__2d_8c_ae7157da08cd10e034b90a40d78e7dc79}{MMG2D\_Get\_solsAtVerticesSize}}(mmgMesh,\&mmgSol,\&nsol,\&np,typSol) != 1 )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00097}00097     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00102}00102   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functions__2d_8c_ab8d38bee046241e8adc8e1a172cc44c7}{MMG2D\_Set\_solsAtVerticesSize}}(mmgMesh,\&tmpSol,nsol,np,typSol) != 1 )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00103}00103     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00108}00108   \textcolor{comment}{/* Get the entire field of a given solution */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00109}00109   \textcolor{keywordflow}{for} ( i=1; i<=nsol; ++i ) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00110}00110     \textcolor{keywordflow}{if} ( !opt ) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00112}00112       \textcolor{comment}{/* Get the ith solution array */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00113}00113       \textcolor{keywordflow}{if} ( typSol[i-\/1] == \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271eac973ca2285269e2b57940636b3435004}{MMG5\_Scalar}} )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00114}00114         sols = (\textcolor{keywordtype}{double}*) calloc(np, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00115}00115       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( typSol[i-\/1] == \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271ea24a3de787b59de108d77429a58f39774}{MMG5\_Vector}} )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00116}00116         sols = (\textcolor{keywordtype}{double}*) calloc(np*2, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00117}00117       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( typSol[i-\/1] == \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271eaa9d1aaab7bff21ecaa2feb214d1ce3a3}{MMG5\_Tensor}} )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00118}00118         sols = (\textcolor{keywordtype}{double}*) calloc(np*3, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00119}00119       \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00120}00120         puts(\textcolor{stringliteral}{"{}Unexpected solution type."{}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00121}00121         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00122}00122       \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00124}00124       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functions__2d_8c_a16ad776ee1a2570b650234316ee6fb94}{MMG2D\_Get\_ithSols\_inSolsAtVertices}}(mmgSol,i,sols) !=1 ) exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00126}00126       \textcolor{comment}{/* Set the ith solution in the new structure */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00127}00127       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functions__2d_8c_a5ee0eabdd75182af784c1cd69b56d3fa}{MMG2D\_Set\_ithSols\_inSolsAtVertices}}(tmpSol,i,sols) !=1 ) exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00128}00128 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00129}00129     \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00130}00130     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00131}00131      \textcolor{comment}{/* Get the ith solution array vertex by vertex */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00132}00132       \textcolor{keywordflow}{if} ( typSol[i-\/1] == \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271eac973ca2285269e2b57940636b3435004}{MMG5\_Scalar}} )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00133}00133         sols = (\textcolor{keywordtype}{double}*) calloc(1, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00134}00134       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( typSol[i-\/1] == \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271ea24a3de787b59de108d77429a58f39774}{MMG5\_Vector}} )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00135}00135         sols = (\textcolor{keywordtype}{double}*) calloc(2, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00136}00136       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( typSol[i-\/1] == \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271eaa9d1aaab7bff21ecaa2feb214d1ce3a3}{MMG5\_Tensor}} ) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00137}00137         sols = (\textcolor{keywordtype}{double}*) calloc(3, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00138}00138       \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00139}00139       \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00140}00140         puts(\textcolor{stringliteral}{"{}Unexpected solution type."{}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00141}00141         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00142}00142       \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00143}00143 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00144}00144       \textcolor{keywordflow}{for} ( j=1; j<=np; ++j ) \{}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00145}00145         \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functions__2d_8c_ade417943b68fe7a8a41a22346fea5bc3}{MMG2D\_Get\_ithSol\_inSolsAtVertices}}(mmgSol,i,sols,j) !=1 ) exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00147}00147         \textcolor{comment}{/* Set the ith solution vertex by vertex in the new structure */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00148}00148         \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functions__2d_8c_a6edfcf5a6b13a11bbb1cd40dd56d0a4f}{MMG2D\_Set\_ithSol\_inSolsAtVertices}}(tmpSol,i,sols,j) !=1 ) exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00149}00149       \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00150}00150     \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00151}00151     free(sols); sols = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00152}00152   \}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00153}00153 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00158}00158   \textcolor{comment}{/* save the mesh */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00159}00159   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_a2d6241f92b0eb89b4f55ae402aebf571}{MMG2D\_saveMesh}}(mmgMesh,fileout) != 1 )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00160}00160     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00161}00161 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00162}00162   \textcolor{comment}{/*s ave the solutions array */}}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00163}00163   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_a8677d2e703cee0ae885d141fc82b30c9}{MMG2D\_saveAllSols}}(mmgMesh,\&tmpSol,fileout) != 1 )}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00164}00164     exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00165}00165 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00167}00167   \mbox{\hyperlink{API__functions__2d_8c_a6629a7937df63c53dd3b7f9810e3099a}{MMG2D\_Free\_allSols}}(mmgMesh,\&mmgSol);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00168}00168 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00169}00169   \mbox{\hyperlink{API__functions__2d_8c_ae54958922cfa83be04e5b76f4dad570c}{MMG2D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00170}00170                  \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh,\mbox{\hyperlink{libmmgtypes_8h_a98bbcd80dd5f234f4d6a852862fe4c3f}{MMG5\_ARG\_ppSols}},\&tmpSol,}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00171}00171                  \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00172}00172 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00173}00173   free(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00174}00174   \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00175}00175 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00176}00176   free(fileout);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00177}00177   fileout = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00178}00178 }
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00179}00179   \textcolor{keywordflow}{return}(0);}
+\DoxyCodeLine{\Hypertarget{d_2io__multisols__example0_2main_8c_source_l00180}00180 \}}
+
+\end{DoxyCode}

@@ -1,0 +1,260 @@
+\hypertarget{boulep_8c}{}\doxysection{src/common/boulep.c File Reference}
+\label{boulep_8c}\index{src/common/boulep.c@{src/common/boulep.c}}
+
+
+Functions for ball of points computation.  
+
+
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for boulep.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{boulep_8c_abf827ce458bad8fc5074e96f4cc6138b}{MMG5\+\_\+boulep}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, int ip, MMG5\+\_\+int $\ast$adja, MMG5\+\_\+int $\ast$list, MMG5\+\_\+int $\ast$tlist)
+\item 
+int \mbox{\hyperlink{boulep_8c_adba9ca5e68acb62959a52a9cfc76f086}{MMG5\+\_\+boulen}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int $\ast$adjt, MMG5\+\_\+int start, int ip, double $\ast$nn)
+\item 
+int \mbox{\hyperlink{boulep_8c_a31b07014fc071938f1be6f0576443575}{MMG5\+\_\+boulec}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int $\ast$adjt, MMG5\+\_\+int start, int ip, double $\ast$tt)
+\item 
+int \mbox{\hyperlink{boulep_8c_acc7e4f1db21808e4174de39c4b168b25}{MMG5\+\_\+bouler}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int $\ast$adjt, MMG5\+\_\+int start, int ip, MMG5\+\_\+int $\ast$list, MMG5\+\_\+int $\ast$listref, int $\ast$ng, int $\ast$nr, int lmax)
+\item 
+int \mbox{\hyperlink{boulep_8c_a71f8e5d4eb5962634fdd646773a14e09}{MMG5\+\_\+boulet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, int ip, MMG5\+\_\+int $\ast$list, int8\+\_\+t s, int8\+\_\+t $\ast$opn)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structMMG5__Info}{MMG5\+\_\+\+Info}} \mbox{\hyperlink{boulep_8c_a6f965dc34f7deedba7598e47c401773a}{info}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for ball of points computation. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{boulep_8c_source}{boulep.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{boulep_8c_a31b07014fc071938f1be6f0576443575}\label{boulep_8c_a31b07014fc071938f1be6f0576443575}} 
+\index{boulep.c@{boulep.c}!MMG5\_boulec@{MMG5\_boulec}}
+\index{MMG5\_boulec@{MMG5\_boulec}!boulep.c@{boulep.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_boulec()}{MMG5\_boulec()}}
+{\footnotesize\ttfamily int MMG5\+\_\+boulec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int $\ast$}]{adjt,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int}]{ip,  }\item[{double $\ast$}]{tt }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em adjt} & pointer toward the table of triangle adjacency. \\
+\hline
+{\em start} & index of triangle where we start to work. \\
+\hline
+{\em ip} & index of vertex where the tangent is computed. \\
+\hline
+{\em tt} & pointer toward the computed tangent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Compute the tangent to the curve at point {\itshape ip}. 
+
+Definition at line \mbox{\hyperlink{boulep_8c_source_l00199}{199}} of file \mbox{\hyperlink{boulep_8c_source}{boulep.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep_8c_a31b07014fc071938f1be6f0576443575_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{boulep_8c_adba9ca5e68acb62959a52a9cfc76f086}\label{boulep_8c_adba9ca5e68acb62959a52a9cfc76f086}} 
+\index{boulep.c@{boulep.c}!MMG5\_boulen@{MMG5\_boulen}}
+\index{MMG5\_boulen@{MMG5\_boulen}!boulep.c@{boulep.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_boulen()}{MMG5\_boulen()}}
+{\footnotesize\ttfamily int MMG5\+\_\+boulen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int $\ast$}]{adjt,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int}]{ip,  }\item[{double $\ast$}]{nn }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em adjt} & pointer toward the table of triangle adjacency. \\
+\hline
+{\em start} & index of triangle where we start to work. \\
+\hline
+{\em ip} & local index of vertex where the normal is computed. \\
+\hline
+{\em nn} & pointer toward the computed tangent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Compute average normal of triangles sharing P without crossing ridge. 
+
+Definition at line \mbox{\hyperlink{boulep_8c_source_l00119}{119}} of file \mbox{\hyperlink{boulep_8c_source}{boulep.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep_8c_adba9ca5e68acb62959a52a9cfc76f086_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep_8c_adba9ca5e68acb62959a52a9cfc76f086_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{boulep_8c_abf827ce458bad8fc5074e96f4cc6138b}\label{boulep_8c_abf827ce458bad8fc5074e96f4cc6138b}} 
+\index{boulep.c@{boulep.c}!MMG5\_boulep@{MMG5\_boulep}}
+\index{MMG5\_boulep@{MMG5\_boulep}!boulep.c@{boulep.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_boulep()}{MMG5\_boulep()}}
+{\footnotesize\ttfamily int MMG5\+\_\+boulep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int}]{ip,  }\item[{MMG5\+\_\+int $\ast$}]{adja,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{MMG5\+\_\+int $\ast$}]{tlist }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward mesh structure. \\
+\hline
+{\em start} & a triangle to which {\itshape ip} belongs. \\
+\hline
+{\em ip} & local point index \\
+\hline
+{\em adja} & pointer toward the adjacency array. \\
+\hline
+{\em list} & pointer toward the list of points connected to {\itshape ip}. \\
+\hline
+{\em tlist} & pointer toward the list of triangles sharing {\itshape ip}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ilist if buffer overflow, ilist otherwise.
+\end{DoxyReturn}
+Return all vertices connected to ip (with list\mbox{[}0\mbox{]} = ip) and all triangles sharing ip. 
+
+Definition at line \mbox{\hyperlink{boulep_8c_source_l00052}{52}} of file \mbox{\hyperlink{boulep_8c_source}{boulep.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep_8c_abf827ce458bad8fc5074e96f4cc6138b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{boulep_8c_acc7e4f1db21808e4174de39c4b168b25}\label{boulep_8c_acc7e4f1db21808e4174de39c4b168b25}} 
+\index{boulep.c@{boulep.c}!MMG5\_bouler@{MMG5\_bouler}}
+\index{MMG5\_bouler@{MMG5\_bouler}!boulep.c@{boulep.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_bouler()}{MMG5\_bouler()}}
+{\footnotesize\ttfamily int MMG5\+\_\+bouler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int $\ast$}]{adjt,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int}]{ip,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{MMG5\+\_\+int $\ast$}]{listref,  }\item[{int $\ast$}]{ng,  }\item[{int $\ast$}]{nr,  }\item[{int}]{lmax }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em adjt} & pointer toward the table of triangle adjacency. \\
+\hline
+{\em start} & index of triangle where we start to work. \\
+\hline
+{\em ip} & index of vertex on which we work. \\
+\hline
+{\em list} & pointer toward the computed list of GEO vertices incident to {\itshape ip}. \\
+\hline
+{\em listref} & pointer toward the corresponding edge references \\
+\hline
+{\em ng} & pointer toward the number of ridges. \\
+\hline
+{\em nr} & pointer toward the number of reference edges. \\
+\hline
+{\em lmax} & maxmum size for the ball of the point {\itshape ip}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of edges incident to the vertex {\itshape ip}.
+\end{DoxyReturn}
+Store edges and count the number of ridges and reference edges incident to the vertex {\itshape ip}. 
+
+Definition at line \mbox{\hyperlink{boulep_8c_source_l00287}{287}} of file \mbox{\hyperlink{boulep_8c_source}{boulep.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep_8c_acc7e4f1db21808e4174de39c4b168b25_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{boulep_8c_a71f8e5d4eb5962634fdd646773a14e09}\label{boulep_8c_a71f8e5d4eb5962634fdd646773a14e09}} 
+\index{boulep.c@{boulep.c}!MMG5\_boulet@{MMG5\_boulet}}
+\index{MMG5\_boulet@{MMG5\_boulet}!boulep.c@{boulep.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_boulet()}{MMG5\_boulet()}}
+{\footnotesize\ttfamily int MMG5\+\_\+boulet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int}]{ip,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{int8\+\_\+t}]{s,  }\item[{int8\+\_\+t $\ast$}]{opn }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em start} & index of triangle to start. \\
+\hline
+{\em ip} & index of point for wich we compute the ball. \\
+\hline
+{\em list} & pointer toward the computed ball of {\itshape ip}. \\
+\hline
+{\em s} & 1 if called from mmgs, 0 if called from mmg2d. \\
+\hline
+{\em opn} & 0 for a closed ball, 1 for an open ball. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the size of the computed ball or 0 if fail.
+\end{DoxyReturn}
+Find all triangles sharing {\itshape ip}, $list[0] =$ {\itshape start} do not stop when crossing ridge. 
+
+Definition at line \mbox{\hyperlink{boulep_8c_source_l00363}{363}} of file \mbox{\hyperlink{boulep_8c_source}{boulep.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep_8c_a71f8e5d4eb5962634fdd646773a14e09_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{boulep_8c_a6f965dc34f7deedba7598e47c401773a}\label{boulep_8c_a6f965dc34f7deedba7598e47c401773a}} 
+\index{boulep.c@{boulep.c}!info@{info}}
+\index{info@{info}!boulep.c@{boulep.c}}
+\doxysubsubsection{\texorpdfstring{info}{info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structMMG5__Info}{MMG5\+\_\+\+Info}} info\hspace{0.3cm}{\ttfamily [extern]}}
+

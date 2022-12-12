@@ -1,0 +1,87 @@
+\hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source}{}\doxysection{main.\+F90}
+\label{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source}\index{libexamples/mmg3d/adaptation\_example0\_fortran/example0\_a/main.F90@{libexamples/mmg3d/adaptation\_example0\_fortran/example0\_a/main.F90}}
+\mbox{\hyperlink{d_2adaptation__example0__fortran_2example0__a_2main_8F90}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00006}\mbox{\hyperlink{d_2adaptation__example0__fortran_2example0__a_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{00006}} \textcolor{keyword}{PROGRAM} \mbox{\hyperlink{mmg2d_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00008}00008   \textcolor{keywordtype}{IMPLICIT NONE}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00011}00011 \textcolor{comment}{! if the header file is in the "{}include"{} directory}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00012}00012 \textcolor{comment}{! \#include "{}libmmg3df.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00014}00014 \textcolor{comment}{! if the header file is in "{}include/mmg/mmg3d"{}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00015}00015 \textcolor{preprocessor}{\#include "{}mmg/mmg3d/libmmg3df.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00016}00016 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00017}00017   mmg5\_data\_ptr\_t    :: mmgmesh}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00018}00018   mmg5\_data\_ptr\_t    :: mmgsol}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00019}00019   \textcolor{keywordtype}{INTEGER}            :: ier,argc}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00020}00020   \textcolor{keywordtype}{CHARACTER(len=300)} :: exec\_name,filename,fileout}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00022}00022   \textcolor{keyword}{WRITE}(*,*) \textcolor{stringliteral}{"{}  -\/-\/ TEST MMG3DLIB"{}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00024}00024   argc =  command\_argument\_count();}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00025}00025   \textcolor{keyword}{CALL }get\_command\_argument(0, exec\_name)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00027}00027   \textcolor{keywordflow}{IF} ( argc /=2 ) \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00028}00028      print*,\textcolor{stringliteral}{"{} Usage: "{}},trim(exec\_name),\textcolor{stringliteral}{"{} input\_file\_name output\_filename"{}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00029}00029      \textcolor{keyword}{CALL }exit(1);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00030}00030 \textcolor{keywordflow}{  ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00032}00032   \textcolor{comment}{! Name and path of the mesh file}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00033}00033   \textcolor{keyword}{CALL }get\_command\_argument(1, filename)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00034}00034   \textcolor{keyword}{CALL }get\_command\_argument(2, fileout)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00045}00045   mmgmesh = 0}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00046}00046   mmgsol  = 0}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00048}00048   \textcolor{keyword}{CALL }mmg3d\_init\_mesh(mmg5\_arg\_start, \&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00049}00049        mmg5\_arg\_ppmesh,mmgmesh,mmg5\_arg\_ppmet,mmgsol, \&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00050}00050        mmg5\_arg\_end)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00057}00057   \textcolor{keyword}{CALL }mmg3d\_loadmesh(mmgmesh,trim(adjustl(filename)),\&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00058}00058        len(trim(adjustl(filename))),ier)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00059}00059   \textcolor{keywordflow}{IF} ( ier == 0 )  \textcolor{keyword}{CALL }exit(102)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00064}00064 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00066}00066   \textcolor{keyword}{CALL }mmg3d\_loadsol(mmgmesh,mmgsol,trim(adjustl(filename)),\&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00067}00067        len(trim(adjustl(filename))),ier)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00068}00068   \textcolor{keywordflow}{IF} ( ier /= 1 ) \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00069}00069      \textcolor{keyword}{CALL }exit(104)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00070}00070 \textcolor{keywordflow}{  ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00071}00071 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00073}00073   \textcolor{keyword}{CALL }mmg3d\_chk\_meshdata(mmgmesh,mmgsol,ier)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00074}00074   \textcolor{keywordflow}{IF} ( ier /= 1 ) \textcolor{keyword}{CALL }exit(105)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00078}00078   \textcolor{keyword}{CALL }mmg3d\_mmg3dlib(mmgmesh,mmgsol,ier)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00080}00080   \textcolor{keywordflow}{IF} ( ier == mmg5\_strongfailure ) \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00081}00081      print*,\textcolor{stringliteral}{"{}BAD ENDING OF MMG3DLIB: UNABLE TO SAVE MESH"{}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00082}00082      stop 2}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00083}00083   \textcolor{keywordflow}{ELSE} \textcolor{keywordflow}{IF} ( ier == mmg5\_lowfailure ) \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00084}00084      print*,\textcolor{stringliteral}{"{}BAD ENDING OF MMG3DLIB"{}}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00085}00085 \textcolor{keywordflow}{  ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00094}00094   \textcolor{keyword}{CALL }mmg3d\_savemesh(mmgmesh,trim(adjustl(fileout)),\&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00095}00095        len(trim(adjustl(fileout))),ier)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00096}00096   \textcolor{keywordflow}{IF} ( ier /= 1 ) \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00097}00097      \textcolor{keyword}{CALL }exit(106)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00098}00098 \textcolor{keywordflow}{  ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00101}00101   \textcolor{keyword}{CALL }mmg3d\_savesol(mmgmesh,mmgsol,trim(adjustl(fileout)),\&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00102}00102        len(trim(adjustl(fileout))),ier)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00103}00103   \textcolor{keywordflow}{IF} ( ier /= 1 ) \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00104}00104      \textcolor{keyword}{CALL }exit(107)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00105}00105 \textcolor{keywordflow}{  ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00108}00108   \textcolor{keyword}{CALL }mmg3d\_free\_all(mmg5\_arg\_start, \&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00109}00109        mmg5\_arg\_ppmesh,mmgmesh,mmg5\_arg\_ppmet,mmgsol, \&}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00110}00110        mmg5\_arg\_end)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example0__fortran_2example0__a_2main_8F90_source_l00112}00112 \textcolor{keyword}{END PROGRAM }\mbox{\hyperlink{mmg2d_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}}}
+
+\end{DoxyCode}

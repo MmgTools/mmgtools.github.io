@@ -1,0 +1,116 @@
+\hypertarget{cenrad__3d_8c}{}\doxysection{src/mmg3d/cenrad\+\_\+3d.c File Reference}
+\label{cenrad__3d_8c}\index{src/mmg3d/cenrad\_3d.c@{src/mmg3d/cenrad\_3d.c}}
+
+
+Compute radius and center of circumscribing circle to the element.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for cenrad\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cenrad__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{cenrad__3d_8c_a98ae7e28f41ffa4c2dde158caf34b98a}{MMG5\+\_\+cenrad\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double $\ast$ct, double $\ast$c, double $\ast$rad)
+\item 
+int \mbox{\hyperlink{cenrad__3d_8c_ae5c33b9a14e6788c3ca376eb15611438}{MMG5\+\_\+cenrad\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double $\ast$ct, double $\ast$m, double $\ast$c, double $\ast$rad)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Compute radius and center of circumscribing circle to the element. 
+
+\begin{DoxyAuthor}{Author}
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2013 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+Delaunay mode only ({\itshape MMG\+\_\+\+PATTERN} flag set to {\itshape OFF}). 
+\end{DoxyRemark}
+
+
+Definition in file \mbox{\hyperlink{cenrad__3d_8c_source}{cenrad\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{cenrad__3d_8c_ae5c33b9a14e6788c3ca376eb15611438}\label{cenrad__3d_8c_ae5c33b9a14e6788c3ca376eb15611438}} 
+\index{cenrad\_3d.c@{cenrad\_3d.c}!MMG5\_cenrad\_ani@{MMG5\_cenrad\_ani}}
+\index{MMG5\_cenrad\_ani@{MMG5\_cenrad\_ani}!cenrad\_3d.c@{cenrad\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_cenrad\_ani()}{MMG5\_cenrad\_ani()}}
+{\footnotesize\ttfamily int MMG5\+\_\+cenrad\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double $\ast$}]{ct,  }\item[{double $\ast$}]{m,  }\item[{double $\ast$}]{c,  }\item[{double $\ast$}]{rad }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em ct} & coordinates of vertices of the element. \\
+\hline
+{\em m} & metric at the point for which we compute the cavity. \\
+\hline
+{\em c} & center of circumscribing circle to the element. \\
+\hline
+{\em rad} & squared radius of circumscribing circle to the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Compute radius (squared) and center of circumscribing circle to the element for an anisotropic metric {\itshape m}. 
+
+Definition at line \mbox{\hyperlink{cenrad__3d_8c_source_l00142}{142}} of file \mbox{\hyperlink{cenrad__3d_8c_source}{cenrad\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cenrad__3d_8c_ae5c33b9a14e6788c3ca376eb15611438_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cenrad__3d_8c_a98ae7e28f41ffa4c2dde158caf34b98a}\label{cenrad__3d_8c_a98ae7e28f41ffa4c2dde158caf34b98a}} 
+\index{cenrad\_3d.c@{cenrad\_3d.c}!MMG5\_cenrad\_iso@{MMG5\_cenrad\_iso}}
+\index{MMG5\_cenrad\_iso@{MMG5\_cenrad\_iso}!cenrad\_3d.c@{cenrad\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_cenrad\_iso()}{MMG5\_cenrad\_iso()}}
+{\footnotesize\ttfamily int MMG5\+\_\+cenrad\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double $\ast$}]{ct,  }\item[{double $\ast$}]{c,  }\item[{double $\ast$}]{rad }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em ct} & coordinates of vertices of the element. \\
+\hline
+{\em c} & center of circumscribing circle to the element. \\
+\hline
+{\em rad} & squared radius of circumscribing circle to the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Compute radius (squared) and center of circumscribing circle to the element. 
+
+Definition at line \mbox{\hyperlink{cenrad__3d_8c_source_l00045}{45}} of file \mbox{\hyperlink{cenrad__3d_8c_source}{cenrad\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cenrad__3d_8c_a98ae7e28f41ffa4c2dde158caf34b98a_icgraph}
+\end{center}
+\end{figure}

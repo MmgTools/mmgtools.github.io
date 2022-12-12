@@ -1,0 +1,219 @@
+\hypertarget{apptools_8c}{}\doxysection{src/common/apptools.c File Reference}
+\label{apptools_8c}\index{src/common/apptools.c@{src/common/apptools.c}}
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for apptools.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{apptools_8c_a56d8f52b65e148af621aaec98c031730}{MMG5\+\_\+\+Alloc\+\_\+inode}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$node)
+\begin{DoxyCompactList}\small\item\em Functions used in mmg applications. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{apptools_8c_a3b1a78e24441a22238543035040093e8}{MMG5\+\_\+\+Add\+\_\+inode}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$li\+Li, int val)
+\item 
+void \mbox{\hyperlink{apptools_8c_a9df55c1f124c8164cf2444272a079906}{MMG5\+\_\+\+Free\+\_\+ilinked\+List}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$li\+Li)
+\item 
+int \mbox{\hyperlink{apptools_8c_a5501c2e34fbef2210b841f3577ef21b1}{MMG5\+\_\+count\+Local\+Param\+At\+Tri}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$bdry\+Refs)
+\item 
+int \mbox{\hyperlink{apptools_8c_af637af5712916bfe046a65e83d81511b}{MMG5\+\_\+write\+Local\+Param\+At\+Tri}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$bdry\+Refs, FILE $\ast$out)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{apptools_8c_a3b1a78e24441a22238543035040093e8}\label{apptools_8c_a3b1a78e24441a22238543035040093e8}} 
+\index{apptools.c@{apptools.c}!MMG5\_Add\_inode@{MMG5\_Add\_inode}}
+\index{MMG5\_Add\_inode@{MMG5\_Add\_inode}!apptools.c@{apptools.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_Add\_inode()}{MMG5\_Add\_inode()}}
+{\footnotesize\ttfamily int MMG5\+\_\+\+Add\+\_\+inode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$}]{li\+Li,  }\item[{int}]{val }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure (for count of used memory). \\
+\hline
+{\em li\+Li} & pointer toward the address of the root of the linked list. \\
+\hline
+{\em val} & value to add to the linked list. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the node is inserted, 0 if the node is not inserted, -\/1 if fail.
+\end{DoxyReturn}
+Add a node with value {\itshape val} to a sorted linked list with unique entries.
+
+\begin{DoxyRemark}{Remarks}
+as the linked list had unique entries, we don\textquotesingle{}t insert a node if it exists. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{apptools_8c_source_l00068}{68}} of file \mbox{\hyperlink{apptools_8c_source}{apptools.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{apptools_8c_a3b1a78e24441a22238543035040093e8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c_a3b1a78e24441a22238543035040093e8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{apptools_8c_a56d8f52b65e148af621aaec98c031730}\label{apptools_8c_a56d8f52b65e148af621aaec98c031730}} 
+\index{apptools.c@{apptools.c}!MMG5\_Alloc\_inode@{MMG5\_Alloc\_inode}}
+\index{MMG5\_Alloc\_inode@{MMG5\_Alloc\_inode}!apptools.c@{apptools.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_Alloc\_inode()}{MMG5\_Alloc\_inode()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+\+Alloc\+\_\+inode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Functions used in mmg applications. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+04 2015 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure (for count of used memory). \\
+\hline
+{\em node} & pointer toward a \mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} (cell for linked list) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if we can alloc the node {\itshape node}, 0 otherwise.
+\end{DoxyReturn}
+Node allocation. 
+
+Definition at line \mbox{\hyperlink{apptools_8c_source_l00046}{46}} of file \mbox{\hyperlink{apptools_8c_source}{apptools.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c_a56d8f52b65e148af621aaec98c031730_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{apptools_8c_a5501c2e34fbef2210b841f3577ef21b1}\label{apptools_8c_a5501c2e34fbef2210b841f3577ef21b1}} 
+\index{apptools.c@{apptools.c}!MMG5\_countLocalParamAtTri@{MMG5\_countLocalParamAtTri}}
+\index{MMG5\_countLocalParamAtTri@{MMG5\_countLocalParamAtTri}!apptools.c@{apptools.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_countLocalParamAtTri()}{MMG5\_countLocalParamAtTri()}}
+{\footnotesize\ttfamily int MMG5\+\_\+count\+Local\+Param\+At\+Tri (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$$\ast$}]{bdry\+Refs }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em bdry\+Refs} & pointer toward the list of the boundary references. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+npar, the number of local parameters at triangles if success, 0 otherwise.
+\end{DoxyReturn}
+Count the local default values at triangles and fill the list of the boundary references. Count the number of different boundary references and list it
+
+Definition at line \mbox{\hyperlink{apptools_8c_source_l00142}{142}} of file \mbox{\hyperlink{apptools_8c_source}{apptools.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c_a5501c2e34fbef2210b841f3577ef21b1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c_a5501c2e34fbef2210b841f3577ef21b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{apptools_8c_a9df55c1f124c8164cf2444272a079906}\label{apptools_8c_a9df55c1f124c8164cf2444272a079906}} 
+\index{apptools.c@{apptools.c}!MMG5\_Free\_ilinkedList@{MMG5\_Free\_ilinkedList}}
+\index{MMG5\_Free\_ilinkedList@{MMG5\_Free\_ilinkedList}!apptools.c@{apptools.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_Free\_ilinkedList()}{MMG5\_Free\_ilinkedList()}}
+{\footnotesize\ttfamily void MMG5\+\_\+\+Free\+\_\+ilinked\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$}]{li\+Li }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure (for count of used memory). \\
+\hline
+{\em li\+Li} & pointer toward the root of the linked list.\\
+\hline
+\end{DoxyParams}
+Free the memory used by the linked list whose root is {\itshape li\+Li}. 
+
+Definition at line \mbox{\hyperlink{apptools_8c_source_l00120}{120}} of file \mbox{\hyperlink{apptools_8c_source}{apptools.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c_a9df55c1f124c8164cf2444272a079906_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{apptools_8c_af637af5712916bfe046a65e83d81511b}\label{apptools_8c_af637af5712916bfe046a65e83d81511b}} 
+\index{apptools.c@{apptools.c}!MMG5\_writeLocalParamAtTri@{MMG5\_writeLocalParamAtTri}}
+\index{MMG5\_writeLocalParamAtTri@{MMG5\_writeLocalParamAtTri}!apptools.c@{apptools.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_writeLocalParamAtTri()}{MMG5\_writeLocalParamAtTri()}}
+{\footnotesize\ttfamily int MMG5\+\_\+write\+Local\+Param\+At\+Tri (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__iNode}{MMG5\+\_\+i\+Node}} $\ast$}]{bdry\+Refs,  }\item[{FILE $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em bdry\+Refs} & pointer toward the list of the boundary references. \\
+\hline
+{\em out} & pointer toward the file in which to write. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+Write the local default values at triangles in the parameter file. 
+
+Definition at line \mbox{\hyperlink{apptools_8c_source_l00186}{186}} of file \mbox{\hyperlink{apptools_8c_source}{apptools.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c_af637af5712916bfe046a65e83d81511b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{apptools_8c_af637af5712916bfe046a65e83d81511b_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,533 @@
+\hypertarget{colver__3d_8c}{}\doxysection{src/mmg3d/colver\+\_\+3d.c File Reference}
+\label{colver__3d_8c}\index{src/mmg3d/colver\_3d.c@{src/mmg3d/colver\_3d.c}}
+
+
+Functions for vertices collapsing.  
+
+
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmg3dexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for colver\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{colver__3d_8c_abd1766c81a4b5209dfbb7d8212c22707}{MMG5\+\_\+chkcol\+\_\+int}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t iface, int8\+\_\+t iedg, int64\+\_\+t $\ast$list, int ilist, int8\+\_\+t typchk)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{colver__3d_8c_af0168755e4adf3d5442862c407bdc9f3}{MMG3\+D\+\_\+unfold\+\_\+shell}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, MMG5\+\_\+int end, MMG5\+\_\+int na, MMG5\+\_\+int nb, MMG5\+\_\+int piv, MMG5\+\_\+int $\ast$iel, int8\+\_\+t $\ast$iopp)
+\item 
+static int \mbox{\hyperlink{colver__3d_8c_a459f9bf58c5963a2ab3cab51eb7977fd}{MMG5\+\_\+topchkcol\+\_\+bdy}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int k, int iface, int8\+\_\+t iedg, MMG5\+\_\+int $\ast$lists, int ilists)
+\item 
+static int \mbox{\hyperlink{colver__3d_8c_a39102926cf86828ba92a164f4107dcd8}{MMG3\+D\+\_\+get\+\_\+shell\+Edge\+Tag\+\_\+one\+Dir}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, MMG5\+\_\+int na, MMG5\+\_\+int nb, int16\+\_\+t $\ast$tag, MMG5\+\_\+int $\ast$ref, MMG5\+\_\+int piv, MMG5\+\_\+int adj, int8\+\_\+t $\ast$filled)
+\item 
+static int \mbox{\hyperlink{colver__3d_8c_a587fd4a8b893f87d4f78adc2f133b8c3}{MMG3\+D\+\_\+get\+\_\+shell\+Edge\+Tag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, int8\+\_\+t ia, int16\+\_\+t $\ast$tag, MMG5\+\_\+int $\ast$ref)
+\item 
+int \mbox{\hyperlink{colver__3d_8c_ad9418ecaa79c07f9efc8e5e3195caeb4}{MMG5\+\_\+chkcol\+\_\+bdy}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t iface, int8\+\_\+t iedg, int64\+\_\+t $\ast$listv, int ilistv, MMG5\+\_\+int $\ast$lists, int ilists, MMG5\+\_\+int refmin, MMG5\+\_\+int refplus, int8\+\_\+t typchk, int isnm, int8\+\_\+t isnmint)
+\item 
+static void \mbox{\hyperlink{colver__3d_8c_a0e0bb8a224325610195fb655251b511a}{MMG3\+D\+\_\+update\+\_\+edge\+Tag}} (\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}} pt, \mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}} pxt, MMG5\+\_\+int np, MMG5\+\_\+int nq, uint8\+\_\+t ip, \mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}} pt1, \mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}} pxt1, uint8\+\_\+t voyp)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{colver__3d_8c_ad44a2209f0d889157a54d48bbae3d54b}{MMG3\+D\+\_\+update\+\_\+shell\+Edge\+Tag\+\_\+one\+Dir}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, MMG5\+\_\+int na, MMG5\+\_\+int nb, int16\+\_\+t tag, MMG5\+\_\+int ref, MMG5\+\_\+int piv, MMG5\+\_\+int adj)
+\item 
+static int \mbox{\hyperlink{colver__3d_8c_ae4ce8e86bd8898bf14d838a315b1a8de}{MMG3\+D\+\_\+update\+\_\+shell\+Edge\+Tag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, int8\+\_\+t ia, int16\+\_\+t tag, MMG5\+\_\+int ref)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{colver__3d_8c_aae08b68688523fb0526e7f43ca096cd9}{MMG5\+\_\+colver}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int64\+\_\+t $\ast$list, int ilist, int8\+\_\+t indq, int8\+\_\+t typchk)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{colver__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for vertices collapsing. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000018}{Todo}}]doxygen documentation. \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{colver__3d_8c_a587fd4a8b893f87d4f78adc2f133b8c3}\label{colver__3d_8c_a587fd4a8b893f87d4f78adc2f133b8c3}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG3D\_get\_shellEdgeTag@{MMG3D\_get\_shellEdgeTag}}
+\index{MMG3D\_get\_shellEdgeTag@{MMG3D\_get\_shellEdgeTag}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_get\_shellEdgeTag()}{MMG3D\_get\_shellEdgeTag()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+get\+\_\+shell\+Edge\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int8\+\_\+t}]{ia,  }\item[{int16\+\_\+t $\ast$}]{tag,  }\item[{MMG5\+\_\+int $\ast$}]{ref }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em start} & tetra from which we start to travel \\
+\hline
+{\em ia} & local index of edge that must be updated \\
+\hline
+{\em tag} & new edge tag \\
+\hline
+{\em ref} & new edge ref \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Get tag and ref of the edge \textbackslash{}ia of tetra {\itshape start} by traveling its shell. Stop when meeting the first xtetra (it is sufficient if tags and refs are consistent through the edge shell); 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l00432}{432}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_a587fd4a8b893f87d4f78adc2f133b8c3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_a587fd4a8b893f87d4f78adc2f133b8c3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_a39102926cf86828ba92a164f4107dcd8}\label{colver__3d_8c_a39102926cf86828ba92a164f4107dcd8}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG3D\_get\_shellEdgeTag\_oneDir@{MMG3D\_get\_shellEdgeTag\_oneDir}}
+\index{MMG3D\_get\_shellEdgeTag\_oneDir@{MMG3D\_get\_shellEdgeTag\_oneDir}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_get\_shellEdgeTag\_oneDir()}{MMG3D\_get\_shellEdgeTag\_oneDir()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+get\+\_\+shell\+Edge\+Tag\+\_\+one\+Dir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{MMG5\+\_\+int}]{na,  }\item[{MMG5\+\_\+int}]{nb,  }\item[{int16\+\_\+t $\ast$}]{tag,  }\item[{MMG5\+\_\+int $\ast$}]{ref,  }\item[{MMG5\+\_\+int}]{piv,  }\item[{MMG5\+\_\+int}]{adj,  }\item[{int8\+\_\+t $\ast$}]{filled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em start} & tetra from which we start to travel \\
+\hline
+{\em na} & edge vertex \\
+\hline
+{\em nb} & edge vertex \\
+\hline
+{\em tag} & new edge tag \\
+\hline
+{\em ref} & new edge ref \\
+\hline
+{\em piv} & global index of the pivot to set the sense of travel \\
+\hline
+{\em adj} & index of adjacent tetra for the travel \\
+\hline
+{\em filled} & 1 if an xtetra has been found (so tag and ref are filled)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail, {\itshape start} if shell has been completely travelled without founding an xtetra, adj if an xtetra has been found, 0 otherwise
+\end{DoxyReturn}
+Get tag and ref of the edge {\itshape na} {\itshape nb} from tetra {\itshape start} by traveling its shell in one direction (given by the pivot {\itshape piv}). Stop when meeting the first xtetra with a non 0 tag (it is sufficient if tags and refs are consistent through the edge shell except for edges with null tags); 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l00377}{377}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_a39102926cf86828ba92a164f4107dcd8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_a39102926cf86828ba92a164f4107dcd8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_af0168755e4adf3d5442862c407bdc9f3}\label{colver__3d_8c_af0168755e4adf3d5442862c407bdc9f3}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG3D\_unfold\_shell@{MMG3D\_unfold\_shell}}
+\index{MMG3D\_unfold\_shell@{MMG3D\_unfold\_shell}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_unfold\_shell()}{MMG3D\_unfold\_shell()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG3\+D\+\_\+unfold\+\_\+shell (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{MMG5\+\_\+int}]{end,  }\item[{MMG5\+\_\+int}]{na,  }\item[{MMG5\+\_\+int}]{nb,  }\item[{MMG5\+\_\+int}]{piv,  }\item[{MMG5\+\_\+int $\ast$}]{iel,  }\item[{int8\+\_\+t $\ast$}]{iopp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em start} & tetra from which we start to travel \\
+\hline
+{\em end} & tetra at which we stop the travel \\
+\hline
+{\em na} & edge vertex \\
+\hline
+{\em nb} & edge vertex \\
+\hline
+{\em piv} & global index of the pivot to set the sense of travel \\
+\hline
+{\em iel} & pointer toward the last element of the shell \\
+\hline
+{\em iopp} & pointer toward the ending boundary face of the shell\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail, {\itshape piv} otherwise.
+\end{DoxyReturn}
+Unfold the shell of the edge {\itshape na} {\itshape nb} from tetra {\itshape start} in the direction given by the pivot {\itshape piv}). 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l00193}{193}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_af0168755e4adf3d5442862c407bdc9f3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_af0168755e4adf3d5442862c407bdc9f3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_a0e0bb8a224325610195fb655251b511a}\label{colver__3d_8c_a0e0bb8a224325610195fb655251b511a}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG3D\_update\_edgeTag@{MMG3D\_update\_edgeTag}}
+\index{MMG3D\_update\_edgeTag@{MMG3D\_update\_edgeTag}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_update\_edgeTag()}{MMG3D\_update\_edgeTag()}}
+{\footnotesize\ttfamily static void MMG3\+D\+\_\+update\+\_\+edge\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}}}]{pt,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}}}]{pxt,  }\item[{MMG5\+\_\+int}]{np,  }\item[{MMG5\+\_\+int}]{nq,  }\item[{uint8\+\_\+t}]{ip,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}}}]{pt1,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}}}]{pxt1,  }\item[{uint8\+\_\+t}]{voyp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & tetra of the shell of the edge to collapse \\
+\hline
+{\em pxt} & xtetra associated to {\itshape pt} \\
+\hline
+{\em np} & global index of point to collapse \\
+\hline
+{\em nq} & global index of point on which we collapse \\
+\hline
+{\em ip} & local index of {\itshape np} in {\itshape pt} \\
+\hline
+{\em pt1} & tetra neighbour to {\itshape pt} through {\itshape nq} \\
+\hline
+{\em pxt1} & xtetra associated to {\itshape pt1} \\
+\hline
+{\em voyp} & point facing tetra {\itshape pt} in {\itshape pt1} \\
+\hline
+\end{DoxyParams}
+Update tag and ref of the edges of {\itshape pxt1} that belongs to the face sharing {\itshape pt1} and {\itshape pt} (face {\itshape ip} in {\itshape pt}). 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l00940}{940}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_a0e0bb8a224325610195fb655251b511a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_ae4ce8e86bd8898bf14d838a315b1a8de}\label{colver__3d_8c_ae4ce8e86bd8898bf14d838a315b1a8de}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG3D\_update\_shellEdgeTag@{MMG3D\_update\_shellEdgeTag}}
+\index{MMG3D\_update\_shellEdgeTag@{MMG3D\_update\_shellEdgeTag}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_update\_shellEdgeTag()}{MMG3D\_update\_shellEdgeTag()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+update\+\_\+shell\+Edge\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int8\+\_\+t}]{ia,  }\item[{int16\+\_\+t}]{tag,  }\item[{MMG5\+\_\+int}]{ref }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em start} & tetra from which we start to travel \\
+\hline
+{\em ia} & local index of edge that must be updated \\
+\hline
+{\em tag} & new edge tag \\
+\hline
+{\em ref} & new edge ref \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Update tag and ref of the edge \textbackslash{}ia of tetra {\itshape start} by traveling its shell. 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l01067}{1067}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_ae4ce8e86bd8898bf14d838a315b1a8de_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_ae4ce8e86bd8898bf14d838a315b1a8de_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_ad44a2209f0d889157a54d48bbae3d54b}\label{colver__3d_8c_ad44a2209f0d889157a54d48bbae3d54b}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG3D\_update\_shellEdgeTag\_oneDir@{MMG3D\_update\_shellEdgeTag\_oneDir}}
+\index{MMG3D\_update\_shellEdgeTag\_oneDir@{MMG3D\_update\_shellEdgeTag\_oneDir}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_update\_shellEdgeTag\_oneDir()}{MMG3D\_update\_shellEdgeTag\_oneDir()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG3\+D\+\_\+update\+\_\+shell\+Edge\+Tag\+\_\+one\+Dir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{MMG5\+\_\+int}]{na,  }\item[{MMG5\+\_\+int}]{nb,  }\item[{int16\+\_\+t}]{tag,  }\item[{MMG5\+\_\+int}]{ref,  }\item[{MMG5\+\_\+int}]{piv,  }\item[{MMG5\+\_\+int}]{adj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em start} & tetra from which we start to travel \\
+\hline
+{\em na} & edge vertex \\
+\hline
+{\em nb} & edge vertex \\
+\hline
+{\em tag} & new edge tag \\
+\hline
+{\em ref} & new edge ref \\
+\hline
+{\em piv} & global index of the pivot to set the sense of travel \\
+\hline
+{\em adj} & index of adjacent tetra for the travel\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail, {\itshape start} if shell has been completely travelled, 0 otherwise
+\end{DoxyReturn}
+Update tag and ref of the edge {\itshape na} {\itshape nb} from tetra {\itshape start} by traveling its shell in one direction (given by the pivot {\itshape piv}). 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l01002}{1002}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_ad44a2209f0d889157a54d48bbae3d54b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_ad44a2209f0d889157a54d48bbae3d54b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_ad9418ecaa79c07f9efc8e5e3195caeb4}\label{colver__3d_8c_ad9418ecaa79c07f9efc8e5e3195caeb4}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG5\_chkcol\_bdy@{MMG5\_chkcol\_bdy}}
+\index{MMG5\_chkcol\_bdy@{MMG5\_chkcol\_bdy}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_chkcol\_bdy()}{MMG5\_chkcol\_bdy()}}
+{\footnotesize\ttfamily int MMG5\+\_\+chkcol\+\_\+bdy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{iface,  }\item[{int8\+\_\+t}]{iedg,  }\item[{int64\+\_\+t $\ast$}]{listv,  }\item[{int}]{ilistv,  }\item[{MMG5\+\_\+int $\ast$}]{lists,  }\item[{int}]{ilists,  }\item[{MMG5\+\_\+int}]{refmin,  }\item[{MMG5\+\_\+int}]{refplus,  }\item[{int8\+\_\+t}]{typchk,  }\item[{int}]{isnm,  }\item[{int8\+\_\+t}]{isnmint }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em k} & index of element in which we collapse. \\
+\hline
+{\em iface} & face through wich we perform the collapse \\
+\hline
+{\em iedg} & edge to collapse (in local face num) \\
+\hline
+{\em listv} & pointer toward the list of the tetra in the ball of {\itshape p0}. \\
+\hline
+{\em ilistv} & number of tetra in the ball of {\itshape p0}. \\
+\hline
+{\em lists} & pointer toward the surfacic ball of {\itshape p0}. \\
+\hline
+{\em ilists} & number of tetra in the surfacic ball of {\itshape p0}. \\
+\hline
+{\em refmin} & reference of one of the two subdomains in presence \\
+\hline
+{\em refplus} & reference of the other subdomain in presence \\
+\hline
+{\em typchk} & typchk type of checking permformed for edge length (hmax or MMG3\+D\+\_\+\+LLONG criterion). \\
+\hline
+{\em isnm} & 1 if edge is non-\/manifold \\
+\hline
+{\em isnmint} & 1 if ip is an internal non manifold point;\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ilistv if success, 0 if the point cannot be collapsed, -\/1 if fail.
+\end{DoxyReturn}
+Check whether collapse ip -\/\texorpdfstring{$>$}{>} iq could be performed, ip boundary point; \textquotesingle{}mechanical\textquotesingle{} tests (positive jacobian) are not performed here ; iface = boundary face on which lie edge iedg -\/ in local face num. (pq, or ia in local tet notation). If isnm is 1, the collapse occurs along an external MG\+\_\+\+NOM edge. If isnmint is 1, ip is an internal non manifold point and dont have normals. In this last case, {\itshape lists}, {\itshape ilists} {\itshape refmin}, {\itshape refplus} and {\itshape isnm} variables aren\textquotesingle{}t used (we neither have a surfacic ball nor \char`\"{}positive\char`\"{} and \char`\"{}negative\char`\"{} volumes)
+
+\begin{DoxyRemark}{Remarks}
+we don\textquotesingle{}t check edge lengths. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l00515}{515}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_ad9418ecaa79c07f9efc8e5e3195caeb4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_ad9418ecaa79c07f9efc8e5e3195caeb4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_abd1766c81a4b5209dfbb7d8212c22707}\label{colver__3d_8c_abd1766c81a4b5209dfbb7d8212c22707}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG5\_chkcol\_int@{MMG5\_chkcol\_int}}
+\index{MMG5\_chkcol\_int@{MMG5\_chkcol\_int}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_chkcol\_int()}{MMG5\_chkcol\_int()}}
+{\footnotesize\ttfamily int MMG5\+\_\+chkcol\+\_\+int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{iface,  }\item[{int8\+\_\+t}]{iedg,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ilist,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})}
+
+Check whether collapse ip -\/\texorpdfstring{$>$}{>} iq could be performed, ip internal ; \textquotesingle{}mechanical\textquotesingle{} tests (positive jacobian) are not performed here 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l00043}{43}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{colver__3d_8c_abd1766c81a4b5209dfbb7d8212c22707_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_abd1766c81a4b5209dfbb7d8212c22707_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_aae08b68688523fb0526e7f43ca096cd9}\label{colver__3d_8c_aae08b68688523fb0526e7f43ca096cd9}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG5\_colver@{MMG5\_colver}}
+\index{MMG5\_colver@{MMG5\_colver}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_colver()}{MMG5\_colver()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+colver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ilist,  }\item[{int8\+\_\+t}]{indq,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em met} & pointer toward the metric \\
+\hline
+{\em list} & pointer toward the ball of the point \\
+\hline
+{\em ilist} & number of elements in the ball of the point \\
+\hline
+{\em indq} & local index of the point on which we collapse \\
+\hline
+{\em typchk} & type of check performed depending on the remeshing step\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np the index of the collpased point if success, 0 if we cannot collapse, -\/1 if we fail.
+\end{DoxyReturn}
+Collapse vertex p = list\mbox{[}0\mbox{]}\%4 of tetra list\mbox{[}0\mbox{]}/4 over vertex indq of tetra list\mbox{[}0\mbox{]}/4. Only physical tests (positive jacobian) are done (i.\+e. approximation of the surface, etc... must be performed outside). Merge tags and references of edges that will merge due to the collapse (the shell of each edge is travelled so each xtetra of the shell is updated). Note that it can\textquotesingle{}t be done in the previous loop because the mesh would be corrupted if we stop the collapse. It can\textquotesingle{}t neither be done in the next loop because we start to delete the elements of the shell.
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l01144}{1144}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_aae08b68688523fb0526e7f43ca096cd9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_aae08b68688523fb0526e7f43ca096cd9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__3d_8c_a459f9bf58c5963a2ab3cab51eb7977fd}\label{colver__3d_8c_a459f9bf58c5963a2ab3cab51eb7977fd}} 
+\index{colver\_3d.c@{colver\_3d.c}!MMG5\_topchkcol\_bdy@{MMG5\_topchkcol\_bdy}}
+\index{MMG5\_topchkcol\_bdy@{MMG5\_topchkcol\_bdy}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_topchkcol\_bdy()}{MMG5\_topchkcol\_bdy()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+topchkcol\+\_\+bdy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int}]{iface,  }\item[{int8\+\_\+t}]{iedg,  }\item[{MMG5\+\_\+int $\ast$}]{lists,  }\item[{int}]{ilists }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em k} & index of the starting tetra. \\
+\hline
+{\em iface} & local index of the starting face in the tetra {\itshape k}. \\
+\hline
+{\em ideg} & local index of the starting edge in the face {\itshape iface}. \\
+\hline
+{\em lists} & surfacic ball of p. \\
+\hline
+{\em ilists} & number of elements in the surfacic ball of p.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the check of the topology fails, 1 if success, -\/1 if the function fails.
+\end{DoxyReturn}
+Topological check on the surface ball of np and nq in collapsing np-\/\texorpdfstring{$>$}{>}nq ; iface = boundary face on which lie edge iedg -\/ in local face num. (pq, or ia in local tet notation). See the Mmg Google Drive/\+Documentation/mmg3d/topchkcol\+\_\+bdy3\+D.\+pdf for a picture of the configuration. 
+
+Definition at line \mbox{\hyperlink{colver__3d_8c_source_l00251}{251}} of file \mbox{\hyperlink{colver__3d_8c_source}{colver\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_a459f9bf58c5963a2ab3cab51eb7977fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__3d_8c_a459f9bf58c5963a2ab3cab51eb7977fd_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{colver__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{colver__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{colver\_3d.c@{colver\_3d.c}!ddb@{ddb}}
+\index{ddb@{ddb}!colver\_3d.c@{colver\_3d.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+

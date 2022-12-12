@@ -1,0 +1,122 @@
+\hypertarget{librnbg__3d_8c}{}\doxysection{src/mmg3d/librnbg\+\_\+3d.c File Reference}
+\label{librnbg__3d_8c}\index{src/mmg3d/librnbg\_3d.c@{src/mmg3d/librnbg\_3d.c}}
+
+
+Functions for scotch renumerotation.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}librnbg\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for librnbg\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{librnbg__3d_8c_a0d8c390f4f5b23eab2e08ed2a5b643cc}{MMG5\+\_\+swap\+Tet}} (\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}} tetras, MMG5\+\_\+int $\ast$perm, MMG5\+\_\+int ind1, MMG5\+\_\+int ind2)
+\item 
+int \mbox{\hyperlink{librnbg__3d_8c_a15715fe8f5347b6407704584a17e99ba}{MMG5\+\_\+mmg3d\+Renumbering}} (int box\+Vert\+Nbr, \mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} fields, MMG5\+\_\+int $\ast$perm\+Nod\+Glob)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for scotch renumerotation. 
+
+\begin{DoxyAuthor}{Author}
+Algiane Froehly (Inria/\+UBordeaux) 
+
+Cedric Lachat (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2013 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{librnbg__3d_8c_source}{librnbg\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{librnbg__3d_8c_a15715fe8f5347b6407704584a17e99ba}\label{librnbg__3d_8c_a15715fe8f5347b6407704584a17e99ba}} 
+\index{librnbg\_3d.c@{librnbg\_3d.c}!MMG5\_mmg3dRenumbering@{MMG5\_mmg3dRenumbering}}
+\index{MMG5\_mmg3dRenumbering@{MMG5\_mmg3dRenumbering}!librnbg\_3d.c@{librnbg\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_mmg3dRenumbering()}{MMG5\_mmg3dRenumbering()}}
+{\footnotesize\ttfamily int MMG5\+\_\+mmg3d\+Renumbering (\begin{DoxyParamCaption}\item[{int}]{box\+Vert\+Nbr,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{fields,  }\item[{MMG5\+\_\+int $\ast$}]{perm\+Nod\+Glob }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em box\+Vert\+Nbr} & number of vertices by box. \\
+\hline
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the solution structure \\
+\hline
+{\em fields} & pointer toward an array of solution fields \\
+\hline
+{\em perm\+Nod\+Glob} & array to store the global permutation of nodes (non mandatory)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the renumbering fail and we can\textquotesingle{}t rebuild tetrahedra hashtable, 1 if the renumbering fail but we can rebuild tetrahedra hashtable or if the renumbering success.
+\end{DoxyReturn}
+Modifies the node indicies to prevent from cache missing. 
+
+Definition at line \mbox{\hyperlink{librnbg__3d_8c_source_l00114}{114}} of file \mbox{\hyperlink{librnbg__3d_8c_source}{librnbg\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg__3d_8c_a15715fe8f5347b6407704584a17e99ba_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg__3d_8c_a15715fe8f5347b6407704584a17e99ba_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{librnbg__3d_8c_a0d8c390f4f5b23eab2e08ed2a5b643cc}\label{librnbg__3d_8c_a0d8c390f4f5b23eab2e08ed2a5b643cc}} 
+\index{librnbg\_3d.c@{librnbg\_3d.c}!MMG5\_swapTet@{MMG5\_swapTet}}
+\index{MMG5\_swapTet@{MMG5\_swapTet}!librnbg\_3d.c@{librnbg\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swapTet()}{MMG5\_swapTet()}}
+{\footnotesize\ttfamily static void MMG5\+\_\+swap\+Tet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}}}]{tetras,  }\item[{MMG5\+\_\+int $\ast$}]{perm,  }\item[{MMG5\+\_\+int}]{ind1,  }\item[{MMG5\+\_\+int}]{ind2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em tetras} & pointer toward a table containing the tetra structures. \\
+\hline
+{\em $\ast$perm} & pointer toward the permutation table (to perform in place permutations). \\
+\hline
+{\em ind1} & index of the first tetra to swap. \\
+\hline
+{\em ind2} & index of the second tetra to swap.\\
+\hline
+\end{DoxyParams}
+Swap two tetras in the table of tetrahedras. 
+
+Definition at line \mbox{\hyperlink{librnbg__3d_8c_source_l00052}{52}} of file \mbox{\hyperlink{librnbg__3d_8c_source}{librnbg\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg__3d_8c_a0d8c390f4f5b23eab2e08ed2a5b643cc_icgraph}
+\end{center}
+\end{figure}

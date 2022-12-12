@@ -1,0 +1,94 @@
+\hypertarget{mmg3_8c}{}\doxysection{src/common/mmg3.c File Reference}
+\label{mmg3_8c}\index{src/common/mmg3.c@{src/common/mmg3.c}}
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for mmg3.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+short \mbox{\hyperlink{mmg3_8c_a64f84d4e08e5b9fcac2b0e38fca8be54}{MMG5\+\_\+dikmov}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp, short $\ast$lastt, short shortmax, MMG5\+\_\+int chkmovmesh(\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}, short, MMG5\+\_\+int $\ast$))
+\begin{DoxyCompactList}\small\item\em common functions for lagrangian meshing. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{mmg3_8c_a54db5271cac8478505188b7088a24e71}{MMG5\+\_\+save\+Disp}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg3_8c_a64f84d4e08e5b9fcac2b0e38fca8be54}\label{mmg3_8c_a64f84d4e08e5b9fcac2b0e38fca8be54}} 
+\index{mmg3.c@{mmg3.c}!MMG5\_dikmov@{MMG5\_dikmov}}
+\index{MMG5\_dikmov@{MMG5\_dikmov}!mmg3.c@{mmg3.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_dikmov()}{MMG5\_dikmov()}}
+{\footnotesize\ttfamily short MMG5\+\_\+dikmov (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp,  }\item[{short $\ast$}]{lastt,  }\item[{short}]{shortmax,  }\item[{MMG5\+\_\+int }]{chkmovmeshMMG5\+\_\+p\+Mesh, MMG5\+\_\+p\+Sol, short, MMG5\+\_\+int $\ast$ }\end{DoxyParamCaption})}
+
+
+
+common functions for lagrangian meshing. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em disp} & pointer toward the displacement field \\
+\hline
+{\em lastt} & 0 if a movement is possible, pointer toward the last tested fraction otherwise \\
+\hline
+{\em shortmax} & maximal parameter t (MMG2\+D\+\_\+\+SHORTMAX or MMG3\+D\+\_\+\+SHORTMAX) \\
+\hline
+{\em chkmovmesh} & function that has to be called to check motion validity\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the largest fraction t allowing a valid motion
+\end{DoxyReturn}
+Generic function to compute the the largest fraction t that makes the motion along disp valid. 
+
+Definition at line \mbox{\hyperlink{mmg3_8c_source_l00049}{49}} of file \mbox{\hyperlink{mmg3_8c_source}{mmg3.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3_8c_a64f84d4e08e5b9fcac2b0e38fca8be54_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3_8c_a54db5271cac8478505188b7088a24e71}\label{mmg3_8c_a54db5271cac8478505188b7088a24e71}} 
+\index{mmg3.c@{mmg3.c}!MMG5\_saveDisp@{MMG5\_saveDisp}}
+\index{MMG5\_saveDisp@{MMG5\_saveDisp}!mmg3.c@{mmg3.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_saveDisp()}{MMG5\_saveDisp()}}
+{\footnotesize\ttfamily int MMG5\+\_\+save\+Disp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em disp} & pointer toward the displacement field\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+For debugging purposes\+: save displacement field. 
+
+Definition at line \mbox{\hyperlink{mmg3_8c_source_l00112}{112}} of file \mbox{\hyperlink{mmg3_8c_source}{mmg3.\+c}}.
+

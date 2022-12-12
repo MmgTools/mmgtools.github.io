@@ -1,0 +1,1207 @@
+\hypertarget{mmg3d1_8c}{}\doxysection{src/mmg3d/mmg3d1.c File Reference}
+\label{mmg3d1_8c}\index{src/mmg3d/mmg3d1.c@{src/mmg3d/mmg3d1.c}}
+
+
+Perform volume and surface mesh adaptation with pattern splitting.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgexterns\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmg3dexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for mmg3d1.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{mmg3d1_8c_a2d3ac9cab03f1edf0aa32410ac1dd3db}{MMG3\+D\+\_\+set\+\_\+geom}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} ppt, int16\+\_\+t tag, MMG5\+\_\+int nmref, MMG5\+\_\+int edgref, double no1\mbox{[}3\mbox{]}, double no2\mbox{[}3\mbox{]}, double to\mbox{[}3\mbox{]})
+\item 
+void \mbox{\hyperlink{mmg3d1_8c_ac7864bff63d5967a2f0c3049bddac2bf}{MMG5\+\_\+tet2tri}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int k, int8\+\_\+t ie, \mbox{\hyperlink{structMMG5__Tria}{MMG5\+\_\+\+Tria}} $\ast$ptt)
+\item 
+int \mbox{\hyperlink{mmg3d1_8c_a886775ccba798544bc60532fde6dba1d}{MMG3\+D\+\_\+dichoto}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, MMG5\+\_\+int $\ast$vx)
+\item 
+int \mbox{\hyperlink{mmg3d1_8c_a31b08047698ae0f7735983f38c3becbb}{MMG3\+D\+\_\+dichoto1b}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int64\+\_\+t $\ast$list, int ret, MMG5\+\_\+int ip)
+\item 
+int8\+\_\+t \mbox{\hyperlink{mmg3d1_8c_a730f00e6643e77d0d1d3f4b4cee04cc2}{MMG5\+\_\+chkedg}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Tria}{MMG5\+\_\+\+Tria}} $\ast$pt, int8\+\_\+t ori, double hmax, double hausd, int loc\+Par)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_a326ee8ad072191718b9f8ef148320ca7}{MMG5\+\_\+swpmsh}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree, int typchk)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_acf309c41fa0539fe0572e5527ca0616b}{MMG5\+\_\+swptet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, double crit, double declic, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree, int typchk, MMG5\+\_\+int testmark)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_a2e27bee5f4fe4806ed06c5581000b825}{MMG5\+\_\+movtet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree, double click\+Surf, double click\+Vol, int move\+Vol, int improve\+Surf, int improve\+Vol\+Surf, int improve\+Vol, int maxit, MMG5\+\_\+int testmark)
+\item 
+static int \mbox{\hyperlink{mmg3d1_8c_a916e1f786157c81fd788c803f13024c0}{MMG5\+\_\+coltet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t typchk)
+\item 
+int \mbox{\hyperlink{mmg3d1_8c_ac5aee2413fcf81b195efbfbcbab01f61}{MMG3\+D\+\_\+adpcoledg}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$PROctree, MMG5\+\_\+int k, int8\+\_\+t imin, double lmin, MMG5\+\_\+int $\ast$nc)
+\item 
+static int \mbox{\hyperlink{mmg3d1_8c_a065c4f7f8a7571803dfc452f963f2e5f}{MMG3\+D\+\_\+del\+Pattern\+Pts}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} hash)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_ac94721b44d168269b2dfda145b7e7163}{MMG5\+\_\+anatetv}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t typchk)
+\item 
+static int \mbox{\hyperlink{mmg3d1_8c_a4046a85ecbb6a94db8880324ae21de7b}{MMG3\+D\+\_\+update\+\_\+rid\+\_\+geom}} (\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} ppt, \mbox{\hyperlink{libmmgtypes_8h_af790764f9134eda475eafca81164d110}{MMG5\+\_\+px\+Point}} pxp, double no\mbox{[}3\mbox{]})
+\item 
+int \mbox{\hyperlink{mmg3d1_8c_a233ac75987c8be3f9f6e15c149833d87}{MMG3\+D\+\_\+normal\+And\+Tangent\+\_\+at\+\_\+sin\+Ridge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int k, int i, int j, double no1\mbox{[}3\mbox{]}, double no2\mbox{[}3\mbox{]}, double to\mbox{[}3\mbox{]})
+\item 
+int8\+\_\+t \mbox{\hyperlink{mmg3d1_8c_ae3f81b8deeff6dbeb1befa0d4e961b27}{MMG3\+D\+\_\+build\+\_\+bezier\+Edge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int k, int8\+\_\+t imax, int8\+\_\+t i, int8\+\_\+t j, \mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}} pxt, MMG5\+\_\+int ip1, MMG5\+\_\+int ip2, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p0, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p1, MMG5\+\_\+int $\ast$ref, int16\+\_\+t $\ast$tag, double o\mbox{[}3\mbox{]}, double to\mbox{[}3\mbox{]}, double no1\mbox{[}3\mbox{]}, double no2\mbox{[}3\mbox{]}, int64\+\_\+t $\ast$list, int $\ast$ilist)
+\item 
+void \mbox{\hyperlink{mmg3d1_8c_aff9063a38f8f23f4325eef13d27b00f3}{MMG3\+D\+\_\+find\+\_\+bdyface\+\_\+from\+\_\+edge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}} pt, int8\+\_\+t ied, int8\+\_\+t $\ast$i, int8\+\_\+t $\ast$j, int8\+\_\+t $\ast$i1, int8\+\_\+t $\ast$i2, MMG5\+\_\+int $\ast$ip1, MMG5\+\_\+int $\ast$ip2, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} $\ast$p0, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} $\ast$p1)
+\item 
+int \mbox{\hyperlink{mmg3d1_8c_a82b8f7b1919bdf249ce8a0d9741e6dc2}{MMG3\+D\+\_\+splsurfedge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, \mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}} pt, \mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}} pxt, int8\+\_\+t imax, int8\+\_\+t typchk, int8\+\_\+t chk\+Rid\+Tet, int $\ast$warn)
+\item 
+static int \mbox{\hyperlink{mmg3d1_8c_a804ecdb1201f3e9f04d3e806a57f055e}{MMG3\+D\+\_\+chkbdyface}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, \mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}} pt, \mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}} pxt, int8\+\_\+t i, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} ptt, int8\+\_\+t typchk)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_a5ac527864ce1eaa9f8a409c1bd5fe80f}{MMG3\+D\+\_\+anatets\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t typchk)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_a9ec9c6cd32f836e763dc0d968bef3639}{MMG3\+D\+\_\+anatets\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t typchk)
+\item 
+static int \mbox{\hyperlink{mmg3d1_8c_a2fcc591b50e6b709347d53a97be71e00}{MMG3\+D\+\_\+anatet4\+\_\+sim}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t met\+Rid\+Typ, int $\ast$ifac, int $\ast$conf0, MMG5\+\_\+int $\ast$adj, int $\ast$conf1)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_a2615af289ad932fbf70a45e89d965b88}{MMG5\+\_\+anatet4}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$nf, int8\+\_\+t typchk)
+\item 
+static MMG5\+\_\+int \mbox{\hyperlink{mmg3d1_8c_a5a2404c31d3849fb9a090c993d0685ed}{MMG5\+\_\+anatet4rid}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$nf, int8\+\_\+t typchk)
+\item 
+int \mbox{\hyperlink{mmg3d1_8c_a550242acabb7c7ba53ced16a41dd882b}{MMG5\+\_\+anatet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t typchk, int pattern\+Mode)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{mmg3d1_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\item 
+static MMG5\+\_\+int($\ast$ \mbox{\hyperlink{mmg3d1_8c_a73821884755106d82b06f9273c98c0e7}{MMG3\+D\+\_\+anatets}} )(\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t typchk)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Perform volume and surface mesh adaptation with pattern splitting. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License.
+\end{DoxyCopyright}
+Perform volume and surface mesh adaptation with pattern splitting ({\itshape MMG\+\_\+\+PATTERN} preprocessor flag set to ON). 
+
+Definition in file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg3d1_8c_ac5aee2413fcf81b195efbfbcbab01f61}\label{mmg3d1_8c_ac5aee2413fcf81b195efbfbcbab01f61}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_adpcoledg@{MMG3D\_adpcoledg}}
+\index{MMG3D\_adpcoledg@{MMG3D\_adpcoledg}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_adpcoledg()}{MMG3D\_adpcoledg()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+adpcoledg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} $\ast$}]{PROctree,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{imin,  }\item[{double}]{lmin,  }\item[{MMG5\+\_\+int $\ast$}]{nc }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+{\em k} & index of tetra in which we work. \\
+\hline
+{\em imin} & index in {\itshape k} of edge that we consider for collapse. \\
+\hline
+{\em lmin} & length of edge {\itshape imin}. \\
+\hline
+{\em nc} & pointer toward count of collapses (has to be updated)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 for strong failure.
+
+0 if edge cannot be collapsed and if we want to pass to next loop step (next element or next tetra edge)
+
+2 if edge has been collapsed.
+
+3 if nothing has been done (no error but no collapse either).
+\end{DoxyReturn}
+Try to collapse edge {\itshape imin} it too small. Compute edge shell
+
+Collapse
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01180}{1180}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_ac5aee2413fcf81b195efbfbcbab01f61_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_ac5aee2413fcf81b195efbfbcbab01f61_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a2fcc591b50e6b709347d53a97be71e00}\label{mmg3d1_8c_a2fcc591b50e6b709347d53a97be71e00}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_anatet4\_sim@{MMG3D\_anatet4\_sim}}
+\index{MMG3D\_anatet4\_sim@{MMG3D\_anatet4\_sim}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_anatet4\_sim()}{MMG3D\_anatet4\_sim()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+anatet4\+\_\+sim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{met\+Rid\+Typ,  }\item[{int $\ast$}]{ifac,  }\item[{int $\ast$}]{conf0,  }\item[{MMG5\+\_\+int $\ast$}]{adj,  }\item[{int $\ast$}]{conf1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em k} & index of the tetrahedron with multiple boundary faces (to be swapped) \\
+\hline
+{\em met\+Rid\+Typ} & metric storage (classic or special) \\
+\hline
+{\em ifac} & face of the tetra {\itshape k} that give the best results for the swap23 \\
+\hline
+{\em conf0} & detected configuration for the swap23 of the tetra {\itshape k} \\
+\hline
+{\em adj} & neighbour of the tetra k through the face {\itshape ifac} (4$\ast$k1+ifac1) \\
+\hline
+{\em conf1} & detected configuration for the swap23 of the tetra {\itshape adj/4} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed (too bad quality), the type of operator that creates the best worst quality otherwise (1 if split4bar, 2 if swap23).
+\end{DoxyReturn}
+Simulation of the swap23 and of the split at its barycenter of a tetra when more than 1 boundary face. The quality of the worst created element is computed for both operators and we return the identifier of the operator that give the best results. If the swap23 is choosen, we fill the needed info to perform it (index of the face and tetra that are choosen to swap) and configuration of both tetra. Step 1\+: test the split4bar
+
+Step 2\+: test the swap23
+
+Neighbouring element with which we will try to swap
+
+Do not choose a config that creates a tetra with more than 2 bdries
+
+Test volume of the 3 created tets
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l02712}{2712}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a2fcc591b50e6b709347d53a97be71e00_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a2fcc591b50e6b709347d53a97be71e00_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a5ac527864ce1eaa9f8a409c1bd5fe80f}\label{mmg3d1_8c_a5ac527864ce1eaa9f8a409c1bd5fe80f}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_anatets\_ani@{MMG3D\_anatets\_ani}}
+\index{MMG3D\_anatets\_ani@{MMG3D\_anatets\_ani}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_anatets\_ani()}{MMG3D\_anatets\_ani()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG3\+D\+\_\+anatets\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmax or MMG3\+D\+\_\+\+LLONG criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed. 
+
+number of new points.
+\end{DoxyReturn}
+Split surface edges on geometric criterion. Split only the longest edge
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l02153}{2153}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a5ac527864ce1eaa9f8a409c1bd5fe80f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a5ac527864ce1eaa9f8a409c1bd5fe80f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a9ec9c6cd32f836e763dc0d968bef3639}\label{mmg3d1_8c_a9ec9c6cd32f836e763dc0d968bef3639}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_anatets\_iso@{MMG3D\_anatets\_iso}}
+\index{MMG3D\_anatets\_iso@{MMG3D\_anatets\_iso}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_anatets\_iso()}{MMG3D\_anatets\_iso()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG3\+D\+\_\+anatets\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmax or MMG3\+D\+\_\+\+LLONG criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed. 
+
+number of new points.
+\end{DoxyReturn}
+Analyze tetra and split on geometric criterion.
+
+\begin{DoxyRemark}{Remarks}
+ridge points creation\+: with fem (finite element method) mode a tetra cannot have 2 boundary faces. Thus, the ridge point is created from a given tetra and it is seen a second time from another tetra, which allows to update its second normal. With nofem mode, a ref edge or ridge can be at the interface of 2 boundary faces belonging to the same tetra. 
+\end{DoxyRemark}
+
+\begin{DoxyEnumerate}
+\item analysis of boundary elements
+\item check if split by adjacent; besides, a triangle may have been splitted and not its adjacent (thus, the associated n2 may not exist) \+: update this normal if need be
+\end{DoxyEnumerate}
+
+Edge analysis
+
+
+\begin{DoxyEnumerate}
+\item Simulate splitting and delete points leading to invalid configurations
+\item splitting
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l02253}{2253}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a9ec9c6cd32f836e763dc0d968bef3639_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a9ec9c6cd32f836e763dc0d968bef3639_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_ae3f81b8deeff6dbeb1befa0d4e961b27}\label{mmg3d1_8c_ae3f81b8deeff6dbeb1befa0d4e961b27}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_build\_bezierEdge@{MMG3D\_build\_bezierEdge}}
+\index{MMG3D\_build\_bezierEdge@{MMG3D\_build\_bezierEdge}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_build\_bezierEdge()}{MMG3D\_build\_bezierEdge()}}
+{\footnotesize\ttfamily int8\+\_\+t MMG3\+D\+\_\+build\+\_\+bezier\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{imax,  }\item[{int8\+\_\+t}]{i,  }\item[{int8\+\_\+t}]{j,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}}}]{pxt,  }\item[{MMG5\+\_\+int}]{ip1,  }\item[{MMG5\+\_\+int}]{ip2,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p0,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p1,  }\item[{MMG5\+\_\+int $\ast$}]{ref,  }\item[{int16\+\_\+t $\ast$}]{tag,  }\item[{double}]{o\mbox{[}3\mbox{]},  }\item[{double}]{to\mbox{[}3\mbox{]},  }\item[{double}]{no1\mbox{[}3\mbox{]},  }\item[{double}]{no2\mbox{[}3\mbox{]},  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int $\ast$}]{ilist }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward mesh \\
+\hline
+{\em k} & index of input tetra \\
+\hline
+{\em imax} & index of edge in tetra {\itshape k} \\
+\hline
+{\em i} & index of boundary face of tetra from which we will work \\
+\hline
+{\em j} & index of edge in face {\itshape i} \\
+\hline
+{\em pxt} & boundary tetra associated to {\itshape k} \\
+\hline
+{\em ip1} & first vertex of edge {\itshape i} \\
+\hline
+{\em ip2} & second vertex of edge {\itshape i} \\
+\hline
+{\em p0} & point {\itshape ip1} \\
+\hline
+{\em p1} & point {\itshape ip2} \\
+\hline
+{\em ref} & edge ref (to fill) \\
+\hline
+{\em tag} & edge tag (to fill) \\
+\hline
+{\em o} & coordinates of new point along bezier edge (to fill) \\
+\hline
+{\em to} & tangent at new point {\itshape o} (to fill if needed) \\
+\hline
+{\em no1} & first normal at new point {\itshape o} (to fill if needed) \\
+\hline
+{\em no2} & second normal at new point (to fill if needed) \\
+\hline
+{\em list} & pointer toward edge shell (to fill) \\
+\hline
+{\em ilist} & 2x edge shell size (+1 for a bdy edge)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 for strong failure. 
+
+0 edge shell contains a required tet or non manifold edge or ridge reconstruction has failed. 
+
+1 ref or regular edge reconstruction has failed. 
+
+2 if successful (we can compute new point).
+\end{DoxyReturn}
+Build Bezier edge from the boundary face of a boundary tetra and compute position and feature of new point along this edge. a/ computation of bezier edge
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01750}{1750}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_ae3f81b8deeff6dbeb1befa0d4e961b27_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_ae3f81b8deeff6dbeb1befa0d4e961b27_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a804ecdb1201f3e9f04d3e806a57f055e}\label{mmg3d1_8c_a804ecdb1201f3e9f04d3e806a57f055e}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_chkbdyface@{MMG3D\_chkbdyface}}
+\index{MMG3D\_chkbdyface@{MMG3D\_chkbdyface}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_chkbdyface()}{MMG3D\_chkbdyface()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+chkbdyface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}}}]{pt,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}}}]{pxt,  }\item[{int8\+\_\+t}]{i,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{ptt,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em k} & index of tetra thath we check \\
+\hline
+{\em pt} & pointer toward the tetra that we check \\
+\hline
+{\em pxt} & pointer toward the xtetra that we check \\
+\hline
+{\em i} & index of the face in {\itshape k} that we check \\
+\hline
+{\em ptt} & pointer toward the virtual triangle build from the face \textbackslash{}i of {\itshape k}. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmax or MMG3\+D\+\_\+\+LLONG criterion).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Mark edges to split on geometric criterion (mark stored in {\itshape pt-\/\texorpdfstring{$>$}{>}flag}) 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l02045}{2045}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a804ecdb1201f3e9f04d3e806a57f055e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a804ecdb1201f3e9f04d3e806a57f055e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a065c4f7f8a7571803dfc452f963f2e5f}\label{mmg3d1_8c_a065c4f7f8a7571803dfc452f963f2e5f}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_delPatternPts@{MMG3D\_delPatternPts}}
+\index{MMG3D\_delPatternPts@{MMG3D\_delPatternPts}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_delPatternPts()}{MMG3D\_delPatternPts()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+del\+Pattern\+Pts (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}}}]{hash }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em hash} & pointer toward the hash table of edges. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 if success
+\end{DoxyReturn}
+Delete the points inserted by pattern if the pattern step fail. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01289}{1289}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a065c4f7f8a7571803dfc452f963f2e5f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a065c4f7f8a7571803dfc452f963f2e5f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a886775ccba798544bc60532fde6dba1d}\label{mmg3d1_8c_a886775ccba798544bc60532fde6dba1d}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_dichoto@{MMG3D\_dichoto}}
+\index{MMG3D\_dichoto@{MMG3D\_dichoto}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_dichoto()}{MMG3D\_dichoto()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+dichoto (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{MMG5\+\_\+int $\ast$}]{vx }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em k} & tetrahedron index. \\
+\hline
+{\em vx} & pointer toward table of edges to split. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Find acceptable position for splitting. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00140}{140}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a886775ccba798544bc60532fde6dba1d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a886775ccba798544bc60532fde6dba1d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a31b08047698ae0f7735983f38c3becbb}\label{mmg3d1_8c_a31b08047698ae0f7735983f38c3becbb}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_dichoto1b@{MMG3D\_dichoto1b}}
+\index{MMG3D\_dichoto1b@{MMG3D\_dichoto1b}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_dichoto1b()}{MMG3D\_dichoto1b()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+dichoto1b (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ret,  }\item[{MMG5\+\_\+int}]{ip }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em list} & pointer toward the shell of edge. \\
+\hline
+{\em ret} & double of the number of tetrahedra in the shell. \\
+\hline
+{\em ip} & new point index.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success 
+
+0 if fail due to a very bad quality 
+
+2 if fail due to a sharp angle creation
+\end{DoxyReturn}
+Find acceptable position for MMG5\+\_\+split1b, passing the shell of considered edge, starting from o point. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00293}{293}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a31b08047698ae0f7735983f38c3becbb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a31b08047698ae0f7735983f38c3becbb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_aff9063a38f8f23f4325eef13d27b00f3}\label{mmg3d1_8c_aff9063a38f8f23f4325eef13d27b00f3}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_find\_bdyface\_from\_edge@{MMG3D\_find\_bdyface\_from\_edge}}
+\index{MMG3D\_find\_bdyface\_from\_edge@{MMG3D\_find\_bdyface\_from\_edge}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_find\_bdyface\_from\_edge()}{MMG3D\_find\_bdyface\_from\_edge()}}
+{\footnotesize\ttfamily void MMG3\+D\+\_\+find\+\_\+bdyface\+\_\+from\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}}}]{pt,  }\item[{int8\+\_\+t}]{ied,  }\item[{int8\+\_\+t $\ast$}]{i,  }\item[{int8\+\_\+t $\ast$}]{j,  }\item[{int8\+\_\+t $\ast$}]{i1,  }\item[{int8\+\_\+t $\ast$}]{i2,  }\item[{MMG5\+\_\+int $\ast$}]{ip1,  }\item[{MMG5\+\_\+int $\ast$}]{ip2,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} $\ast$}]{p0,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} $\ast$}]{p1 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward mesh \\
+\hline
+{\em pt} & pointer toward tetra on which we work \\
+\hline
+{\em ied} & index in tetra {\itshape pt} of edge on which we work \\
+\hline
+{\em i} & index of a face of {\itshape pt} that contains {\itshape ied}. If possible we choose a boundary face with suitable orientation (to fill) \\
+\hline
+{\em j} & local index of edge {\itshape ied} in face {\itshape i} (to fill) \\
+\hline
+{\em i1} & local index in tetra {\itshape pt} of first extremity of edge {\itshape ied} (to fill) \\
+\hline
+{\em i2} & local index in tetra {\itshape pt} of second extremity of edge {\itshape ied} (to fill) \\
+\hline
+{\em ip1} & global index first extremity of edge {\itshape ied} (to fill) \\
+\hline
+{\em ip2} & global index in tetra {\itshape pt} of second extremity of edge {\itshape ied} (to fill) \\
+\hline
+{\em p0} & pointer toward first extremity of edge {\itshape ied} (to fill) \\
+\hline
+{\em p1} & pointer toward second extremity of edge {\itshape ied} (to fill)\\
+\hline
+\end{DoxyParams}
+Search a face from wich we car reach edge {\itshape ied}. If a boundary face with good orientation exists it is choosed prior to another face, otherwise, if possible, we choose a boundary face. Fill data needed to work on edge. An edge can be at the interface of a boundary face with good orientation and of another one with bad orientation\+: ensure to treat the edge from the suitable face
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01868}{1868}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_aff9063a38f8f23f4325eef13d27b00f3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a233ac75987c8be3f9f6e15c149833d87}\label{mmg3d1_8c_a233ac75987c8be3f9f6e15c149833d87}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_normalAndTangent\_at\_sinRidge@{MMG3D\_normalAndTangent\_at\_sinRidge}}
+\index{MMG3D\_normalAndTangent\_at\_sinRidge@{MMG3D\_normalAndTangent\_at\_sinRidge}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_normalAndTangent\_at\_sinRidge()}{MMG3D\_normalAndTangent\_at\_sinRidge()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+normal\+And\+Tangent\+\_\+at\+\_\+sin\+Ridge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{double}]{no1\mbox{[}3\mbox{]},  }\item[{double}]{no2\mbox{[}3\mbox{]},  }\item[{double}]{to\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em k} & index of the tetra to split. \\
+\hline
+{\em i} & index of (boundary) face in which we work. \\
+\hline
+{\em j} & local index in face i of the ridge. \\
+\hline
+{\em pt} & tetra to split \\
+\hline
+{\em no1} & first normal at new ridge point (to fill) \\
+\hline
+{\em no2} & second normal at new ridge point (to fill) \\
+\hline
+{\em to} & tangent ar new ridge point (to fill)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if succeed.
+\end{DoxyReturn}
+Compute normals and tangent at new ridge point.
+
+\begin{DoxyRemark}{Remarks}
+has to be called from a bdy face with suitable orientation (normal orientation is not checked along edges with 2 singular extremities) 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01654}{1654}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a233ac75987c8be3f9f6e15c149833d87_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a233ac75987c8be3f9f6e15c149833d87_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a2d3ac9cab03f1edf0aa32410ac1dd3db}\label{mmg3d1_8c_a2d3ac9cab03f1edf0aa32410ac1dd3db}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_set\_geom@{MMG3D\_set\_geom}}
+\index{MMG3D\_set\_geom@{MMG3D\_set\_geom}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_set\_geom()}{MMG3D\_set\_geom()}}
+{\footnotesize\ttfamily void MMG3\+D\+\_\+set\+\_\+geom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{ppt,  }\item[{int16\+\_\+t}]{tag,  }\item[{MMG5\+\_\+int}]{nmref,  }\item[{MMG5\+\_\+int}]{edgref,  }\item[{double}]{no1\mbox{[}3\mbox{]},  }\item[{double}]{no2\mbox{[}3\mbox{]},  }\item[{double}]{to\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward mesh \\
+\hline
+{\em ppt} & pointer toward point whose geom data have to be updated \\
+\hline
+{\em tag} & point tag \\
+\hline
+{\em nmref} & ref that has to be setted at point {\itshape ppt} if point is non-\/manifold \\
+\hline
+{\em edgref} & ref that has to be setted at point {\itshape ppt} if point is manifold (edg ref) \\
+\hline
+{\em no1} & normal that has to be setted at point {\itshape ppt} (if needed) \\
+\hline
+{\em no2} & normal that has to be setted at point {\itshape ppt} (if needed) \\
+\hline
+{\em to} & tangent that has to be setted at point {\itshape ppt} (if needed)\\
+\hline
+\end{DoxyParams}
+Set geometric info (ref, tag, normals and tangent) at point {\itshape ppt}. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00059}{59}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a2d3ac9cab03f1edf0aa32410ac1dd3db_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a82b8f7b1919bdf249ce8a0d9741e6dc2}\label{mmg3d1_8c_a82b8f7b1919bdf249ce8a0d9741e6dc2}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_splsurfedge@{MMG3D\_splsurfedge}}
+\index{MMG3D\_splsurfedge@{MMG3D\_splsurfedge}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_splsurfedge()}{MMG3D\_splsurfedge()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+splsurfedge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_aa048f146b39894e279e53fd0a209f320}{MMG5\+\_\+p\+Tetra}}}]{pt,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a9c060f5bc10391cd95dcf8c4c5a7634d}{MMG5\+\_\+px\+Tetra}}}]{pxt,  }\item[{int8\+\_\+t}]{imax,  }\item[{int8\+\_\+t}]{typchk,  }\item[{int8\+\_\+t}]{chk\+Rid\+Tet,  }\item[{int $\ast$}]{warn }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em k} & index of the tetra to split. \\
+\hline
+{\em pt} & tetra to split \\
+\hline
+{\em pxt} & associated xtetra \\
+\hline
+{\em imax} & index of the edge to split to split \\
+\hline
+{\em typchk} & type of check \\
+\hline
+{\em chk\+Rid\+Tet} & check for ridge metric \\
+\hline
+{\em $\ast$warn} & {\itshape warn} is set to 1 if we don\textquotesingle{}t have enough memory to complete mesh.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail, 0 if we can\textquotesingle{}t split but the upper loop may continue, 1 if the edge is splitted, 2 if we can\textquotesingle{}t split due to lack of memory
+\end{DoxyReturn}
+Split a surface edge using split1b 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01927}{1927}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a82b8f7b1919bdf249ce8a0d9741e6dc2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a82b8f7b1919bdf249ce8a0d9741e6dc2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a4046a85ecbb6a94db8880324ae21de7b}\label{mmg3d1_8c_a4046a85ecbb6a94db8880324ae21de7b}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_update\_rid\_geom@{MMG3D\_update\_rid\_geom}}
+\index{MMG3D\_update\_rid\_geom@{MMG3D\_update\_rid\_geom}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_update\_rid\_geom()}{MMG3D\_update\_rid\_geom()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+update\+\_\+rid\+\_\+geom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{ppt,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_af790764f9134eda475eafca81164d110}{MMG5\+\_\+px\+Point}}}]{pxp,  }\item[{double}]{no\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em ppt} & pointer toward the point that we update \\
+\hline
+{\em pxp} & point toward the {\itshape oot} xpoint \\
+\hline
+{\em no} & normal at ppt \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 if success.
+\end{DoxyReturn}
+Starting from a point for which the normal {\itshape pxp-\/\texorpdfstring{$>$}{>}n1} is already stored, store {\itshape no} in {\itshape pxp-\/\texorpdfstring{$>$}{>}n2}, compute the tangent with respect to this two normals and store it in {\itshape ppt-\/\texorpdfstring{$>$}{>}n}. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01601}{1601}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a4046a85ecbb6a94db8880324ae21de7b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a550242acabb7c7ba53ced16a41dd882b}\label{mmg3d1_8c_a550242acabb7c7ba53ced16a41dd882b}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_anatet@{MMG5\_anatet}}
+\index{MMG5\_anatet@{MMG5\_anatet}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_anatet()}{MMG5\_anatet()}}
+{\footnotesize\ttfamily int MMG5\+\_\+anatet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{typchk,  }\item[{int}]{pattern\+Mode }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em typchk} & type of checking for edges length. \\
+\hline
+{\em pattern\+Mode} & flag to say if we perform vertex insertion by patterns or by delaunay kernel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, number of new points otherwise.
+\end{DoxyReturn}
+Analyze tetrahedra and split if needed. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l03116}{3116}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{mmg3d1_8c_a550242acabb7c7ba53ced16a41dd882b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a550242acabb7c7ba53ced16a41dd882b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a2615af289ad932fbf70a45e89d965b88}\label{mmg3d1_8c_a2615af289ad932fbf70a45e89d965b88}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_anatet4@{MMG5\_anatet4}}
+\index{MMG5\_anatet4@{MMG5\_anatet4}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_anatet4()}{MMG5\_anatet4()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG5\+\_\+anatet4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{nf,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em nf} & number of swap performed. \\
+\hline
+{\em typchk} & type of checking permformed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed, number of new points otherwise.
+\end{DoxyReturn}
+Split tetra into 4 when more than 1 boundary face or if 4 boundary vertices. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l02986}{2986}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a2615af289ad932fbf70a45e89d965b88_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a2615af289ad932fbf70a45e89d965b88_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a5a2404c31d3849fb9a090c993d0685ed}\label{mmg3d1_8c_a5a2404c31d3849fb9a090c993d0685ed}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_anatet4rid@{MMG5\_anatet4rid}}
+\index{MMG5\_anatet4rid@{MMG5\_anatet4rid}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_anatet4rid()}{MMG5\_anatet4rid()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG5\+\_\+anatet4rid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{nf,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em nf} & number of swap performed. \\
+\hline
+{\em typchk} & type of checking permformed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed, number of new points otherwise.
+\end{DoxyReturn}
+Split tetra into 4 when its 4 points are ridge points. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l03071}{3071}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a5a2404c31d3849fb9a090c993d0685ed_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a5a2404c31d3849fb9a090c993d0685ed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_ac94721b44d168269b2dfda145b7e7163}\label{mmg3d1_8c_ac94721b44d168269b2dfda145b7e7163}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_anatetv@{MMG5\_anatetv}}
+\index{MMG5\_anatetv@{MMG5\_anatetv}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_anatetv()}{MMG5\_anatetv()}}
+{\footnotesize\ttfamily static MMG5\+\_\+int MMG5\+\_\+anatetv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmax or MMG3\+D\+\_\+\+LLONG criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed. 
+
+number of new points.
+\end{DoxyReturn}
+Analyze volume tetra and split if needed. 
+\begin{DoxyEnumerate}
+\item analysis
+\item Set flags and split internal edges
+\item check and split
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l01333}{1333}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_ac94721b44d168269b2dfda145b7e7163_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_ac94721b44d168269b2dfda145b7e7163_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a730f00e6643e77d0d1d3f4b4cee04cc2}\label{mmg3d1_8c_a730f00e6643e77d0d1d3f4b4cee04cc2}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_chkedg@{MMG5\_chkedg}}
+\index{MMG5\_chkedg@{MMG5\_chkedg}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_chkedg()}{MMG5\_chkedg()}}
+{\footnotesize\ttfamily int8\+\_\+t MMG5\+\_\+chkedg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Tria}{MMG5\+\_\+\+Tria}} $\ast$}]{pt,  }\item[{int8\+\_\+t}]{ori,  }\item[{double}]{hmax,  }\item[{double}]{hausd,  }\item[{int}]{loc\+Par }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em pt} & pointer toward the triangle. \\
+\hline
+{\em ori} & orientation of the triangle (1 for direct orientation, 0 otherwise). \\
+\hline
+{\em hmax} & maximal edge length. \\
+\hline
+{\em hausd} & maximal hausdorff distance. \\
+\hline
+{\em loc\+Par} & 1 if hmax and hausd are locals parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if error 
+
+edges of the triangle pt that need to be split.
+\end{DoxyReturn}
+Find edges of (virtual) triangle pt that need to be split with respect to the Hausdorff criterion. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00363}{363}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a730f00e6643e77d0d1d3f4b4cee04cc2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a730f00e6643e77d0d1d3f4b4cee04cc2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a916e1f786157c81fd788c803f13024c0}\label{mmg3d1_8c_a916e1f786157c81fd788c803f13024c0}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_coltet@{MMG5\_coltet}}
+\index{MMG5\_coltet@{MMG5\_coltet}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_coltet()}{MMG5\_coltet()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+coltet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmin or LSHORT criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed, number of collapsed points otherwise.
+\end{DoxyReturn}
+Attempt to collapse small edges. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00888}{888}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a916e1f786157c81fd788c803f13024c0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a916e1f786157c81fd788c803f13024c0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a2e27bee5f4fe4806ed06c5581000b825}\label{mmg3d1_8c_a2e27bee5f4fe4806ed06c5581000b825}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_movtet@{MMG5\_movtet}}
+\index{MMG5\_movtet@{MMG5\_movtet}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_movtet()}{MMG5\_movtet()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+movtet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree,  }\item[{double}]{click\+Surf,  }\item[{double}]{click\+Vol,  }\item[{int}]{move\+Vol,  }\item[{int}]{improve\+Surf,  }\item[{int}]{improve\+Vol\+Surf,  }\item[{int}]{improve\+Vol,  }\item[{int}]{maxit,  }\item[{MMG5\+\_\+int}]{testmark }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure. \\
+\hline
+{\em click\+Surf} & triangle quality threshold under which we want to move \\
+\hline
+{\em click\+Vol} & tetra quality threshold under which we want to move \\
+\hline
+{\em move\+Vol} & internal move \\
+\hline
+{\em improve\+Surf} & forbid surface degradation during the move \\
+\hline
+{\em improve\+Vol\+Surf} & forbid volume degradation during the surfacic move \\
+\hline
+{\em improve\+Vol} & forbid volume degradation during the move \\
+\hline
+{\em maxit} & maximum number of iteration \\
+\hline
+{\em testmark} & all the tets with a mark less than testmark will not be treated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed, number of moved points otherwise.
+\end{DoxyReturn}
+Analyze tetrahedra and move points so as to make mesh more uniform. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00732}{732}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a2e27bee5f4fe4806ed06c5581000b825_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a2e27bee5f4fe4806ed06c5581000b825_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_a326ee8ad072191718b9f8ef148320ca7}\label{mmg3d1_8c_a326ee8ad072191718b9f8ef148320ca7}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_swpmsh@{MMG5\_swpmsh}}
+\index{MMG5\_swpmsh@{MMG5\_swpmsh}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swpmsh()}{MMG5\_swpmsh()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+swpmsh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree,  }\item[{int}]{typchk }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure (only for delaunay). \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmin or LSHORT criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if failed and swap number otherwise.
+\end{DoxyReturn}
+Search for boundary edges that could be swapped for geometric approximation. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00598}{598}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a326ee8ad072191718b9f8ef148320ca7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_a326ee8ad072191718b9f8ef148320ca7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_acf309c41fa0539fe0572e5527ca0616b}\label{mmg3d1_8c_acf309c41fa0539fe0572e5527ca0616b}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_swptet@{MMG5\_swptet}}
+\index{MMG5\_swptet@{MMG5\_swptet}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swptet()}{MMG5\_swptet()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+swptet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{double}]{crit,  }\item[{double}]{declic,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree,  }\item[{int}]{typchk,  }\item[{MMG5\+\_\+int}]{testmark }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em crit} & coefficient of quality improvment. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure in delaunay mode and toward the {\itshape NULL} pointer otherwise \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmin or LSHORT criterion) \\
+\hline
+{\em testmark} & all the tets with a mark less than testmark will not be treated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail, the number of swap otherwise.
+\end{DoxyReturn}
+Internal edge flipping. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00668}{668}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_acf309c41fa0539fe0572e5527ca0616b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_acf309c41fa0539fe0572e5527ca0616b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d1_8c_ac7864bff63d5967a2f0c3049bddac2bf}\label{mmg3d1_8c_ac7864bff63d5967a2f0c3049bddac2bf}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG5\_tet2tri@{MMG5\_tet2tri}}
+\index{MMG5\_tet2tri@{MMG5\_tet2tri}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_tet2tri()}{MMG5\_tet2tri()}}
+{\footnotesize\ttfamily void MMG5\+\_\+tet2tri (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{ie,  }\item[{\mbox{\hyperlink{structMMG5__Tria}{MMG5\+\_\+\+Tria}} $\ast$}]{ptt }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em k} & tetrahedron index. \\
+\hline
+{\em ie} & face index of tetrahedron. \\
+\hline
+{\em ptt} & pointer toward the output triangle.\\
+\hline
+\end{DoxyParams}
+Set triangle corresponding to face ie of tetra k. 
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l00102}{102}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d1_8c_ac7864bff63d5967a2f0c3049bddac2bf_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{mmg3d1_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{mmg3d1_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{mmg3d1.c@{mmg3d1.c}!ddb@{ddb}}
+\index{ddb@{ddb}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+
+\mbox{\Hypertarget{mmg3d1_8c_a73821884755106d82b06f9273c98c0e7}\label{mmg3d1_8c_a73821884755106d82b06f9273c98c0e7}} 
+\index{mmg3d1.c@{mmg3d1.c}!MMG3D\_anatets@{MMG3D\_anatets}}
+\index{MMG3D\_anatets@{MMG3D\_anatets}!mmg3d1.c@{mmg3d1.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_anatets}{MMG3D\_anatets}}
+{\footnotesize\ttfamily MMG5\+\_\+int($\ast$ MMG3\+D\+\_\+anatets) (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t typchk) (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1_8c_source_l02688}{2688}} of file \mbox{\hyperlink{mmg3d1_8c_source}{mmg3d1.\+c}}.
+

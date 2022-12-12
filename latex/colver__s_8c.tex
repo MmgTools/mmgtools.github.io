@@ -1,0 +1,214 @@
+\hypertarget{colver__s_8c}{}\doxysection{src/mmgs/colver\+\_\+s.c File Reference}
+\label{colver__s_8c}\index{src/mmgs/colver\_s.c@{src/mmgs/colver\_s.c}}
+
+
+Functions for vertices collapsing.  
+
+
+{\ttfamily \#include \char`\"{}libmmgs\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgexterns\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for colver\+\_\+s.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__s_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{colver__s_8c_aea074daee2550fea8cfc7551f698606e}{chkcol}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t i, MMG5\+\_\+int $\ast$list, int8\+\_\+t typchk, double($\ast$MMGS\+\_\+len\+Edg)(\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}, MMG5\+\_\+int, MMG5\+\_\+int, int8\+\_\+t), double($\ast$MMGS\+\_\+caltri)(\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}))
+\item 
+int \mbox{\hyperlink{colver__s_8c_a39a5444b08cea2976dd42821ff16f6d3}{colver}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int $\ast$list, int ilist)
+\item 
+int \mbox{\hyperlink{colver__s_8c_a7519c000b525f1cec179ed858c05f47f}{colver3}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int $\ast$list)
+\item 
+int \mbox{\hyperlink{colver__s_8c_ab6da8e5639a065f0e2e0e53ebe3c150a}{colver2}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int $\ast$list)
+\item 
+int \mbox{\hyperlink{colver__s_8c_afbc90213c84485ed62c7ce1a63686d27}{litcol}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int k, int8\+\_\+t i, double kali)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for vertices collapsing. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000043}{Todo}}]doxygen documentation. \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{colver__s_8c_source}{colver\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{colver__s_8c_aea074daee2550fea8cfc7551f698606e}\label{colver__s_8c_aea074daee2550fea8cfc7551f698606e}} 
+\index{colver\_s.c@{colver\_s.c}!chkcol@{chkcol}}
+\index{chkcol@{chkcol}!colver\_s.c@{colver\_s.c}}
+\doxysubsubsection{\texorpdfstring{chkcol()}{chkcol()}}
+{\footnotesize\ttfamily int chkcol (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{i,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{int8\+\_\+t}]{typchk,  }\item[{double($\ast$)(\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}, MMG5\+\_\+int, MMG5\+\_\+int, int8\+\_\+t)}]{MMGS\+\_\+len\+Edg,  }\item[{double($\ast$)(\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}})}]{MMGS\+\_\+caltri }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em met} & pointer toward the metric \\
+\hline
+{\em k} & index of the element in wich we collapse \\
+\hline
+{\em i} & index of the edge to collapse \\
+\hline
+{\em list} & pointer toward the ball of point \\
+\hline
+{\em typchk} & type of check to perform \\
+\hline
+{\em MMGS\+\_\+len\+Edg} & pointer toward the suitable fct to compute edge lengths depending on presence of input metric, metric type (iso/aniso) and {\itshape typchk} value (i.\+e. stage of adaptation) \\
+\hline
+{\em MMGS\+\_\+caltri} & pointer toward the suitable fct to compute tria quality depending on presence of input metric, metric type (iso/aniso) and {\itshape typchk} value (i.\+e. stage of adaptation)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if we can\textquotesingle{}t move of if we fail, 1 if success
+\end{DoxyReturn}
+check if geometry preserved by collapsing edge i 
+
+Definition at line \mbox{\hyperlink{colver__s_8c_source_l00059}{59}} of file \mbox{\hyperlink{colver__s_8c_source}{colver\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__s_8c_aea074daee2550fea8cfc7551f698606e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__s_8c_aea074daee2550fea8cfc7551f698606e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__s_8c_a39a5444b08cea2976dd42821ff16f6d3}\label{colver__s_8c_a39a5444b08cea2976dd42821ff16f6d3}} 
+\index{colver\_s.c@{colver\_s.c}!colver@{colver}}
+\index{colver@{colver}!colver\_s.c@{colver\_s.c}}
+\doxysubsubsection{\texorpdfstring{colver()}{colver()}}
+{\footnotesize\ttfamily int colver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{int}]{ilist }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{colver__s_8c_source_l00280}{280}} of file \mbox{\hyperlink{colver__s_8c_source}{colver\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{colver__s_8c_a39a5444b08cea2976dd42821ff16f6d3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__s_8c_a39a5444b08cea2976dd42821ff16f6d3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__s_8c_ab6da8e5639a065f0e2e0e53ebe3c150a}\label{colver__s_8c_ab6da8e5639a065f0e2e0e53ebe3c150a}} 
+\index{colver\_s.c@{colver\_s.c}!colver2@{colver2}}
+\index{colver2@{colver2}!colver\_s.c@{colver\_s.c}}
+\doxysubsubsection{\texorpdfstring{colver2()}{colver2()}}
+{\footnotesize\ttfamily int colver2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int $\ast$}]{list }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{colver__s_8c_source_l00433}{433}} of file \mbox{\hyperlink{colver__s_8c_source}{colver\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{colver__s_8c_ab6da8e5639a065f0e2e0e53ebe3c150a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__s_8c_ab6da8e5639a065f0e2e0e53ebe3c150a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__s_8c_a7519c000b525f1cec179ed858c05f47f}\label{colver__s_8c_a7519c000b525f1cec179ed858c05f47f}} 
+\index{colver\_s.c@{colver\_s.c}!colver3@{colver3}}
+\index{colver3@{colver3}!colver\_s.c@{colver\_s.c}}
+\doxysubsubsection{\texorpdfstring{colver3()}{colver3()}}
+{\footnotesize\ttfamily int colver3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int $\ast$}]{list }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em list} & pointer toward the ball of the point to collapse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Collapse edge $list[0]\%3$ in tet $list[0]/3$ ( $ ip->i1$ ) for a ball of the collapsed point of size 3\+: the collapsed point is removed. 
+
+Definition at line \mbox{\hyperlink{colver__s_8c_source_l00370}{370}} of file \mbox{\hyperlink{colver__s_8c_source}{colver\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{colver__s_8c_a7519c000b525f1cec179ed858c05f47f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__s_8c_a7519c000b525f1cec179ed858c05f47f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{colver__s_8c_afbc90213c84485ed62c7ce1a63686d27}\label{colver__s_8c_afbc90213c84485ed62c7ce1a63686d27}} 
+\index{colver\_s.c@{colver\_s.c}!litcol@{litcol}}
+\index{litcol@{litcol}!colver\_s.c@{colver\_s.c}}
+\doxysubsubsection{\texorpdfstring{litcol()}{litcol()}}
+{\footnotesize\ttfamily int litcol (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{i,  }\item[{double}]{kali }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{colver__s_8c_source_l00473}{473}} of file \mbox{\hyperlink{colver__s_8c_source}{colver\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{colver__s_8c_afbc90213c84485ed62c7ce1a63686d27_cgraph}
+\end{center}
+\end{figure}

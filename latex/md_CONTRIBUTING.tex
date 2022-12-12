@@ -1,0 +1,105 @@
+\hypertarget{md_CONTRIBUTING_autotoc_md21}{}\doxysection{I/ Documents your code using Doxygen}\label{md_CONTRIBUTING_autotoc_md21}
+\hypertarget{md_CONTRIBUTING_autotoc_md22}{}\doxysubsection{1) How}\label{md_CONTRIBUTING_autotoc_md22}
+\hypertarget{md_CONTRIBUTING_autotoc_md23}{}\doxysubsubsection{General case}\label{md_CONTRIBUTING_autotoc_md23}
+Our project use {\bfseries{Doxygen}} to automatically generate the developer documentation. If you implement a new function in {\bfseries{Mmg}}, please, comment it and give at least its interface description (function\textquotesingle{}s arguments and return values). ~\newline
+
+
+For example a minimal documentation for the function that save the mesh may be this one\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{inout__3d_8c_a5b1548618359fda03ce50c5fa34e9598}{MMG3D\_saveMesh}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+
+\end{DoxyCode}
+ Additionaly, it is a good practice to include text inside the routine to explain the work carried out. ~\newline
+
+
+You can refer to the \href{http://www.stack.nl/~dimitri/doxygen/}{\texttt{ Doxygen documentation}} for a description of the {\bfseries{Doxygen}} commands.\hypertarget{md_CONTRIBUTING_autotoc_md24}{}\doxysubsubsection{API\textquotesingle{}s functions}\label{md_CONTRIBUTING_autotoc_md24}
+Because the library header for Fortran users is automatically generated from the C header, you must add to your documentation the interface of the fortran function. Each line of this interface must begin with the {\ttfamily \texorpdfstring{$>$}{>}} symbol and end with the {\ttfamily \textbackslash{}n} one.
+
+For example, if the previous function is an API function, its documentation becames the following\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{int} \mbox{\hyperlink{inout__3d_8c_a5b1548618359fda03ce50c5fa34e9598}{MMG3D\_saveMesh}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+
+\end{DoxyCode}
+\hypertarget{md_CONTRIBUTING_autotoc_md25}{}\doxysubsection{2) Where}\label{md_CONTRIBUTING_autotoc_md25}
+Please, comments only your functions in the {\ttfamily .c} file, except for the {\bfseries{API}}\textquotesingle{}s functions that must be documentated in the suitable {\ttfamily libmmg\texorpdfstring{$<$}{<}X\texorpdfstring{$>$}{>}.h} file (and only here).\hypertarget{md_CONTRIBUTING_autotoc_md26}{}\doxysection{II/ Memory management\+: dynamic allocations and deallocations}\label{md_CONTRIBUTING_autotoc_md26}
+We need to control the memory consumption in our applications so the memory used by dynamic allocations is counted and updated at each allocation and deallocation. ~\newline
+
+
+Note that with a high verbosity (at least 6), you can check that at the end of the process the memory count is 0.
+
+To make the update of memory consumption easier, we have wrapped the {\ttfamily malloc}, {\ttfamily calloc}, {\ttfamily realloc} and {\ttfamily free} functions into macros that must be called in place of the matching function.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\ttfamily C function}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\ttfamily Mmg macro}    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\ttfamily C function}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\ttfamily Mmg macro}    }\\\cline{1-2}
+\endhead
+{\ttfamily ptr = (type $\ast$) malloc(size$\ast$sizeof(type));}   &{\ttfamily \mbox{\hyperlink{mmgcommon__private_8h_acdeadc8c5aa177b193c4568cb5984559}{MMG5\+\_\+\+SAFE\+\_\+\+MALLOC(ptr,size,type,law)}};}    \\\cline{1-2}
+{\ttfamily ptr = (type $\ast$) calloc(size,sizeof(type));}   &{\ttfamily \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\+\_\+\+SAFE\+\_\+\+CALLOC(ptr,size,type,law)}};}    \\\cline{1-2}
+{\ttfamily ptr = (type $\ast$) realloc(ptr,size$\ast$sizeof(type));}~\newline
+{\ttfamily if ( high\+\_\+verbosity )}~\newline
+~~~~{\ttfamily printf(\char`\"{}  \#\# Warning\+:\%s\+:\%d\+: \%s reallocation.\textbackslash{}n\char`\"{},\+\_\+\+\_\+\+FILE\+\_\+\+\_\+,\+\_\+\+\_\+\+LINE\+\_\+\+\_\+,tab\+\_\+info);}   &{\ttfamily \mbox{\hyperlink{mmgcommon__private_8h_a594a92a9942fb5bd016ec28ab49b3c69}{MMG5\+\_\+\+SAFE\+\_\+\+REALLOC(ptr,prev\+Size,new\+Size,type,tab\+\_\+name,law)}};}    \\\cline{1-2}
+{\ttfamily Decrease\+\_\+memory\+\_\+count(size);}~\newline
+{\ttfamily free(ptr); ptr = NULL;}   &{\ttfamily \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\+\_\+\+DEL\+\_\+\+MEM(mesh,ptr)}}}   \\\cline{1-2}
+\end{longtabu}
+
+
+Note that other macros which aims to help to manage the memory have been implemented.\hypertarget{md_CONTRIBUTING_autotoc_md27}{}\doxysubsection{1) Allocations}\label{md_CONTRIBUTING_autotoc_md27}
+To check that we have enough memory to allocate a pointer of size {\ttfamily siz} and to increment the memory counter, you must precede your allocation by a call to the {\ttfamily MMG5\+\_\+\+ADD\+\_\+\+MEM(mesh, siz, \char`\"{}tab\+\_\+name\char`\"{}, law)} macro.
+
+For example, the following allocation\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Increase\_memory\_count(5*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{ptr = (\textcolor{keywordtype}{double} *) malloc (5*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\textcolor{keywordflow}{if} ( !ptr ) \{}
+\DoxyCodeLine{   fprintf(stdout,\textcolor{stringliteral}{"{}  \#\# Error: unable to allocate my array."{}});}
+\DoxyCodeLine{   exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+must be replaced by the following one in the {\bfseries{Mmg}} code\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},5*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}),\textcolor{stringliteral}{"{}my array"{}},exit(EXIT\_FAILURE));}
+\DoxyCodeLine{\mbox{\hyperlink{mmgcommon__private_8h_acdeadc8c5aa177b193c4568cb5984559}{MMG5\_SAFE\_MALLOC}}(ptr,5,\textcolor{keywordtype}{double},exit(EXIT\_FAILURE));}
+
+\end{DoxyCode}
+\hypertarget{md_CONTRIBUTING_autotoc_md28}{}\doxysubsection{2) Deallocations}\label{md_CONTRIBUTING_autotoc_md28}
+To decrement the memory counter, to deallocate your pointer and to leave it pointing toward {\ttfamily NULL}, you just need to call the {\ttfamily \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\+\_\+\+DEL\+\_\+\+MEM(mesh,ptr)}}} macro.
+
+To deallocate the memory allocated in the previous example, instead of the following code\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Decrease\_memory\_count(5*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{free(ptr);}
+\DoxyCodeLine{ptr = NULL;}
+
+\end{DoxyCode}
+ just write\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ptr);}
+
+\end{DoxyCode}
+\hypertarget{md_CONTRIBUTING_autotoc_md29}{}\doxysection{III/ Coding style}\label{md_CONTRIBUTING_autotoc_md29}
+Please, use the following configuration in your editor\+:
+\begin{DoxyItemize}
+\item no tabs;
+\item 1 indent = 2 spaces;
+\item no trailing whitespaces;
+\item limit the size of your lines to 80 characters;
+\end{DoxyItemize}
+
+Besides, try to respect the following rules\+:
+\begin{DoxyItemize}
+\item declaration of variables in the top of the function;
+\item do not use exit(), use a return value instead;
+\item do not implement void API function;
+\item the main library functions returns {\ttfamily MMG\texorpdfstring{$<$}{<}X\texorpdfstring{$>$}{>}\+\_\+\+SUCCESS} if success, {\ttfamily MMG\texorpdfstring{$<$}{<}X\texorpdfstring{$>$}{>}\+\_\+\+LOWFAILURE} if fails but we can save the mesh, {\ttfamily MMG\texorpdfstring{$<$}{<}X\texorpdfstring{$>$}{>}\+\_\+\+STRONGFAILURE} if fails and we can\textquotesingle{}t save a conform mesh; 
+\end{DoxyItemize}

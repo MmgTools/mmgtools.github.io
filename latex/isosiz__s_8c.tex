@@ -1,0 +1,196 @@
+\hypertarget{isosiz__s_8c}{}\doxysection{src/mmgs/isosiz\+\_\+s.c File Reference}
+\label{isosiz__s_8c}\index{src/mmgs/isosiz\_s.c@{src/mmgs/isosiz\_s.c}}
+
+
+Fonctions for isotropic size map computation.  
+
+
+{\ttfamily \#include \char`\"{}libmmgs\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}libmmgs.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mmgsexterns\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for isosiz\+\_\+s.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{isosiz__s_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{isosiz__s_8c_ae6648cd71a8bd49d58ae8ed33ba910d1}{MAXLEN}}~1.\+0e+3
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{isosiz__s_8c_ac914df82d8fbd69f808d8e67c33db2f6}{MMGS\+\_\+sum\+\_\+req\+Edge\+Lengths\+At\+Point}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} pt, int8\+\_\+t i)
+\item 
+int \mbox{\hyperlink{isosiz__s_8c_a29794a35e3056a4ea8105bf0ce7a4d01}{MMGS\+\_\+set\+\_\+metric\+At\+Points\+On\+Req\+Edges}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int8\+\_\+t ismet)
+\item 
+int \mbox{\hyperlink{isosiz__s_8c_a7c624b3be20ecbd11d2f762b400b5de1}{MMGS\+\_\+defsiz\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fonctions for isotropic size map computation. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000047}{Todo}}]doxygen documentation. \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{isosiz__s_8c_source}{isosiz\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{isosiz__s_8c_ae6648cd71a8bd49d58ae8ed33ba910d1}\label{isosiz__s_8c_ae6648cd71a8bd49d58ae8ed33ba910d1}} 
+\index{isosiz\_s.c@{isosiz\_s.c}!MAXLEN@{MAXLEN}}
+\index{MAXLEN@{MAXLEN}!isosiz\_s.c@{isosiz\_s.c}}
+\doxysubsubsection{\texorpdfstring{MAXLEN}{MAXLEN}}
+{\footnotesize\ttfamily \#define MAXLEN~1.\+0e+3}
+
+
+
+Definition at line \mbox{\hyperlink{isosiz__s_8c_source_l00042}{42}} of file \mbox{\hyperlink{isosiz__s_8c_source}{isosiz\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{isosiz__s_8c_a7c624b3be20ecbd11d2f762b400b5de1}\label{isosiz__s_8c_a7c624b3be20ecbd11d2f762b400b5de1}} 
+\index{isosiz\_s.c@{isosiz\_s.c}!MMGS\_defsiz\_iso@{MMGS\_defsiz\_iso}}
+\index{MMGS\_defsiz\_iso@{MMGS\_defsiz\_iso}!isosiz\_s.c@{isosiz\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_defsiz\_iso()}{MMGS\_defsiz\_iso()}}
+{\footnotesize\ttfamily int MMGS\+\_\+defsiz\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em met} & pointer toward the metric\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+Define isotropic size map at all vertices of the mesh, associated with geometric approx ; by convention, p0-\/\texorpdfstring{$>$}{>}h stores desired length at point p0 Step 1\+: Set metric at points belonging to a required edge\+: compute the metric as the mean of the length of the required eges passing through the point
+
+Step 2\+: size at non required internal points
+
+Step 3\+: Minimum size feature imposed by the hausdorff distance
+
+Definition at line \mbox{\hyperlink{isosiz__s_8c_source_l00142}{142}} of file \mbox{\hyperlink{isosiz__s_8c_source}{isosiz\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{isosiz__s_8c_a7c624b3be20ecbd11d2f762b400b5de1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{isosiz__s_8c_a7c624b3be20ecbd11d2f762b400b5de1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{isosiz__s_8c_a29794a35e3056a4ea8105bf0ce7a4d01}\label{isosiz__s_8c_a29794a35e3056a4ea8105bf0ce7a4d01}} 
+\index{isosiz\_s.c@{isosiz\_s.c}!MMGS\_set\_metricAtPointsOnReqEdges@{MMGS\_set\_metricAtPointsOnReqEdges}}
+\index{MMGS\_set\_metricAtPointsOnReqEdges@{MMGS\_set\_metricAtPointsOnReqEdges}!isosiz\_s.c@{isosiz\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_set\_metricAtPointsOnReqEdges()}{MMGS\_set\_metricAtPointsOnReqEdges()}}
+{\footnotesize\ttfamily int MMGS\+\_\+set\+\_\+metric\+At\+Points\+On\+Req\+Edges (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int8\+\_\+t}]{ismet }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em met} & pointer toward the metric \\
+\hline
+{\em ismet} & 1 if user provided metric\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise
+\end{DoxyReturn}
+Compute the metric at points on trequired adges as the mean of the lengths of the required eges to which belongs the point. The processeed points are marked with flag 3. 
+
+Definition at line \mbox{\hyperlink{isosiz__s_8c_source_l00090}{90}} of file \mbox{\hyperlink{isosiz__s_8c_source}{isosiz\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{isosiz__s_8c_a29794a35e3056a4ea8105bf0ce7a4d01_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{isosiz__s_8c_a29794a35e3056a4ea8105bf0ce7a4d01_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{isosiz__s_8c_ac914df82d8fbd69f808d8e67c33db2f6}\label{isosiz__s_8c_ac914df82d8fbd69f808d8e67c33db2f6}} 
+\index{isosiz\_s.c@{isosiz\_s.c}!MMGS\_sum\_reqEdgeLengthsAtPoint@{MMGS\_sum\_reqEdgeLengthsAtPoint}}
+\index{MMGS\_sum\_reqEdgeLengthsAtPoint@{MMGS\_sum\_reqEdgeLengthsAtPoint}!isosiz\_s.c@{isosiz\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_sum\_reqEdgeLengthsAtPoint()}{MMGS\_sum\_reqEdgeLengthsAtPoint()}}
+{\footnotesize\ttfamily static int MMGS\+\_\+sum\+\_\+req\+Edge\+Lengths\+At\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{pt,  }\item[{int8\+\_\+t}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em hash} & edge hashtable. \\
+\hline
+{\em pt} & tria to process. \\
+\hline
+{\em i} & index of the edge of the tria {\itshape pt} that we process.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+If the edge {\itshape i} of the tria {\itshape pt} is seen for the first time, compute its euclidean length, add this length to the metric of the edge extremities and increment the count of times we have processed this extremities. 
+
+Definition at line \mbox{\hyperlink{isosiz__s_8c_source_l00059}{59}} of file \mbox{\hyperlink{isosiz__s_8c_source}{isosiz\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{isosiz__s_8c_ac914df82d8fbd69f808d8e67c33db2f6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{isosiz__s_8c_ac914df82d8fbd69f808d8e67c33db2f6_icgraph}
+\end{center}
+\end{figure}

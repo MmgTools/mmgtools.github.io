@@ -1,0 +1,276 @@
+\hypertarget{movpt__s_8c}{}\doxysection{src/mmgs/movpt\+\_\+s.c File Reference}
+\label{movpt__s_8c}\index{src/mmgs/movpt\_s.c@{src/mmgs/movpt\_s.c}}
+
+
+Functions to move a point in the mesh.  
+
+
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}libmmgs\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for movpt\+\_\+s.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{movpt__s_8c_a5cd793314288837482210fafa11f4d39}{movintpt\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$list, int ilist)
+\item 
+int \mbox{\hyperlink{movpt__s_8c_abe63f8253d20288260c307755d560a7a}{MMGS\+\_\+param\+Disp}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int it, int8\+\_\+t isrid, MMG5\+\_\+int ip0, MMG5\+\_\+int ip, double step, double o\mbox{[}3\mbox{]})
+\item 
+static int \mbox{\hyperlink{movpt__s_8c_aa7616365414646509de1c9c906692e7c}{MMGS\+\_\+update\+\_\+normal\+And\+Tangent}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p0, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p, double llold, double lam0, double lam1, double lam2, double no1\mbox{[}3\mbox{]}, double no2\mbox{[}3\mbox{]}, double np1\mbox{[}3\mbox{]}, double np2\mbox{[}3\mbox{]}, double nn1\mbox{[}3\mbox{]}, double nn2\mbox{[}3\mbox{]}, double to\mbox{[}3\mbox{]})
+\item 
+int \mbox{\hyperlink{movpt__s_8c_a18a4e5e1f352340028176ed49a0feb13}{MMGS\+\_\+move\+Toward\+Point}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p0, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} p, double llold, double lam0, double lam1, double lam2, double nn1\mbox{[}3\mbox{]}, double nn2\mbox{[}3\mbox{]}, double to\mbox{[}3\mbox{]})
+\item 
+int \mbox{\hyperlink{movpt__s_8c_a1e3d6c2a85fe912c8efbbd307fa6df85}{movridpt\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$list, int ilist)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions to move a point in the mesh. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000050}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{movpt__s_8c_source}{movpt\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{movpt__s_8c_a18a4e5e1f352340028176ed49a0feb13}\label{movpt__s_8c_a18a4e5e1f352340028176ed49a0feb13}} 
+\index{movpt\_s.c@{movpt\_s.c}!MMGS\_moveTowardPoint@{MMGS\_moveTowardPoint}}
+\index{MMGS\_moveTowardPoint@{MMGS\_moveTowardPoint}!movpt\_s.c@{movpt\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_moveTowardPoint()}{MMGS\_moveTowardPoint()}}
+{\footnotesize\ttfamily int MMGS\+\_\+move\+Toward\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p0,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p,  }\item[{double}]{llold,  }\item[{double}]{lam0,  }\item[{double}]{lam1,  }\item[{double}]{lam2,  }\item[{double}]{nn1\mbox{[}3\mbox{]},  }\item[{double}]{nn2\mbox{[}3\mbox{]},  }\item[{double}]{to\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em p0} & point to move. \\
+\hline
+{\em p} & neighbouring point toward which we try to move. \\
+\hline
+{\em llold} & init length of edge p0-\/p \\
+\hline
+{\em lam0} & first bezier basis function (order 2) \\
+\hline
+{\em lam1} & second bezier basis function (order 2) \\
+\hline
+{\em lam2} & third bezier basis function (order 2) \\
+\hline
+{\em nn1} & normal at point {\itshape p0} after relocation \\
+\hline
+{\em nn2} & normal at point {\itshape p0} after relocation \\
+\hline
+{\em to} & tangent along edge at point {\itshape p0} after relocation\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+Update normals and tangent at ref or ridge point {\itshape p0} after relocation at coordinates {\itshape o}. 
+
+Definition at line \mbox{\hyperlink{movpt__s_8c_source_l00555}{555}} of file \mbox{\hyperlink{movpt__s_8c_source}{movpt\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c_a18a4e5e1f352340028176ed49a0feb13_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c_a18a4e5e1f352340028176ed49a0feb13_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{movpt__s_8c_abe63f8253d20288260c307755d560a7a}\label{movpt__s_8c_abe63f8253d20288260c307755d560a7a}} 
+\index{movpt\_s.c@{movpt\_s.c}!MMGS\_paramDisp@{MMGS\_paramDisp}}
+\index{MMGS\_paramDisp@{MMGS\_paramDisp}!movpt\_s.c@{movpt\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_paramDisp()}{MMGS\_paramDisp()}}
+{\footnotesize\ttfamily int MMGS\+\_\+param\+Disp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{it,  }\item[{int8\+\_\+t}]{isrid,  }\item[{MMG5\+\_\+int}]{ip0,  }\item[{MMG5\+\_\+int}]{ip,  }\item[{double}]{step,  }\item[{double}]{o\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em it} & triangle to which belongs the edge along which we move \\
+\hline
+{\em isrid} & 1 if the edge is a ridge \\
+\hline
+{\em ip0} & edge point that we want to move \\
+\hline
+{\em ip} & edge point connected by the ref/ridge edge to {\itshape p0} \\
+\hline
+{\em step} & displacement factor along the ref/ridge edge \\
+\hline
+{\em o} & coordinates of point after relocation\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+Infer arc length of displacement along ref or ridge edge, parameterized over edges. 
+
+Definition at line \mbox{\hyperlink{movpt__s_8c_source_l00375}{375}} of file \mbox{\hyperlink{movpt__s_8c_source}{movpt\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{movpt__s_8c_abe63f8253d20288260c307755d560a7a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c_abe63f8253d20288260c307755d560a7a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{movpt__s_8c_aa7616365414646509de1c9c906692e7c}\label{movpt__s_8c_aa7616365414646509de1c9c906692e7c}} 
+\index{movpt\_s.c@{movpt\_s.c}!MMGS\_update\_normalAndTangent@{MMGS\_update\_normalAndTangent}}
+\index{MMGS\_update\_normalAndTangent@{MMGS\_update\_normalAndTangent}!movpt\_s.c@{movpt\_s.c}}
+\doxysubsubsection{\texorpdfstring{MMGS\_update\_normalAndTangent()}{MMGS\_update\_normalAndTangent()}}
+{\footnotesize\ttfamily static int MMGS\+\_\+update\+\_\+normal\+And\+Tangent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p0,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{p,  }\item[{double}]{llold,  }\item[{double}]{lam0,  }\item[{double}]{lam1,  }\item[{double}]{lam2,  }\item[{double}]{no1\mbox{[}3\mbox{]},  }\item[{double}]{no2\mbox{[}3\mbox{]},  }\item[{double}]{np1\mbox{[}3\mbox{]},  }\item[{double}]{np2\mbox{[}3\mbox{]},  }\item[{double}]{nn1\mbox{[}3\mbox{]},  }\item[{double}]{nn2\mbox{[}3\mbox{]},  }\item[{double}]{to\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em p0} & point to move. \\
+\hline
+{\em p} & neighbouring point toward which we try to move. \\
+\hline
+{\em llold} & init length of edge p0-\/p \\
+\hline
+{\em lam0} & first bezier basis function (order 2) \\
+\hline
+{\em lam1} & second bezier basis function (order 2) \\
+\hline
+{\em lam2} & third bezier basis function (order 2) \\
+\hline
+{\em no1} & init normal at point {\itshape p0} \\
+\hline
+{\em no2} & init normal at point {\itshape p0} \\
+\hline
+{\em np1} & normal at point {\itshape p} associated to {\itshape no1} \\
+\hline
+{\em np2} & normal at point {\itshape p} associated to {\itshape no2} \\
+\hline
+{\em nn1} & normal at point {\itshape p0} after relocation \\
+\hline
+{\em nn2} & normal at point {\itshape p0} after relocation \\
+\hline
+{\em to} & tangent along edge at point {\itshape p0} after relocation\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+Update normals and tangent at ref or ridge point {\itshape p0} after relocation at coordinates {\itshape o} with the normal {\itshape np1} associated to the normal {\itshape no1} and the normal {\itshape np2} associated to the normal {\itshape no2}. 
+
+Definition at line \mbox{\hyperlink{movpt__s_8c_source_l00449}{449}} of file \mbox{\hyperlink{movpt__s_8c_source}{movpt\+\_\+s.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c_aa7616365414646509de1c9c906692e7c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{movpt__s_8c_a5cd793314288837482210fafa11f4d39}\label{movpt__s_8c_a5cd793314288837482210fafa11f4d39}} 
+\index{movpt\_s.c@{movpt\_s.c}!movintpt\_iso@{movintpt\_iso}}
+\index{movintpt\_iso@{movintpt\_iso}!movpt\_s.c@{movpt\_s.c}}
+\doxysubsubsection{\texorpdfstring{movintpt\_iso()}{movintpt\_iso()}}
+{\footnotesize\ttfamily int movintpt\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{int}]{ilist }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em list} & pointer toward the ball of the point. \\
+\hline
+{\em ilist} & size of the ball.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if we can\textquotesingle{}t move the point, 1 if we can.
+\end{DoxyReturn}
+Move internal point whose volumic is passed. 
+
+Definition at line \mbox{\hyperlink{movpt__s_8c_source_l00052}{52}} of file \mbox{\hyperlink{movpt__s_8c_source}{movpt\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{movpt__s_8c_a5cd793314288837482210fafa11f4d39_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c_a5cd793314288837482210fafa11f4d39_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{movpt__s_8c_a1e3d6c2a85fe912c8efbbd307fa6df85}\label{movpt__s_8c_a1e3d6c2a85fe912c8efbbd307fa6df85}} 
+\index{movpt\_s.c@{movpt\_s.c}!movridpt\_iso@{movridpt\_iso}}
+\index{movridpt\_iso@{movridpt\_iso}!movpt\_s.c@{movpt\_s.c}}
+\doxysubsubsection{\texorpdfstring{movridpt\_iso()}{movridpt\_iso()}}
+{\footnotesize\ttfamily int movridpt\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{int}]{ilist }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{movpt__s_8c_source_l00595}{595}} of file \mbox{\hyperlink{movpt__s_8c_source}{movpt\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c_a1e3d6c2a85fe912c8efbbd307fa6df85_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{movpt__s_8c_a1e3d6c2a85fe912c8efbbd307fa6df85_icgraph}
+\end{center}
+\end{figure}

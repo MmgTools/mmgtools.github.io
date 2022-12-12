@@ -1,0 +1,56 @@
+\hypertarget{md_libexamples_mmgs_adaptation_example1_README_autotoc_md99}{}\doxysection{I/ Implementation}\label{md_libexamples_mmgs_adaptation_example1_README_autotoc_md99}
+To call the {\bfseries{mmgs}} library, you must\+: ~\newline
+
+\begin{DoxyEnumerate}
+\item build mesh and sol at MMG5 format;
+\item call the MMGS library;
+\item get the final mesh and sol.
+\end{DoxyEnumerate}
+
+We read mesh and solution files using the {\bfseries{MMGS\+\_\+load\+Mesh}} and {\bfseries{MMGS\+\_\+load\+Sol}} functions.
+
+
+\begin{DoxyItemize}
+\item First we remesh in debug mode\+:
+\begin{DoxyItemize}
+\item we ask for a minimal size of 0.\+001, a maximal size of 40, a gradation of 2 and a global hausdorff value (applied on all the boundaries) of 0.\+1;
+\item we save results.
+\end{DoxyItemize}
+\item Second, we remesh in normal mode, with specified memory and lower verbosity\+:
+\begin{DoxyItemize}
+\item in addition to previous parameters, we ask that all boundary triangles of ref 36 respect a minimal edge size of 0.\+005 and a maximal one of 0.\+05 and all boundary triangles of ref 38 must respect a minimal edges size of 0.\+1 and a maximal one of 1. For both reference, we set the hausdorff value to 1.
+\item we save the mesh and solution.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md_libexamples_mmgs_adaptation_example1_README_autotoc_md100}{}\doxysection{II/ Compilation}\label{md_libexamples_mmgs_adaptation_example1_README_autotoc_md100}
+
+\begin{DoxyEnumerate}
+\item Build and install the {\bfseries{mmgs}} shared and static library. We suppose in the following that you have installed the {\bfseries{mmgs}} library in the $\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory (see the \href{https://github.com/MmgTools/Mmg/wiki/Setup-guide\#iii-installation}{\texttt{ installation}} section of the setup guide);
+\item compile the main.\+c file specifying\+:
+\begin{DoxyItemize}
+\item the {\bfseries{mmgs}} include directory with the {\bfseries{-\/I}} option;
+\item the {\bfseries{mmgs}} library location with the {\bfseries{-\/L}} option;
+\item the {\bfseries{mmgs}} library name with the {\bfseries{-\/l}} option;
+\item for the static library you must also link the executable with, if used for the {\bfseries{mmgs}} library compilation, the scotch and scotcherr libraries and with the math library;
+\item with the shared library, you must add the $\ast$$\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory to your {\bfseries{LD\+\_\+\+LIBRARY\+\_\+\+PATH}}.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\begin{quote}
+Example 1 ~\newline
+ Command line to link the application with the {\bfseries{mmgs}} static library (we supposed here that the scotch library is installed in the $\ast$$\ast$\+\_\+\$\+SCOTCH\+\_\+\+PATH\+\_\+$\ast$$\ast$ directory)\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmgs main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/L\$SCOTCH\_PATH -\/lmmgs -\/lscotch -\/lscotcherr -\/lm}
+
+\end{DoxyCode}
+ \end{quote}
+\begin{quote}
+Example 2 ~\newline
+ Command line to link the application with the {\bfseries{mmgs}} shared library\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmgs main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/lmmgs}
+\DoxyCodeLine{export LD\_LIBRARY\_PATH=\$CMAKE\_INSTALL\_PREFIX/lib:\$LD\_LIBRARY\_PATH}
+
+\end{DoxyCode}
+ \end{quote}

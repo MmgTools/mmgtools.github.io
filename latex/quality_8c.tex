@@ -1,0 +1,299 @@
+\hypertarget{quality_8c}{}\doxysection{src/common/quality.c File Reference}
+\label{quality_8c}\index{src/common/quality.c@{src/common/quality.c}}
+
+
+Functions to compute elements quality and edge lengths.  
+
+
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for quality.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{quality_8c_afb12ed378c17c44e2b0eb5e3b4d7ad29}{MMG5\+\_\+caltri33\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} pt)
+\item 
+double \mbox{\hyperlink{quality_8c_a257694db1d155b5804f67269f3c3b720}{MMG5\+\_\+caltri\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} ptt)
+\item 
+double \mbox{\hyperlink{quality_8c_ae9ac730599a38ad9ffaab940e5fd9f83}{MMG5\+\_\+caltri\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}} ptt)
+\item 
+void \mbox{\hyperlink{quality_8c_aa90d6a17ea55fad943244e919dfa4752}{MMG5\+\_\+display\+Length\+Histo}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int ned, double $\ast$avlen, MMG5\+\_\+int amin, MMG5\+\_\+int bmin, double lmin, MMG5\+\_\+int amax, MMG5\+\_\+int bmax, double lmax, int null\+Edge, double $\ast$bd, MMG5\+\_\+int $\ast$hl, int8\+\_\+t shift)
+\item 
+void \mbox{\hyperlink{quality_8c_a9b5dd572a9a640e07f9a6574f7b8cdf9}{MMG5\+\_\+display\+Length\+Histo\+\_\+internal}} (MMG5\+\_\+int ned, MMG5\+\_\+int amin, MMG5\+\_\+int bmin, double lmin, MMG5\+\_\+int amax, MMG5\+\_\+int bmax, double lmax, MMG5\+\_\+int null\+Edge, double $\ast$bd, MMG5\+\_\+int $\ast$hl, int8\+\_\+t shift, int imprim)
+\item 
+int \mbox{\hyperlink{quality_8c_a0b664a982a5824140fe158ff616fb2c8}{MMG5\+\_\+min\+Qual\+Check}} (MMG5\+\_\+int iel, double minqual, double alpha)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions to compute elements quality and edge lengths. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{quality_8c_source}{quality.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{quality_8c_afb12ed378c17c44e2b0eb5e3b4d7ad29}\label{quality_8c_afb12ed378c17c44e2b0eb5e3b4d7ad29}} 
+\index{quality.c@{quality.c}!MMG5\_caltri33\_ani@{MMG5\_caltri33\_ani}}
+\index{MMG5\_caltri33\_ani@{MMG5\_caltri33\_ani}!quality.c@{quality.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_caltri33\_ani()}{MMG5\_caltri33\_ani()}}
+{\footnotesize\ttfamily double MMG5\+\_\+caltri33\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{pt }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the meric structure. \\
+\hline
+{\em pt} & pointer toward the triangle structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed quality.
+\end{DoxyReturn}
+Compute the quality of the surface triangle {\itshape ptt} with respect to an anisotropic metric and a classic storage of the ridges metrics. 
+
+Definition at line \mbox{\hyperlink{quality_8c_source_l00047}{47}} of file \mbox{\hyperlink{quality_8c_source}{quality.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{quality_8c_afb12ed378c17c44e2b0eb5e3b4d7ad29_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c_afb12ed378c17c44e2b0eb5e3b4d7ad29_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{quality_8c_a257694db1d155b5804f67269f3c3b720}\label{quality_8c_a257694db1d155b5804f67269f3c3b720}} 
+\index{quality.c@{quality.c}!MMG5\_caltri\_ani@{MMG5\_caltri\_ani}}
+\index{MMG5\_caltri\_ani@{MMG5\_caltri\_ani}!quality.c@{quality.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_caltri\_ani()}{MMG5\_caltri\_ani()}}
+{\footnotesize\ttfamily double MMG5\+\_\+caltri\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{ptt }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the meric structure. \\
+\hline
+{\em ptt} & pointer toward the triangle structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed quality.
+\end{DoxyReturn}
+Compute the quality of the surface triangle {\itshape ptt} with respect to an anisotropic metric.
+
+\begin{DoxyWarning}{Warning}
+The quality is computed as if the triangle is a \char`\"{}straight\char`\"{} triangle. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{quality_8c_source_l00115}{115}} of file \mbox{\hyperlink{quality_8c_source}{quality.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{quality_8c_a257694db1d155b5804f67269f3c3b720_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c_a257694db1d155b5804f67269f3c3b720_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{quality_8c_ae9ac730599a38ad9ffaab940e5fd9f83}\label{quality_8c_ae9ac730599a38ad9ffaab940e5fd9f83}} 
+\index{quality.c@{quality.c}!MMG5\_caltri\_iso@{MMG5\_caltri\_iso}}
+\index{MMG5\_caltri\_iso@{MMG5\_caltri\_iso}!quality.c@{quality.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_caltri\_iso()}{MMG5\_caltri\_iso()}}
+{\footnotesize\ttfamily double MMG5\+\_\+caltri\+\_\+iso (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a20e63fab5273f15ae1a3cae77bfcdcb6}{MMG5\+\_\+p\+Tria}}}]{ptt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the meric structure. \\
+\hline
+{\em ptt} & pointer toward the triangle structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed quality.
+\end{DoxyReturn}
+Compute the quality of the surface triangle {\itshape ptt} with respect to an isotropic metric. 
+
+Definition at line \mbox{\hyperlink{quality_8c_source_l00199}{199}} of file \mbox{\hyperlink{quality_8c_source}{quality.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c_ae9ac730599a38ad9ffaab940e5fd9f83_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{quality_8c_aa90d6a17ea55fad943244e919dfa4752}\label{quality_8c_aa90d6a17ea55fad943244e919dfa4752}} 
+\index{quality.c@{quality.c}!MMG5\_displayLengthHisto@{MMG5\_displayLengthHisto}}
+\index{MMG5\_displayLengthHisto@{MMG5\_displayLengthHisto}!quality.c@{quality.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_displayLengthHisto()}{MMG5\_displayLengthHisto()}}
+{\footnotesize\ttfamily void MMG5\+\_\+display\+Length\+Histo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{ned,  }\item[{double $\ast$}]{avlen,  }\item[{MMG5\+\_\+int}]{amin,  }\item[{MMG5\+\_\+int}]{bmin,  }\item[{double}]{lmin,  }\item[{MMG5\+\_\+int}]{amax,  }\item[{MMG5\+\_\+int}]{bmax,  }\item[{double}]{lmax,  }\item[{int}]{null\+Edge,  }\item[{double $\ast$}]{bd,  }\item[{MMG5\+\_\+int $\ast$}]{hl,  }\item[{int8\+\_\+t}]{shift }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em ned} & edges number. \\
+\hline
+{\em avlen} & pointer toward the average edges lengths. \\
+\hline
+{\em amin} & index of first extremity of the smallest edge. \\
+\hline
+{\em bmin} & index of second extremity of the smallest edge. \\
+\hline
+{\em lmin} & smallest edge length. \\
+\hline
+{\em amax} & index of first extremity of the largest edge. \\
+\hline
+{\em bmax} & index of second extremity of the largest edge. \\
+\hline
+{\em lmax} & largest edge length. \\
+\hline
+{\em null\+Edge} & number of edges for which we are unable to compute the length \\
+\hline
+{\em bd} & pointer toward the table of the quality span. \\
+\hline
+{\em hl} & pointer toward the table that store the number of edges for eac \\
+\hline
+{\em shift} & value to shift the target lenght interval span of quality\\
+\hline
+\end{DoxyParams}
+Display histogram of edge length. 
+
+Definition at line \mbox{\hyperlink{quality_8c_source_l00252}{252}} of file \mbox{\hyperlink{quality_8c_source}{quality.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c_aa90d6a17ea55fad943244e919dfa4752_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c_aa90d6a17ea55fad943244e919dfa4752_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{quality_8c_a9b5dd572a9a640e07f9a6574f7b8cdf9}\label{quality_8c_a9b5dd572a9a640e07f9a6574f7b8cdf9}} 
+\index{quality.c@{quality.c}!MMG5\_displayLengthHisto\_internal@{MMG5\_displayLengthHisto\_internal}}
+\index{MMG5\_displayLengthHisto\_internal@{MMG5\_displayLengthHisto\_internal}!quality.c@{quality.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_displayLengthHisto\_internal()}{MMG5\_displayLengthHisto\_internal()}}
+{\footnotesize\ttfamily void MMG5\+\_\+display\+Length\+Histo\+\_\+internal (\begin{DoxyParamCaption}\item[{MMG5\+\_\+int}]{ned,  }\item[{MMG5\+\_\+int}]{amin,  }\item[{MMG5\+\_\+int}]{bmin,  }\item[{double}]{lmin,  }\item[{MMG5\+\_\+int}]{amax,  }\item[{MMG5\+\_\+int}]{bmax,  }\item[{double}]{lmax,  }\item[{MMG5\+\_\+int}]{null\+Edge,  }\item[{double $\ast$}]{bd,  }\item[{MMG5\+\_\+int $\ast$}]{hl,  }\item[{int8\+\_\+t}]{shift,  }\item[{int}]{imprim }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em ned} & edges number. \\
+\hline
+{\em amin} & index of first extremity of the smallest edge. \\
+\hline
+{\em bmin} & index of second extremity of the smallest edge. \\
+\hline
+{\em lmin} & smallest edge length. \\
+\hline
+{\em amax} & index of first extremity of the largest edge. \\
+\hline
+{\em bmax} & index of second extremity of the largest edge. \\
+\hline
+{\em lmax} & largest edge length. \\
+\hline
+{\em null\+Edge} & number of edges for which we are unable to compute the length \\
+\hline
+{\em bd} & pointer toward the table of the quality span. \\
+\hline
+{\em hl} & pointer toward the table that store the number of edges for eac \\
+\hline
+{\em shift} & value to shift the target lenght interval span of quality \\
+\hline
+{\em imprim} & verbosity level\\
+\hline
+\end{DoxyParams}
+Display histogram of edge length without the histo header 
+
+Definition at line \mbox{\hyperlink{quality_8c_source_l00294}{294}} of file \mbox{\hyperlink{quality_8c_source}{quality.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c_a9b5dd572a9a640e07f9a6574f7b8cdf9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{quality_8c_a0b664a982a5824140fe158ff616fb2c8}\label{quality_8c_a0b664a982a5824140fe158ff616fb2c8}} 
+\index{quality.c@{quality.c}!MMG5\_minQualCheck@{MMG5\_minQualCheck}}
+\index{MMG5\_minQualCheck@{MMG5\_minQualCheck}!quality.c@{quality.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_minQualCheck()}{MMG5\_minQualCheck()}}
+{\footnotesize\ttfamily int MMG5\+\_\+min\+Qual\+Check (\begin{DoxyParamCaption}\item[{MMG5\+\_\+int}]{iel,  }\item[{double}]{minqual,  }\item[{double}]{alpha }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em iel} & index of the worst tetra of the mesh \\
+\hline
+{\em minqual} & quality of the worst tetra of the mesh (will be normalized by {\itshape alpha}) \\
+\hline
+{\em alpha} & normalisation parameter for the quality\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail (the quality is lower than MMG5\+\_\+\+NULKAL).
+\end{DoxyReturn}
+Print warning or error messages depending on the quality of the worst tetra of the mesh. 
+
+Definition at line \mbox{\hyperlink{quality_8c_source_l00343}{343}} of file \mbox{\hyperlink{quality_8c_source}{quality.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quality_8c_a0b664a982a5824140fe158ff616fb2c8_icgraph}
+\end{center}
+\end{figure}

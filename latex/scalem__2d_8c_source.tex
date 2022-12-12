@@ -1,0 +1,149 @@
+\hypertarget{scalem__2d_8c_source}{}\doxysection{scalem\+\_\+2d.\+c}
+\label{scalem__2d_8c_source}\index{src/mmg2d/scalem\_2d.c@{src/mmg2d/scalem\_2d.c}}
+\mbox{\hyperlink{scalem__2d_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00034}00034 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00035}00035 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d_8h}{libmmg2d.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00048}\mbox{\hyperlink{libmmg2d_8h_aca8f1f6f3ebe4148ed28d012b83499a3}{00048}} \textcolor{keywordtype}{int} \mbox{\hyperlink{scalem__2d_8c_ab48bcb9eb638dbd0b795d4f0146c194a}{MMG2D\_scaleMesh}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00049}00049   \textcolor{keywordtype}{double}         dd,isqhmin,isqhmax;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00050}00050   \textcolor{keywordtype}{double}         *m;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00051}00051   \textcolor{keywordtype}{double}         lambda[2],v[2][2];}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00052}00052   \textcolor{keywordtype}{int}            i,k,iadr;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00053}00053   int8\_t         sethmin,sethmax;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00054}00054   \textcolor{keyword}{static} int8\_t  mmgWarn0=0, mmgWarn1=0;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00056}00056   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon_8h_a5a4a1c4bec43d98f8fae5fe6fc0cc367}{MMG5\_scale\_meshAndSol}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\&dd,\&sethmin,\&sethmax) ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00057}00057     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00058}00058   \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00060}00060   \textcolor{keywordflow}{if} ( (!met) || (met \&\& !met-\/>\mbox{\hyperlink{structMMG5__Sol_a64ff2996b9bd5735ee7d33612d89691a}{np}}) ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00061}00061     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00062}00062   \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00064}00064   \textcolor{comment}{/* metric truncature and normalization and default values for hmin/hmax if not}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00065}00065 \textcolor{comment}{   * provided by the user ( 0.1 \(\backslash\)times the minimum of the metric sizes for hmin}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00066}00066 \textcolor{comment}{   * and 10 \(\backslash\)times the max of the metric sizes for hmax ). */}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00067}00067   \textcolor{keywordflow}{switch} (met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}}) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00068}00068   \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00069}00069     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon_8h_a2529d5ad3e7a2751a5a6d3077e63f3ff}{MMG5\_scale\_scalarMetric}} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, met, dd, sethmin, sethmax ) ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00070}00070       \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00071}00071     \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00072}00072     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00074}00074   \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00075}00075     dd = 1.0 / (dd*dd);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00076}00076     \textcolor{comment}{/* Normalization */}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00077}00077     \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a72df760764001e551e49c7312b983a8a}{np}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00078}00078       iadr = k*met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}};}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00079}00079       \textcolor{keywordflow}{for} (i=0; i<met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}}; i++)  met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[iadr+i] *= dd;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00080}00080     \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00081}00081 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00082}00082     \textcolor{comment}{/* compute hmin and hmax parameters if not provided by the user */}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00083}00083     \textcolor{keywordflow}{if} ( !sethmin ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00084}00084       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a4874acf5ce0475bd5da312b657a1537a}{hmin}} = FLT\_MAX;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00085}00085     \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00086}00086     \textcolor{keywordflow}{if} ( !sethmax ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00087}00087       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a86382948e4bb3afa6b1acd6e9f1c9e33}{hmax}} = 0.;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00088}00088     \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00089}00089 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00090}00090     \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a72df760764001e551e49c7312b983a8a}{np}}; k++)  \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00091}00091       iadr = k*met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}};}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00092}00092       m    = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[iadr];}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00094}00094       \textcolor{comment}{/* Check the input metric */}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00095}00095       \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{eigenv_8c_a17b8479b752c743a51f4a86d853518ca}{MMG5\_eigensym}}(m,lambda,v) ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00096}00096         \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00097}00097           mmgWarn0 = 1;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00098}00098           fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 wrong metric.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00099}00099                   \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00100}00100         \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00101}00101         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00102}00102       \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00103}00103       \textcolor{keywordflow}{for} (i=0; i<2; i++) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00104}00104         \textcolor{keywordflow}{if}(lambda[i]<=0) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00105}00105           \textcolor{keywordflow}{if} ( !mmgWarn1 ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00106}00106             mmgWarn1 = 1;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00107}00107             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 wrong metric"{}}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00108}00108                     \textcolor{stringliteral}{"{} (eigenvalue : \%e \%e -\/-\/ det \%e\(\backslash\)n"{}},\_\_func\_\_,lambda[0],}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00109}00109                     lambda[1],m[0]*m[2]-\/m[1]*m[1]);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00110}00110           \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00111}00111           \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00112}00112         \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00113}00113         \textcolor{keywordflow}{if} ( !sethmin ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00114}00114           \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a4874acf5ce0475bd5da312b657a1537a}{hmin}} = \mbox{\hyperlink{mmgcommon_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a4874acf5ce0475bd5da312b657a1537a}{hmin}},1./sqrt(lambda[i]));}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00115}00115         \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00117}00117         \textcolor{keywordflow}{if} ( !sethmax ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00118}00118           \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a86382948e4bb3afa6b1acd6e9f1c9e33}{hmax}} = \mbox{\hyperlink{mmgcommon_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a86382948e4bb3afa6b1acd6e9f1c9e33}{hmax}},1./sqrt(lambda[i]));}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00119}00119         \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00120}00120       \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00121}00121     \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00122}00122 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00123}00123     \textcolor{comment}{/* Check the compatibility between the user settings and the automatically}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00124}00124 \textcolor{comment}{     * computed values */}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00125}00125     \mbox{\hyperlink{mmgcommon_8h_a54b46d6b27f3073c7fd3ea01daf85afc}{MMG5\_check\_hminhmax}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},sethmin,sethmax);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00127}00127     \textcolor{comment}{/* Truncature */}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00128}00128     isqhmin  = 1.0 / (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a4874acf5ce0475bd5da312b657a1537a}{hmin}}*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a4874acf5ce0475bd5da312b657a1537a}{hmin}});}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00129}00129     isqhmax  = 1.0 / (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a86382948e4bb3afa6b1acd6e9f1c9e33}{hmax}}*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a86382948e4bb3afa6b1acd6e9f1c9e33}{hmax}});}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00130}00130     \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a72df760764001e551e49c7312b983a8a}{np}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00131}00131       iadr = k*met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}};}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00132}00132 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00133}00133       m    = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[iadr];}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00134}00134       \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{eigenv_8c_a17b8479b752c743a51f4a86d853518ca}{MMG5\_eigensym}}(m,lambda,v) ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00135}00135         \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00136}00136           mmgWarn0 = 1;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00137}00137           fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 wrong metric.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00138}00138                   \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00139}00139         \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00140}00140         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00141}00141       \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00142}00142       \textcolor{keywordflow}{for} (i=0; i<2; i++) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00143}00143         \textcolor{keywordflow}{if}(lambda[i]<=0) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00144}00144           \textcolor{keywordflow}{if} ( !mmgWarn1 ) \{}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00145}00145             mmgWarn1 = 1;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00146}00146             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 wrong metric"{}}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00147}00147                     \textcolor{stringliteral}{"{} (eigenvalue : \%e \%e -\/-\/ det \%e\(\backslash\)n"{}},\_\_func\_\_,lambda[0],}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00148}00148                     lambda[1],m[0]*m[2]-\/m[1]*m[1]);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00149}00149           \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00150}00150           \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00151}00151         \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00152}00152         lambda[i]=\mbox{\hyperlink{mmgcommon_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(isqhmin,lambda[i]);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00153}00153         lambda[i]=\mbox{\hyperlink{mmgcommon_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(isqhmax,lambda[i]);}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00154}00154       \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00155}00155       m[0] = v[0][0]*v[0][0]*lambda[0] + v[1][0]*v[1][0]*lambda[1];}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00156}00156       m[1] = v[0][0]*v[0][1]*lambda[0] + v[1][0]*v[1][1]*lambda[1];}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00157}00157       m[2] = v[0][1]*v[0][1]*lambda[0] + v[1][1]*v[1][1]*lambda[1];}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00158}00158     \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00159}00159     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00160}00160   \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00161}00161     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: unexpected metric size (\%d)\(\backslash\)n"{}},\_\_func\_\_,met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}});}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00162}00162     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00163}00163   \}}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00164}00164 }
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00165}00165   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{scalem__2d_8c_source_l00166}00166 \}}
+
+\end{DoxyCode}

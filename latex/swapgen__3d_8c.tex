@@ -1,0 +1,151 @@
+\hypertarget{swapgen__3d_8c}{}\doxysection{src/mmg3d/swapgen\+\_\+3d.c File Reference}
+\label{swapgen__3d_8c}\index{src/mmg3d/swapgen\_3d.c@{src/mmg3d/swapgen\_3d.c}}
+
+
+Functions for swapping process inside the mesh.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmg3dexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for swapgen\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swapgen__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{swapgen__3d_8c_a2b1834c09c3abb17b6f18f825d5fc29c}{MMG5\+\_\+chkswpgen}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int start, int ia, int $\ast$ilist, int64\+\_\+t $\ast$list, double crit, int8\+\_\+t typchk)
+\item 
+int \mbox{\hyperlink{swapgen__3d_8c_a9a2f3349d52ab7d361338febac529cd1}{MMG5\+\_\+swpgen}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int nconf, int ilist, int64\+\_\+t $\ast$list, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree, int8\+\_\+t typchk)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for swapping process inside the mesh. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{swapgen__3d_8c_source}{swapgen\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{swapgen__3d_8c_a2b1834c09c3abb17b6f18f825d5fc29c}\label{swapgen__3d_8c_a2b1834c09c3abb17b6f18f825d5fc29c}} 
+\index{swapgen\_3d.c@{swapgen\_3d.c}!MMG5\_chkswpgen@{MMG5\_chkswpgen}}
+\index{MMG5\_chkswpgen@{MMG5\_chkswpgen}!swapgen\_3d.c@{swapgen\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_chkswpgen()}{MMG5\_chkswpgen()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+chkswpgen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int}]{ia,  }\item[{int $\ast$}]{ilist,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{double}]{crit,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em start} & tetrahedra in which the swap should be performed \\
+\hline
+{\em ia} & edge that we want to swap \\
+\hline
+{\em ilist} & pointer to store the size of the shell of the edge \\
+\hline
+{\em list} & pointer to store the shell of the edge \\
+\hline
+{\em crit} & improvment coefficient \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail, 0 if we cannot swap, the index of point corresponding to the swapped configuration otherwise ( $4*k+i$). 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em typchk} & type of checking permformed for edge length (hmin or LSHORT criterion).\\
+\hline
+\end{DoxyParams}
+Check whether swap of edge {\itshape ia} in {\itshape start} should be performed, and return $4*k+i$ the index of point corresponding to the swapped configuration. The shell of edge is built during the process. 
+
+Definition at line \mbox{\hyperlink{swapgen__3d_8c_source_l00057}{57}} of file \mbox{\hyperlink{swapgen__3d_8c_source}{swapgen\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swapgen__3d_8c_a2b1834c09c3abb17b6f18f825d5fc29c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swapgen__3d_8c_a2b1834c09c3abb17b6f18f825d5fc29c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{swapgen__3d_8c_a9a2f3349d52ab7d361338febac529cd1}\label{swapgen__3d_8c_a9a2f3349d52ab7d361338febac529cd1}} 
+\index{swapgen\_3d.c@{swapgen\_3d.c}!MMG5\_swpgen@{MMG5\_swpgen}}
+\index{MMG5\_swpgen@{MMG5\_swpgen}!swapgen\_3d.c@{swapgen\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swpgen()}{MMG5\_swpgen()}}
+{\footnotesize\ttfamily int MMG5\+\_\+swpgen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{nconf,  }\item[{int}]{ilist,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the sol structure. \\
+\hline
+{\em nconf} & configuration. \\
+\hline
+{\em ilist} & number of tetrahedra in the shell of the edge that we want to swap. \\
+\hline
+{\em list} & pointer toward the shell of the edge that we want to swap. \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure in Delaunay mode, NULL pointer in pattern mode. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmin or LSHORT criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if lack of memory, 0 if fail to swap, 1 otherwise.
+\end{DoxyReturn}
+Perform swap of edge whose shell is passed according to configuration nconf. First step \+: split of edge (na,nb)
+
+Second step \+: collapse of np towards enhancing configuration
+
+Definition at line \mbox{\hyperlink{swapgen__3d_8c_source_l00271}{271}} of file \mbox{\hyperlink{swapgen__3d_8c_source}{swapgen\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swapgen__3d_8c_a9a2f3349d52ab7d361338febac529cd1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swapgen__3d_8c_a9a2f3349d52ab7d361338febac529cd1_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,164 @@
+\hypertarget{librnbg_8c}{}\doxysection{src/common/librnbg.c File Reference}
+\label{librnbg_8c}\index{src/common/librnbg.c@{src/common/librnbg.c}}
+
+
+Functions for scotch renumerotation.  
+
+
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgexterns\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}librnbg\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for librnbg.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e}{MMG5\+\_\+k\+Part\+Box\+Compute}} (SCOTCH\+\_\+\+Graph $\ast$graf, MMG5\+\_\+int vert\+Nbr, MMG5\+\_\+int box\+Vert\+Nbr, SCOTCH\+\_\+\+Num $\ast$perm\+Vrt\+Tab, \mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+void \mbox{\hyperlink{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a}{MMG5\+\_\+swap\+Nod}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} points, double $\ast$sols, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} field, MMG5\+\_\+int $\ast$perm, MMG5\+\_\+int ind1, MMG5\+\_\+int ind2, int solsiz)
+\item 
+int \mbox{\hyperlink{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4}{MMG5\+\_\+scotch\+Call}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} fields, MMG5\+\_\+int $\ast$perm\+Nod\+Glob)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for scotch renumerotation. 
+
+\begin{DoxyAuthor}{Author}
+Cedric Lachat (Inria/\+UBordeaux) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2013 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{librnbg_8c_source}{librnbg.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e}\label{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e}} 
+\index{librnbg.c@{librnbg.c}!MMG5\_kPartBoxCompute@{MMG5\_kPartBoxCompute}}
+\index{MMG5\_kPartBoxCompute@{MMG5\_kPartBoxCompute}!librnbg.c@{librnbg.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_kPartBoxCompute()}{MMG5\_kPartBoxCompute()}}
+{\footnotesize\ttfamily int MMG5\+\_\+k\+Part\+Box\+Compute (\begin{DoxyParamCaption}\item[{SCOTCH\+\_\+\+Graph $\ast$}]{graf,  }\item[{MMG5\+\_\+int}]{vert\+Nbr,  }\item[{MMG5\+\_\+int}]{box\+Vert\+Nbr,  }\item[{SCOTCH\+\_\+\+Num $\ast$}]{perm\+Vrt\+Tab,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em graf} & pointer toward the input graph structure. \\
+\hline
+{\em vert\+Nbr} & the number of vertices. \\
+\hline
+{\em box\+Vert\+Nbr} & the number of vertices of each box. \\
+\hline
+{\em perm\+Vrt\+Tab} & the new numbering. \\
+\hline
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if ok, 1 otherwise.
+\end{DoxyReturn}
+Internal function that computes a new numbering of graph vertices using a k-\/partitioning and assuming that baseval of the graph is 1. 
+
+Definition at line \mbox{\hyperlink{librnbg_8c_source_l00053}{53}} of file \mbox{\hyperlink{librnbg_8c_source}{librnbg.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4}\label{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4}} 
+\index{librnbg.c@{librnbg.c}!MMG5\_scotchCall@{MMG5\_scotchCall}}
+\index{MMG5\_scotchCall@{MMG5\_scotchCall}!librnbg.c@{librnbg.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_scotchCall()}{MMG5\_scotchCall()}}
+{\footnotesize\ttfamily int MMG5\+\_\+scotch\+Call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{fields,  }\item[{MMG5\+\_\+int $\ast$}]{perm\+Nod\+Glob }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the solution structure. \\
+\hline
+{\em fields} & pointer toward an array of solution fields (non mandatory) \\
+\hline
+{\em perm\+Nod\+Glob} & store the global permutation of nodes (if provided).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if {\itshape MMG5\+\_\+renumbering} fail (non conformal mesh), 1 otherwise (renumerotation success of renumerotation fail but the mesh is still conformal).
+\end{DoxyReturn}
+Call scotch renumbering. 
+
+Definition at line \mbox{\hyperlink{librnbg_8c_source_l00231}{231}} of file \mbox{\hyperlink{librnbg_8c_source}{librnbg.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a}\label{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a}} 
+\index{librnbg.c@{librnbg.c}!MMG5\_swapNod@{MMG5\_swapNod}}
+\index{MMG5\_swapNod@{MMG5\_swapNod}!librnbg.c@{librnbg.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swapNod()}{MMG5\_swapNod()}}
+{\footnotesize\ttfamily void MMG5\+\_\+swap\+Nod (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{points,  }\item[{double $\ast$}]{sols,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{field,  }\item[{MMG5\+\_\+int $\ast$}]{perm,  }\item[{MMG5\+\_\+int}]{ind1,  }\item[{MMG5\+\_\+int}]{ind2,  }\item[{int}]{solsiz }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em points} & pointer toward a table containing the point structures. \\
+\hline
+{\em sols} & pointer toward a table containing the solution structures. \\
+\hline
+{\em fields} & pointer toward an array of solution fields to permute. \\
+\hline
+{\em $\ast$perm} & pointer toward the permutation table (to perform in place permutations). \\
+\hline
+{\em ind1} & index of the first tetra to swap. \\
+\hline
+{\em ind2} & index of the second tetra to swap. \\
+\hline
+{\em solsize} & size of the solution.\\
+\hline
+\end{DoxyParams}
+Swap two nodes in the table of vertices. 
+
+Definition at line \mbox{\hyperlink{librnbg_8c_source_l00158}{158}} of file \mbox{\hyperlink{librnbg_8c_source}{librnbg.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a_icgraph}
+\end{center}
+\end{figure}

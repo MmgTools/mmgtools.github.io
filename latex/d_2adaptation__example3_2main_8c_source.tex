@@ -1,0 +1,137 @@
+\hypertarget{d_2adaptation__example3_2main_8c_source}{}\doxysection{main.\+c}
+\label{d_2adaptation__example3_2main_8c_source}\index{libexamples/mmg2d/adaptation\_example3/main.c@{libexamples/mmg2d/adaptation\_example3/main.c}}
+\mbox{\hyperlink{d_2adaptation__example3_2main_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00001}00001 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <mmg/mmg2d/libmmg2d.h>}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00006}\mbox{\hyperlink{d_2adaptation__example3_2main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{00006}} \textcolor{keywordtype}{int} \mbox{\hyperlink{adaptation__example0__fortran_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}() \{}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00007}00007   \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} mesh2 = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00008}00008   \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met2 = NULL;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00009}00009   \textcolor{keywordtype}{int} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = 0;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00010}00010   \mbox{\hyperlink{API__functions__2d_8c_a34d42982555797a0c6ba089f674279f4}{MMG2D\_Init\_mesh}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}}, \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}}, \&mesh2, \mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}}, \&met2, \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00011}00011   \mbox{\hyperlink{API__functions__2d_8c_a3639c1a88f62b23d23203b2fbebd7a23}{MMG2D\_Set\_iparameter}}(mesh2, met2, \mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adcad48a1f20de6a5e7c16644ff7e5031c63}{MMG2D\_IPARAM\_verbose}}, 10);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00013}00013   \textcolor{comment}{// 4 vertices, no tris, no quads, no edges so far}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00014}00014   \mbox{\hyperlink{API__functions__2d_8c_a42e878bb5f6e3392d95e22ad12555048}{MMG2D\_Set\_meshSize}}(mesh2, 4, 0, 0, 0);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00016}00016   \textcolor{comment}{// a rectangle [0, 2 * M\_PI] x [-\/M\_PI / 2, M\_PI / 2] for spherical coordinates in usual lon/lat way}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00017}00017   \textcolor{keywordtype}{double} v[8] = \{0, -\/M\_PI/2, 2 * M\_PI, -\/M\_PI/2, 2 * M\_PI, M\_PI/2, 0, M\_PI/2\};}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00018}00018   \mbox{\hyperlink{API__functions__2d_8c_acb2405ff2cff8dfe8ef5a4ff0166280b}{MMG2D\_Set\_vertices}}(mesh2, v, NULL);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00020}00020   \mbox{\hyperlink{API__functions__2d_8c_ae39cf56a1e0f69f392990222a252e776}{MMG2D\_Set\_dparameter}}(mesh2, met2, \mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adcafca66f13816700c32a1c0dcf79a10e94}{MMG2D\_DPARAM\_hsiz}}, 0.01);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00022}00022   \textcolor{comment}{// generate a regular fine mesh of the square in meshing mode}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00023}00023   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmg2d_8c_a42bfab87a9b4592077466822f970abcf}{MMG2D\_mmg2dmesh}}(mesh2, met2);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00024}00024   \textcolor{keywordflow}{if} (\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}) \{}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00025}00025     fprintf(stderr, \textcolor{stringliteral}{"{}error \%i during meshing.\(\backslash\)n"{}}, \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00026}00026     exit(1);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00027}00027   \}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00029}00029   \textcolor{comment}{// save the "{}computational geometry"{} mesh and the metric set by MMG2D\_mmg2dmesh}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00030}00030   \textcolor{comment}{// For Medit users}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00031}00031   \mbox{\hyperlink{inout__2d_8c_a2d6241f92b0eb89b4f55ae402aebf571}{MMG2D\_saveMesh}}(mesh2, \textcolor{stringliteral}{"{}cg.mesh"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00032}00032   \mbox{\hyperlink{inout__2d_8c_a9c104e177e141b7396288e1018bf59db}{MMG2D\_saveSol}}(mesh2, met2, \textcolor{stringliteral}{"{}cg.sol"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00033}00033   \textcolor{comment}{// For Gmsh users}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00034}00034   \mbox{\hyperlink{inout__2d_8c_a4ddd7c72681c236dd6d3ce54f890f39f}{MMG2D\_saveMshMesh}}(mesh2, NULL, \textcolor{stringliteral}{"{}cg.msh"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00036}00036   \mbox{\hyperlink{libmmg2d_8h_a5d5b5ffc62d982e8c1ee337df7ee6784}{MMG2D\_Free\_solutions}}(mesh2,met2);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00038}00038   \textcolor{comment}{// remesh with anisotropic metric}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00039}00039   \textcolor{keywordtype}{int} np, nt, nquad, na;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00040}00040   \mbox{\hyperlink{API__functions__2d_8c_abe28b5a159aaffbb3e9dced74959029c}{MMG2D\_Get\_meshSize}}(mesh2, \&np, \&nt, \&nquad, \&na);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00041}00041   \textcolor{keywordtype}{double}* verts = malloc(2 * np * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00042}00042   \mbox{\hyperlink{API__functions__2d_8c_a72bba5f554ba0e3fa826c891a1adfb53}{MMG2D\_Get\_vertices}}(mesh2, verts, NULL, NULL, NULL);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00043}00043   \mbox{\hyperlink{API__functions__2d_8c_a8d62d3bba9103b93e6764ecadb213ec2}{MMG2D\_Set\_solSize}}(mesh2, met2, \mbox{\hyperlink{libmmgtypes_8h_ad7dceff255dbd127a2b7ff2ceb8d9ba6a3e0b7e1298beaabada671bf465c477c2}{MMG5\_Vertex}}, np, \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271eaa9d1aaab7bff21ecaa2feb214d1ce3a3}{MMG5\_Tensor}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00044}00044   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < np; i++) \{}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00046}00046     \textcolor{comment}{// latitude}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00047}00047     \textcolor{keywordtype}{double} y = verts[2 * i + 1];}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00048}00048     \textcolor{comment}{// metric on the sphere, see standard textbooks on elementary differential geometry}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00049}00049     \textcolor{comment}{// Gaussian fundamental quantities}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00050}00050     \textcolor{keywordtype}{double} E = cos(y) * cos(y);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00051}00051     \textcolor{keywordtype}{double} F = 0.0;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00052}00052     \textcolor{keywordtype}{double} G = 1.0;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00054}00054     \textcolor{comment}{// The symetric metric tensor (E F \(\backslash\)\(\backslash\) F G) may be diagonalized in the basis of its}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00055}00055     \textcolor{comment}{// eigenvectors. The eigenvalue \(\backslash\)lambda\_i associated to the eigenvector e\_i prescribes a}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00056}00056     \textcolor{comment}{// length l\_i = 1/\(\backslash\)sqrt(\(\backslash\)lambda\_i) in the direction e\_i. This formula allows to compute}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00057}00057     \textcolor{comment}{// a size factor to have sufficiently small edges on the surface of the sphere of radius 1.}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00058}00058     \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00059}00059     \textcolor{comment}{// For a detailed explanation, see:}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00060}00060     \textcolor{comment}{// https://forum.mmgtools.org/t/how-\/to-\/scale-\/the-\/metric-\/for-\/anisotropic-\/meshing-\/in-\/mmg2d-\/example-\/provided/441/2?u=algiane}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00061}00061     \textcolor{keywordtype}{double} factor = 100.0;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00063}00063     \textcolor{comment}{// we add a small amount to the 1-\/1-\/entry to make the metric non-\/singular everywhere}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00064}00064     \textcolor{keyword}{const} \textcolor{keywordtype}{double} eps = 1.e-\/1;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00065}00065     \mbox{\hyperlink{API__functions__2d_8c_a5875f151a4a08c3ca0d4144021d2141f}{MMG2D\_Set\_tensorSol}}(met2, factor * E + eps, factor * F, factor * G, i+1);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00066}00066   \}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00067}00067 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00068}00068   \textcolor{comment}{// disable hsiz because it is incompatible with an anisotropic metric}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00069}00069   \mbox{\hyperlink{API__functions__2d_8c_ae39cf56a1e0f69f392990222a252e776}{MMG2D\_Set\_dparameter}}(mesh2, met2, \mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adcafca66f13816700c32a1c0dcf79a10e94}{MMG2D\_DPARAM\_hsiz}}, -\/1);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00070}00070 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00071}00071   \textcolor{comment}{// set gradation to a not too restrictive value}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00072}00072   \mbox{\hyperlink{API__functions__2d_8c_ae39cf56a1e0f69f392990222a252e776}{MMG2D\_Set\_dparameter}}(mesh2, met2, \mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adca418c5493cc733f374429f23285f789f4}{MMG2D\_DPARAM\_hgrad}}, 1.5);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00074}00074   \textcolor{comment}{// save the "{}computational geometry"{} mesh and the setted metric}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00075}00075   \textcolor{comment}{// For Medit users}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00076}00076   \mbox{\hyperlink{inout__2d_8c_a2d6241f92b0eb89b4f55ae402aebf571}{MMG2D\_saveMesh}}(mesh2, \textcolor{stringliteral}{"{}cg-\/with-\/met.mesh"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00077}00077   \mbox{\hyperlink{inout__2d_8c_a9c104e177e141b7396288e1018bf59db}{MMG2D\_saveSol}}(mesh2, met2, \textcolor{stringliteral}{"{}cg-\/with-\/met.sol"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00078}00078   \textcolor{comment}{// For Gmsh users}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00079}00079   \mbox{\hyperlink{inout__2d_8c_a4ddd7c72681c236dd6d3ce54f890f39f}{MMG2D\_saveMshMesh}}(mesh2, met2, \textcolor{stringliteral}{"{}cg-\/with-\/met.msh"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00081}00081   \textcolor{comment}{// do it, remesh!}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00082}00082   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmg2d_8c_a002bd2252bae7f66816a43da71049560}{MMG2D\_mmg2dlib}}(mesh2, met2);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00084}00084   \textcolor{keywordflow}{if} (\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} != 0) \{}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00085}00085     fprintf(stderr, \textcolor{stringliteral}{"{}error \%i during remeshing.\(\backslash\)n"{}}, \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00086}00086     exit(1);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00087}00087   \}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00088}00088 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00089}00089   \textcolor{comment}{// Save at Gmsh file format}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00090}00090   \mbox{\hyperlink{inout__2d_8c_a4ddd7c72681c236dd6d3ce54f890f39f}{MMG2D\_saveMshMesh}}(mesh2, NULL, \textcolor{stringliteral}{"{}out2.msh"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00092}00092   \textcolor{comment}{// Save at Medit one}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00093}00093   \mbox{\hyperlink{inout__2d_8c_a2d6241f92b0eb89b4f55ae402aebf571}{MMG2D\_saveMesh}}(mesh2, \textcolor{stringliteral}{"{}out2.mesh"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00094}00094   \mbox{\hyperlink{inout__2d_8c_a9c104e177e141b7396288e1018bf59db}{MMG2D\_saveSol}}(mesh2,met2, \textcolor{stringliteral}{"{}out2.sol"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00096}00096   \textcolor{comment}{// map to 3d and save as Medit file}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00097}00097   \mbox{\hyperlink{API__functions__2d_8c_abe28b5a159aaffbb3e9dced74959029c}{MMG2D\_Get\_meshSize}}(mesh2, \&np, \&nt, \&nquad, \&na);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00098}00098   verts = realloc(verts, 2 * np * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00099}00099   \textcolor{keywordtype}{int}* tris = malloc(3 * nt * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00100}00100   \mbox{\hyperlink{API__functions__2d_8c_a72bba5f554ba0e3fa826c891a1adfb53}{MMG2D\_Get\_vertices}}(mesh2, verts, NULL, NULL, NULL);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00101}00101   \mbox{\hyperlink{API__functions__2d_8c_ae7ec6d9021e9dc173d498f53cb6905d5}{MMG2D\_Get\_triangles}}(mesh2, tris, NULL, NULL);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00103}00103   printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n -\/-\/ Save the final mesh 'sphere-\/end.mesh' at Medit file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00105}00105   FILE *fp = fopen(\textcolor{stringliteral}{"{}sphere-\/end.mesh"{}}, \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00107}00107   fprintf(fp, \textcolor{stringliteral}{"{}MeshVersionFormatted 2\(\backslash\)n\(\backslash\)n Dimension 3\(\backslash\)n\(\backslash\)n Vertices \%d\(\backslash\)n\(\backslash\)n"{}}, np);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00108}00108   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < np; i++) \{}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00109}00109     \textcolor{keywordtype}{double} x = verts[2 * i];}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00110}00110     \textcolor{keywordtype}{double} y = verts[2 * i + 1];}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00111}00111     \textcolor{comment}{/* Parametrization of a sphere of radius 1 from the longitude (x) and}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00112}00112 \textcolor{comment}{     * latitude (y) */}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00113}00113     \textcolor{keywordtype}{double} newx = cos(x) * cos(y);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00114}00114     \textcolor{keywordtype}{double} newy = sin(x) * cos(y);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00115}00115     \textcolor{keywordtype}{double} newz = sin(y);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00116}00116     fprintf(fp, \textcolor{stringliteral}{"{}\%f \%f \%f 0\(\backslash\)n"{}}, newx, newy, newz);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00117}00117   \}}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00118}00118   fprintf(fp, \textcolor{stringliteral}{"{}Triangles \%d\(\backslash\)n"{}}, nt);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00120}00120   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < nt; i++)}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00121}00121     fprintf(fp, \textcolor{stringliteral}{"{}\%i \%i \%i 0\(\backslash\)n"{}}, tris[3 * i], tris[3 * i +1], tris[3 * i + 2]);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00122}00122 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00123}00123   fprintf(fp, \textcolor{stringliteral}{"{}End\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00124}00124   fclose(fp);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00126}00126   free(verts);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00127}00127   free(tris);}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00128}00128   \mbox{\hyperlink{API__functions__2d_8c_ae54958922cfa83be04e5b76f4dad570c}{MMG2D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}}, \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}}, \&mesh2, \mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}}, \&met2, \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00129}00129 }
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00130}00130   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{d_2adaptation__example3_2main_8c_source_l00131}00131 \}}
+
+\end{DoxyCode}

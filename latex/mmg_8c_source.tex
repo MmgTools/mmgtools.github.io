@@ -1,0 +1,364 @@
+\hypertarget{mmg_8c_source}{}\doxysection{mmg.\+c}
+\label{mmg_8c_source}\index{src/common/mmg.c@{src/common/mmg.c}}
+\mbox{\hyperlink{mmg_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00036}00036 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgcommon_8h}{mmgcommon.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00044}\mbox{\hyperlink{mmg_8c_a3efe28e05910628d1787348b7453d689}{00044}} \textcolor{keywordtype}{void} \mbox{\hyperlink{mmg_8c_a3efe28e05910628d1787348b7453d689}{MMG5\_mmgUsage}}(\textcolor{keywordtype}{char} *prog) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00045}00045   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)nUsage: \%s [-\/v [n]] [opts..] filein [fileout]\(\backslash\)n"{}},prog);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00047}00047   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n** Generic options\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00048}00048   fprintf(stdout,\textcolor{stringliteral}{"{}-\/h        Print this message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00049}00049   fprintf(stdout,\textcolor{stringliteral}{"{}-\/v [n]    Tune level of verbosity, [-\/1..10]\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00050}00050   fprintf(stdout,\textcolor{stringliteral}{"{}-\/m [n]    Set maximal memory size to n Mbytes\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00051}00051   fprintf(stdout,\textcolor{stringliteral}{"{}-\/d        Turn on debug mode\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00052}00052   fprintf(stdout,\textcolor{stringliteral}{"{}-\/val      Print the default parameters values\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00053}00053   fprintf(stdout,\textcolor{stringliteral}{"{}-\/default  Save a local parameters file for default parameters"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00054}00054           \textcolor{stringliteral}{"{} values\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00056}00056   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n**  File specifications\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00057}00057   fprintf(stdout,\textcolor{stringliteral}{"{}-\/in  file  input triangulation\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00058}00058   fprintf(stdout,\textcolor{stringliteral}{"{}-\/out file  output triangulation\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00059}00059   fprintf(stdout,\textcolor{stringliteral}{"{}-\/sol file  load solution or metric file\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00060}00060   fprintf(stdout,\textcolor{stringliteral}{"{}-\/met file  load metric file\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00062}00062   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n**  Mode specifications (mesh adaptation by default)\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00063}00063   fprintf(stdout,\textcolor{stringliteral}{"{}-\/ls  val     create mesh of isovalue val (0 if no argument provided)\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00064}00064 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00065}00065 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00072}\mbox{\hyperlink{mmg_8c_a5be81418b5623ff47c40740def84362f}{00072}} \textcolor{keywordtype}{void} \mbox{\hyperlink{mmg_8c_a5be81418b5623ff47c40740def84362f}{MMG5\_paramUsage1}}(\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00073}00073   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n**  Parameters\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00074}00074   fprintf(stdout,\textcolor{stringliteral}{"{}-\/A           enable anisotropy (without metric file).\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00075}00075   fprintf(stdout,\textcolor{stringliteral}{"{}-\/ar     val  angle detection\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00076}00076   fprintf(stdout,\textcolor{stringliteral}{"{}-\/nr          no angle detection\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00077}00077   fprintf(stdout,\textcolor{stringliteral}{"{}-\/hausd  val  control Hausdorff distance\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00078}00078   fprintf(stdout,\textcolor{stringliteral}{"{}-\/hgrad  val  control gradation\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00079}00079   fprintf(stdout,\textcolor{stringliteral}{"{}-\/hmax   val  maximal mesh size\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00080}00080   fprintf(stdout,\textcolor{stringliteral}{"{}-\/hmin   val  minimal mesh size\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00081}00081   fprintf(stdout,\textcolor{stringliteral}{"{}-\/hsiz   val  constant mesh size\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00082}00082 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00089}\mbox{\hyperlink{mmg_8c_ab9b04ee1eab827e3c12af57bf790f36d}{00089}} \textcolor{keywordtype}{void} \mbox{\hyperlink{mmg_8c_ab9b04ee1eab827e3c12af57bf790f36d}{MMG5\_paramUsage2}}(\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00091}00091   fprintf(stdout,\textcolor{stringliteral}{"{}-\/noinsert    no point insertion/deletion \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00092}00092   fprintf(stdout,\textcolor{stringliteral}{"{}-\/nomove      no point relocation\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00093}00093   fprintf(stdout,\textcolor{stringliteral}{"{}-\/noswap      no edge or face flipping\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00094}00094   fprintf(stdout,\textcolor{stringliteral}{"{}-\/nreg        normal regul.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00095}00095   fprintf(stdout,\textcolor{stringliteral}{"{}-\/nsd    val  save the subdomain number val (0==all subdomain)\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00096}00096   fprintf(stdout,\textcolor{stringliteral}{"{}-\/optim       mesh optimization\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00098}00098 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00105}\mbox{\hyperlink{mmg_8c_a8b654401f205ebf27a4f87c73c1235b9}{00105}} \textcolor{keywordtype}{void} \mbox{\hyperlink{mmg_8c_a8b654401f205ebf27a4f87c73c1235b9}{MMG5\_lagUsage}}(\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00107}00107 \textcolor{preprocessor}{\#ifdef USE\_ELAS}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00108}00108   fprintf(stdout,\textcolor{stringliteral}{"{}-\/lag [n]     lagrangian mesh displacement according to mode [0/1/2]\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00109}00109   fprintf(stdout,\textcolor{stringliteral}{"{}               0: displacement\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00110}00110   fprintf(stdout,\textcolor{stringliteral}{"{}               1: displacement + remeshing (swap and move)\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00111}00111   fprintf(stdout,\textcolor{stringliteral}{"{}               2: displacement + remeshing (split, collapse,"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00112}00112           \textcolor{stringliteral}{"{} swap and move)\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00113}00113 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00114}00114 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00121}\mbox{\hyperlink{mmg_8c_a60f19b0e345f635d8351c4085f75a11c}{00121}} \textcolor{keywordtype}{void} \mbox{\hyperlink{mmg_8c_a60f19b0e345f635d8351c4085f75a11c}{MMG5\_2d3dUsage}}(\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00122}00122 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00123}00123   fprintf(stdout,\textcolor{stringliteral}{"{}-\/opnbdy      preserve input triangles at the interface of"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00124}00124           \textcolor{stringliteral}{"{} two domains of the same reference.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00126}00126   fprintf(stdout,\textcolor{stringliteral}{"{}-\/rmc   [val] enable the removal of componants whose volume fraction is less than\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00127}00127           \textcolor{stringliteral}{"{}             val (1e-\/5 if not given) of the mesh volume (ls mode).\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00128}00128 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00129}00129 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00135}\mbox{\hyperlink{mmg_8c_a13e1941ba6fe9b8583a2bf3fa51d5e54}{00135}} \textcolor{keywordtype}{void} \mbox{\hyperlink{mmg_8c_a13e1941ba6fe9b8583a2bf3fa51d5e54}{MMG5\_advancedUsage}}(\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00136}00136 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00137}00137   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n**  Parameters for advanced users\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00138}00138   fprintf(stdout,\textcolor{stringliteral}{"{}-\/nosizreq       disable setting of required edge sizes over required vertices.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00139}00139   fprintf(stdout,\textcolor{stringliteral}{"{}-\/hgradreq  val  control gradation from required entities toward others\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00140}00140 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00141}00141 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00142}00142 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00150}\mbox{\hyperlink{mmg_8c_a802750feadc124e5b79133bc9796ac27}{00150}} \textcolor{keywordtype}{void} \mbox{\hyperlink{mmg_8c_a802750feadc124e5b79133bc9796ac27}{MMG5\_mmgDefaultValues}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00152}00152   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)nDefault parameters values:\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00153}00153 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00154}00154   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n** Generic options :\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00155}00155   fprintf(stdout,\textcolor{stringliteral}{"{}verbosity                 (-\/v)      : \%d\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00156}00156           \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00157}00157   fprintf(stdout,\textcolor{stringliteral}{"{}maximal memory size       (-\/m)      : \%zu MB\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00158}00158           \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}}/\mbox{\hyperlink{mmgcommon_8h_a566f85bd5eb2497efbd6d4435a7efc64}{MMG5\_MILLION}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00159}00159 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00160}00160 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00161}00161   fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n**  Parameters\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00162}00162   fprintf(stdout,\textcolor{stringliteral}{"{}angle detection           (-\/ar)     : \%lf\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00163}00163           180/M\_PI*acos(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ad9247431b83de722fdb8b7b7c0e1fca9}{dhd}}) );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00164}00164   fprintf(stdout,\textcolor{stringliteral}{"{}minimal mesh size         (-\/hmin)   : \%lf\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00165}00165           \textcolor{stringliteral}{"{}If not yet computed: 0.001 of "{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00166}00166           \textcolor{stringliteral}{"{}the mesh bounding box if no metric is provided, 0.1 times the "{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00167}00167           \textcolor{stringliteral}{"{}minimum of the metric sizes otherwise.\(\backslash\)n"{}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a4874acf5ce0475bd5da312b657a1537a}{hmin}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00168}00168   fprintf(stdout,\textcolor{stringliteral}{"{}maximal mesh size         (-\/hmax)   : \%lf\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00169}00169           \textcolor{stringliteral}{"{} If not yet computed: size of "{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00170}00170           \textcolor{stringliteral}{"{}the mesh bounding box without metric, 10 times the maximum of the "{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00171}00171           \textcolor{stringliteral}{"{}metric sizes otherwise.\(\backslash\)n"{}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a86382948e4bb3afa6b1acd6e9f1c9e33}{hmax}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00172}00172   fprintf(stdout,\textcolor{stringliteral}{"{}Hausdorff distance        (-\/hausd)  : \%lf\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00173}00173           \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_aea77197ca22e3eb72f97c56efbfc64a0}{hausd}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00174}00174 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00175}00175   fprintf(stdout,\textcolor{stringliteral}{"{}gradation control         (-\/hgrad)  : \%lf\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00176}00176           (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a61dba6868b2752cab22a2dc59d2e8104}{hgrad}} < 0) ? \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a61dba6868b2752cab22a2dc59d2e8104}{hgrad}} : exp(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a61dba6868b2752cab22a2dc59d2e8104}{hgrad}}) );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00177}00177 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00178}00178   fprintf(stdout,\textcolor{stringliteral}{"{}gradation control for required entities (-\/hgradreq)  : \%lf\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00179}00179           (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ae2e1a6d9ad39421bc8c6113b42f1fe88}{hgradreq}} < 0) ? \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ae2e1a6d9ad39421bc8c6113b42f1fe88}{hgradreq}} : exp(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ae2e1a6d9ad39421bc8c6113b42f1fe88}{hgradreq}}) );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00180}00180 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00181}00181 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00192}00192 \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00193}\mbox{\hyperlink{mmg_8c_a5501c2e34fbef2210b841f3577ef21b1}{00193}} \textcolor{keywordtype}{int} \mbox{\hyperlink{mmg_8c_a5501c2e34fbef2210b841f3577ef21b1}{MMG5\_countLocalParamAtTri}}( \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__iNode}{MMG5\_iNode}} **bdryRefs) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00194}00194   \textcolor{keywordtype}{int}         npar,k,\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00195}00195 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00197}00197   (*bdryRefs) = NULL;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00198}00198 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00199}00199   k = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aa93d2edb17025aebacb017a9f88fc1b5}{nt}}? \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[1].\mbox{\hyperlink{structMMG5__Tria_a0a87a170a3bf3fd6866fa97e7f443543}{ref}} : 0;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00200}00200 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00201}00201   \textcolor{comment}{/* Try to alloc the first node */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00202}00202   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{mmgcommon_8h_a3b1a78e24441a22238543035040093e8}{MMG5\_Add\_inode}}( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, bdryRefs, k );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00203}00203   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 0 ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00204}00204     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: unable to allocate the first boundary"{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00205}00205            \textcolor{stringliteral}{"{} reference node.\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00206}00206     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00207}00207   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00208}00208   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00209}00209     assert(\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00210}00210     npar = 1;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00211}00211   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00213}00213   \textcolor{keywordflow}{for} ( k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aa93d2edb17025aebacb017a9f88fc1b5}{nt}}; ++k ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00214}00214     \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{mmgcommon_8h_a3b1a78e24441a22238543035040093e8}{MMG5\_Add\_inode}}( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, bdryRefs, \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k].\mbox{\hyperlink{structMMG5__Tria_a0a87a170a3bf3fd6866fa97e7f443543}{ref}} );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00215}00215 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00216}00216     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 0 ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00217}00217       printf(\textcolor{stringliteral}{"{}  \#\# Warning: \%s: unable to list the tria references."{}}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00218}00218              \textcolor{stringliteral}{"{} Uncomplete parameters file.\(\backslash\)n"{}},\_\_func\_\_ );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00219}00219       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00220}00220     \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00221}00221     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} ) ++npar;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00222}00222   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00223}00223 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00224}00224   \textcolor{keywordflow}{return} npar;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00225}00225 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00226}00226 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00236}00236 \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00237}\mbox{\hyperlink{mmg_8c_af637af5712916bfe046a65e83d81511b}{00237}} \textcolor{keywordtype}{int} \mbox{\hyperlink{mmg_8c_af637af5712916bfe046a65e83d81511b}{MMG5\_writeLocalParamAtTri}}( \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__iNode}{MMG5\_iNode}} *bdryRefs,}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00238}00238                                 FILE *out ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00239}00239   \mbox{\hyperlink{structMMG5__iNode}{MMG5\_iNode}} *cur;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00240}00240 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00241}00241   cur = bdryRefs;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00242}00242   \textcolor{keywordflow}{while}( cur ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00243}00243     fprintf(out,\textcolor{stringliteral}{"{}\%d Triangle \%e \%e \%e \(\backslash\)n"{}},cur-\/>val,}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00244}00244             \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a4874acf5ce0475bd5da312b657a1537a}{hmin}}, \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a86382948e4bb3afa6b1acd6e9f1c9e33}{hmax}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_aea77197ca22e3eb72f97c56efbfc64a0}{hausd}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00245}00245     cur = cur-\/>nxt;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00246}00246   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00247}00247 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00248}00248   \mbox{\hyperlink{mmgcommon_8h_a9df55c1f124c8164cf2444272a079906}{MMG5\_Free\_ilinkedList}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},bdryRefs);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00249}00249 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00250}00250   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00251}00251 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00252}00252 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00262}\mbox{\hyperlink{mmg_8c_acf1a5a15fe4aa338ff817bf1eee21fa4}{00262}} \textcolor{keywordtype}{char} *\mbox{\hyperlink{mmg_8c_acf1a5a15fe4aa338ff817bf1eee21fa4}{MMG5\_Get\_filenameExt}}( \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00263}00263   \textcolor{keyword}{const} \textcolor{keywordtype}{char} pathsep=\textcolor{charliteral}{'/'};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00264}00264   \textcolor{keywordtype}{char}       *dot,*lastpath;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00265}00265 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00266}00266   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00267}00267     \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00268}00268   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00270}00270   dot = strrchr(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, \textcolor{charliteral}{'.'});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00271}00271   lastpath = (pathsep == 0) ? NULL : strrchr (\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, pathsep);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00272}00272 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00273}00273   \textcolor{keywordflow}{if} ( (!dot) || dot == \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} || (lastpath>dot) || (!strcmp(dot,\textcolor{stringliteral}{"{}.o"{}})) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00274}00274     \textcolor{comment}{/* No extension */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00275}00275     \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} + strlen(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00276}00276   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00277}00277 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00278}00278   \textcolor{keywordflow}{return} dot;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00279}00279 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00280}00280 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00289}\mbox{\hyperlink{mmg_8c_a2e08513e507db723d7bd61b6efedbeb0}{00289}} \textcolor{keywordtype}{char} *\mbox{\hyperlink{mmg_8c_a2e08513e507db723d7bd61b6efedbeb0}{MMG5\_Get\_basename}}(\textcolor{keywordtype}{char} *path) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00290}00290   \textcolor{keywordtype}{char} *s = strrchr(path, \textcolor{charliteral}{'/'});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00291}00291 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00292}00292   \textcolor{keywordflow}{if} (!s)}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00293}00293     \textcolor{keywordflow}{return} strdup(path);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00294}00294   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00295}00295     \textcolor{keywordflow}{return} strdup(s + 1);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00296}00296 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00297}00297 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00306}\mbox{\hyperlink{mmg_8c_ac9b329d9ab2d62228dfd012760de7e37}{00306}} \textcolor{keywordtype}{char} *\mbox{\hyperlink{mmg_8c_ac9b329d9ab2d62228dfd012760de7e37}{MMG5\_Get\_path}}(\textcolor{keywordtype}{char} *path) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00307}00307   \textcolor{keywordtype}{char} *lastpath,*retpath;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00308}00308   \textcolor{keywordtype}{int} len;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00309}00309 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00310}00310   \textcolor{keywordflow}{if} ( path == NULL) \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00311}00311 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00312}00312   lastpath = (\mbox{\hyperlink{mmgcommon_8h_a82458a287cc852728f1fa1a648718c7d}{MMG5\_PATHSEP}} == 0) ? NULL : strrchr (path, \mbox{\hyperlink{mmgcommon_8h_a82458a287cc852728f1fa1a648718c7d}{MMG5\_PATHSEP}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00313}00313 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00314}00314   \textcolor{keywordflow}{if} ( !lastpath ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00315}00315     \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00316}00316   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00317}00317 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00318}00318 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00319}00319   len = 0;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00320}00320   \textcolor{keywordflow}{while} ( path+len != lastpath ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00321}00321     ++len;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00322}00322   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00323}00323 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00324}00324   \mbox{\hyperlink{mmgcommon_8h_acdeadc8c5aa177b193c4568cb5984559}{MMG5\_SAFE\_MALLOC}}(retpath,len+1,\textcolor{keywordtype}{char},\textcolor{keywordflow}{return} NULL);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00325}00325 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00326}00326   \textcolor{comment}{/* Copy the string without the extension and add \(\backslash\)0 */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00327}00327   \mbox{\hyperlink{API__functionsf__2d_8c_a14bfee113563620ee532c52283791e7a}{strncpy}} ( retpath, path, len );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00328}00328   retpath[len] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00329}00329 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00330}00330   \textcolor{keywordflow}{return} retpath;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00331}00331 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00332}00332 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00341}\mbox{\hyperlink{mmg_8c_a96e5e6a6f99a8156112f07c72eaca362}{00341}} \textcolor{keywordtype}{char} *\mbox{\hyperlink{mmg_8c_a96e5e6a6f99a8156112f07c72eaca362}{MMG5\_Remove\_ext}} (\textcolor{keywordtype}{char}* path,\textcolor{keywordtype}{char} *ext) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00342}00342   \textcolor{keywordtype}{int}        len;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00343}00343   \textcolor{keywordtype}{char}       *retpath, *lastext, *lastpath;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00344}00344   \textcolor{keywordtype}{char}       *extloc;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00345}00345 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00346}00346   \textcolor{comment}{/* Default extension if not provided */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00347}00347   \textcolor{keywordflow}{if} ( (!ext) || !*ext ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00348}00348     extloc = \textcolor{stringliteral}{"{}."{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00349}00349   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00350}00350   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00351}00351     extloc = ext;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00352}00352   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00353}00353 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00354}00354   \textcolor{comment}{/* Error checks and string allocation. */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00355}00355   \textcolor{keywordflow}{if} ( path == NULL) \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00356}00356 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00357}00357   \textcolor{comment}{/* Find the relevant characters and the length of the string without}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00358}00358 \textcolor{comment}{   * extension */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00359}00359   lastext = strstr (path, extloc);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00360}00360   lastpath = (\mbox{\hyperlink{mmgcommon_8h_a82458a287cc852728f1fa1a648718c7d}{MMG5\_PATHSEP}} == 0) ? NULL : strrchr (path, \mbox{\hyperlink{mmgcommon_8h_a82458a287cc852728f1fa1a648718c7d}{MMG5\_PATHSEP}});}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00361}00361 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00362}00362   \textcolor{keywordflow}{if} ( lastext == NULL || (lastpath != NULL \&\& lastpath > lastext) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00363}00363     \textcolor{comment}{/* No extension or the extension is left from a separator (i.e. it is not an}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00364}00364 \textcolor{comment}{     * extension) */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00365}00365     len = strlen(path);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00366}00366   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00367}00367   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00368}00368     \textcolor{comment}{/* An extension is found */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00369}00369     len = 0;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00370}00370     \textcolor{keywordflow}{while} ( path+len != lastext ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00371}00371       ++len;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00372}00372     \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00373}00373   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00374}00374 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00375}00375   \mbox{\hyperlink{mmgcommon_8h_acdeadc8c5aa177b193c4568cb5984559}{MMG5\_SAFE\_MALLOC}}(retpath,len+1,\textcolor{keywordtype}{char},\textcolor{keywordflow}{return} NULL);}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00376}00376 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00377}00377   \textcolor{comment}{/* Copy the string without the extension and add \(\backslash\)0 */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00378}00378   \mbox{\hyperlink{API__functionsf__2d_8c_a14bfee113563620ee532c52283791e7a}{strncpy}} ( retpath, path, len );}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00379}00379   retpath[len] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00380}00380 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00381}00381   \textcolor{keywordflow}{return} retpath;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00382}00382 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00383}00383 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00395}\mbox{\hyperlink{mmg_8c_a99e5535ce9b64741e3a50a275c9c8b34}{00395}} \textcolor{keywordtype}{int} \mbox{\hyperlink{mmg_8c_a99e5535ce9b64741e3a50a275c9c8b34}{MMG5\_Get\_format}}( \textcolor{keywordtype}{char} *ptr, \textcolor{keywordtype}{int} fmt ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00396}00396   \textcolor{comment}{/* Default is the Medit file format or a format given as input */}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00397}00397   \textcolor{keywordtype}{int} defFmt = fmt;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00398}00398 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00399}00399   \textcolor{keywordflow}{if} ( !ptr ) \textcolor{keywordflow}{return} defFmt;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00400}00400 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00401}00401   \textcolor{keywordflow}{if} ( !strncmp ( ptr,\textcolor{stringliteral}{"{}.meshb"{}},strlen(\textcolor{stringliteral}{"{}.meshb"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00402}00402     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a1dfe5805b30e96512f34c9f71fd9ab6b}{MMG5\_FMT\_MeditBinary}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00403}00403   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00404}00404   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp( ptr,\textcolor{stringliteral}{"{}.mesh"{}},strlen(\textcolor{stringliteral}{"{}.mesh"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00405}00405     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a7ac1272b3ed0bb274c41fdb766190d5b}{MMG5\_FMT\_MeditASCII}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00406}00406   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00407}00407   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp( ptr,\textcolor{stringliteral}{"{}.mshb"{}},strlen(\textcolor{stringliteral}{"{}.mshb"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00408}00408     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a3ce0bec89899995f9473c0a30cf15205}{MMG5\_FMT\_GmshBinary}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00409}00409   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00410}00410   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp( ptr,\textcolor{stringliteral}{"{}.msh"{}},strlen(\textcolor{stringliteral}{"{}.msh"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00411}00411     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a69090b3fadfd86eb6e2b0ea81f1d93f5}{MMG5\_FMT\_GmshASCII}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00412}00412   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00413}00413   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp ( ptr,\textcolor{stringliteral}{"{}.pvtu"{}},strlen(\textcolor{stringliteral}{"{}.pvtu"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00414}00414     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5ab5694330ee618058cf7d4e5307515fcf}{MMG5\_FMT\_VtkPvtu}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00415}00415   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00416}00416   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp ( ptr,\textcolor{stringliteral}{"{}.vtu"{}},strlen(\textcolor{stringliteral}{"{}.vtu"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00417}00417     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5aeaf6578bb93f686de6efb5ec0647fead}{MMG5\_FMT\_VtkVtu}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00418}00418   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00419}00419   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp ( ptr,\textcolor{stringliteral}{"{}.pvtp"{}},strlen(\textcolor{stringliteral}{"{}.pvtu"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00420}00420     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a44955c19c2e811d64606fdd0874e8339}{MMG5\_FMT\_VtkPvtp}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00421}00421   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00422}00422   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp ( ptr,\textcolor{stringliteral}{"{}.vtp"{}},strlen(\textcolor{stringliteral}{"{}.vtp"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00423}00423     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a93fb91c4d959a977e49101d5594c80aa}{MMG5\_FMT\_VtkVtp}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00424}00424   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00425}00425   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp ( ptr,\textcolor{stringliteral}{"{}.vtk"{}},strlen(\textcolor{stringliteral}{"{}.vtk"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00426}00426     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a314c7283c692daf218c65dc4593ffb98}{MMG5\_FMT\_VtkVtk}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00427}00427   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00428}00428   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !strncmp ( ptr,\textcolor{stringliteral}{"{}.node"{}},strlen(\textcolor{stringliteral}{"{}.node"{}}) ) ) \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00429}00429     \textcolor{keywordflow}{return} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a2346caa2410beceb12214524d031425d}{MMG5\_FMT\_Tetgen}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00430}00430   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00431}00431 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00432}00432   \textcolor{keywordflow}{return} defFmt;}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00433}00433 \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00434}00434 }
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00443}\mbox{\hyperlink{mmg_8c_a4284d8a12ca8bb7b721cb112d1a8444e}{00443}} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{mmg_8c_a4284d8a12ca8bb7b721cb112d1a8444e}{MMG5\_Get\_formatName}}(\textcolor{keyword}{enum} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5}{MMG5\_Format}} fmt)}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00444}00444 \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00445}00445   \textcolor{keywordflow}{switch} (fmt)}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00446}00446   \{}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00447}00447   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a7ac1272b3ed0bb274c41fdb766190d5b}{MMG5\_FMT\_MeditASCII}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00448}00448     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_MeditASCII"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00449}00449     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00450}00450   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a1dfe5805b30e96512f34c9f71fd9ab6b}{MMG5\_FMT\_MeditBinary}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00451}00451     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_MeditBinary"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00452}00452     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00453}00453   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5aeaf6578bb93f686de6efb5ec0647fead}{MMG5\_FMT\_VtkVtu}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00454}00454     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_VtkVtu"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00455}00455     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00456}00456   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a93fb91c4d959a977e49101d5594c80aa}{MMG5\_FMT\_VtkVtp}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00457}00457     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_VtkVtp"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00458}00458     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00459}00459   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5ab5694330ee618058cf7d4e5307515fcf}{MMG5\_FMT\_VtkPvtu}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00460}00460     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_VtkPvtu"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00461}00461     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00462}00462   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a44955c19c2e811d64606fdd0874e8339}{MMG5\_FMT\_VtkPvtp}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00463}00463     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_VtkPvtp"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00464}00464     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00465}00465   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a314c7283c692daf218c65dc4593ffb98}{MMG5\_FMT\_VtkVtk}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00466}00466     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_VtkVtk"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00467}00467     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00468}00468   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a69090b3fadfd86eb6e2b0ea81f1d93f5}{MMG5\_FMT\_GmshASCII}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00469}00469     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_GmshASCII"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00470}00470     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00471}00471   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a3ce0bec89899995f9473c0a30cf15205}{MMG5\_FMT\_GmshBinary}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00472}00472     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_GmshBinary"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00473}00473     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00474}00474   \textcolor{keywordflow}{case} \mbox{\hyperlink{mmgcommon_8h_a6c4f1113aab3e900de4e6f8dfc3b1bd5a2346caa2410beceb12214524d031425d}{MMG5\_FMT\_Tetgen}}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00475}00475     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_FMT\_Tetgen"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00476}00476     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00477}00477   \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00478}00478     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}MMG5\_Unknown"{}};}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00479}00479   \}}
+\DoxyCodeLine{\Hypertarget{mmg_8c_source_l00480}00480 \}}
+
+\end{DoxyCode}

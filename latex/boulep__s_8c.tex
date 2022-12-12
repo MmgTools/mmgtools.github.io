@@ -1,0 +1,134 @@
+\hypertarget{boulep__s_8c}{}\doxysection{src/mmgs/boulep\+\_\+s.c File Reference}
+\label{boulep__s_8c}\index{src/mmgs/boulep\_s.c@{src/mmgs/boulep\_s.c}}
+
+
+Functions for ball of points computation.  
+
+
+{\ttfamily \#include \char`\"{}libmmgs\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for boulep\+\_\+s.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep__s_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{boulep__s_8c_a867845754f338b70cab54ec73d0ca5a9}{boulechknm}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, int ip, MMG5\+\_\+int $\ast$list)
+\item 
+int \mbox{\hyperlink{boulep__s_8c_aecbb431a8fa5660917b19cf324d70654}{bouletrid}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, MMG5\+\_\+int ip, int $\ast$il1, MMG5\+\_\+int $\ast$l1, int $\ast$il2, MMG5\+\_\+int $\ast$l2, MMG5\+\_\+int $\ast$ip0, MMG5\+\_\+int $\ast$ip1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for ball of points computation. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000041}{Todo}}]doxygen documentation. \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{boulep__s_8c_source}{boulep\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{boulep__s_8c_a867845754f338b70cab54ec73d0ca5a9}\label{boulep__s_8c_a867845754f338b70cab54ec73d0ca5a9}} 
+\index{boulep\_s.c@{boulep\_s.c}!boulechknm@{boulechknm}}
+\index{boulechknm@{boulechknm}!boulep\_s.c@{boulep\_s.c}}
+\doxysubsubsection{\texorpdfstring{boulechknm()}{boulechknm()}}
+{\footnotesize\ttfamily int boulechknm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int}]{ip,  }\item[{MMG5\+\_\+int $\ast$}]{list }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em start} & index of tetra to start to compute the ball. \\
+\hline
+{\em ip} & index of point in tetra {\itshape start} for which we want to compute the ball. \\
+\hline
+{\em list} & pointer toward the computed ball of point.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size of list if success, -\/size if overflow, 0 if cfg is non-\/manifold.
+\end{DoxyReturn}
+Find all triangles sharing {\itshape ip}, $list[0] = start$ . Do not stop when crossing ridge. Check whether resulting configuration is manifold. 
+
+Definition at line \mbox{\hyperlink{boulep__s_8c_source_l00051}{51}} of file \mbox{\hyperlink{boulep__s_8c_source}{boulep\+\_\+s.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep__s_8c_a867845754f338b70cab54ec73d0ca5a9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{boulep__s_8c_aecbb431a8fa5660917b19cf324d70654}\label{boulep__s_8c_aecbb431a8fa5660917b19cf324d70654}} 
+\index{boulep\_s.c@{boulep\_s.c}!bouletrid@{bouletrid}}
+\index{bouletrid@{bouletrid}!boulep\_s.c@{boulep\_s.c}}
+\doxysubsubsection{\texorpdfstring{bouletrid()}{bouletrid()}}
+{\footnotesize\ttfamily int bouletrid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{MMG5\+\_\+int}]{ip,  }\item[{int $\ast$}]{il1,  }\item[{MMG5\+\_\+int $\ast$}]{l1,  }\item[{int $\ast$}]{il2,  }\item[{MMG5\+\_\+int $\ast$}]{l2,  }\item[{MMG5\+\_\+int $\ast$}]{ip0,  }\item[{MMG5\+\_\+int $\ast$}]{ip1 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em start} & index of the starting triangle. \\
+\hline
+{\em ip} & index of the looked ridge point. \\
+\hline
+{\em il1} & pointer toward the first ball size. \\
+\hline
+{\em l1} & pointer toward the first computed ball (associated to {\itshape n1\textquotesingle{}s} side). \\
+\hline
+{\em il2} & pointer toward the second ball size. \\
+\hline
+{\em l2} & pointer toward the second computed ball (associated to {\itshape n2\textquotesingle{}s} side). \\
+\hline
+{\em global} & ip0 index of the first extremity of the ridge. \\
+\hline
+{\em global} & ip1 index of the second extremity of the ridge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Computation of the two balls of a ridge point\+: the list {\itshape l1} is associated to normal {\itshape n1\textquotesingle{}s} side. {\itshape ip0} and {\itshape ip1} are the indices of the 2 ending point of the ridge. Both lists are returned enumerated in direct order. 
+
+Definition at line \mbox{\hyperlink{boulep__s_8c_source_l00201}{201}} of file \mbox{\hyperlink{boulep__s_8c_source}{boulep\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep__s_8c_aecbb431a8fa5660917b19cf324d70654_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boulep__s_8c_aecbb431a8fa5660917b19cf324d70654_icgraph}
+\end{center}
+\end{figure}

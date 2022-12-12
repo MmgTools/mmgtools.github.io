@@ -1,0 +1,244 @@
+\hypertarget{solmap__2d_8c_source}{}\doxysection{solmap\+\_\+2d.\+c}
+\label{solmap__2d_8c_source}\index{src/mmg2d/solmap\_2d.c@{src/mmg2d/solmap\_2d.c}}
+\mbox{\hyperlink{solmap__2d_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00035}00035 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d_8h}{libmmg2d.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00036}00036 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00037}00037 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmg2dexterns__private_8h}{mmg2dexterns\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00038}00038 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgexterns__private_8h}{mmgexterns\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00051}00051 \textcolor{keyword}{static} \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00052}\mbox{\hyperlink{solmap__2d_8c_a46301d257bd0a46872134c4aa6cab413}{00052}} \textcolor{keywordtype}{int} \mbox{\hyperlink{solmap__2d_8c_a46301d257bd0a46872134c4aa6cab413}{MMG2D\_solTruncatureForOptim}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met, \textcolor{keywordtype}{int} ani) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00053}00053   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}  ptt;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00054}00054   MMG5\_int    k;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00055}00055   \textcolor{keywordtype}{int}         i,\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00057}00057   assert ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ad6623838f0c98049d43c0406ea9ce983}{optim}} || \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a15a020a6f7cd2d733c459b250d522625}{hsiz}} > 0. );}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00059}00059   \textcolor{comment}{/* Detect the points not used by triangles */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00060}00060   ++\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00061}00061 \textcolor{preprocessor}{\#ifndef NDEBUG}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00062}00062   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00063}00063     assert ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} < \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}} );}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00064}00064   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00065}00065 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00067}00067   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00068}00068     ptt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00069}00069     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(ptt) ) \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00070}00070 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00071}00071     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00072}00072       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i]].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00073}00073     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00074}00074   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00076}00076   \textcolor{comment}{/* Compute hmin/hmax on unflagged points and truncate the metric */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00077}00077   \textcolor{keywordflow}{if} ( !ani ) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00078}00078     \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{mmgcommon__private_8h_ab709a39bf6fea0d95ffb1cc3dffff0d4}{MMG5\_solTruncature\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00079}00079   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00080}00080   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00081}00081     MMG5\_solTruncature\_ani = \mbox{\hyperlink{mmgcommon__private_8h_af340ecc6e0c07d5545e3cdba913a5eaa}{MMG5\_2dSolTruncature\_ani}};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00082}00082     \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = MMG5\_solTruncature\_ani(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00083}00083   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00085}00085   \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00086}00086 \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00097}\mbox{\hyperlink{libmmg2d__private_8h_a67644928e731b2526d46acb0b35acb5c}{00097}} \textcolor{keywordtype}{int} \mbox{\hyperlink{solmap__2d_8c_a67644928e731b2526d46acb0b35acb5c}{MMG2D\_doSol\_iso}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00098}00098   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}      ptt,pt;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00099}00099   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}     p1,p2;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00100}00100   \textcolor{keywordtype}{double}          ux,uy,dd;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00101}00101   MMG5\_int        k,ipa,ipb;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00102}00102   \textcolor{keywordtype}{int}             i,ib;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00103}00103   \textcolor{keywordtype}{int}             MMG\_inxtt[5] = \{0,1,2,0,1\};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00105}00105   \textcolor{comment}{// here we guess that we have less than int32 edges passing through a point}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00106}00106   \textcolor{keywordtype}{int}             *mark;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00107}00107   \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(mark,\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}+1,\textcolor{keywordtype}{int},\textcolor{keywordflow}{return} 0);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00109}00109   \textcolor{comment}{/* Memory alloc */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00110}00110   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size!=1 ) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00111}00111     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: unexpected size of metric: \%d.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00112}00112             \_\_func\_\_,\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00113}00113     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00114}00114   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00116}00116   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{API__functions__2d_8c_a8d62d3bba9103b93e6764ecadb213ec2}{MMG2D\_Set\_solSize}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{libmmgtypes_8h_ad7dceff255dbd127a2b7ff2ceb8d9ba6a3e0b7e1298beaabada671bf465c477c2}{MMG5\_Vertex}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size) )}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00117}00117     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00119}00119   \textcolor{comment}{/* Travel the triangles edges and add the edge contribution to edges}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00120}00120 \textcolor{comment}{   * extermities */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00121}00121   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00122}00122     ptt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00123}00123     \textcolor{keywordflow}{if} ( !ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0] )  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00124}00124 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00125}00125     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00126}00126       ib  = MMG\_inxtt[i+1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00127}00127       ipa = ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00128}00128       ipb = ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[ib];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00129}00129       p1  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ipa];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00130}00130       p2  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ipb];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00131}00131 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00132}00132       ux  = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00133}00133       uy  = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00134}00134       dd  = sqrt(ux*ux + uy*uy);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00135}00135 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00136}00136       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ipa] += dd;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00137}00137       mark[ipa]++;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00138}00138       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ipb] += dd;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00139}00139       mark[ipb]++;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00140}00140     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00141}00141   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00142}00142 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00143}00143   \textcolor{comment}{/* vertex size */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00144}00144   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00145}00145     \textcolor{keywordflow}{if} ( !mark[k] )  \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00146}00146       \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00147}00147     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00148}00148     \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[k] = \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[k] / (double)mark[k];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00149}00149   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00150}00150   \mbox{\hyperlink{mmgcommon__private_8h_af4d5e437466b48a931cc2ad480bc3a8d}{MMG5\_SAFE\_FREE}}(mark);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00152}00152   \textcolor{comment}{/* Computation of hmin/hmax if not provided + size truncature */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00153}00153   \mbox{\hyperlink{solmap__2d_8c_a46301d257bd0a46872134c4aa6cab413}{MMG2D\_solTruncatureForOptim}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},0);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00155}00155   \textcolor{comment}{/* compute quality */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00156}00156   \textcolor{keywordflow}{if} ( MMG2D\_caltri ) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00157}00157     \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00158}00158       pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00159}00159       pt-\/>\mbox{\hyperlink{structMMG5__Tria_a3f6c1e88b1ca31d9957e7ced081eb424}{qual}} = \mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},pt);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00160}00160     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00161}00161   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00162}00162 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00163}00163   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00164}00164 \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00165}00165 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00175}\mbox{\hyperlink{libmmg2d__private_8h_a9cf74594bc4ecf7188b2ae0fa8875732}{00175}} \textcolor{keywordtype}{int} \mbox{\hyperlink{solmap__2d_8c_a9cf74594bc4ecf7188b2ae0fa8875732}{MMG2D\_doSol\_ani}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00176}00176   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}      ptt,pt;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00177}00177   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}     p1,p2;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00178}00178   \textcolor{keywordtype}{double}          ux,uy,dd,tensordot[3];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00179}00179   MMG5\_int        k,ipa,ipb,iadr;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00180}00180   \textcolor{keywordtype}{int}             i,ib;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00181}00181   \textcolor{keywordtype}{int}             MMG\_inxtt[5] = \{0,1,2,0,1\};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00182}00182 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00183}00183   \textcolor{comment}{// here we guess that we have less than int32 edges passing through a point}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00184}00184   \textcolor{keywordtype}{int}             *mark;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00185}00185   \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(mark,\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}+1,\textcolor{keywordtype}{int},\textcolor{keywordflow}{return} 0);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00186}00186 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00187}00187   \textcolor{comment}{/* Memory alloc */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00188}00188   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size!=3 ) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00189}00189     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: unexpected size of metric: \%d.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00190}00190               \_\_func\_\_,\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00191}00191       \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00192}00192     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00193}00193 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00194}00194   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{API__functions__2d_8c_a8d62d3bba9103b93e6764ecadb213ec2}{MMG2D\_Set\_solSize}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{libmmgtypes_8h_ad7dceff255dbd127a2b7ff2ceb8d9ba6a3e0b7e1298beaabada671bf465c477c2}{MMG5\_Vertex}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size) )}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00195}00195     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00197}00197   \textcolor{comment}{/* Travel the triangles edges and add the edge contribution to edges}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00198}00198 \textcolor{comment}{   * extermities */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00199}00199   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00200}00200     ptt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00201}00201     \textcolor{keywordflow}{if} ( !ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0] )  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00202}00202 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00203}00203     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00204}00204       ib  = MMG\_inxtt[i+1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00205}00205       ipa = ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00206}00206       ipb = ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[ib];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00207}00207       p1  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ipa];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00208}00208       p2  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ipb];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00209}00209 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00210}00210       ux  = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00211}00211       uy  = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00213}00213       tensordot[0] = ux*ux;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00214}00214       tensordot[1] = ux*uy;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00215}00215       tensordot[2] = uy*uy;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00216}00216 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00217}00217       iadr = 3*ipa;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00218}00218       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr]   += tensordot[0];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00219}00219       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+1] += tensordot[1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00220}00220       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+2] += tensordot[2];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00221}00221       mark[ipa]++;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00222}00222 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00223}00223       iadr = 3*ipb;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00224}00224       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr]   += tensordot[0];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00225}00225       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+1] += tensordot[1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00226}00226       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+2] += tensordot[2];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00227}00227       mark[ipb]++;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00228}00228     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00229}00229   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00230}00230 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00231}00231   \textcolor{comment}{/* Compute metric tensor and hmax if not specified */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00232}00232   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00233}00233     p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00234}00234     \textcolor{keywordflow}{if} ( !mark[k] ) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00235}00235       \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00236}00236     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00238}00238     iadr = 3*k;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00239}00239     \textcolor{comment}{/* Metric = nedges/dim * inv (sum(tensor\_dot(edges,edges))).}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00240}00240 \textcolor{comment}{     * sum(tensor\_dot) is stored in sol-\/>m so reuse tensordot to}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00241}00241 \textcolor{comment}{     * compute M.  */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00242}00242     dd = 1./(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr]*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+2] -\/ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+1]*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+1]);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00243}00243     dd *= (double)mark[k]*0.5;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00245}00245     tensordot[0] = \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+2];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00246}00246     tensordot[1] = -\/\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00247}00247     tensordot[2] = \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00248}00248 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00249}00249     \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr]   = dd*tensordot[0];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00250}00250     \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+1] = dd*tensordot[1];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00251}00251     \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[iadr+2] = dd*tensordot[2];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00252}00252 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00253}00253 \textcolor{preprocessor}{\#ifndef NDEBUG}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00254}00254     \textcolor{comment}{/* Check metric */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00255}00255     \textcolor{keywordtype}{double} lambda[2],vp[2][2];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00256}00256     \mbox{\hyperlink{eigenv_8c_a17b8479b752c743a51f4a86d853518ca}{MMG5\_eigensym}}(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m+iadr,lambda,vp);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00257}00257 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00258}00258     assert (lambda[0] > 0. \&\& lambda[1] > 0. \&\& \textcolor{stringliteral}{"{}Negative eigenvalue"{}});}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00259}00259 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00260}00260     \textcolor{comment}{/* Normally the case where the point belongs to only 2 colinear points is}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00261}00261 \textcolor{comment}{    impossible */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00262}00262     assert (isfinite(lambda[0]) \&\& isfinite(lambda[1]) \&\& \textcolor{stringliteral}{"{}wrong eigenvalue"{}});}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00263}00263 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00264}00264   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00265}00265   \mbox{\hyperlink{mmgcommon__private_8h_af4d5e437466b48a931cc2ad480bc3a8d}{MMG5\_SAFE\_FREE}}(mark);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00266}00266 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00267}00267   \textcolor{comment}{/* Size truncature */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00268}00268   \mbox{\hyperlink{solmap__2d_8c_a46301d257bd0a46872134c4aa6cab413}{MMG2D\_solTruncatureForOptim}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},1);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00270}00270   \textcolor{comment}{/* compute quality */}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00271}00271   \textcolor{keywordflow}{if} ( MMG2D\_caltri ) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00272}00272     \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00273}00273       pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00274}00274       pt-\/>\mbox{\hyperlink{structMMG5__Tria_a3f6c1e88b1ca31d9957e7ced081eb424}{qual}} = \mbox{\hyperlink{libmmg2d__private_8h_a5ffcb74d20d198e2a96e25cbd32552f1}{MMG2D\_caltri\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},pt);}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00275}00275     \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00276}00276   \}}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00277}00277 }
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00278}00278   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{solmap__2d_8c_source_l00279}00279 \}}
+
+\end{DoxyCode}

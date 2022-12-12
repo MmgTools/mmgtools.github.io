@@ -1,0 +1,631 @@
+\hypertarget{mmg3d2_8c}{}\doxysection{src/mmg3d/mmg3d2.c File Reference}
+\label{mmg3d2_8c}\index{src/mmg3d/mmg3d2.c@{src/mmg3d/mmg3d2.c}}
+
+
+Create implicit surface in mesh.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmg3dexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for mmg3d2.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{mmg3d2_8c_aae19f6f52ad4f10cfa4400d51ef6bd4b}{MMG3\+D\+\_\+vfrac\+\_\+1vertex}} (\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}} ppt\mbox{[}4\mbox{]}, int8\+\_\+t i0, double v\mbox{[}4\mbox{]}, int8\+\_\+t part\+\_\+opp)
+\item 
+double \mbox{\hyperlink{mmg3d2_8c_afed1bc2055f6b64fb52d7d66df39356e}{MMG3\+D\+\_\+vfrac}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, MMG5\+\_\+int k, int pm)
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_adf06d7f3ad0d1c6238d0b317cfea5e67}{MMG3\+D\+\_\+reset\+Ref\+\_\+ls}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+static int \mbox{\hyperlink{mmg3d2_8c_ab7b8b44029e21959d0b7dce68d82311e}{MMG5\+\_\+invsl}} (double A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double b\mbox{[}3\mbox{]}, double r\mbox{[}3\mbox{]})
+\item 
+static int \mbox{\hyperlink{mmg3d2_8c_a68c8efd37e5753af010d4511a522d7f4}{MMG3\+D\+\_\+ismaniball}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, MMG5\+\_\+int k, int indp)
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_ad543bbd56e8bc69e0a7fd5dcce536880}{MMG3\+D\+\_\+snpval\+\_\+ls}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_ab37e71aba44bf58cdc6a325f1a8a784b}{MMG3\+D\+\_\+rmc}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_aa3690d1bf09c63e1c7a2618a1127fda3}{MMG3\+D\+\_\+cuttet\+\_\+ls}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met)
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_a5feaaffdfd784486983c011079adbf1e}{MMG3\+D\+\_\+setref\+\_\+ls}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_a2d9de3905f7de89cb552e9d84ddd660b}{MMG3\+D\+\_\+update\+\_\+xtetra}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_a5364ae2c8c43cb00f0ec7c1647f77c14}{MMG3\+D\+\_\+chkmaniball}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int start, int8\+\_\+t ip)
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_a6590f19116193c0ff7c89ef3db9c0def}{MMG3\+D\+\_\+chkmani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_a57075c29fa6092384ec2004b9322e59d}{MMG3\+D\+\_\+chkmani2}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_a47822076249d82310f9488395f138dac}{MMG3\+D\+\_\+chkmanicoll}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int k, int iface, int iedg, MMG5\+\_\+int ndepmin, MMG5\+\_\+int ndepplus, MMG5\+\_\+int refmin, MMG5\+\_\+int refplus, int8\+\_\+t isminp, int8\+\_\+t isplp)
+\item 
+int \mbox{\hyperlink{mmg3d2_8c_a992121145ab09e9a3be7e7812415b681}{MMG3\+D\+\_\+mmg3d2}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{mmg3d2_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Create implicit surface in mesh. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000024}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000025}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg3d2_8c_a6590f19116193c0ff7c89ef3db9c0def}\label{mmg3d2_8c_a6590f19116193c0ff7c89ef3db9c0def}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_chkmani@{MMG3D\_chkmani}}
+\index{MMG3D\_chkmani@{MMG3D\_chkmani}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_chkmani()}{MMG3D\_chkmani()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+chkmani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+Check whether implicit surface enclosed in volume is orientable First test \+: check whether a tetra has 4 boundary faces
+
+Second test \+: Check whether configuration is manifold in each ball
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l01527}{1527}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a6590f19116193c0ff7c89ef3db9c0def_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a6590f19116193c0ff7c89ef3db9c0def_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_a57075c29fa6092384ec2004b9322e59d}\label{mmg3d2_8c_a57075c29fa6092384ec2004b9322e59d}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_chkmani2@{MMG3D\_chkmani2}}
+\index{MMG3D\_chkmani2@{MMG3D\_chkmani2}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_chkmani2()}{MMG3D\_chkmani2()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+chkmani2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em sol} & pointer toward the metric\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+Check whether implicit surface enclosed in volume is orientable (perform an additionnal test w.\+r.\+t. MMG3\+D\+\_\+chkmani) First test \+: assure no tetra has its 4 vertices on implicit boundary
+
+Second test \+: check whether configuration is manifold in each ball
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l01601}{1601}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a57075c29fa6092384ec2004b9322e59d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_a5364ae2c8c43cb00f0ec7c1647f77c14}\label{mmg3d2_8c_a5364ae2c8c43cb00f0ec7c1647f77c14}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_chkmaniball@{MMG3D\_chkmaniball}}
+\index{MMG3D\_chkmaniball@{MMG3D\_chkmaniball}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_chkmaniball()}{MMG3D\_chkmaniball()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+chkmaniball (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{start,  }\item[{int8\+\_\+t}]{ip }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em start} & index of the starting tetra \\
+\hline
+{\em ip} & point index\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+Check whether implicit surface is orientable in ball of point ip in tet iel ; Beware \+: may return 0 when implicit boundary is tangent to outer boundary 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l01419}{1419}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a5364ae2c8c43cb00f0ec7c1647f77c14_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a5364ae2c8c43cb00f0ec7c1647f77c14_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_a47822076249d82310f9488395f138dac}\label{mmg3d2_8c_a47822076249d82310f9488395f138dac}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_chkmanicoll@{MMG3D\_chkmanicoll}}
+\index{MMG3D\_chkmanicoll@{MMG3D\_chkmanicoll}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_chkmanicoll()}{MMG3D\_chkmanicoll()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+chkmanicoll (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int}]{iface,  }\item[{int}]{iedg,  }\item[{MMG5\+\_\+int}]{ndepmin,  }\item[{MMG5\+\_\+int}]{ndepplus,  }\item[{MMG5\+\_\+int}]{refmin,  }\item[{MMG5\+\_\+int}]{refplus,  }\item[{int8\+\_\+t}]{isminp,  }\item[{int8\+\_\+t}]{isplp }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em k} & index of element in which we collapse. \\
+\hline
+{\em iface} & face through wich we perform the collapse \\
+\hline
+{\em iedg} & edge to collapse \\
+\hline
+{\em ndepmin} & index of an elt with ref refmin and outside the shell of edge. \\
+\hline
+{\em ndepplus} & ndex of an elt with ref refplus and outside the shell of edge. \\
+\hline
+{\em refmin} & reference of one of the two subdomains in presence \\
+\hline
+{\em refplus} & reference of the other subdomain in presence \\
+\hline
+{\em isminp} & 1 if we have found a tetra with ref refmin \\
+\hline
+{\em isplp} & 1 if we have found a tetra with ref refplus \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if we create a non manifold situation, 1 otherwise
+\end{DoxyReturn}
+Check whether collapse of point np to nq does not create a non manifold situation at nq ndepmin, ndepplus = tetra of ref minus, plus in ball of np, not in shell of (np,nq). First step \+: pile up tetras of future ball of nq, crossing through the shell of (np,nq), as long as they have same ref as ndepmin list\mbox{[}l\mbox{]} \texorpdfstring{$<$}{<}= 0 if element of ball of np, \texorpdfstring{$>$}{>}= 0, if element of ball of nq
+
+Second step \+: same process, starting with a tetra of different reference, in the ball of np
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l01672}{1672}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a47822076249d82310f9488395f138dac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_aa3690d1bf09c63e1c7a2618a1127fda3}\label{mmg3d2_8c_aa3690d1bf09c63e1c7a2618a1127fda3}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_cuttet\_ls@{MMG3D\_cuttet\_ls}}
+\index{MMG3D\_cuttet\_ls@{MMG3D\_cuttet\_ls}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_cuttet\_ls()}{MMG3D\_cuttet\_ls()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+cuttet\+\_\+ls (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the level-\/set values. \\
+\hline
+{\em met} & pointer toward a metric (non-\/mandatory). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+Proceed to discretization of the implicit function carried by sol into mesh, once values of sol have been snapped/checked 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l01025}{1025}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_aa3690d1bf09c63e1c7a2618a1127fda3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_aa3690d1bf09c63e1c7a2618a1127fda3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_a68c8efd37e5753af010d4511a522d7f4}\label{mmg3d2_8c_a68c8efd37e5753af010d4511a522d7f4}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_ismaniball@{MMG3D\_ismaniball}}
+\index{MMG3D\_ismaniball@{MMG3D\_ismaniball}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_ismaniball()}{MMG3D\_ismaniball()}}
+{\footnotesize\ttfamily static int MMG3\+D\+\_\+ismaniball (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int}]{indp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the level-\/set values. \\
+\hline
+{\em k} & index of the starting tetra. \\
+\hline
+{\em indp} & local index (inside the tria {\itshape k}) of the vertex that we check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+Check whether snapping the value of vertex {\itshape indp} to 0 exactly leads to a non manifold situation.
+
+\begin{DoxyWarning}{Warning}
+\+: we assume that the triangle {\itshape start} has vertex {\itshape istart} with value 0 and the other two with changing values. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l00408}{408}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a68c8efd37e5753af010d4511a522d7f4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_a992121145ab09e9a3be7e7812415b681}\label{mmg3d2_8c_a992121145ab09e9a3be7e7812415b681}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_mmg3d2@{MMG3D\_mmg3d2}}
+\index{MMG3D\_mmg3d2@{MMG3D\_mmg3d2}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_mmg3d2()}{MMG3D\_mmg3d2()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+mmg3d2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the level-\/set. \\
+\hline
+{\em met} & pointer toward a metric (optionnal). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Create implicit surface in mesh. 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l02208}{2208}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{mmg3d2_8c_a992121145ab09e9a3be7e7812415b681_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a992121145ab09e9a3be7e7812415b681_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_adf06d7f3ad0d1c6238d0b317cfea5e67}\label{mmg3d2_8c_adf06d7f3ad0d1c6238d0b317cfea5e67}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_resetRef\_ls@{MMG3D\_resetRef\_ls}}
+\index{MMG3D\_resetRef\_ls@{MMG3D\_resetRef\_ls}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_resetRef\_ls()}{MMG3D\_resetRef\_ls()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+reset\+Ref\+\_\+ls (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh.\\
+\hline
+\end{DoxyParams}
+Reset mesh-\/\texorpdfstring{$>$}{>}info.\+isoref vertex and tetra references to 0.
+
+\begin{DoxyWarning}{Warning}
+to improve\+: for now, entities linked to the old ls (corners,required points, normals/tangents, triangles and edges) are deleted in load\+Mesh. It would be better to analyze wich entities must be keeped and which one must be deleted depending on the split/nosplit infos. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l00313}{313}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_adf06d7f3ad0d1c6238d0b317cfea5e67_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_adf06d7f3ad0d1c6238d0b317cfea5e67_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_ab37e71aba44bf58cdc6a325f1a8a784b}\label{mmg3d2_8c_ab37e71aba44bf58cdc6a325f1a8a784b}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_rmc@{MMG3D\_rmc}}
+\index{MMG3D\_rmc@{MMG3D\_rmc}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_rmc()}{MMG3D\_rmc()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+rmc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em sol} & pointer toward the level-\/set\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise
+\end{DoxyReturn}
+Removal of small parasitic components (bubbles of material, etc) with volume less than mesh-\/\texorpdfstring{$>$}{>}info.\+rmc (default VOLFRAC) $\ast$ volume of the mesh. 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l00777}{777}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_ab37e71aba44bf58cdc6a325f1a8a784b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_ab37e71aba44bf58cdc6a325f1a8a784b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_a5feaaffdfd784486983c011079adbf1e}\label{mmg3d2_8c_a5feaaffdfd784486983c011079adbf1e}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_setref\_ls@{MMG3D\_setref\_ls}}
+\index{MMG3D\_setref\_ls@{MMG3D\_setref\_ls}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_setref\_ls()}{MMG3D\_setref\_ls()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+setref\+\_\+ls (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the level-\/set values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1.
+\end{DoxyReturn}
+Set references to tets according to the sign of the level set function. 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l01256}{1256}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a5feaaffdfd784486983c011079adbf1e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a5feaaffdfd784486983c011079adbf1e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_ad543bbd56e8bc69e0a7fd5dcce536880}\label{mmg3d2_8c_ad543bbd56e8bc69e0a7fd5dcce536880}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_snpval\_ls@{MMG3D\_snpval\_ls}}
+\index{MMG3D\_snpval\_ls@{MMG3D\_snpval\_ls}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_snpval\_ls()}{MMG3D\_snpval\_ls()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+snpval\+\_\+ls (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the level-\/set function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Snap values of the level set function very close to 0 to exactly 0, and prevent nonmanifold patterns from being generated. 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l00669}{669}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_ad543bbd56e8bc69e0a7fd5dcce536880_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_ad543bbd56e8bc69e0a7fd5dcce536880_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_a2d9de3905f7de89cb552e9d84ddd660b}\label{mmg3d2_8c_a2d9de3905f7de89cb552e9d84ddd660b}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_update\_xtetra@{MMG3D\_update\_xtetra}}
+\index{MMG3D\_update\_xtetra@{MMG3D\_update\_xtetra}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_update\_xtetra()}{MMG3D\_update\_xtetra()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+update\+\_\+xtetra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if the xtetra array can\textquotesingle{}t be reallocated.
+\end{DoxyReturn}
+Update the xtetra array to store the new bdy faces created by the isosurface discretization. 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l01309}{1309}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_a2d9de3905f7de89cb552e9d84ddd660b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_afed1bc2055f6b64fb52d7d66df39356e}\label{mmg3d2_8c_afed1bc2055f6b64fb52d7d66df39356e}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_vfrac@{MMG3D\_vfrac}}
+\index{MMG3D\_vfrac@{MMG3D\_vfrac}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_vfrac()}{MMG3D\_vfrac()}}
+{\footnotesize\ttfamily double MMG3\+D\+\_\+vfrac (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int}]{pm }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em sol} & pointer toward the ls function \\
+\hline
+{\em k} & index of the triangle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+volfrac
+\end{DoxyReturn}
+Calculate the area of the positive (if pm == 1) or negative (if pm == -\/1) subdomain inside tetra k defined by the ls function in sol Checks for debug mode
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l00107}{107}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_afed1bc2055f6b64fb52d7d66df39356e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_afed1bc2055f6b64fb52d7d66df39356e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_aae19f6f52ad4f10cfa4400d51ef6bd4b}\label{mmg3d2_8c_aae19f6f52ad4f10cfa4400d51ef6bd4b}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG3D\_vfrac\_1vertex@{MMG3D\_vfrac\_1vertex}}
+\index{MMG3D\_vfrac\_1vertex@{MMG3D\_vfrac\_1vertex}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_vfrac\_1vertex()}{MMG3D\_vfrac\_1vertex()}}
+{\footnotesize\ttfamily static double MMG3\+D\+\_\+vfrac\+\_\+1vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a8a626fbb189129e6f22bde1246f7bb25}{MMG5\+\_\+p\+Point}}}]{ppt\mbox{[}4\mbox{]},  }\item[{int8\+\_\+t}]{i0,  }\item[{double}]{v\mbox{[}4\mbox{]},  }\item[{int8\+\_\+t}]{part\+\_\+opp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em ppt} & array of points containing the tetra vertices \\
+\hline
+{\em i0} & local index of the vertex that has a sign different to the other vertices. \\
+\hline
+{\em part\+\_\+opp} & 0 if we want to compute the area containing the vertex {\itshape i0}, 1 if we want the area that do not contains {\itshape i0}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the computed area (multiplied by 6) if sucess or 0.\+0 if fail.
+\end{DoxyReturn}
+Compute the area (x6) defined by the level-\/set inside the tetra with vertices {\itshape ppt}. This tetra must be splitted by the level-\/set such has it has exactly 1 vertex (the vertex {\itshape i0}) with sign opposite to the other vertices. If {\itshape part\+\_\+opp} == 0, we compte the area that contains {\itshape i0}, otherwise we compute the complementary area. 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l00058}{58}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_aae19f6f52ad4f10cfa4400d51ef6bd4b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d2_8c_aae19f6f52ad4f10cfa4400d51ef6bd4b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{mmg3d2_8c_ab7b8b44029e21959d0b7dce68d82311e}\label{mmg3d2_8c_ab7b8b44029e21959d0b7dce68d82311e}} 
+\index{mmg3d2.c@{mmg3d2.c}!MMG5\_invsl@{MMG5\_invsl}}
+\index{MMG5\_invsl@{MMG5\_invsl}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_invsl()}{MMG5\_invsl()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+invsl (\begin{DoxyParamCaption}\item[{double}]{A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{b\mbox{[}3\mbox{]},  }\item[{double}]{r\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\begin{DoxyRemark}{Remarks}
+Not used.
+\end{DoxyRemark}
+solve 3$\ast$3 non symmetric system Ar = b 
+
+Definition at line \mbox{\hyperlink{mmg3d2_8c_source_l00364}{364}} of file \mbox{\hyperlink{mmg3d2_8c_source}{mmg3d2.\+c}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{mmg3d2_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{mmg3d2_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{mmg3d2.c@{mmg3d2.c}!ddb@{ddb}}
+\index{ddb@{ddb}!mmg3d2.c@{mmg3d2.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+

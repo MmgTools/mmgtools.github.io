@@ -1,0 +1,207 @@
+\hypertarget{velextls__3d_8c}{}\doxysection{src/mmg3d/velextls\+\_\+3d.c File Reference}
+\label{velextls__3d_8c}\index{src/mmg3d/velextls\_3d.c@{src/mmg3d/velextls\_3d.c}}
+
+
+Tools for interfacing mmg with LS, for extension of the displacement field.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ls\+\_\+calls.\+h\char`\"{}}\newline
+Include dependency graph for velextls\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{velextls__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{velextls__3d_8c_a7a399282b9c797b41094beff0f9272d5}{MMG5\+\_\+\+DEGTOL}}~0.\+75
+\item 
+\#define \mbox{\hyperlink{velextls__3d_8c_af95cddc625432b0fac3eaeaa9dc506c7}{\+\_\+\+LS\+\_\+\+LAMBDA}}~10.\+0e5
+\item 
+\#define \mbox{\hyperlink{velextls__3d_8c_a487e121df6b0d93e78ba41135ca0d1b9}{\+\_\+\+LS\+\_\+\+MU}}~8.\+2e5
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+MMG5\+\_\+int $\ast$ \mbox{\hyperlink{velextls__3d_8c_a21834247bb8f5c4a3b30c0500b5f19d0}{MMG5\+\_\+pack\+LS}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp, LSst $\ast$lsst, MMG5\+\_\+int $\ast$npfin)
+\item 
+int \mbox{\hyperlink{velextls__3d_8c_a43176f8da2a1de6fdd49a4d51b861de9}{MMG5\+\_\+unpack\+LS}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp, LSst $\ast$lsst, MMG5\+\_\+int npf, MMG5\+\_\+int $\ast$invperm)
+\item 
+int \mbox{\hyperlink{velextls__3d_8c_ad3dfa1003054ebb2566376100684947d}{MMG5\+\_\+velext\+LS}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} disp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Tools for interfacing mmg with LS, for extension of the displacement field. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000034}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{velextls__3d_8c_source}{velextls\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{velextls__3d_8c_af95cddc625432b0fac3eaeaa9dc506c7}\label{velextls__3d_8c_af95cddc625432b0fac3eaeaa9dc506c7}} 
+\index{velextls\_3d.c@{velextls\_3d.c}!\_LS\_LAMBDA@{\_LS\_LAMBDA}}
+\index{\_LS\_LAMBDA@{\_LS\_LAMBDA}!velextls\_3d.c@{velextls\_3d.c}}
+\doxysubsubsection{\texorpdfstring{\_LS\_LAMBDA}{\_LS\_LAMBDA}}
+{\footnotesize\ttfamily \#define \+\_\+\+LS\+\_\+\+LAMBDA~10.\+0e5}
+
+
+
+Definition at line \mbox{\hyperlink{velextls__3d_8c_source_l00041}{41}} of file \mbox{\hyperlink{velextls__3d_8c_source}{velextls\+\_\+3d.\+c}}.
+
+\mbox{\Hypertarget{velextls__3d_8c_a487e121df6b0d93e78ba41135ca0d1b9}\label{velextls__3d_8c_a487e121df6b0d93e78ba41135ca0d1b9}} 
+\index{velextls\_3d.c@{velextls\_3d.c}!\_LS\_MU@{\_LS\_MU}}
+\index{\_LS\_MU@{\_LS\_MU}!velextls\_3d.c@{velextls\_3d.c}}
+\doxysubsubsection{\texorpdfstring{\_LS\_MU}{\_LS\_MU}}
+{\footnotesize\ttfamily \#define \+\_\+\+LS\+\_\+\+MU~8.\+2e5}
+
+
+
+Definition at line \mbox{\hyperlink{velextls__3d_8c_source_l00042}{42}} of file \mbox{\hyperlink{velextls__3d_8c_source}{velextls\+\_\+3d.\+c}}.
+
+\mbox{\Hypertarget{velextls__3d_8c_a7a399282b9c797b41094beff0f9272d5}\label{velextls__3d_8c_a7a399282b9c797b41094beff0f9272d5}} 
+\index{velextls\_3d.c@{velextls\_3d.c}!MMG5\_DEGTOL@{MMG5\_DEGTOL}}
+\index{MMG5\_DEGTOL@{MMG5\_DEGTOL}!velextls\_3d.c@{velextls\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_DEGTOL}{MMG5\_DEGTOL}}
+{\footnotesize\ttfamily \#define MMG5\+\_\+\+DEGTOL~0.\+75}
+
+
+
+Definition at line \mbox{\hyperlink{velextls__3d_8c_source_l00040}{40}} of file \mbox{\hyperlink{velextls__3d_8c_source}{velextls\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{velextls__3d_8c_a21834247bb8f5c4a3b30c0500b5f19d0}\label{velextls__3d_8c_a21834247bb8f5c4a3b30c0500b5f19d0}} 
+\index{velextls\_3d.c@{velextls\_3d.c}!MMG5\_packLS@{MMG5\_packLS}}
+\index{MMG5\_packLS@{MMG5\_packLS}!velextls\_3d.c@{velextls\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_packLS()}{MMG5\_packLS()}}
+{\footnotesize\ttfamily MMG5\+\_\+int $\ast$ MMG5\+\_\+pack\+LS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp,  }\item[{LSst $\ast$}]{lsst,  }\item[{MMG5\+\_\+int $\ast$}]{npfin }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em disp} & pointer toward the displacement \\
+\hline
+{\em lsst} & pointer toward the elastic structure (mesh + sol + info) \\
+\hline
+{\em npfin} & pointer toward the final number of points in the packed mesh for the elasticity call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+invperm array of the permutation (vertices) from the submesh (given to the elastic library) toward the global one.
+\end{DoxyReturn}
+Create submesh for solving the linear elasticity velocity extension problem. invperm stores the permutation \mbox{[} new pt nb -\/\texorpdfstring{$>$}{>} old pt nb \mbox{]} (for unpacking purposes) Fill npf = number of vertices in the packed mesh. 
+
+Definition at line \mbox{\hyperlink{velextls__3d_8c_source_l00059}{59}} of file \mbox{\hyperlink{velextls__3d_8c_source}{velextls\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{velextls__3d_8c_a21834247bb8f5c4a3b30c0500b5f19d0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{velextls__3d_8c_a21834247bb8f5c4a3b30c0500b5f19d0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{velextls__3d_8c_a43176f8da2a1de6fdd49a4d51b861de9}\label{velextls__3d_8c_a43176f8da2a1de6fdd49a4d51b861de9}} 
+\index{velextls\_3d.c@{velextls\_3d.c}!MMG5\_unpackLS@{MMG5\_unpackLS}}
+\index{MMG5\_unpackLS@{MMG5\_unpackLS}!velextls\_3d.c@{velextls\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_unpackLS()}{MMG5\_unpackLS()}}
+{\footnotesize\ttfamily int MMG5\+\_\+unpack\+LS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp,  }\item[{LSst $\ast$}]{lsst,  }\item[{MMG5\+\_\+int}]{npf,  }\item[{MMG5\+\_\+int $\ast$}]{invperm }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em disp} & pointer toward the displacement \\
+\hline
+{\em lsst} & pointer toward the elastic structure (mesh + sol + info) \\
+\hline
+{\em npf} & pointer toward the number of points in the submesh \\
+\hline
+{\em invperm} & array of the permutation from the submesh toward the global one\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise
+\end{DoxyReturn}
+Transfer solution from the submesh to the global mesh 
+
+Definition at line \mbox{\hyperlink{velextls__3d_8c_source_l00369}{369}} of file \mbox{\hyperlink{velextls__3d_8c_source}{velextls\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{velextls__3d_8c_a43176f8da2a1de6fdd49a4d51b861de9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{velextls__3d_8c_ad3dfa1003054ebb2566376100684947d}\label{velextls__3d_8c_ad3dfa1003054ebb2566376100684947d}} 
+\index{velextls\_3d.c@{velextls\_3d.c}!MMG5\_velextLS@{MMG5\_velextLS}}
+\index{MMG5\_velextLS@{MMG5\_velextLS}!velextls\_3d.c@{velextls\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_velextLS()}{MMG5\_velextLS()}}
+{\footnotesize\ttfamily int MMG5\+\_\+velext\+LS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{disp }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh. \\
+\hline
+{\em disp} & pointer toward the displacement.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 if success.
+\end{DoxyReturn}
+Extension of the displacement at the nodes of triangles tagged MMG5\+\_\+\+DISPREF 
+
+Definition at line \mbox{\hyperlink{velextls__3d_8c_source_l00400}{400}} of file \mbox{\hyperlink{velextls__3d_8c_source}{velextls\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{velextls__3d_8c_ad3dfa1003054ebb2566376100684947d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{velextls__3d_8c_ad3dfa1003054ebb2566376100684947d_icgraph}
+\end{center}
+\end{figure}

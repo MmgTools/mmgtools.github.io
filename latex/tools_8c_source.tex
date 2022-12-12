@@ -1,0 +1,901 @@
+\hypertarget{tools_8c_source}{}\doxysection{tools.\+c}
+\label{tools_8c_source}\index{src/common/tools.c@{src/common/tools.c}}
+\mbox{\hyperlink{tools_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00036}00036 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00049}\mbox{\hyperlink{mmgcommon__private_8h_ad14c8e0fadc18c462f8df43462687373}{00049}} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_a7523b66db8cd99c549c0543c690ad34f}{MMG5\_nsort}}(int8\_t n,\textcolor{keywordtype}{double} *val,int8\_t *perm)\{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00050}00050     int8\_t   i,j;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00051}00051     int8\_t   aux;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00053}00053     \textcolor{keywordflow}{for} (i=0; i<n; i++)  perm[i] = i;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00055}00055     \textcolor{keywordflow}{for} (i=0; i<n; i++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00056}00056         \textcolor{keywordflow}{for} (j=i+1; j<n; j++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00057}00057             \textcolor{keywordflow}{if} ( val[perm[i]] > val[perm[j]] ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00058}00058                 aux = perm[i];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00059}00059                 perm[i] = perm[j];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00060}00060                 perm[j] = aux;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00061}00061             \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00062}00062         \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00063}00063     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00064}00064 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00065}00065 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00080}\mbox{\hyperlink{mmgcommon__private_8h_adce98f4d0cb850356fa1165d03f24244}{00080}} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_adce98f4d0cb850356fa1165d03f24244}{MMG5\_nperm}}(int8\_t n,int8\_t shift,int8\_t stride,\textcolor{keywordtype}{double} *val,\textcolor{keywordtype}{double} *oldval,int8\_t *perm) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00081}00081   int8\_t i,k;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00083}00083   \textcolor{keywordflow}{for}( i = 0; i < n; i++ )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00084}00084     oldval[i] = val[shift+i*stride];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00085}00085 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00086}00086   \textcolor{keywordflow}{for}( i = 0; i < n; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00087}00087     k = perm[i];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00088}00088     val[shift+i*stride] = oldval[k];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00089}00089   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00090}00090 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00103}\mbox{\hyperlink{mmgcommon__private_8h_aaac0cc688dfa3b23cef9f9af71ad8d90}{00103}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_aaac0cc688dfa3b23cef9f9af71ad8d90}{MMG5\_devangle}}(\textcolor{keywordtype}{double}* n1, \textcolor{keywordtype}{double} *n2, \textcolor{keywordtype}{double} crit)}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00104}00104 \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00105}00105   \textcolor{keywordtype}{double} dev;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00107}00107   dev = n1[0]*n2[0] + n1[1]*n2[1] + n1[2]*n2[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00109}00109   \textcolor{keywordflow}{if} ( dev < crit ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00110}00110     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00111}00111   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00112}00112 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00113}00113   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00114}00114 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00127}\mbox{\hyperlink{mmgcommon__private_8h_a81a1fcfcd4604ea25a0f2ef9f27c5638}{00127}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a1697a142b49479c556a692551268a749}{MMG5\_nonUnitNorPts}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00128}00128                                 MMG5\_int ip1,MMG5\_int ip2, MMG5\_int ip3,\textcolor{keywordtype}{double} *n) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00129}00129   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}   p1,p2,p3;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00130}00130   \textcolor{keywordtype}{double}        abx,aby,abz,acx,acy,acz;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00131}00131 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00132}00132   p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00133}00133   p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00134}00134   p3 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip3];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00135}00135 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00136}00136   \textcolor{comment}{/* area */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00137}00137   abx = p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00138}00138   aby = p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00139}00139   abz = p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00140}00140 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00141}00141   acx = p3-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00142}00142   acy = p3-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00143}00143   acz = p3-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00144}00144 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00145}00145   n[0] = aby*acz -\/ abz*acy;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00146}00146   n[1] = abz*acx -\/ abx*acz;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00147}00147   n[2] = abx*acy -\/ aby*acx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00148}00148 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00149}00149   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00150}00150 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00160}\mbox{\hyperlink{mmgcommon__private_8h_a326c5427cfdff2a0895d1c2cda9b845c}{00160}} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{tools_8c_a326c5427cfdff2a0895d1c2cda9b845c}{MMG5\_nonorsurf}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}} pt) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00161}00161   \textcolor{keywordtype}{double}    n[3];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00162}00162   MMG5\_int  ip1, ip2, ip3;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00163}00163 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00164}00164   ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00165}00165   ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00166}00166   ip3 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00167}00167 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00168}00168   \mbox{\hyperlink{tools_8c_a1697a142b49479c556a692551268a749}{MMG5\_nonUnitNorPts}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip1,ip2,ip3,n);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00169}00169 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00170}00170   \textcolor{keywordflow}{return} n[0]*n[0] + n[1]*n[1] + n[2]*n[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00171}00171 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00183}\mbox{\hyperlink{mmgcommon__private_8h_ae1bb6a2d0e15eb4a15420b4ef77401a8}{00183}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a3e0e07a926291c3bc3ea07dde00cdb7e}{MMG5\_norpts}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int ip1,MMG5\_int ip2, MMG5\_int ip3,\textcolor{keywordtype}{double} *n) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00184}00184   \textcolor{keywordtype}{double}   dd,det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00185}00185 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00186}00186   \mbox{\hyperlink{tools_8c_a1697a142b49479c556a692551268a749}{MMG5\_nonUnitNorPts}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip1,ip2,ip3,n);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00187}00187 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00188}00188   det  = n[0]*n[0] + n[1]*n[1] + n[2]*n[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00189}00189 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00190}00190   \textcolor{keywordflow}{if} ( det < \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}} )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00191}00191 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00192}00192   dd = 1.0 / sqrt(det);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00193}00193   n[0] *= dd;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00194}00194   n[1] *= dd;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00195}00195   n[2] *= dd;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00197}00197   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00198}00198 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00209}\mbox{\hyperlink{mmgcommon__private_8h_abb8ea4584fddf99cd69c9dcf99553c29}{00209}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_abb8ea4584fddf99cd69c9dcf99553c29}{MMG5\_nortri}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}} pt,\textcolor{keywordtype}{double} *n) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00210}00210 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00211}00211   \textcolor{keywordflow}{return} \mbox{\hyperlink{tools_8c_a3e0e07a926291c3bc3ea07dde00cdb7e}{MMG5\_norpts}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[2],n);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00213}00213 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00214}00214 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00220}\mbox{\hyperlink{mmgcommon__private_8h_ac89275a1c7124b0c4344c78dfd0cc341}{00220}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_ac89275a1c7124b0c4344c78dfd0cc341}{MMG5\_transpose3d}}(\textcolor{keywordtype}{double} m[3][3]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00221}00221   \textcolor{keywordtype}{double} swp;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00222}00222   \textcolor{keywordflow}{for}( int8\_t i = 0; i < 2; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00223}00223     \textcolor{keywordflow}{for}( int8\_t j = i+1; j < 3; j++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00224}00224       swp = m[i][j];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00225}00225       m[i][j] = m[j][i];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00226}00226       m[j][i] = swp;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00227}00227     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00228}00228   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00229}00229 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00230}00230 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00236}\mbox{\hyperlink{mmgcommon__private_8h_a01348aae3f78a80cb07cf4c65363a646}{00236}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a01348aae3f78a80cb07cf4c65363a646}{MMG5\_test\_transpose3d}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00237}00237   \textcolor{keywordtype}{double} a[3][3] = \{\{1.,2.,3.\},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00238}00238                     \{4.,5.,6.\},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00239}00239                     \{7.,8.,9.\}\};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00240}00240   \textcolor{keywordtype}{double} b[3][3] = \{\{1.,4.,7.\},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00241}00241                     \{2.,5.,8.\},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00242}00242                     \{3.,6.,9.\}\};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00243}00243   \textcolor{keywordtype}{double} maxerr;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00245}00245   \mbox{\hyperlink{tools_8c_ac89275a1c7124b0c4344c78dfd0cc341}{MMG5\_transpose3d}}(a);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00246}00246 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00247}00247   maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(9,(\textcolor{keywordtype}{double} *)a,(\textcolor{keywordtype}{double} *)b);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00248}00248   \textcolor{keywordflow}{if}( maxerr > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00249}00249     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error matrix transposition: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00250}00250       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00251}00251     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00252}00252   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00253}00253 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00254}00254   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00255}00255 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00256}00256 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00265}\mbox{\hyperlink{mmgcommon__private_8h_ab2480ed967d6844e99874ae6ca37615c}{00265}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_ab2480ed967d6844e99874ae6ca37615c}{MMG5\_dotprod}}(int8\_t dim,\textcolor{keywordtype}{double} *a,\textcolor{keywordtype}{double} *b,\textcolor{keywordtype}{double} *result) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00266}00266   *result = 0.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00267}00267   \textcolor{keywordflow}{for}( int8\_t i = 0; i < dim; i++ )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00268}00268     *result += a[i]*b[i];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00269}00269 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00270}00270 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00276}\mbox{\hyperlink{mmgcommon__private_8h_ab419dc98e40341b1851ac3a6d5d233f8}{00276}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_ab419dc98e40341b1851ac3a6d5d233f8}{MMG5\_test\_dotprod}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00277}00277   \textcolor{keywordtype}{double} a[4] = \{1.0, 2.0,   3.0,  4.0\};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00278}00278   \textcolor{keywordtype}{double} b[4] = \{1.0, 0.5, 1./3., 0.25\};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00279}00279   \textcolor{keywordtype}{double} cex = 4.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00280}00280   \textcolor{keywordtype}{double} cnum,err;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00281}00281 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00282}00282   \mbox{\hyperlink{tools_8c_ab2480ed967d6844e99874ae6ca37615c}{MMG5\_dotprod}}(4,a,b,\&cnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00283}00283   err = fabs(cex-\/cnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00284}00284   \textcolor{keywordflow}{if}( err > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00285}00285     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error scalar product: in function \%s, error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00286}00286       \_\_func\_\_,err);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00287}00287     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00288}00288   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00289}00289 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00290}00290   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00291}00291 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00292}00292 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00300}\mbox{\hyperlink{mmgcommon__private_8h_adc70cb182809cbf96349afc2b0f64136}{00300}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_adc70cb182809cbf96349afc2b0f64136}{MMG5\_crossprod3d}}(\textcolor{keywordtype}{double} *a,\textcolor{keywordtype}{double} *b,\textcolor{keywordtype}{double} *result) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00301}00301   result[0] = a[1]*b[2] -\/ a[2]*b[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00302}00302   result[1] = a[2]*b[0] -\/ a[0]*b[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00303}00303   result[2] = a[0]*b[1] -\/ a[1]*b[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00304}00304 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00305}00305 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00311}\mbox{\hyperlink{mmgcommon__private_8h_a43e9546ea4cf8b3ab0119700352e5313}{00311}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a43e9546ea4cf8b3ab0119700352e5313}{MMG5\_test\_crossprod3d}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00312}00312   \textcolor{keywordtype}{double} a[3] = \{1., 0., 0.\};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00313}00313   \textcolor{keywordtype}{double} b[3] = \{1./sqrt(2.),1./sqrt(2.),0.\};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00314}00314   \textcolor{keywordtype}{double} cex[3] = \{0.,0.,1./sqrt(2.)\};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00315}00315   \textcolor{keywordtype}{double} cnum[3],maxerr;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00316}00316 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00317}00317   \mbox{\hyperlink{tools_8c_adc70cb182809cbf96349afc2b0f64136}{MMG5\_crossprod3d}}(a,b,cnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00318}00318 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00319}00319   maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(3,cex,cnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00320}00320   \textcolor{keywordflow}{if}( maxerr > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00321}00321     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error 3D cross product: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00322}00322       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00323}00323     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00324}00324   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00325}00325 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00326}00326   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00327}00327 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00328}00328 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00337}\mbox{\hyperlink{mmgcommon__private_8h_a1923296c53b96406e46d2e4d3f4c29bb}{00337}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_a1923296c53b96406e46d2e4d3f4c29bb}{MMG5\_mn}}(\textcolor{keywordtype}{double} m[6], \textcolor{keywordtype}{double} n[6], \textcolor{keywordtype}{double} mn[9] )\{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00338}00338 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00339}00339   mn[0] = m[0]*n[0] + m[1]*n[1] + m[2]*n[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00340}00340   mn[1] = m[0]*n[1] + m[1]*n[3] + m[2]*n[4];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00341}00341   mn[2] = m[0]*n[2] + m[1]*n[4] + m[2]*n[5];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00342}00342   mn[3] = m[1]*n[0] + m[3]*n[1] + m[4]*n[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00343}00343   mn[4] = m[1]*n[1] + m[3]*n[3] + m[4]*n[4];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00344}00344   mn[5] = m[1]*n[2] + m[3]*n[4] + m[4]*n[5];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00345}00345   mn[6] = m[2]*n[0] + m[4]*n[1] + m[5]*n[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00346}00346   mn[7] = m[2]*n[1] + m[4]*n[3] + m[5]*n[4];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00347}00347   mn[8] = m[2]*n[2] + m[4]*n[4] + m[5]*n[5];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00348}00348 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00349}00349   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00350}00350 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00351}00351 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00357}\mbox{\hyperlink{mmgcommon__private_8h_aaa64c856cd65b20586e890f477312aa8}{00357}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_aaa64c856cd65b20586e890f477312aa8}{MMG5\_test\_mn}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00358}00358   \textcolor{keywordtype}{double} m[6] = \{1.,2.,3.,4.,5.,6.\}; \textcolor{comment}{/* Test matrix 1 */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00359}00359   \textcolor{keywordtype}{double} n[6] = \{2.,3.,4.,5.,6.,7.\}; \textcolor{comment}{/* Test matrix 2 */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00360}00360   \textcolor{keywordtype}{double} mnex[9] = \{20., 31., 37.,}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00361}00361                     36., 56., 67.,}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00362}00362                     45., 70., 84.\}; \textcolor{comment}{/* Exact m*n product */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00363}00363   \textcolor{keywordtype}{double} nmex[9] = \{20., 36., 45.,}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00364}00364                     31., 56., 70.,}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00365}00365                     37., 67., 84.\}; \textcolor{comment}{/* Exact n*m product */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00366}00366   \textcolor{keywordtype}{double} prodnum[9],maxerr; \textcolor{comment}{/* Numerical approximation */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00367}00367 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00369}00369   \mbox{\hyperlink{tools_8c_a1923296c53b96406e46d2e4d3f4c29bb}{MMG5\_mn}}(m,n,prodnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00370}00370 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00371}00371   \textcolor{comment}{/* Check error in norm inf */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00372}00372   maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(9,mnex,prodnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00373}00373   \textcolor{keywordflow}{if}( maxerr > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00374}00374     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error 3x3 symmetric matrix product m*n: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00375}00375       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00376}00376     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00377}00377   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00378}00378 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00379}00379 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00381}00381   \mbox{\hyperlink{tools_8c_a1923296c53b96406e46d2e4d3f4c29bb}{MMG5\_mn}}(n,m,prodnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00382}00382 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00383}00383   \textcolor{comment}{/* Check error in norm inf */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00384}00384   maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(9,nmex,prodnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00385}00385   \textcolor{keywordflow}{if}( maxerr > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00386}00386     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error 3x3 symmetric matrix product n*m: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00387}00387       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00388}00388     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00389}00389   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00390}00390 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00391}00391   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00392}00392 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00393}00393 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00394}00394 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00405}\mbox{\hyperlink{mmgcommon__private_8h_a83635a3fa94abc3f03bf6c303e055500}{00405}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a83635a3fa94abc3f03bf6c303e055500}{MMG5\_rmtr}}(\textcolor{keywordtype}{double} r[3][3],\textcolor{keywordtype}{double} m[6], \textcolor{keywordtype}{double} mr[6])\{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00406}00406   \textcolor{keywordtype}{double} n[3][3];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00407}00407 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00408}00408   n[0][0] = m[0]*r[0][0] + m[1]*r[0][1] + m[2]*r[0][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00409}00409   n[1][0] = m[1]*r[0][0] + m[3]*r[0][1] + m[4]*r[0][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00410}00410   n[2][0] = m[2]*r[0][0] + m[4]*r[0][1] + m[5]*r[0][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00411}00411 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00412}00412   n[0][1] = m[0]*r[1][0] + m[1]*r[1][1] + m[2]*r[1][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00413}00413   n[1][1] = m[1]*r[1][0] + m[3]*r[1][1] + m[4]*r[1][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00414}00414   n[2][1] = m[2]*r[1][0] + m[4]*r[1][1] + m[5]*r[1][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00415}00415 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00416}00416   n[0][2] = m[0]*r[2][0] + m[1]*r[2][1] + m[2]*r[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00417}00417   n[1][2] = m[1]*r[2][0] + m[3]*r[2][1] + m[4]*r[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00418}00418   n[2][2] = m[2]*r[2][0] + m[4]*r[2][1] + m[5]*r[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00419}00419 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00420}00420   mr[0] = r[0][0]*n[0][0] + r[0][1]*n[1][0] + r[0][2]*n[2][0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00421}00421   mr[1] = r[0][0]*n[0][1] + r[0][1]*n[1][1] + r[0][2]*n[2][1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00422}00422   mr[2] = r[0][0]*n[0][2] + r[0][1]*n[1][2] + r[0][2]*n[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00423}00423   mr[3] = r[1][0]*n[0][1] + r[1][1]*n[1][1] + r[1][2]*n[2][1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00424}00424   mr[4] = r[1][0]*n[0][2] + r[1][1]*n[1][2] + r[1][2]*n[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00425}00425   mr[5] = r[2][0]*n[0][2] + r[2][1]*n[1][2] + r[2][2]*n[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00426}00426 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00427}00427   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00428}00428 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00429}00429 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00435}\mbox{\hyperlink{mmgcommon__private_8h_a0ad8a236667668ef068632e2cb60c785}{00435}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a0ad8a236667668ef068632e2cb60c785}{MMG5\_test\_rmtr}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00436}00436   \textcolor{keywordtype}{double} m[6] = \{111./2.,-\/109./2.,  89./2.,111./2.,-\/91./2.,111./2.\}; \textcolor{comment}{/* Test matrix */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00437}00437   \textcolor{keywordtype}{double} r[3][3] = \{\{1./sqrt(2.),1./sqrt(2.),         0.\},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00438}00438                     \{         0.,1./sqrt(2.),1./sqrt(2.)\},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00439}00439                     \{1./sqrt(2.),         0.,1./sqrt(2.)\}\}; \textcolor{comment}{/* Test transformation */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00440}00440   \textcolor{keywordtype}{double} outex[6] = \{1., 0., 0., 10., 0., 100.\}; \textcolor{comment}{/* Exact result */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00441}00441   \textcolor{keywordtype}{double} outnum[6],maxerr; \textcolor{comment}{/* Numerical result */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00442}00442 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00444}00444   \textcolor{keywordflow}{if}( !\mbox{\hyperlink{tools_8c_a83635a3fa94abc3f03bf6c303e055500}{MMG5\_rmtr}}(r,m,outnum) )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00445}00445     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00446}00446 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00447}00447   \textcolor{comment}{/* Check error in norm inf */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00448}00448   maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(6,outex,outnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00449}00449   \textcolor{keywordflow}{if}( maxerr > 10.*\mbox{\hyperlink{mmgcommon__private_8h_a1e26cddefcd1ee56395167b28bb92330}{MMG5\_EPSOK}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00450}00450     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error linear transformation of symmetric matrix: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00451}00451       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00452}00452     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00453}00453   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00454}00454 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00455}00455   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00456}00456 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00457}00457 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00467}\mbox{\hyperlink{mmgcommon__private_8h_ac3e49574efef1e50f5899e2b985fdf6b}{00467}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_ac3e49574efef1e50f5899e2b985fdf6b}{MMG5\_rotmatrix}}(\textcolor{keywordtype}{double} n[3],\textcolor{keywordtype}{double} r[3][3]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00468}00468   \textcolor{keywordtype}{double} aa,bb,ab,ll,l,cosalpha,sinalpha;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00469}00469 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00470}00470   aa = n[0]*n[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00471}00471   bb = n[1]*n[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00472}00472   ab = n[0]*n[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00473}00473   ll = aa+bb;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00474}00474   cosalpha = n[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00475}00475   sinalpha = sqrt(1.0-\/ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(1.0,cosalpha*cosalpha));}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00476}00476 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00477}00477   \textcolor{comment}{/* No rotation needed in this case */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00478}00478   \textcolor{keywordflow}{if} ( ll < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00479}00479     \textcolor{keywordflow}{if} ( n[2] > 0.0 ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00480}00480       r[0][0] = 1.0 ; r[0][1] = 0.0 ; r[0][2] = 0.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00481}00481       r[1][0] = 0.0 ; r[1][1] = 1.0 ; r[1][2] = 0.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00482}00482       r[2][0] = 0.0 ; r[2][1] = 0.0 ; r[2][2] = 1.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00483}00483     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00484}00484     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00485}00485       r[0][0] = -\/1.0 ; r[0][1] = 0.0 ; r[0][2] = 0.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00486}00486       r[1][0] = 0.0 ; r[1][1] = 1.0 ; r[1][2] = 0.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00487}00487       r[2][0] = 0.0 ; r[2][1] = 0.0 ; r[2][2] = -\/1.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00488}00488     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00489}00489   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00490}00490   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00491}00491     l = sqrt(ll);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00492}00492 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00493}00493     r[0][0] = (aa*cosalpha + bb)/ll;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00494}00494     r[0][1] = ab*(cosalpha-\/1)/ll;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00495}00495     r[0][2] = -\/n[0]*sinalpha/l;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00496}00496     r[1][0] = r[0][1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00497}00497     r[1][1] = (bb*cosalpha + aa)/ll;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00498}00498     r[1][2] = -\/n[1]*sinalpha/l;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00499}00499     r[2][0] = n[0]*sinalpha/l;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00500}00500     r[2][1] = n[1]*sinalpha/l;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00501}00501     r[2][2] = cosalpha;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00502}00502   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00503}00503   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00504}00504 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00505}00505 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00512}\mbox{\hyperlink{mmgcommon__private_8h_a39dfd66c8d904afe335f3a6e8708237e}{00512}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a39dfd66c8d904afe335f3a6e8708237e}{MMG5\_test\_rotmatrix}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00513}00513   \textcolor{keywordtype}{double} n[3] = \{1./sqrt(1000101.),1000./sqrt(1000101.),10./sqrt(1000101.)\}; \textcolor{comment}{/* Test unit vector */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00514}00514   \textcolor{keywordtype}{double} idex[6] = \{1.,0.,0.,1.,0.,1.\}; \textcolor{comment}{/*Exact identity matrix */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00515}00515   \textcolor{keywordtype}{double} ezex [3] = \{0.,0.,1.\}; \textcolor{comment}{/* Exact z-\/unit vector */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00516}00516   \textcolor{keywordtype}{double} R[3][3],idnum[6],eznum[3],maxerr; \textcolor{comment}{/* Numerical quantities */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00517}00517 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00520}00520   \textcolor{keywordflow}{if}( !\mbox{\hyperlink{tools_8c_ac3e49574efef1e50f5899e2b985fdf6b}{MMG5\_rotmatrix}}(n,R) )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00521}00521     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00522}00522 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00523}00523 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00525}00525   \textcolor{keywordflow}{for}( int8\_t i = 0; i < 3; i++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00526}00526     eznum[i] = 0.;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00527}00527     \textcolor{keywordflow}{for}( int8\_t j = 0; j < 3; j++ )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00528}00528       eznum[i] += R[i][j]*n[j];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00529}00529   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00530}00530 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00531}00531   \textcolor{comment}{/* Check error in norm inf */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00532}00532   maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(3,ezex,eznum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00533}00533   \textcolor{keywordflow}{if}( maxerr > 10.*\mbox{\hyperlink{mmgcommon__private_8h_a1e26cddefcd1ee56395167b28bb92330}{MMG5\_EPSOK}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00534}00534     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error vector rotation: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00535}00535       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00536}00536     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00537}00537   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00538}00538 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00539}00539 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00541}00541   \textcolor{keywordflow}{if}( !\mbox{\hyperlink{tools_8c_a83635a3fa94abc3f03bf6c303e055500}{MMG5\_rmtr}}(R,idex,idnum) )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00542}00542     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00543}00543 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00544}00544   \textcolor{comment}{/* Check error in norm inf */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00545}00545   maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(6,idex,idnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00546}00546   \textcolor{keywordflow}{if}( maxerr > \mbox{\hyperlink{mmgcommon__private_8h_a1e26cddefcd1ee56395167b28bb92330}{MMG5\_EPSOK}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00547}00547     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error rotation matrix orthonormality: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00548}00548       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00549}00549     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00550}00550   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00551}00551 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00552}00552   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00553}00553 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00554}00554 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00562}\mbox{\hyperlink{mmgcommon__private_8h_aff5ae2ee7b4c83437a93992fd1f66ef1}{00562}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_aff5ae2ee7b4c83437a93992fd1f66ef1}{MMG5\_invmat}}(\textcolor{keywordtype}{double} *m,\textcolor{keywordtype}{double} *mi) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00563}00563   \textcolor{keywordtype}{double}  aa,bb,cc,det,vmax,maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00564}00564   \textcolor{keywordtype}{int}     k;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00565}00565 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00566}00566   \textcolor{comment}{/* check diagonal matrices */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00567}00567   vmax = fabs(m[1]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00568}00568   maxx = fabs(m[2]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00569}00569   \textcolor{keywordflow}{if}( maxx > vmax ) vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00570}00570   maxx = fabs(m[4]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00571}00571   \textcolor{keywordflow}{if}( maxx > vmax ) vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00572}00572   \textcolor{keywordflow}{if} ( vmax < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00573}00573     mi[0]  = 1./m[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00574}00574     mi[3]  = 1./m[3];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00575}00575     mi[5]  = 1./m[5];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00576}00576     mi[1] = mi[2] = mi[4] = 0.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00577}00577     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00578}00578   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00579}00579 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00580}00580   \textcolor{comment}{/* check ill-\/conditionned matrix */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00581}00581   vmax = fabs(m[0]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00582}00582   \textcolor{keywordflow}{for} (k=1; k<6; k++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00583}00583     maxx = fabs(m[k]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00584}00584     \textcolor{keywordflow}{if} ( maxx > vmax )  vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00585}00585   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00586}00586   \textcolor{keywordflow}{if} ( vmax == 0.0 )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00587}00587 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00588}00588   \textcolor{comment}{/* compute sub-\/dets */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00589}00589   aa  = m[3]*m[5] -\/ m[4]*m[4];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00590}00590   bb  = m[4]*m[2] -\/ m[1]*m[5];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00591}00591   cc  = m[1]*m[4] -\/ m[2]*m[3];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00592}00592   det = m[0]*aa + m[1]*bb + m[2]*cc;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00593}00593   \textcolor{keywordflow}{if} ( fabs(det) < \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}} )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00594}00594   det = 1.0 / det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00595}00595 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00596}00596   mi[0] = aa*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00597}00597   mi[1] = bb*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00598}00598   mi[2] = cc*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00599}00599   mi[3] = (m[0]*m[5] -\/ m[2]*m[2])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00600}00600   mi[4] = (m[1]*m[2] -\/ m[0]*m[4])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00601}00601   mi[5] = (m[0]*m[3] -\/ m[1]*m[1])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00602}00602 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00603}00603   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00604}00604 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00605}00605 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00613}\mbox{\hyperlink{mmgcommon__private_8h_acf2bd93ac87c0959016434d99c262ba7}{00613}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_acf2bd93ac87c0959016434d99c262ba7}{MMG5\_invmatg}}(\textcolor{keywordtype}{double} m[9],\textcolor{keywordtype}{double} mi[9]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00614}00614   \textcolor{keywordtype}{double}  aa,bb,cc,det,vmax,maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00615}00615   \textcolor{keywordtype}{int}     k;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00616}00616 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00617}00617   \textcolor{comment}{/* check ill-\/conditionned matrix */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00618}00618   vmax = fabs(m[0]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00619}00619   \textcolor{keywordflow}{for} (k=1; k<9; k++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00620}00620     maxx = fabs(m[k]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00621}00621     \textcolor{keywordflow}{if} ( maxx > vmax )  vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00622}00622   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00623}00623   \textcolor{keywordflow}{if} ( vmax == 0.0 )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00624}00624 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00625}00625   \textcolor{comment}{/* compute sub-\/dets */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00626}00626   aa = m[4]*m[8] -\/ m[5]*m[7];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00627}00627   bb = m[5]*m[6] -\/ m[3]*m[8];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00628}00628   cc = m[3]*m[7] -\/ m[4]*m[6];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00629}00629   det = m[0]*aa + m[1]*bb + m[2]*cc;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00630}00630   \textcolor{keywordflow}{if} ( fabs(det) < \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00631}00631   det = 1.0 / det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00632}00632 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00633}00633   mi[0] = aa*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00634}00634   mi[3] = bb*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00635}00635   mi[6] = cc*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00636}00636   mi[1] = (m[2]*m[7] -\/ m[1]*m[8])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00637}00637   mi[4] = (m[0]*m[8] -\/ m[2]*m[6])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00638}00638   mi[7] = (m[1]*m[6] -\/ m[0]*m[7])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00639}00639   mi[2] = (m[1]*m[5] -\/ m[2]*m[4])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00640}00640   mi[5] = (m[2]*m[3] -\/ m[0]*m[5])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00641}00641   mi[8] = (m[0]*m[4] -\/ m[1]*m[3])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00642}00642 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00643}00643   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00644}00644 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00645}00645 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00653}\mbox{\hyperlink{mmgcommon__private_8h_a85d314d873f70dbe42c0147c95cb69e0}{00653}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_a85d314d873f70dbe42c0147c95cb69e0}{MMG5\_invmat33}}(\textcolor{keywordtype}{double} m[3][3],\textcolor{keywordtype}{double} mi[3][3]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00654}00654   \textcolor{keywordtype}{double}  aa,bb,cc,det,vmax,maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00655}00655   \textcolor{keywordtype}{int}     k,l;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00656}00656 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00657}00657   \textcolor{comment}{/* check ill-\/conditionned matrix */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00658}00658   vmax = fabs(m[0][0]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00659}00659   \textcolor{keywordflow}{for} (k=0; k<3; k++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00660}00660     \textcolor{keywordflow}{for} (l=0; l<3; l++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00661}00661       maxx = fabs(m[k][l]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00662}00662       \textcolor{keywordflow}{if} ( maxx > vmax )  vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00663}00663     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00664}00664   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00665}00665   \textcolor{keywordflow}{if} ( vmax == 0.0 )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00666}00666 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00667}00667   \textcolor{comment}{/* check diagonal matrices */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00668}00668   \textcolor{comment}{/* lower */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00669}00669   vmax = fabs(m[1][0]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00670}00670   maxx = fabs(m[2][0]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00671}00671   \textcolor{keywordflow}{if}( maxx > vmax ) vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00672}00672   maxx = fabs(m[2][1]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00673}00673   \textcolor{keywordflow}{if}( maxx > vmax ) vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00674}00674   \textcolor{comment}{/* upper */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00675}00675   maxx = fabs(m[0][1]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00676}00676   \textcolor{keywordflow}{if}( maxx > vmax ) vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00677}00677   maxx = fabs(m[0][2]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00678}00678   \textcolor{keywordflow}{if}( maxx > vmax ) vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00679}00679   maxx = fabs(m[1][2]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00680}00680   \textcolor{keywordflow}{if}( maxx > vmax ) vmax = maxx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00681}00681 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00682}00682   \textcolor{keywordflow}{if} ( vmax < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00683}00683     mi[0][0]  = 1./m[0][0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00684}00684     mi[1][1]  = 1./m[1][1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00685}00685     mi[2][2]  = 1./m[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00686}00686     mi[1][0] = mi[0][1] = mi[2][0] = mi[0][2] = mi[1][2] = mi[2][1] = 0.0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00687}00687     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00688}00688   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00689}00689 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00690}00690   \textcolor{comment}{/* compute sub-\/dets */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00691}00691   aa = m[1][1]*m[2][2] -\/ m[2][1]*m[1][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00692}00692   bb = m[2][1]*m[0][2] -\/ m[0][1]*m[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00693}00693   cc = m[0][1]*m[1][2] -\/ m[1][1]*m[0][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00694}00694   det = m[0][0]*aa + m[1][0]*bb + m[2][0]*cc;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00695}00695   \textcolor{keywordflow}{if} ( fabs(det) < \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00696}00696   det = 1.0 / det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00697}00697 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00698}00698   mi[0][0] = aa*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00699}00699   mi[0][1] = bb*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00700}00700   mi[0][2] = cc*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00701}00701   mi[1][0] = (m[2][0]*m[1][2] -\/ m[1][0]*m[2][2])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00702}00702   mi[1][1] = (m[0][0]*m[2][2] -\/ m[2][0]*m[0][2])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00703}00703   mi[1][2] = (m[1][0]*m[0][2] -\/ m[0][0]*m[1][2])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00704}00704   mi[2][0] = (m[1][0]*m[2][1] -\/ m[2][0]*m[1][1])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00705}00705   mi[2][1] = (m[2][0]*m[0][1] -\/ m[0][0]*m[2][1])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00706}00706   mi[2][2] = (m[0][0]*m[1][1] -\/ m[1][0]*m[0][1])*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00707}00707 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00708}00708   \textcolor{comment}{/* Check results */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00709}00709 \textcolor{preprocessor}{\#ifndef NDEBUG}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00710}00710   \textcolor{keywordtype}{double} res[3][3];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00711}00711 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00712}00712   res[0][0] = m[0][0] * mi[0][0] + m[0][1] * mi[1][0] + m[0][2] * mi[2][0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00713}00713   res[0][1] = m[0][0] * mi[0][1] + m[0][1] * mi[1][1] + m[0][2] * mi[2][1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00714}00714   res[0][2] = m[0][0] * mi[0][2] + m[0][1] * mi[1][2] + m[0][2] * mi[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00715}00715 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00716}00716   res[1][0] = m[1][0] * mi[0][0] + m[1][1] * mi[1][0] + m[1][2] * mi[2][0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00717}00717   res[1][1] = m[1][0] * mi[0][1] + m[1][1] * mi[1][1] + m[1][2] * mi[2][1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00718}00718   res[1][2] = m[1][0] * mi[0][2] + m[1][1] * mi[1][2] + m[1][2] * mi[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00719}00719 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00720}00720   res[2][0] = m[2][0] * mi[0][0] + m[2][1] * mi[1][0] + m[2][2] * mi[2][0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00721}00721   res[2][1] = m[2][0] * mi[0][1] + m[2][1] * mi[1][1] + m[2][2] * mi[2][1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00722}00722   res[2][2] = m[2][0] * mi[0][2] + m[2][1] * mi[1][2] + m[2][2] * mi[2][2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00723}00723 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00724}00724 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00725}00725   assert ( ( fabs(res[0][0]-\/1.) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\&}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00726}00726            ( fabs(res[1][1]-\/1.) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\&}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00727}00727            ( fabs(res[2][2]-\/1.) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\&}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00728}00728            ( fabs(res[0][1]) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\& ( fabs(res[0][2]) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\&}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00729}00729            ( fabs(res[1][2]) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\&}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00730}00730            ( fabs(res[1][0]) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\& ( fabs(res[2][0]) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\&}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00731}00731            ( fabs(res[2][1]) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ) \&\& \textcolor{stringliteral}{"{}Matrix inversion"{}} );}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00732}00732 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00733}00733 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00734}00734 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00735}00735   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00736}00736 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00737}00737 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00745}\mbox{\hyperlink{mmgcommon__private_8h_af164320c484fd137c9749bec1e912546}{00745}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_af164320c484fd137c9749bec1e912546}{MMG5\_invmat22}}(\textcolor{keywordtype}{double} m[2][2],\textcolor{keywordtype}{double} mi[2][2]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00746}00746   \textcolor{keywordtype}{double} det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00747}00747 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00748}00748   det = m[0][0]*m[1][1] -\/ m[0][1]*m[1][0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00749}00749   \textcolor{keywordflow}{if} ( fabs(det) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} )  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00750}00750   det = 1.0 / det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00751}00751 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00752}00752   mi[0][0] =  m[1][1]*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00753}00753   mi[0][1] = -\/m[0][1]*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00754}00754   mi[1][0] = -\/m[1][0]*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00755}00755   mi[1][1] =  m[0][0]*det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00756}00756 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00757}00757   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00758}00758 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00759}00759 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00769}\mbox{\hyperlink{mmgcommon__private_8h_ac41646d3bd4063273cbc8ced20c463f9}{00769}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_ac41646d3bd4063273cbc8ced20c463f9}{MMG5\_sys33sym}}(\textcolor{keywordtype}{double} a[6], \textcolor{keywordtype}{double} b[3], \textcolor{keywordtype}{double} r[3])\{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00770}00770   \textcolor{keywordtype}{double} ia[6],as[6],det,m;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00771}00771   \textcolor{keywordtype}{int}    i;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00772}00772 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00773}00773   \textcolor{comment}{/* If possible : multiply matrix by a constant coefficient for stability}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00774}00774 \textcolor{comment}{     purpose */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00775}00775   m = fabs(a[0]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00776}00776   m = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}} ( fabs(a[3]), m );}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00777}00777   m = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}} ( fabs(a[5]), m );}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00778}00778 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00779}00779   \textcolor{keywordflow}{if} ( m >= \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00780}00780     \textcolor{comment}{/* Normalization */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00781}00781     m = 1.0/m;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00782}00782   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00783}00783   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00784}00784     \textcolor{comment}{/* Unable to normalized */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00785}00785     m = 1.;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00786}00786   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00787}00787 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00788}00788   \textcolor{keywordflow}{for}(i=0;i<6;i++)\{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00789}00789     as[i] = a[i]*m;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00790}00790   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00791}00791 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00792}00792   det = as[0]*(as[3]*as[5]-\/as[4]*as[4]) -\/ as[1]*(as[1]*as[5]-\/as[2]*as[4]) \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00793}00793     + as[2]*(as[1]*as[4]-\/as[2]*as[3]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00794}00794 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00795}00795   \textcolor{keywordflow}{if}(fabs(det) < \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}})}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00796}00796     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00797}00797 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00798}00798   det = 1.0/det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00799}00799 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00800}00800   ia[0] = (as[3]*as[5]-\/as[4]*as[4]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00801}00801   ia[1] = -\/ (as[1]*as[5]-\/as[2]*as[4]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00802}00802   ia[2] = (as[1]*as[4]-\/as[2]*as[3]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00803}00803   ia[3] = (as[0]*as[5]-\/as[2]*as[2]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00804}00804   ia[4] = -\/(as[0]*as[4]-\/as[2]*as[1]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00805}00805   ia[5] = (as[0]*as[3]-\/as[1]*as[1]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00806}00806 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00807}00807   r[0] = ia[0]*b[0] + ia[1]*b[1] + ia[2]*b[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00808}00808   r[1] = ia[1]*b[0] + ia[3]*b[1] + ia[4]*b[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00809}00809   r[2] = ia[2]*b[0] + ia[4]*b[1] + ia[5]*b[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00810}00810 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00811}00811   r[0] *= (det*m);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00812}00812   r[1] *= (det*m);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00813}00813   r[2] *= (det*m);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00814}00814 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00815}00815   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00816}00816 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00817}00817 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00825}\mbox{\hyperlink{mmgcommon__private_8h_aa84d206ef52475254e419506a8cddc2d}{00825}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_aa84d206ef52475254e419506a8cddc2d}{MMG5\_printTria}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\textcolor{keywordtype}{char}* fileName) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00826}00826   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}} ptt;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00827}00827   MMG5\_int   k;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00828}00828   FILE       *inm;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00829}00829 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00830}00830   inm = fopen(fileName,\textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00831}00831 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00832}00832   fprintf(inm,\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/> \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{} TRIANGLES <-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00833}00833   \textcolor{keywordflow}{for}(k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00834}00834     ptt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00835}00835     fprintf(inm,\textcolor{stringliteral}{"{}num \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{} -\/> \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{} \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{} \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{}\(\backslash\)n"{}},k,ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0],ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[1],}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00836}00836             ptt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[2]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00837}00837     fprintf(inm,\textcolor{stringliteral}{"{}ref   -\/> \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{}\(\backslash\)n"{}},ptt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00838}00838     fprintf(inm,\textcolor{stringliteral}{"{}tag   -\/> \%d \%d \%d\(\backslash\)n"{}},ptt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[0],ptt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[1],ptt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[2]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00839}00839     fprintf(inm,\textcolor{stringliteral}{"{}edg   -\/> \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{} \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{} \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{}\(\backslash\)n"{}},ptt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[0],ptt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[1],ptt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[2]);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00840}00840     fprintf(inm,\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00841}00841   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00842}00842   fprintf(inm,\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/> END TRIANGLES <-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00843}00843   fclose(inm);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00844}00844 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00845}00845 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00852}\mbox{\hyperlink{mmgcommon__private_8h_a1af16eadd1a172dff232d14060d59be4}{00852}} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{tools_8c_a1af16eadd1a172dff232d14060d59be4}{MMG5\_memSize}} (\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00853}00853   \textcolor{keywordtype}{size\_t} mem;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00854}00854 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00855}00855 \textcolor{preprocessor}{\#if (defined(\_\_APPLE\_\_) \&\& defined(\_\_MACH\_\_))}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00856}00856   \textcolor{keywordtype}{size\_t} size;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00857}00857 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00858}00858   size = \textcolor{keyword}{sizeof}(mem);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00859}00859   \textcolor{keywordflow}{if} ( sysctlbyname(\textcolor{stringliteral}{"{}hw.memsize"{}},\&mem,\&size,NULL,0) == -\/1)}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00860}00860     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00861}00861 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00862}00862 \textcolor{preprocessor}{\#elif defined(\_\_unix\_\_) || defined(\_\_unix) || defined(unix)}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00863}00863   mem = sysconf(\_SC\_PHYS\_PAGES) * sysconf(\_SC\_PAGE\_SIZE);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00864}00864 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00865}00865 \textcolor{preprocessor}{\#elif defined(\_WIN16) || defined(\_WIN32) || defined(\_WIN64) || defined(\_\_WIN32\_\_) || defined(\_\_TOS\_WIN\_\_) || defined(\_\_WINDOWS\_\_)}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00866}00866   MEMORYSTATUSEX status;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00867}00867 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00868}00868   status.dwLength = \textcolor{keyword}{sizeof}(status);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00869}00869   GlobalMemoryStatusEx(\&status);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00870}00870   \textcolor{comment}{// status.ullTotalPhys is an unsigned long long: check that it fits in a size\_t}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00871}00871   mem = status.ullTotalPhys \& SIZE\_MAX;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00872}00872   \textcolor{keywordflow}{if} (mem == status.ullTotalPhys) \textcolor{keywordflow}{return} mem;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00873}00873   \textcolor{keywordflow}{else} \textcolor{keywordflow}{return} SIZE\_MAX;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00874}00874 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00875}00875 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00876}00876   fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: unknown system, recover of maximal memory"{}}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00877}00877           \textcolor{stringliteral}{"{} not available.\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00878}00878   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00879}00879 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00880}00880 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00881}00881   \textcolor{keywordflow}{return} mem;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00882}00882 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00883}00883 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00891}\mbox{\hyperlink{mmgcommon__private_8h_a30e76b147d35ab3e987d5bc775e5f2e6}{00891}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_a30e76b147d35ab3e987d5bc775e5f2e6}{MMG5\_memOption\_memSet}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00892}00892 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00893}00893   assert ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}} );}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00894}00894   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ad86c34fac1b18aae4ca5173cc71b331c}{mem}} <= 0 ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00895}00895     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}} )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00896}00896       \textcolor{comment}{/* maximal memory = 50\% of total physical memory */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00897}00897       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}} = (size\_t)(\mbox{\hyperlink{tools_8c_a1af16eadd1a172dff232d14060d59be4}{MMG5\_memSize}}()*\mbox{\hyperlink{mmgcommon__private_8h_a89d4d491f0d17be8d74fd9f3468f8215}{MMG5\_MEMPERCENT}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00898}00898     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00899}00899       \textcolor{comment}{/* default value = 800 MB */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00900}00900       printf(\textcolor{stringliteral}{"{}  Maximum memory set to default value: \%d MB.\(\backslash\)n"{}},\mbox{\hyperlink{mmgcommon__private_8h_aaa84fe8af1a691800c58ff79a4e3e498}{MMG5\_MEMMAX}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00901}00901       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}} = \mbox{\hyperlink{mmgcommon__private_8h_aaa84fe8af1a691800c58ff79a4e3e498}{MMG5\_MEMMAX}}*\mbox{\hyperlink{mmgcommon__private_8h_a566f85bd5eb2497efbd6d4435a7efc64}{MMG5\_MILLION}};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00902}00902     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00903}00903   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00904}00904   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00905}00905     \textcolor{comment}{/* memory asked by user if possible, otherwise total physical memory */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00906}00906     \textcolor{keywordflow}{if} ( (\textcolor{keywordtype}{size\_t})\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ad86c34fac1b18aae4ca5173cc71b331c}{mem}}*\mbox{\hyperlink{mmgcommon__private_8h_a566f85bd5eb2497efbd6d4435a7efc64}{MMG5\_MILLION}} > (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}}/\mbox{\hyperlink{mmgcommon__private_8h_a89d4d491f0d17be8d74fd9f3468f8215}{MMG5\_MEMPERCENT}}) \&\& \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00907}00907       fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: asking for \%d MB of memory "{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00908}00908               \_\_func\_\_,\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ad86c34fac1b18aae4ca5173cc71b331c}{mem}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00909}00909       fprintf(stderr,\textcolor{stringliteral}{"{}when only \%zu available.\(\backslash\)n"{}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}}/\mbox{\hyperlink{mmgcommon__private_8h_a566f85bd5eb2497efbd6d4435a7efc64}{MMG5\_MILLION}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00910}00910     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00911}00911     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00912}00912       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a78864dcc595d6729d48a9c2b348cc4c7}{memMax}}= (size\_t)\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_ad86c34fac1b18aae4ca5173cc71b331c}{mem}}*\mbox{\hyperlink{mmgcommon__private_8h_a566f85bd5eb2497efbd6d4435a7efc64}{MMG5\_MILLION}};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00913}00913     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00914}00914   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00915}00915   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00916}00916 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00917}00917 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00918}00918 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00920}\mbox{\hyperlink{mmgcommon__private_8h_a67b2561d3ae544e7aa9a7d9bee2b72ec}{00920}} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{tools_8c_a67b2561d3ae544e7aa9a7d9bee2b72ec}{MMG5\_det3pt1vec}}(\textcolor{keywordtype}{double} c0[3],\textcolor{keywordtype}{double} c1[3],\textcolor{keywordtype}{double} c2[3],\textcolor{keywordtype}{double} v[3]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00921}00921     \textcolor{keywordtype}{double} m00,m10,m20,m01,m11,m21,det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00922}00922 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00923}00923     m00 = c1[0] -\/ c0[0] ; m01 = c2[0] -\/ c0[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00924}00924     m10 = c1[1] -\/ c0[1] ; m11 = c2[1] -\/ c0[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00925}00925     m20 = c1[2] -\/ c0[2] ; m21 = c2[2] -\/ c0[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00926}00926     det = v[0]*(m10*m21 -\/ m20*m11) -\/v[1]*(m00*m21-\/m20*m01) + v[2]*(m00*m11-\/m10*m01);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00927}00927 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00928}00928     \textcolor{keywordflow}{return} det;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00929}00929 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00930}00930 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00932}\mbox{\hyperlink{mmgcommon__private_8h_a6b73b9ea92946221271273a053e0d83e}{00932}} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{tools_8c_a6b73b9ea92946221271273a053e0d83e}{MMG5\_det4pt}}(\textcolor{keywordtype}{double} c0[3],\textcolor{keywordtype}{double} c1[3],\textcolor{keywordtype}{double} c2[3],\textcolor{keywordtype}{double} c3[3]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00933}00933   \textcolor{keywordtype}{double} m[3];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00934}00934 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00935}00935   m[0] = c3[0] -\/ c0[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00936}00936   m[1] = c3[1] -\/ c0[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00937}00937   m[2] = c3[2] -\/ c0[2];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00938}00938 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00939}00939   \textcolor{keywordflow}{return}  \mbox{\hyperlink{tools_8c_a67b2561d3ae544e7aa9a7d9bee2b72ec}{MMG5\_det3pt1vec}}(c0,c1,c2,m) ;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00940}00940 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00941}00941 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00951}\mbox{\hyperlink{mmgcommon__private_8h_ac2c72474b86ce1a63e0056659340ffa8}{00951}} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{tools_8c_ac2c72474b86ce1a63e0056659340ffa8}{MMG5\_orvol}}(\mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}} point,MMG5\_int *v) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00952}00952     \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}  p0,p1,p2,p3;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00953}00953 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00954}00954     p0 = \&point[v[0]];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00955}00955     p1 = \&point[v[1]];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00956}00956     p2 = \&point[v[2]];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00957}00957     p3 = \&point[v[3]];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00958}00958 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00959}00959     \textcolor{keywordflow}{return} \mbox{\hyperlink{tools_8c_a6b73b9ea92946221271273a053e0d83e}{MMG5\_det4pt}}(p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}},p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}},p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}},p3-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00960}00960 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00961}00961 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00962}00962 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00971}\mbox{\hyperlink{mmgcommon__private_8h_a25dfc743e95fc9cbdcc41dff66197f90}{00971}} \textcolor{keywordtype}{double} \mbox{\hyperlink{tools_8c_a25dfc743e95fc9cbdcc41dff66197f90}{MMG2D\_quickarea}}(\textcolor{keywordtype}{double} a[2],\textcolor{keywordtype}{double} b[2],\textcolor{keywordtype}{double} c[2]) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00972}00972   \textcolor{keywordtype}{double}     abx,aby,acx,acy;\textcolor{comment}{//,bcx,bcy;}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00973}00973   \textcolor{keywordtype}{double}     aire;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00974}00974 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00975}00975   abx = b[0] -\/ a[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00976}00976   aby = b[1] -\/ a[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00977}00977   acx = c[0] -\/ a[0];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00978}00978   acy = c[1] -\/ a[1];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00979}00979   \textcolor{comment}{// bcx = c[0] -\/ b[0];}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00980}00980   \textcolor{comment}{// bcy = c[1] -\/ b[1];}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00981}00981   \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00982}00982   \textcolor{comment}{/* orientation */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00983}00983   aire = abx*acy -\/ aby*acx;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00984}00984 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00985}00985   \textcolor{keywordflow}{return} aire;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00986}00986 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00987}00987 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00994}\mbox{\hyperlink{mmgcommon__private_8h_a9e8ebfe54780af738a91633dc1380d1b}{00994}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_a9e8ebfe54780af738a91633dc1380d1b}{MMG5\_mark\_verticesAsUnused}} ( \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00995}00995   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}} ppt;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00996}00996   MMG5\_int    k;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00997}00997 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00998}00998   \textcolor{keywordflow}{for} ( k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l00999}00999     ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01000}01000     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_aacf41a0e0a3fdf65d77fa5a97fa83bce}{MG\_VOK}}(ppt) )  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01001}01001 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01002}01002     \textcolor{comment}{/* reset ppt-\/>flag to detect isolated points in keep\_subdomainElts */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01003}01003     ppt-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01004}01004     ppt-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{mmgcommon__private_8h_a352756626d2bd3d87e2862db54147ac3}{MG\_NUL}};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01005}01005   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01006}01006 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01007}01007   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01008}01008 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01009}01009 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01018}\mbox{\hyperlink{mmgcommon__private_8h_a760b1f908485300aa2c593f84fcff104}{01018}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_a760b1f908485300aa2c593f84fcff104}{MMG5\_mark\_usedVertices}} ( \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\textcolor{keywordtype}{void} (*delPt)(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}},MMG5\_int)  ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01019}01019   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}  pt;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01020}01020   \mbox{\hyperlink{structMMG5__Quad}{MMG5\_pQuad}}  pq;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01021}01021   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}} ppt;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01022}01022   \textcolor{keywordtype}{int}         i;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01023}01023   MMG5\_int    k;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01024}01024 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01025}01025   \textcolor{comment}{/* Preserve isolated required points */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01026}01026   \textcolor{keywordflow}{for} ( k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01027}01027     ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01028}01028 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01029}01029     \textcolor{keywordflow}{if} ( ppt-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} || !(ppt-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} \& \mbox{\hyperlink{mmgcommon__private_8h_a05cee83c76c35ad01e5bef497a19f46f}{MG\_REQ}}) ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01030}01030       \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01031}01031     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01032}01032     ppt-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} \&= \string~MG\_NUL;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01033}01033   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01034}01034 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01035}01035   \textcolor{comment}{/* Mark points used by the connectivity */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01036}01036   \textcolor{keywordflow}{for} ( k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01037}01037     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01038}01038     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) )  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01039}01039 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01040}01040     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01041}01041       ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i] ];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01042}01042       ppt-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} \&= \string~MG\_NUL;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01043}01043     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01044}01044   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01045}01045 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01046}01046   \textcolor{keywordflow}{for} ( k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a7307ed2dae41f0e8d5ca13956152ecb4}{nquad}}; k++ ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01047}01047     pq = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a085420d5b31a5c540b77a29397c97c9b}{quadra}}[k];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01048}01048     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pq) )  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01049}01049 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01050}01050     \textcolor{keywordflow}{for} (i=0; i<4; i++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01051}01051       ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ pq-\/>\mbox{\hyperlink{structMMG5__Quad_a75f28e28580b2a9105c01e7482354032}{v}}[i] ];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01052}01052       ppt-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} \&= \string~MG\_NUL;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01053}01053     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01054}01054   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01055}01055 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01056}01056   \textcolor{comment}{/* Finally, clean point array */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01057}01057   \textcolor{keywordflow}{while} ( (!\mbox{\hyperlink{mmgcommon__private_8h_aacf41a0e0a3fdf65d77fa5a97fa83bce}{MG\_VOK}}(\&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}])) \&\& \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01058}01058     delPt(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}});}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01059}01059   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01060}01060 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01061}01061   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01062}01062 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01063}01063 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01072}\mbox{\hyperlink{mmgcommon__private_8h_a42ba99163c119f9324a90c535b1ffce9}{01072}} \textcolor{keywordtype}{void} \mbox{\hyperlink{tools_8c_ae4041a40b2cfe8ce852fae42b9d7ca40}{MMG5\_keep\_subdomainElts}} ( \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \textcolor{keywordtype}{int} nsd,}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01073}01073                                \textcolor{keywordtype}{int} (*delElt)(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}},MMG5\_int) ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01074}01074   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}  pt;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01075}01075   \textcolor{keywordtype}{int}         i,iv;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01076}01076   MMG5\_int    k,*adja,iadr,iadrv;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01077}01077   \textcolor{keywordtype}{int}         nfac = 3; \textcolor{comment}{// number of faces per elt}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01078}01078 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01079}01079   \textcolor{keywordflow}{for} ( k=1 ; k <= \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}} ; k++) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01080}01080     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01081}01081 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01082}01082     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) ) \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01083}01083 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01084}01084     \textcolor{comment}{/* Mark triangle vertices as seen to be able to detect isolated points */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01085}01085     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0]].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01086}01086     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[1]].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01087}01087     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[2]].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01088}01088 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01089}01089     \textcolor{keywordflow}{if} ( pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}} == nsd ) \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01090}01090 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01091}01091     \textcolor{comment}{/* Update adjacency relationship: we will delete elt k so k adjacent will}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01092}01092 \textcolor{comment}{     * not be adjacent to k anymore */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01093}01093     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01094}01094       iadr = nfac*(k-\/1) + 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01095}01095       adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01096}01096       \textcolor{keywordflow}{for} ( i=0; i<nfac; ++i ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01097}01097         iadrv = adja[i];}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01098}01098         \textcolor{keywordflow}{if} ( !iadrv ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01099}01099           \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01100}01100         \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01101}01101         iv = iadrv\%nfac;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01102}01102         iadrv /= nfac;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01103}01103         \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[nfac*(iadrv-\/1)+1+iv] = 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01104}01104       \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01105}01105     \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01106}01106 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01107}01107     \textcolor{comment}{/* Delete element (triangle in 2D and surface, tetra in 3D) */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01108}01108     delElt(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},k);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01109}01109   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01110}01110 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01111}01111   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01112}01112 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01113}01113 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01122}01122 \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01123}\mbox{\hyperlink{mmgcommon__private_8h_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{01123}} \textcolor{keywordtype}{double} \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}( int8\_t nelem,\textcolor{keywordtype}{double} m1[],\textcolor{keywordtype}{double} m2[] ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01124}01124   \textcolor{keywordtype}{double} maxerr;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01125}01125   int8\_t k;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01126}01126 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01127}01127   \textcolor{comment}{/* Compute max error */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01128}01128   maxerr = 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01129}01129   \textcolor{keywordflow}{for}( k = 0; k < nelem; k++ )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01130}01130     maxerr = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(maxerr,fabs(m1[k] -\/ m2[k]));}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01131}01131 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01132}01132   \textcolor{keywordflow}{return} maxerr;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01133}01133 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01134}01134 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01140}\mbox{\hyperlink{mmgcommon__private_8h_aca3a8c6bfc159f1d3bc1b610bbd0e86a}{01140}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_aca3a8c6bfc159f1d3bc1b610bbd0e86a}{MMG5\_test\_invmat22}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01141}01141   \textcolor{keywordtype}{double} A[2][2] = \{\{4.0,2.0\},\{1.0,1.0\}\}; \textcolor{comment}{/* Test matrix */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01142}01142   \textcolor{keywordtype}{double} iAex[2][2] = \{\{0.5,-\/1.0\},\{-\/0.5,2.0\}\}; \textcolor{comment}{/* Analytical inverse */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01143}01143   \textcolor{keywordtype}{double} iAnum[2][2]; \textcolor{comment}{/* Numerical inverse */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01144}01144 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01145}01145   \textcolor{comment}{/* Compute matrix inverse */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01146}01146   \textcolor{keywordflow}{if}( !\mbox{\hyperlink{tools_8c_af164320c484fd137c9749bec1e912546}{MMG5\_invmat22}}(A,iAnum) )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01147}01147     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01148}01148 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01149}01149   \textcolor{comment}{/* Check error in norm inf */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01150}01150   \textcolor{keywordtype}{double} maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(4,(\textcolor{keywordtype}{double} *)iAex,(\textcolor{keywordtype}{double} *)iAnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01151}01151   \textcolor{keywordflow}{if}( maxerr > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01152}01152     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error matrix inversion: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01153}01153       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01154}01154     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01155}01155   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01156}01156 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01157}01157   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01158}01158 \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01159}01159 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01165}\mbox{\hyperlink{mmgcommon__private_8h_ac702ca8c2cd3a7d807eb5975e3d2e1d2}{01165}} \textcolor{keywordtype}{int} \mbox{\hyperlink{tools_8c_ac702ca8c2cd3a7d807eb5975e3d2e1d2}{MMG5\_test\_invmat33}}() \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01166}01166   \textcolor{keywordtype}{double} A[3][3] = \{\{7.0,2.0,1.0\},\{0.0,3.0,-\/1.0\},\{-\/3.0,4.0,-\/2.0\}\}; \textcolor{comment}{/* Test matrix */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01167}01167   \textcolor{keywordtype}{double} iAex[3][3] = \{\{-\/2.0,8.0,-\/5.0\},\{3.0,-\/11.0,7.0\},\{9.0,-\/34.0,21.0\}\}; \textcolor{comment}{/* Analytical inverse */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01168}01168   \textcolor{keywordtype}{double} iAnum[3][3]; \textcolor{comment}{/* Numerical inverse */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01169}01169 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01170}01170   \textcolor{comment}{/* Compute matrix inverse */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01171}01171   \textcolor{keywordflow}{if}( !\mbox{\hyperlink{tools_8c_a85d314d873f70dbe42c0147c95cb69e0}{MMG5\_invmat33}}(A,iAnum) )}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01172}01172     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01173}01173 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01174}01174   \textcolor{comment}{/* Check error in norm inf */}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01175}01175   \textcolor{keywordtype}{double} maxerr = \mbox{\hyperlink{tools_8c_a3928d3c6fc7f4e3bf1214c6d1b4522f0}{MMG5\_test\_mat\_error}}(9,(\textcolor{keywordtype}{double} *)iAex,(\textcolor{keywordtype}{double} *)iAnum);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01176}01176   \textcolor{keywordflow}{if}( maxerr > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01177}01177     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error matrix inversion: in function \%s, max error \%e\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01178}01178       \_\_func\_\_,maxerr);}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01179}01179     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01180}01180   \}}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01181}01181 }
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01182}01182   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{tools_8c_source_l01183}01183 \}}
+
+\end{DoxyCode}

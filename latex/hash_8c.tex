@@ -1,0 +1,339 @@
+\hypertarget{hash_8c}{}\doxysection{src/common/hash.c File Reference}
+\label{hash_8c}\index{src/common/hash.c@{src/common/hash.c}}
+
+
+Functions for hash tables management and tetrahedra packing.  
+
+
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for hash.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{hash_8c_a2d05251a69b6f626d88af66ac1aed14a}{MMG5\+\_\+mmg\+Hash\+Tria}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int $\ast$adjt, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, int chk\+ISO)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{hash_8c_a1ae4cce82722658e88253895a214a815}{MMG5\+\_\+hash\+Face}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int ia, MMG5\+\_\+int ib, MMG5\+\_\+int ic, MMG5\+\_\+int k)
+\item 
+int \mbox{\hyperlink{hash_8c_abf9ecdc9c796612c38768d7d15d28642}{MMG5\+\_\+hash\+Edge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b, MMG5\+\_\+int k)
+\item 
+int \mbox{\hyperlink{hash_8c_a664448f735b3d71e4e122a1874b2ebd1}{MMG5\+\_\+hash\+Update}} (\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b, MMG5\+\_\+int k)
+\item 
+int \mbox{\hyperlink{hash_8c_a266799d3b2b0bcba745fc85c8593de3d}{MMG5\+\_\+hash\+Edge\+Tag}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b, int16\+\_\+t tag)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{MMG5\+\_\+hash\+Get}} (\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int a, MMG5\+\_\+int b)
+\item 
+int \mbox{\hyperlink{hash_8c_a8dafcb56c527c1ed983952055b52668c}{MMG5\+\_\+hash\+New}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$hash, MMG5\+\_\+int hsiz, MMG5\+\_\+int hmax)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for hash tables management and tetrahedra packing. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hash_8c_abf9ecdc9c796612c38768d7d15d28642}\label{hash_8c_abf9ecdc9c796612c38768d7d15d28642}} 
+\index{hash.c@{hash.c}!MMG5\_hashEdge@{MMG5\_hashEdge}}
+\index{MMG5\_hashEdge@{MMG5\_hashEdge}!hash.c@{hash.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashEdge()}{MMG5\_hashEdge()}}
+{\footnotesize\ttfamily int MMG5\+\_\+hash\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b,  }\item[{MMG5\+\_\+int}]{k }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em hash} & pointer toward the hash table of edges. \\
+\hline
+{\em a} & index of the first extremity of the edge. \\
+\hline
+{\em b} & index of the second extremity of the edge. \\
+\hline
+{\em k} & index of point along the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Add edge $[a;b]$ to the hash table. 
+
+Definition at line \mbox{\hyperlink{hash_8c_source_l00345}{345}} of file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{hash_8c_abf9ecdc9c796612c38768d7d15d28642_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c_abf9ecdc9c796612c38768d7d15d28642_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash_8c_a266799d3b2b0bcba745fc85c8593de3d}\label{hash_8c_a266799d3b2b0bcba745fc85c8593de3d}} 
+\index{hash.c@{hash.c}!MMG5\_hashEdgeTag@{MMG5\_hashEdgeTag}}
+\index{MMG5\_hashEdgeTag@{MMG5\_hashEdgeTag}!hash.c@{hash.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashEdgeTag()}{MMG5\_hashEdgeTag()}}
+{\footnotesize\ttfamily int MMG5\+\_\+hash\+Edge\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b,  }\item[{int16\+\_\+t}]{tag }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em hash} & pointer toward the hash table of edges. \\
+\hline
+{\em a} & index of the first extremity of the edge. \\
+\hline
+{\em b} & index of the second extremity of the edge. \\
+\hline
+{\em tag} & edge tag \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the edge tag if success, 0 if fail.
+\end{DoxyReturn}
+Add edge $[a;b]$ to the hash table if it doesn\textquotesingle{}t exist and store the edge tag. If the edge exist, add the new tag to the already stored tags. 
+
+Definition at line \mbox{\hyperlink{hash_8c_source_l00437}{437}} of file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{hash_8c_a266799d3b2b0bcba745fc85c8593de3d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c_a266799d3b2b0bcba745fc85c8593de3d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash_8c_a1ae4cce82722658e88253895a214a815}\label{hash_8c_a1ae4cce82722658e88253895a214a815}} 
+\index{hash.c@{hash.c}!MMG5\_hashFace@{MMG5\_hashFace}}
+\index{MMG5\_hashFace@{MMG5\_hashFace}!hash.c@{hash.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashFace()}{MMG5\_hashFace()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+hash\+Face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{ia,  }\item[{MMG5\+\_\+int}]{ib,  }\item[{MMG5\+\_\+int}]{ic,  }\item[{MMG5\+\_\+int}]{k }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh. \\
+\hline
+{\em hash} & pointer toward the hash table to fill. \\
+\hline
+{\em ia} & first vertex of face to hash. \\
+\hline
+{\em ib} & second vertex of face to hash. \\
+\hline
+{\em ic} & third vertex of face to hash. \\
+\hline
+{\em k} & index of face to hash.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, -\/1 if the face is newly hashed, index of the first face hashed if another face with same vertices exist. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{hash_8c_source_l00286}{286}} of file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{hash_8c_a1ae4cce82722658e88253895a214a815_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c_a1ae4cce82722658e88253895a214a815_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash_8c_ab5de9343b5c738f6614f3a1598faa338}\label{hash_8c_ab5de9343b5c738f6614f3a1598faa338}} 
+\index{hash.c@{hash.c}!MMG5\_hashGet@{MMG5\_hashGet}}
+\index{MMG5\_hashGet@{MMG5\_hashGet}!hash.c@{hash.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashGet()}{MMG5\_hashGet()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+hash\+Get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & pointer toward the hash table of edges. \\
+\hline
+{\em a} & index of the first extremity of the edge. \\
+\hline
+{\em b} & index of the second extremity of the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index of point stored along $[a;b]$.
+\end{DoxyReturn}
+Find the index of point stored along $[a;b]$. 
+
+Definition at line \mbox{\hyperlink{hash_8c_source_l00495}{495}} of file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{hash_8c_ab5de9343b5c738f6614f3a1598faa338_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c_ab5de9343b5c738f6614f3a1598faa338_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash_8c_a8dafcb56c527c1ed983952055b52668c}\label{hash_8c_a8dafcb56c527c1ed983952055b52668c}} 
+\index{hash.c@{hash.c}!MMG5\_hashNew@{MMG5\_hashNew}}
+\index{MMG5\_hashNew@{MMG5\_hashNew}!hash.c@{hash.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashNew()}{MMG5\_hashNew()}}
+{\footnotesize\ttfamily int MMG5\+\_\+hash\+New (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{hsiz,  }\item[{MMG5\+\_\+int}]{hmax }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em hash} & pointer toward the hash table of edges. \\
+\hline
+{\em hsiz} & initial size of hash table. \\
+\hline
+{\em hmax} & maximal size of hash table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Hash edges or faces. 
+
+Definition at line \mbox{\hyperlink{hash_8c_source_l00526}{526}} of file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c_a8dafcb56c527c1ed983952055b52668c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash_8c_a664448f735b3d71e4e122a1874b2ebd1}\label{hash_8c_a664448f735b3d71e4e122a1874b2ebd1}} 
+\index{hash.c@{hash.c}!MMG5\_hashUpdate@{MMG5\_hashUpdate}}
+\index{MMG5\_hashUpdate@{MMG5\_hashUpdate}!hash.c@{hash.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_hashUpdate()}{MMG5\_hashUpdate()}}
+{\footnotesize\ttfamily int MMG5\+\_\+hash\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{MMG5\+\_\+int}]{a,  }\item[{MMG5\+\_\+int}]{b,  }\item[{MMG5\+\_\+int}]{k }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em hash} & pointer toward the hash table of edges. \\
+\hline
+{\em a} & index of the first extremity of the edge. \\
+\hline
+{\em b} & index of the second extremity of the edge. \\
+\hline
+{\em k} & new index of point along the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail (edge is not found).
+\end{DoxyReturn}
+Update the index of the point stored along the edge $[a;b]$ 
+
+Definition at line \mbox{\hyperlink{hash_8c_source_l00400}{400}} of file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c_a664448f735b3d71e4e122a1874b2ebd1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash_8c_a2d05251a69b6f626d88af66ac1aed14a}\label{hash_8c_a2d05251a69b6f626d88af66ac1aed14a}} 
+\index{hash.c@{hash.c}!MMG5\_mmgHashTria@{MMG5\_mmgHashTria}}
+\index{MMG5\_mmgHashTria@{MMG5\_mmgHashTria}!hash.c@{hash.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_mmgHashTria()}{MMG5\_mmgHashTria()}}
+{\footnotesize\ttfamily int MMG5\+\_\+mmg\+Hash\+Tria (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int $\ast$}]{adjt,  }\item[{\mbox{\hyperlink{structMMG5__Hash}{MMG5\+\_\+\+Hash}} $\ast$}]{hash,  }\item[{int}]{chk\+ISO }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em adjt} & pointer toward the adjacency table of the surfacic mesh. \\
+\hline
+{\em hash} & pointer toward the edge hash table. \\
+\hline
+{\em chk\+ISO} & flag to say if we check ISO references (so if we come from mmg3d). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise.
+\end{DoxyReturn}
+Create surface adjacency
+
+\begin{DoxyRemark}{Remarks}
+the ph-\/\texorpdfstring{$>$}{>}s field computation is useless in mmgs.
+
+\+: as all triangles are mesh boundaries, we do not need to mark their adges as MG\+\_\+\+BDY so the MG\+\_\+\+BDY tag may be used inside geometrical triangles (external non-\/parallel, or internal parallel) to tag edges on the intersection with purely parallel (non-\/geometrical) triangles. The MG\+\_\+\+PARBDYBDY tag is also added, as it does not have a supporting triangle to inherit this tag from. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{hash_8c_source_l00058}{58}} of file \mbox{\hyperlink{hash_8c_source}{hash.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{hash_8c_a2d05251a69b6f626d88af66ac1aed14a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8c_a2d05251a69b6f626d88af66ac1aed14a_icgraph}
+\end{center}
+\end{figure}

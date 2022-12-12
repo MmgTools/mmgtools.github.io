@@ -1,0 +1,82 @@
+\hypertarget{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c}{}\doxysection{libexamples/mmg3d/\+Isosurf\+Discretization\+\_\+ls\+Only/main\+\_\+optim.c File Reference}
+\label{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c}\index{libexamples/mmg3d/IsosurfDiscretization\_lsOnly/main\_optim.c@{libexamples/mmg3d/IsosurfDiscretization\_lsOnly/main\_optim.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mmg/mmg3d/libmmg3d.\+h\char`\"{}}\newline
+Include dependency graph for main\+\_\+optim.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{main\_optim.c@{main\_optim.c}!main@{main}}
+\index{main@{main}!main\_optim.c@{main\_optim.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Example of use of the mmg3dls function of the mmg3d library (basic use of level-\/set discretization option)\+: here the user only provide the level-\/set
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (LJLL, UPMC) 
+
+Pascal Frey (LJLL, UPMC) 
+
+Algiane Froehly (Inria / IMB, Université de Bordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. Include the mmg3d library hader file 
+\end{DoxyCopyright}
+1) Initialisation of mesh and sol structures
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- Enable the level set discretization -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+2) Build mesh in MMG5 format
+
+Two solutions\+: just use the MMG3\+D\+\_\+load\+Mesh function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh(b)}} file formatted or manually set your mesh using the MMG3\+D\+\_\+\+Set$\ast$ functions
+
+with MMG3\+D\+\_\+load\+Mesh function
+
+3) Build the level-\/set in MMG5 format
+
+Two solutions\+: just use the MMG3\+D\+\_\+load\+Sol function that will read a .\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol(b)}} file formatted or manually set your level-\/set using the MMG3\+D\+\_\+\+Set$\ast$ functions
+
+load the level-\/set With the MMG3\+D\+\_\+load\+Sol function
+
+4) (not mandatory)\+: check if the number of given entities match with mesh size
+
+5) (not mandatory)\+: set your global parameters using the MMG3\+D\+\_\+\+Set\+\_\+iparameter and MMG3\+D\+\_\+\+Set\+\_\+dparameter function (resp. for integer parameters and double param)
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- level set discretization -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---
+
+isovalue discretization\+: as we don\textquotesingle{}t want to impose an input metric we pass NULL instead of the metric structure as function argument
+
+Definition at line \mbox{\hyperlink{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c_source_l00050}{50}} of file \mbox{\hyperlink{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c_source}{main\+\_\+optim.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{mmg3d_2IsosurfDiscretization__lsOnly_2main__optim_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}

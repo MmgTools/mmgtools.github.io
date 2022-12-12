@@ -1,0 +1,252 @@
+\hypertarget{movpt__2d_8c_source}{}\doxysection{movpt\+\_\+2d.\+c}
+\label{movpt__2d_8c_source}\index{src/mmg2d/movpt\_2d.c@{src/mmg2d/movpt\_2d.c}}
+\mbox{\hyperlink{movpt__2d_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00034}00034 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00035}00035 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmg2dexterns__private_8h}{mmg2dexterns\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00037}00037 \textcolor{comment}{//extern int8\_t ddb;}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00053}\mbox{\hyperlink{libmmg2d__private_8h_add70ae6e4e3978eea6cada594f0e0e28}{00053}} \textcolor{keywordtype}{int} \mbox{\hyperlink{movpt__2d_8c_a9c0dcbbd689ed5c051c635d9d774c1fa}{MMG2D\_movedgpt}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,\textcolor{keywordtype}{int} ilist,MMG5\_int *list, int8\_t improve) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00054}00054   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}         pt,pt0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00055}00055   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}        p0,p1,p2,ppt;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00056}00056   \textcolor{keywordtype}{double}             step,ll1,ll2,o[2],no[2],calold,calnew;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00057}00057   MMG5\_int           k,iel,ip0,ip1,ip2,it1,it2;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00058}00058   int8\_t             i,i1,i2;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00059}00059   \textcolor{keyword}{static} int8\_t      mmgWarn0=0,mmgWarn1=0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00061}00061   pt0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00062}00062   step = 0.1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00063}00063   ip1 = ip2 = it1 = it2 = 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00064}00064   calold = calnew = DBL\_MAX;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00065}00065 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00066}00066   \textcolor{comment}{/* First step: retrieve the two boundary points connected to p0 */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00067}00067   \textcolor{keywordflow}{for} (k=0; k<ilist; k++) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00068}00068     iel = list[k] / 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00069}00069     i   = list[k] \% 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00070}00070     i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00071}00071     i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00073}00073     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00074}00074     calold = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(MMG2D\_caltri(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,pt),calold);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00076}00076     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1]) ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00077}00077       \textcolor{keywordflow}{if} ( ip1 == 0 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00078}00078         ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00079}00079         it1 = 3*iel+i1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00080}00080       \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00081}00081       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00082}00082         \textcolor{keywordflow}{if} ( ip2 == 0 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00083}00083           ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00084}00084           it2 = 3*iel+i1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00085}00085         \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00086}00086         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( ip2 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00087}00087           \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00088}00088             mmgWarn0 = 1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00089}00089             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: at least 1 point at the "{}}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00090}00090                     \textcolor{stringliteral}{"{}intersection of 3 edges. abort.\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00091}00091           \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00092}00092           \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00093}00093         \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00094}00094       \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00095}00095     \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00097}00097     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00098}00098       \textcolor{keywordflow}{if} ( ip1 == 0 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00099}00099         ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00100}00100         it1 = 3*iel+i2;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00101}00101       \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00102}00102       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00103}00103         \textcolor{keywordflow}{if} ( ip2 == 0 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00104}00104           ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00105}00105           it2 = 3*iel+i2;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00106}00106         \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00107}00107         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( ip2 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00108}00108           \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00109}00109             mmgWarn0 = 1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00110}00110             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: at least 1 point at the "{}}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00111}00111                     \textcolor{stringliteral}{"{}intersection of 3 edges. abort.\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00112}00112           \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00113}00113          \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00114}00114         \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00115}00115       \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00116}00116     \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00117}00117   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00119}00119   \textcolor{comment}{/* Check that there are exactly two boundary points connected at p0 */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00120}00120   \textcolor{keywordflow}{if} ( ip1 == 0 || ip2 == 0 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00121}00121     \textcolor{keywordflow}{if} ( !mmgWarn1 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00122}00122       mmgWarn1 = 1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00123}00123       fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: non singular point at end of edge.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00124}00124               \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00125}00125     \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00126}00126     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00127}00127   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00128}00128 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00129}00129   ip0 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00130}00130   p0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00131}00131   p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00132}00132   p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00133}00133 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00134}00134   \textcolor{comment}{/* Calculate length of both edges */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00135}00135   \textcolor{comment}{/* Anisotropic case: ll1 and ll2 = anisotropic edge lengths */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00136}00136   \textcolor{keywordflow}{if} ( met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}} == 3 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00137}00137     ll1 = \mbox{\hyperlink{length__2d_8c_a76a2351fc2f76d9436c7d28152c15b23}{MMG2D\_lencurv\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,ip0,ip1);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00138}00138     ll2 = \mbox{\hyperlink{length__2d_8c_a76a2351fc2f76d9436c7d28152c15b23}{MMG2D\_lencurv\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,ip0,ip2);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00139}00139   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00140}00140   \textcolor{comment}{/* In all the remaining cases, ll1 and ll2 = squared edge lengths;}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00141}00141 \textcolor{comment}{     inconsistency between both cases is not problematic since these values serve only for comparison */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00142}00142   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00143}00143     ll1 = (p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0])*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]) + (p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1])*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00144}00144     ll2 = (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]) + (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00145}00145   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00147}00147   \textcolor{comment}{/* Relocate p0 slightly towards p1 */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00148}00148   \textcolor{keywordflow}{if} ( ll1 > ll2 ) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00149}00149     iel = it1 / 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00150}00150     i   = it1 \% 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00151}00151   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00152}00152   \textcolor{comment}{/* Relocate p0 slightly towards p2 */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00153}00153   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00154}00154     iel = it2 / 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00155}00155     i   = it2 \% 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00156}00156   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00158}00158   i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00159}00159 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00160}00160   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00161}00161 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00162}00162   \textcolor{comment}{/* step = distance of the relocated position from ip0}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00163}00163 \textcolor{comment}{     bezierCurv = distance s from inxt2[i] */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00164}00164   \textcolor{keywordflow}{if} ( pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] == ip0 ) \mbox{\hyperlink{bezier__2d_8c_a300e4f64da7d402e25fb74f53205f952}{MMG2D\_bezierCurv}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},iel,i,step,o,no);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00165}00165   \textcolor{keywordflow}{else} \mbox{\hyperlink{bezier__2d_8c_a300e4f64da7d402e25fb74f53205f952}{MMG2D\_bezierCurv}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},iel,i,1.0-\/step,o,no);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00166}00166 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00167}00167   \textcolor{comment}{/* Evaluate resulting configuration */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00168}00168   ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00169}00169   ppt-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] = o[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00170}00170   ppt-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] = o[1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00171}00171   ppt-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[0] = no[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00172}00172   ppt-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[1] = no[1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00173}00173 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00174}00174   \textcolor{keywordflow}{for} (k=0; k<ilist; k++) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00175}00175     iel = list[k] / 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00176}00176     i   = list[k] \% 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00177}00177     pt  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00178}00178     memcpy(pt0,pt,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00179}00179     pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i] = 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00180}00180 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00181}00181     calnew = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(MMG2D\_caltri(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,pt0),calnew);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00182}00182   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00183}00183 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00184}00184   \textcolor{keywordflow}{if} ( calold < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} \&\& calnew <= calold ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00185}00185   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( calnew < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00186}00186   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( improve \&\& calnew < 1.02 * calold ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00187}00187   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( calnew < 0.3 * calold ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00188}00188 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00189}00189   \textcolor{comment}{/* Update of the coordinates and normal of the point */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00190}00190   p0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i]];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00191}00191   p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] = o[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00192}00192   p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] = o[1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00193}00193 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00194}00194   p0-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[0] = no[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00195}00195   p0-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[1] = no[1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00197}00197   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00198}00198 \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00213}\mbox{\hyperlink{libmmg2d__private_8h_a1c65a8d1d2dbd00075b23ce8d8c25270}{00213}} \textcolor{keywordtype}{int} \mbox{\hyperlink{movpt__2d_8c_a9ba782c3f76effd8cf43eea5ec663f8c}{MMG2D\_movintpt}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,\textcolor{keywordtype}{int} ilist,MMG5\_int *list,int8\_t improve) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00214}00214   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}        pt,pt0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00215}00215   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}       p0,p1,p2,ppt0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00216}00216   \textcolor{keywordtype}{double}            calold,calnew,vol,volbal,b[2];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00217}00217   MMG5\_int          k,iel;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00218}00218   int8\_t            i,i1,i2;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00219}00219 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00220}00220   ppt0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00221}00221   pt0  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00222}00222 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00223}00223   volbal = 0.0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00224}00224   b[0] = b[1] = 0.0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00225}00225   calold = calnew = DBL\_MAX;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00226}00226 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00227}00227   \textcolor{comment}{/* Calculate the now position for vertex, as well as the quality of the previous configuration */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00228}00228   \textcolor{keywordflow}{for} (k=0; k<ilist; k++) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00229}00229     iel = list[k] / 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00230}00230     i   = list[k] \% 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00231}00231     i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00232}00232     i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00234}00234     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00235}00235 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00236}00236     \textcolor{comment}{/* Volume of iel */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00237}00237     p0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i]];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00238}00238     p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00239}00239     p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00240}00240     vol = 0.5* fabs((p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]) -\/ (p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]));}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00241}00241 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00242}00242     volbal += vol;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00243}00243 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00244}00244     \textcolor{comment}{/* Add coordinates of the centre of mass of iel, weighted by its volume */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00245}00245     b[0] += \mbox{\hyperlink{mmgcommon__private_8h_a675ed527e3feff2d4da55ad756042356}{MMG5\_ATHIRD}}*vol*(p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]+p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]+p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00246}00246     b[1] += \mbox{\hyperlink{mmgcommon__private_8h_a675ed527e3feff2d4da55ad756042356}{MMG5\_ATHIRD}}*vol*(p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]+p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]+p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00247}00247 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00248}00248     \textcolor{comment}{/* Quality of pt */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00249}00249     calold = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt),calold);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00250}00250   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00251}00251 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00252}00252   \textcolor{keywordflow}{if} ( volbal < \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00253}00253   volbal = 1.0 / volbal;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00254}00254   b[0] *= volbal;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00255}00255   b[1] *= volbal;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00256}00256 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00257}00257   \textcolor{comment}{/* Check the quality of the resulting configuration */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00258}00258   ppt0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] = b[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00259}00259   ppt0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] = b[1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00260}00260 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00261}00261   \textcolor{keywordflow}{for} (k=0; k<ilist; k++) \{}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00262}00262     iel = list[k] / 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00263}00263     i   = list[k] \% 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00264}00264     pt  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00265}00265     memcpy(pt0,pt,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00266}00266     pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i] = 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00267}00267 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00268}00268     calnew = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt0),calnew);}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00269}00269   \}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00270}00270 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00271}00271   \textcolor{keywordflow}{if} (calold < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} \&\& calnew <= calold) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00272}00272   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (calnew < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}}) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00273}00273   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( improve \&\& calnew < 1.02 * calold ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00274}00274   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( calnew < 0.3 * calold ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00275}00275 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00276}00276   \textcolor{comment}{/* Update of the coordinates of the point */}}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00277}00277   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[list[0]/3];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00278}00278   i  = list[0] \% 3;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00279}00279   p0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i]];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00280}00280   p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] = b[0];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00281}00281   p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] = b[1];}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00282}00282 }
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00283}00283   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{movpt__2d_8c_source_l00284}00284 \}}
+
+\end{DoxyCode}

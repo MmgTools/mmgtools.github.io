@@ -1,0 +1,272 @@
+\hypertarget{inoutcpp__3d_8cpp_source}{}\doxysection{inoutcpp\+\_\+3d.\+cpp}
+\label{inoutcpp__3d_8cpp_source}\index{src/mmg3d/inoutcpp\_3d.cpp@{src/mmg3d/inoutcpp\_3d.cpp}}
+\mbox{\hyperlink{inoutcpp__3d_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00002}00002 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00003}00003 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00004}00004 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00005}00005 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00006}00006 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00007}00007 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00008}00008 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00009}00009 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00010}00010 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00011}00011 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00012}00012 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00013}00013 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00014}00014 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00015}00015 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00016}00016 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00017}00017 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00018}00018 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00019}00019 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00020}00020 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00021}00021 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00022}00022 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00023}00023 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00035}00035 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{vtkparser_8hpp}{vtkparser.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00037}00037 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg3d_8h}{libmmg3d.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00038}00038 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg3d__private_8h}{libmmg3d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00040}00040 \textcolor{preprocessor}{\#ifdef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00042}\mbox{\hyperlink{inoutcpp__3d_8cpp_ae5354964862590e595e2614dac1992eb}{00042}} \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_ae5354964862590e595e2614dac1992eb}{MMG3D\_loadVtkMesh\_part2}} ( \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00043}00043                                      vtkDataSet **dataset, int8\_t ptMeditRef,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00044}00044                                      int8\_t eltMeditRef,\textcolor{keywordtype}{int} nsols ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00046}00046   \textcolor{keywordtype}{int} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00048}00048   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{libmmg3d__private_8h_ac2549c2af2a5bcaa52fff866fbd654d5}{MMG3D\_zaldy}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00049}00049     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00050}00050   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00051}00051   \textcolor{keywordflow}{if} (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}} < \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}} || \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a06f247c0d2cb244cc8f75970f17503a5}{ntmax}} < \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}} || \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a87f35588ecc56b0523413f5529d67f08}{nemax}} < \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a3c9274a9ff525c4c80b264c79e5701df}{ne}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00052}00052     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00053}00053   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00054}00054   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a3c9274a9ff525c4c80b264c79e5701df}{ne}} ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00055}00055     fprintf(stderr,\textcolor{stringliteral}{"{}  ** MISSING DATA.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00056}00056     fprintf(stderr,\textcolor{stringliteral}{"{} Check that your mesh contains tetrahedra.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00057}00057     fprintf(stderr,\textcolor{stringliteral}{"{} Exit program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00058}00058     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00059}00059   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00061}00061   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{vtkparser_8cpp_a16782d621b9b5e9c06dfa7dc322e7b5e}{MMG5\_loadVtkMesh\_part2}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},dataset,ptMeditRef,eltMeditRef,nsols);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00063}00063   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 1 ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00064}00064     fprintf(stderr,\textcolor{stringliteral}{"{}  ** ERROR WHEN PARSING THE INPUT FILE\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00065}00065     \textcolor{keywordflow}{return}  \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00066}00066   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00067}00067 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00068}00068   \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00069}00069 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00070}00070 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00071}00071 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00073}\mbox{\hyperlink{inoutcpp__3d_8cpp_a69ac11353c160ffa2b454a2786bf3209}{00073}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_a69ac11353c160ffa2b454a2786bf3209}{MMG3D\_loadVtuMesh}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00074}00074 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00075}00075 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00076}00076 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00077}00077   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00078}00078   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00080}00080 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00081}00081   \textcolor{keywordtype}{int}         \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}},nsols;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00082}00082   int8\_t      ptMeditRef,eltMeditRef,metricData;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00083}00083   vtkDataSet  *dataset;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00085}00085   \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac70707181547b168ced906589500bde4}{dim}} = 3;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00087}00087   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{vtkparser_8cpp_a38a5bbc70c5077dc7454b3ea371354f1}{MMG5\_loadVtuMesh\_part1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},\&dataset,\&ptMeditRef,\&eltMeditRef,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00088}00088                                \&nsols,\&metricData);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00089}00089   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00091}00091   \textcolor{comment}{/* Check data fields */}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00092}00092   \textcolor{keywordflow}{if} ( nsols > metricData ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00093}00093     fprintf(stderr,\textcolor{stringliteral}{"{}Error: \%d UNEXPECTED DATA FIELD(S)\(\backslash\)n"{}},nsols);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00094}00094     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00095}00095   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00097}00097   \textcolor{comment}{// Mesh alloc and transfer of the mesh from dataset toward the MMG5 Mesh Sol}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00098}00098   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{inoutcpp__3d_8cpp_ae5354964862590e595e2614dac1992eb}{MMG3D\_loadVtkMesh\_part2}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\&dataset,ptMeditRef,eltMeditRef,nsols);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00099}00099   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 1 ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00100}00100     fprintf(stderr,\textcolor{stringliteral}{"{}  ** ERROR WHEN PARSING THE INPUT FILE\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00101}00101     \textcolor{keywordflow}{return}  \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00102}00102   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00104}00104   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}} ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00105}00105     \textcolor{comment}{/* Check the metric type */}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00106}00106     \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{inout_8c_a1efa9a22184acb6e5a8d253590d70b1a}{MMG5\_chkMetricType}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac4d4e17292f5380eedbb705fff0041e7}{type}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>entities,NULL);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00107}00107   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00109}00109   \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00110}00110 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00111}00111 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00112}00112 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00113}\mbox{\hyperlink{inoutcpp__3d_8cpp_a091b30e762f02ea84a5771f5699e8a3e}{00113}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_a091b30e762f02ea84a5771f5699e8a3e}{MMG3D\_loadVtuMesh\_and\_allData}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00115}00115 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00117}00117   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00118}00118   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00120}00120 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00121}00121   \textcolor{keywordtype}{int}         \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}},nsols;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00122}00122   int8\_t      ptMeditRef,eltMeditRef,metricData;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00123}00123   vtkDataSet  *dataset;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00124}00124 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00125}00125   \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac70707181547b168ced906589500bde4}{dim}} = 3;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00127}00127   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{vtkparser_8cpp_a38a5bbc70c5077dc7454b3ea371354f1}{MMG5\_loadVtuMesh\_part1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},\&dataset,\&ptMeditRef,\&eltMeditRef,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00128}00128                                \&nsols,\&metricData);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00129}00129   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00130}00130 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00131}00131   \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a19907e508494e4e0d74633f4e3bc5789}{nsols}} = nsols;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00132}00132   \textcolor{keywordflow}{if} ( *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}} )  \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00133}00133 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00134}00134   \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},nsols*\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Sol}{MMG5\_Sol}}),\textcolor{stringliteral}{"{}solutions array"{}},}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00135}00135                 printf(\textcolor{stringliteral}{"{}  Exit program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00136}00136                 \textcolor{keywordflow}{return} -\/1);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00137}00137   \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},nsols,\mbox{\hyperlink{structMMG5__Sol}{MMG5\_Sol}},\textcolor{keywordflow}{return} -\/1);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00138}00138 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00139}00139   \textcolor{comment}{// Mesh alloc and transfer of the mesh from dataset toward the MMG5 Mesh Sol}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00140}00140   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{inoutcpp__3d_8cpp_ae5354964862590e595e2614dac1992eb}{MMG3D\_loadVtkMesh\_part2}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\&dataset,ptMeditRef,eltMeditRef,nsols);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00141}00141 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00142}00142   \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00143}00143 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00144}00144 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00145}00145 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00146}\mbox{\hyperlink{inoutcpp__3d_8cpp_a17be405f38f5505c60d8fab24a91c369}{00146}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_a17be405f38f5505c60d8fab24a91c369}{MMG3D\_loadVtkMesh}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00148}00148 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00150}00150   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00151}00151   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00152}00152 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00153}00153 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00154}00154   \textcolor{keywordtype}{int}         \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}},nsols;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00155}00155   int8\_t      ptMeditRef,eltMeditRef,metricData;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00156}00156   vtkDataSet  *dataset;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00158}00158   \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac70707181547b168ced906589500bde4}{dim}} = 3;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00159}00159 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00160}00160   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{vtkparser_8cpp_aba34d55b0d62681f411dbfaea2f1727d}{MMG5\_loadVtkMesh\_part1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},\&dataset,\&ptMeditRef,\&eltMeditRef,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00161}00161                                \&nsols,\&metricData);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00162}00162   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00163}00163 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00164}00164   \textcolor{comment}{/* Check data fields */}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00165}00165   \textcolor{keywordflow}{if} ( nsols > metricData ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00166}00166     fprintf(stderr,\textcolor{stringliteral}{"{}Error: \%d UNEXPECTED DATA FIELD(S)\(\backslash\)n"{}},nsols);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00167}00167     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00168}00168   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00169}00169 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00170}00170   \textcolor{comment}{// Mesh alloc and transfer of the mesh from dataset toward the MMG5 Mesh Sol}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00171}00171   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{inoutcpp__3d_8cpp_ae5354964862590e595e2614dac1992eb}{MMG3D\_loadVtkMesh\_part2}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\&dataset,ptMeditRef,eltMeditRef,nsols);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00172}00172   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 1 ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00173}00173     fprintf(stderr,\textcolor{stringliteral}{"{}  ** ERROR WHEN PARSING THE INPUT FILE\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00174}00174     \textcolor{keywordflow}{return}  \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00175}00175   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00176}00176 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00177}00177   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}} ) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00178}00178     \textcolor{comment}{/* Check the metric type */}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00179}00179     \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{inout_8c_a1efa9a22184acb6e5a8d253590d70b1a}{MMG5\_chkMetricType}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac4d4e17292f5380eedbb705fff0041e7}{type}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>entities,NULL);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00180}00180   \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00181}00181 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00182}00182   \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00183}00183 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00184}00184 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00185}00185 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00186}\mbox{\hyperlink{inoutcpp__3d_8cpp_a4ba0355b0c15a6efbd68fd3d950f1f16}{00186}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_a4ba0355b0c15a6efbd68fd3d950f1f16}{MMG3D\_loadVtkMesh\_and\_allData}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00187}00187 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00188}00188 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00189}00189 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00190}00190   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00191}00191   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00192}00192 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00193}00193 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00194}00194   \textcolor{keywordtype}{int}         \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}},nsols;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00195}00195   int8\_t      ptMeditRef,eltMeditRef,metricData;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00196}00196   vtkDataSet  *dataset;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00197}00197 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00198}00198   \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac70707181547b168ced906589500bde4}{dim}} = 3;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00200}00200   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{vtkparser_8cpp_aba34d55b0d62681f411dbfaea2f1727d}{MMG5\_loadVtkMesh\_part1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},\&dataset,\&ptMeditRef,\&eltMeditRef,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00201}00201                                \&nsols,\&metricData);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00202}00202   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} < 1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00203}00203 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00204}00204   \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a19907e508494e4e0d74633f4e3bc5789}{nsols}} = nsols;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00205}00205   \textcolor{keywordflow}{if} ( *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}} )  \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00206}00206 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00207}00207   \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},nsols*\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Sol}{MMG5\_Sol}}),\textcolor{stringliteral}{"{}solutions array"{}},}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00208}00208                 printf(\textcolor{stringliteral}{"{}  Exit program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00209}00209                 \textcolor{keywordflow}{return} -\/1);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00210}00210   \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(*\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},nsols,\mbox{\hyperlink{structMMG5__Sol}{MMG5\_Sol}},\textcolor{keywordflow}{return} -\/1);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00211}00211 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00212}00212   \textcolor{comment}{// Mesh alloc and transfer of the mesh from dataset toward the MMG5 Mesh Sol}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00213}00213   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{inoutcpp__3d_8cpp_ae5354964862590e595e2614dac1992eb}{MMG3D\_loadVtkMesh\_part2}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\&dataset,ptMeditRef,eltMeditRef,nsols);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00214}00214 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00215}00215   \textcolor{keywordflow}{return} \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00216}00216 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00217}00217 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00218}00218 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00219}\mbox{\hyperlink{inoutcpp__3d_8cpp_adbf6507cf5f16e9ab41771afd36640d1}{00219}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_adbf6507cf5f16e9ab41771afd36640d1}{MMG3D\_saveVtuMesh}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00220}00220 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00221}00221 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00222}00222 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00223}00223   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00224}00224   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00225}00225 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00226}00226 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00227}00227   \textcolor{keywordflow}{return} \mbox{\hyperlink{vtkparser_8hpp_a3fa7cdd81b831506aad2e633e0f534e7}{MMG5\_saveVtkMesh}}<vtkUnstructuredGrid,vtkXMLUnstructuredGridWriter,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00228}00228                           vtkXMLPUnstructuredGridWriter>(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},1,1);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00229}00229 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00230}00230 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00231}00231 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00232}\mbox{\hyperlink{inoutcpp__3d_8cpp_a2d56c79a26f4240fd30ac12a802559c3}{00232}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_a2d56c79a26f4240fd30ac12a802559c3}{MMG3D\_saveVtuMesh\_and\_allData}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00234}00234 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00235}00235 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00236}00236   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00237}00237   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00238}00238 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00239}00239 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00240}00240 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00241}00241   \textcolor{keywordflow}{return} \mbox{\hyperlink{vtkparser_8hpp_a3fa7cdd81b831506aad2e633e0f534e7}{MMG5\_saveVtkMesh}}<vtkUnstructuredGrid,vtkXMLUnstructuredGridWriter,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00242}00242                           vtkXMLPUnstructuredGridWriter>(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},0,1);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00243}00243 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00244}00244 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00245}00245 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00246}00246 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00247}00247 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00248}\mbox{\hyperlink{inoutcpp__3d_8cpp_aafdc6aa9ffced878137aa5d381eb09fa}{00248}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_aafdc6aa9ffced878137aa5d381eb09fa}{MMG3D\_saveVtkMesh}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00249}00249 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00250}00250 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00251}00251 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00252}00252   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00253}00253   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00255}00255 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00256}00256 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00257}00257   \textcolor{keywordflow}{return} \mbox{\hyperlink{vtkparser_8hpp_a3fa7cdd81b831506aad2e633e0f534e7}{MMG5\_saveVtkMesh}}<vtkUnstructuredGrid,vtkDataSetWriter,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00258}00258                           vtkPDataSetWriter>(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},1,0);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00259}00259 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00260}00260 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00261}00261 \}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00262}00262 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00263}\mbox{\hyperlink{inoutcpp__3d_8cpp_accc240e54d89e2f2fe64b8ea647070e0}{00263}} \textcolor{keywordtype}{int} \mbox{\hyperlink{inoutcpp__3d_8cpp_accc240e54d89e2f2fe64b8ea647070e0}{MMG3D\_saveVtkMesh\_and\_allData}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} *\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}) \{}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00264}00264 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00265}00265 \textcolor{preprocessor}{\#ifndef USE\_VTK}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00266}00266 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00267}00267   fprintf(stderr,\textcolor{stringliteral}{"{}  ** VTK library not founded. Unavailable file format.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00268}00268   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00270}00270 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00271}00271 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00272}00272   \textcolor{keywordflow}{return} \mbox{\hyperlink{vtkparser_8hpp_a3fa7cdd81b831506aad2e633e0f534e7}{MMG5\_saveVtkMesh}}<vtkUnstructuredGrid,vtkDataSetWriter,}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00273}00273                           vtkPDataSetWriter>(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},0,0);}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00274}00274 }
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00275}00275 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inoutcpp__3d_8cpp_source_l00276}00276 \}}
+
+\end{DoxyCode}

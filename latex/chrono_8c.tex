@@ -1,0 +1,141 @@
+\hypertarget{chrono_8c}{}\doxysection{src/common/chrono.c File Reference}
+\label{chrono_8c}\index{src/common/chrono.c@{src/common/chrono.c}}
+
+
+Simulation of a chronograph.  
+
+
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}chrono\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for chrono.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{chrono_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{chrono_8c_a67921c69e98250518e09b9443656ddad}{chrono}} (int cmode, \mbox{\hyperlink{structmytime}{mytime}} $\ast$ptt)
+\begin{DoxyCompactList}\small\item\em Function to measure time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{chrono_8c_a131699bc03717cfe1f21d602f81089fd}{tminit}} (\mbox{\hyperlink{structmytime}{mytime}} $\ast$t, int maxtim)
+\begin{DoxyCompactList}\small\item\em Initialize mytime object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}{printim}} (double elps, char $\ast$stim)
+\begin{DoxyCompactList}\small\item\em Print real time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simulation of a chronograph. 
+
+\begin{DoxyAuthor}{Author}
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+08 2010 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License.
+\end{DoxyCopyright}
+Simulation of a chronograph. Allow parallel usage. 
+
+Definition in file \mbox{\hyperlink{chrono_8c_source}{chrono.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{chrono_8c_a67921c69e98250518e09b9443656ddad}\label{chrono_8c_a67921c69e98250518e09b9443656ddad}} 
+\index{chrono.c@{chrono.c}!chrono@{chrono}}
+\index{chrono@{chrono}!chrono.c@{chrono.c}}
+\doxysubsubsection{\texorpdfstring{chrono()}{chrono()}}
+{\footnotesize\ttfamily void chrono (\begin{DoxyParamCaption}\item[{int}]{cmode,  }\item[{\mbox{\hyperlink{structmytime}{mytime}} $\ast$}]{ptt }\end{DoxyParamCaption})}
+
+
+
+Function to measure time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmode} & macro that allow to reset (RESET), start (ON) or stop (OFF) the chrono. \\
+\hline
+{\em $\ast$ptt} & pointer toward mytime object that store the chronograph informations. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{chrono_8c_source_l00049}{49}} of file \mbox{\hyperlink{chrono_8c_source}{chrono.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{chrono_8c_a67921c69e98250518e09b9443656ddad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}\label{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}} 
+\index{chrono.c@{chrono.c}!printim@{printim}}
+\index{printim@{printim}!chrono.c@{chrono.c}}
+\doxysubsubsection{\texorpdfstring{printim()}{printim()}}
+{\footnotesize\ttfamily void printim (\begin{DoxyParamCaption}\item[{double}]{elps,  }\item[{char $\ast$}]{stim }\end{DoxyParamCaption})}
+
+
+
+Print real time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em elps} & elapsed time in seconds. \\
+\hline
+{\em stim} & pointer toward string containg the elapsed time at .h.\+m.\+s format. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{chrono_8c_source_l00160}{160}} of file \mbox{\hyperlink{chrono_8c_source}{chrono.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{chrono_8c_a131699bc03717cfe1f21d602f81089fd}\label{chrono_8c_a131699bc03717cfe1f21d602f81089fd}} 
+\index{chrono.c@{chrono.c}!tminit@{tminit}}
+\index{tminit@{tminit}!chrono.c@{chrono.c}}
+\doxysubsubsection{\texorpdfstring{tminit()}{tminit()}}
+{\footnotesize\ttfamily void tminit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmytime}{mytime}} $\ast$}]{t,  }\item[{int}]{maxtim }\end{DoxyParamCaption})}
+
+
+
+Initialize mytime object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$t} & mytime object to store the chronograph infos. \\
+\hline
+{\em maxtim} & integer sepcifying the maximum number of times stored. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{chrono_8c_source_l00120}{120}} of file \mbox{\hyperlink{chrono_8c_source}{chrono.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{chrono_8c_a131699bc03717cfe1f21d602f81089fd_icgraph}
+\end{center}
+\end{figure}

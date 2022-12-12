@@ -1,0 +1,123 @@
+\hypertarget{anisomovpt__s_8c}{}\doxysection{src/mmgs/anisomovpt\+\_\+s.c File Reference}
+\label{anisomovpt__s_8c}\index{src/mmgs/anisomovpt\_s.c@{src/mmgs/anisomovpt\_s.c}}
+
+
+Functions to move a point in the mesh (with anisotropic metric).  
+
+
+{\ttfamily \#include \char`\"{}libmmgs\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmgexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for anisomovpt\+\_\+s.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt__s_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{anisomovpt__s_8c_af31128f60a909c3ddc2ba5dffbc42722}{movintpt\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$list, int ilist)
+\item 
+int \mbox{\hyperlink{anisomovpt__s_8c_af6aa26f2afe2922a217615167aa57b45}{movridpt\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int $\ast$list, int ilist)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions to move a point in the mesh (with anisotropic metric). 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000037}{Todo}}]Doxygen documentation \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{anisomovpt__s_8c_source}{anisomovpt\+\_\+s.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{anisomovpt__s_8c_af31128f60a909c3ddc2ba5dffbc42722}\label{anisomovpt__s_8c_af31128f60a909c3ddc2ba5dffbc42722}} 
+\index{anisomovpt\_s.c@{anisomovpt\_s.c}!movintpt\_ani@{movintpt\_ani}}
+\index{movintpt\_ani@{movintpt\_ani}!anisomovpt\_s.c@{anisomovpt\_s.c}}
+\doxysubsubsection{\texorpdfstring{movintpt\_ani()}{movintpt\_ani()}}
+{\footnotesize\ttfamily int movintpt\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{int}]{ilist }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em list} & ball of point. \\
+\hline
+{\em ilist} & size of the point ball. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Compute movement of an internal point whose ball is passed. Step 2 \+: Compute gradient towards optimal position = centre of mass of the ball, projected to tangent plane
+
+Step 3 \+: locate new point in the ball, and compute its barycentric coordinates
+
+Step 4 \+: come back to original problem, and compute patch in triangle iel
+
+Definition at line \mbox{\hyperlink{anisomovpt__s_8c_source_l00049}{49}} of file \mbox{\hyperlink{anisomovpt__s_8c_source}{anisomovpt\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt__s_8c_af31128f60a909c3ddc2ba5dffbc42722_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt__s_8c_af31128f60a909c3ddc2ba5dffbc42722_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{anisomovpt__s_8c_af6aa26f2afe2922a217615167aa57b45}\label{anisomovpt__s_8c_af6aa26f2afe2922a217615167aa57b45}} 
+\index{anisomovpt\_s.c@{anisomovpt\_s.c}!movridpt\_ani@{movridpt\_ani}}
+\index{movridpt\_ani@{movridpt\_ani}!anisomovpt\_s.c@{anisomovpt\_s.c}}
+\doxysubsubsection{\texorpdfstring{movridpt\_ani()}{movridpt\_ani()}}
+{\footnotesize\ttfamily int movridpt\+\_\+ani (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int $\ast$}]{list,  }\item[{int}]{ilist }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{anisomovpt__s_8c_source_l00252}{252}} of file \mbox{\hyperlink{anisomovpt__s_8c_source}{anisomovpt\+\_\+s.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt__s_8c_af6aa26f2afe2922a217615167aa57b45_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{anisomovpt__s_8c_af6aa26f2afe2922a217615167aa57b45_icgraph}
+\end{center}
+\end{figure}

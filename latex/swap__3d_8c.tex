@@ -1,0 +1,221 @@
+\hypertarget{swap__3d_8c}{}\doxysection{src/mmg3d/swap\+\_\+3d.c File Reference}
+\label{swap__3d_8c}\index{src/mmg3d/swap\_3d.c@{src/mmg3d/swap\_3d.c}}
+
+
+Functions for swapping process over boundary.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}inlined\+\_\+functions\+\_\+3d\+\_\+private.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mmg3dexterns\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for swap\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swap__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{swap__3d_8c_abefd5a74c494581fc4bde6e16012c3fa}{MMG5\+\_\+chkswpbdy}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int64\+\_\+t $\ast$list, int ilist, MMG5\+\_\+int it1, MMG5\+\_\+int it2, int8\+\_\+t typchk)
+\item 
+int \mbox{\hyperlink{swap__3d_8c_a73bb4dc76f9ef33941a433b8f6e9169d}{MMG5\+\_\+swpbdy}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, int64\+\_\+t $\ast$list, int ret, MMG5\+\_\+int it1, \mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}} PROctree, int8\+\_\+t typchk)
+\item 
+int \mbox{\hyperlink{swap__3d_8c_a0a69844906b5733960611f1a04f9dc18}{MMG3\+D\+\_\+swap23}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t met\+Rid\+Typ, int ifac, int conf0, MMG5\+\_\+int adj, int conf1)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{swap__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for swapping process over boundary. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{swap__3d_8c_source}{swap\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{swap__3d_8c_a0a69844906b5733960611f1a04f9dc18}\label{swap__3d_8c_a0a69844906b5733960611f1a04f9dc18}} 
+\index{swap\_3d.c@{swap\_3d.c}!MMG3D\_swap23@{MMG3D\_swap23}}
+\index{MMG3D\_swap23@{MMG3D\_swap23}!swap\_3d.c@{swap\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_swap23()}{MMG3D\_swap23()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+swap23 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{met\+Rid\+Typ,  }\item[{int}]{ifac,  }\item[{int}]{conf0,  }\item[{MMG5\+\_\+int}]{adj,  }\item[{int}]{conf1 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the sol structure. \\
+\hline
+{\em k} & index of the tetrahedron with multiple boundary faces (to be swapped). \\
+\hline
+{\em met\+Rid\+Typ} & metric storage (classic or special) \\
+\hline
+{\em ifac} & face of the tetra {\itshape k} that give the best results for the swap23 \\
+\hline
+{\em conf0} & detected configuration for the swap23 of the tetra {\itshape k} \\
+\hline
+{\em adj} & neighbour of the tetra k through the face {\itshape ifac} (4$\ast$k1+ifac1) \\
+\hline
+{\em conf1} & detected configuration for the swap23 of the tetra {\itshape adj/4} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if lack of memory, 0 if fail to swap, 1 otherwise.
+\end{DoxyReturn}
+Search an adjacent to the tetra {\itshape k} and perform swap 2-\/\texorpdfstring{$>$}{>}3 (the common face of the 2 tetra is destroyed and replaced by a common edge used by the three new elts).
+
+\begin{DoxyRemark}{Remarks}
+used in anatet4 to remove the tetra with multiple boundary faces. 
+\end{DoxyRemark}
+Neighbouring element with which we will try to swap
+
+Swap
+
+Quality Update
+
+Definition at line \mbox{\hyperlink{swap__3d_8c_source_l00603}{603}} of file \mbox{\hyperlink{swap__3d_8c_source}{swap\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{swap__3d_8c_a0a69844906b5733960611f1a04f9dc18_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swap__3d_8c_a0a69844906b5733960611f1a04f9dc18_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{swap__3d_8c_abefd5a74c494581fc4bde6e16012c3fa}\label{swap__3d_8c_abefd5a74c494581fc4bde6e16012c3fa}} 
+\index{swap\_3d.c@{swap\_3d.c}!MMG5\_chkswpbdy@{MMG5\_chkswpbdy}}
+\index{MMG5\_chkswpbdy@{MMG5\_chkswpbdy}!swap\_3d.c@{swap\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_chkswpbdy()}{MMG5\_chkswpbdy()}}
+{\footnotesize\ttfamily int MMG5\+\_\+chkswpbdy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ilist,  }\item[{MMG5\+\_\+int}]{it1,  }\item[{MMG5\+\_\+int}]{it2,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure. \\
+\hline
+{\em list} & pointer toward the shell of the edge. \\
+\hline
+{\em ilist} & pointer toward the size of the shell of the edge. \\
+\hline
+{\em it1} & first element of the open shell. \\
+\hline
+{\em it2} & last element of the open shell. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmin or LSHORT criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if fail, 0 if we can not swap the edge, 1 otherwise.
+\end{DoxyReturn}
+Check whether edge whose shell is provided should be swapped for geometric approximation purposes (the 2 surface triangles are also provided). 
+
+Definition at line \mbox{\hyperlink{swap__3d_8c_source_l00057}{57}} of file \mbox{\hyperlink{swap__3d_8c_source}{swap\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swap__3d_8c_abefd5a74c494581fc4bde6e16012c3fa_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swap__3d_8c_abefd5a74c494581fc4bde6e16012c3fa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{swap__3d_8c_a73bb4dc76f9ef33941a433b8f6e9169d}\label{swap__3d_8c_a73bb4dc76f9ef33941a433b8f6e9169d}} 
+\index{swap\_3d.c@{swap\_3d.c}!MMG5\_swpbdy@{MMG5\_swpbdy}}
+\index{MMG5\_swpbdy@{MMG5\_swpbdy}!swap\_3d.c@{swap\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swpbdy()}{MMG5\_swpbdy()}}
+{\footnotesize\ttfamily int MMG5\+\_\+swpbdy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{int64\+\_\+t $\ast$}]{list,  }\item[{int}]{ret,  }\item[{MMG5\+\_\+int}]{it1,  }\item[{\mbox{\hyperlink{PRoctree__3d__private_8h_a3123a024d89f849036a3b9c8397b5a9f}{MMG3\+D\+\_\+p\+PROctree}}}]{PROctree,  }\item[{int8\+\_\+t}]{typchk }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em met} & pointer toward the solution structure \\
+\hline
+{\em list} & pointer toward the shell of the edge \\
+\hline
+{\em ret} & dobble of the number of tetrahedra in the shell \\
+\hline
+{\em it1} & boundary face carrying the beforehand tested terminal point for collapse \\
+\hline
+{\em PROctree} & pointer toward the PROctree structure in Delaunay mode, NULL pointer in pattern mode. \\
+\hline
+{\em typchk} & type of checking permformed for edge length (hmin or LSHORT criterion). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if lack of memory, 0 if fail to swap, 1 otherwise
+\end{DoxyReturn}
+Swap boundary edge whose shell is provided. 
+
+Definition at line \mbox{\hyperlink{swap__3d_8c_source_l00467}{467}} of file \mbox{\hyperlink{swap__3d_8c_source}{swap\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swap__3d_8c_a73bb4dc76f9ef33941a433b8f6e9169d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{swap__3d_8c_a73bb4dc76f9ef33941a433b8f6e9169d_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{swap__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{swap__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{swap\_3d.c@{swap\_3d.c}!ddb@{ddb}}
+\index{ddb@{ddb}!swap\_3d.c@{swap\_3d.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+

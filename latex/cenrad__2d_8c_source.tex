@@ -1,0 +1,76 @@
+\hypertarget{cenrad__2d_8c_source}{}\doxysection{cenrad\+\_\+2d.\+c}
+\label{cenrad__2d_8c_source}\index{src/mmg2d/cenrad\_2d.c@{src/mmg2d/cenrad\_2d.c}}
+\mbox{\hyperlink{cenrad__2d_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00005}00005 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00010}00010 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00015}00015 \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00022}00022 \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00031}00031 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00042}\mbox{\hyperlink{cenrad__2d_8c_a496679f0776854605c425d4c3da06d38}{00042}} \textcolor{keywordtype}{int} \mbox{\hyperlink{cenrad__2d_8c_a496679f0776854605c425d4c3da06d38}{MMG2D\_cenrad\_iso}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\textcolor{keywordtype}{double} *ct,\textcolor{keywordtype}{double} *c,\textcolor{keywordtype}{double} *rad) \{}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00043}00043   \textcolor{keywordtype}{double}      dd,ux,uy,n1[2],n2[2],*c1,*c2,*c3,pl1,pl2;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00044}00044   \textcolor{keywordtype}{double}      cc1,cc2;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00046}00046   c1 = \&ct[0];}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00047}00047   c2 = \&ct[2];}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00048}00048   c3 = \&ct[4];}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00050}00050   ux = c3[0] -\/ c1[0];}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00051}00051   uy = c3[1] -\/ c1[1];}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00053}00053   dd = 1.0 / sqrt(ux*ux + uy*uy);}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00054}00054   n1[0] = ux*dd;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00055}00055   n1[1] = uy*dd;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00057}00057   \textcolor{comment}{/* droite passant par le milieu de c1c3 */}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00058}00058   pl1 = 0.5*(n1[0]*(c3[0]+c1[0])+ n1[1]*(c3[1]+c1[1])) ;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00060}00060   ux = c3[0] -\/ c2[0];}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00061}00061   uy = c3[1] -\/ c2[1];}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00063}00063   dd = 1.0 / sqrt(ux*ux + uy*uy);}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00064}00064   n2[0] = ux*dd;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00065}00065   n2[1] = uy*dd;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00066}00066   pl2 = 0.5*(n2[0]*(c3[0]+c2[0])+ n2[1]*(c3[1]+c2[1]));}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00067}00067 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00068}00068   \textcolor{comment}{/* center = intersection of 3 mediatrice */}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00069}00069   dd = n1[0]*n2[1] -\/ n2[0]*n1[1] ;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00070}00070   \textcolor{keywordflow}{if}(fabs((dd))<1e-\/12)  \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00071}00071   dd = 1./dd;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00073}00073   cc1 = n2[1]*pl1 -\/ n1[1]*pl2;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00074}00074   cc2 = -\/n2[0]*pl1 + n1[0]*pl2;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00076}00076   c[0] = dd * cc1;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00077}00077   c[1] = dd * cc2;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00078}00078 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00079}00079   \textcolor{comment}{/* radius (squared) */}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00080}00080   *rad = (c[0] -\/ c1[0]) * (c[0] -\/ c1[0]) \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00081}00081     + (c[1] -\/ c1[1]) * (c[1] -\/ c1[1]);}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00083}00083   \textcolor{comment}{/* printf("{}check rad \%e -\/-\/ \%e \%e\(\backslash\)n"{},*rad, (c[0] -\/ c2[0]) * (c[0] -\/ c2[0]) \(\backslash\) */}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00084}00084   \textcolor{comment}{/*     + (c[1] -\/ c2[1]) * (c[1] -\/ c2[1]), (c[0] -\/ c3[0]) * (c[0] -\/ c3[0]) \(\backslash\) */}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00085}00085   \textcolor{comment}{/*     + (c[1] -\/ c3[1]) * (c[1] -\/ c3[1])); */}}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00087}00087   \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{cenrad__2d_8c_source_l00088}00088 \}}
+
+\end{DoxyCode}

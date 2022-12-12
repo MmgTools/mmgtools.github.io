@@ -1,0 +1,268 @@
+\hypertarget{bezier__3d_8c}{}\doxysection{src/mmg3d/bezier\+\_\+3d.c File Reference}
+\label{bezier__3d_8c}\index{src/mmg3d/bezier\_3d.c@{src/mmg3d/bezier\_3d.c}}
+
+
+Functions for Bezier surface computation.  
+
+
+{\ttfamily \#include \char`\"{}libmmg3d\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for bezier\+\_\+3d.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bezier__3d_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{bezier__3d_8c_a3d0d982b6bfe1bebc2183b433f9f3fb5}{MMG5\+\_\+\+Bezier\+Tgt}} (double c1\mbox{[}3\mbox{]}, double c2\mbox{[}3\mbox{]}, double n1\mbox{[}3\mbox{]}, double n2\mbox{[}3\mbox{]}, double t1\mbox{[}3\mbox{]}, double t2\mbox{[}3\mbox{]})
+\item 
+double \mbox{\hyperlink{bezier__3d_8c_aaff08675aafbdebc90c10d813be55ba8}{MMG5\+\_\+\+Bezier\+Geod}} (double c1\mbox{[}3\mbox{]}, double c2\mbox{[}3\mbox{]}, double t1\mbox{[}3\mbox{]}, double t2\mbox{[}3\mbox{]})
+\item 
+int \mbox{\hyperlink{bezier__3d_8c_a025bc31e4da7444ea604bee30fef7102}{MMG5\+\_\+\+Bezier\+Edge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int ip0, MMG5\+\_\+int ip1, double b0\mbox{[}3\mbox{]}, double b1\mbox{[}3\mbox{]}, int8\+\_\+t ised, double v\mbox{[}3\mbox{]})
+\item 
+int \mbox{\hyperlink{bezier__3d_8c_ae28d21a4bbe2f684cbf9ee72015c3aba}{MMG5\+\_\+mmg3d\+Bezier\+CP}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Tria}{MMG5\+\_\+\+Tria}} $\ast$pt, \mbox{\hyperlink{mmgcommon__private_8h_a76da89d731fcac55dc78dcd0e297da1e}{MMG5\+\_\+p\+Bezier}} pb, int8\+\_\+t ori)
+\item 
+int \mbox{\hyperlink{bezier__3d_8c_a0c564e9854cf8e694775fc8510ddee2b}{MMG3\+D\+\_\+bezier\+Int}} (\mbox{\hyperlink{mmgcommon__private_8h_a76da89d731fcac55dc78dcd0e297da1e}{MMG5\+\_\+p\+Bezier}} pb, double uv\mbox{[}2\mbox{]}, double o\mbox{[}3\mbox{]}, double no\mbox{[}3\mbox{]}, double to\mbox{[}3\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \mbox{\hyperlink{bezier__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}{ddb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for Bezier surface computation. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{bezier__3d_8c_source}{bezier\+\_\+3d.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{bezier__3d_8c_a0c564e9854cf8e694775fc8510ddee2b}\label{bezier__3d_8c_a0c564e9854cf8e694775fc8510ddee2b}} 
+\index{bezier\_3d.c@{bezier\_3d.c}!MMG3D\_bezierInt@{MMG3D\_bezierInt}}
+\index{MMG3D\_bezierInt@{MMG3D\_bezierInt}!bezier\_3d.c@{bezier\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_bezierInt()}{MMG3D\_bezierInt()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+bezier\+Int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mmgcommon__private_8h_a76da89d731fcac55dc78dcd0e297da1e}{MMG5\+\_\+p\+Bezier}}}]{pb,  }\item[{double}]{uv\mbox{[}2\mbox{]},  }\item[{double}]{o\mbox{[}3\mbox{]},  }\item[{double}]{no\mbox{[}3\mbox{]},  }\item[{double}]{to\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em pb} & pointer toward the Bezier structure. \\
+\hline
+{\em uv} & coordinates of the point in the parametric space. \\
+\hline
+{\em o} & computed coordinates of the point in the real space. \\
+\hline
+{\em no} & computed normal. \\
+\hline
+{\em to} & computed tangent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1.
+\end{DoxyReturn}
+Compute {\itshape o}, {\itshape no} and {\itshape to} at $(u,v)$ in Bezier patch. 
+
+Definition at line \mbox{\hyperlink{bezier__3d_8c_source_l00607}{607}} of file \mbox{\hyperlink{bezier__3d_8c_source}{bezier\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bezier__3d_8c_a0c564e9854cf8e694775fc8510ddee2b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bezier__3d_8c_a025bc31e4da7444ea604bee30fef7102}\label{bezier__3d_8c_a025bc31e4da7444ea604bee30fef7102}} 
+\index{bezier\_3d.c@{bezier\_3d.c}!MMG5\_BezierEdge@{MMG5\_BezierEdge}}
+\index{MMG5\_BezierEdge@{MMG5\_BezierEdge}!bezier\_3d.c@{bezier\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_BezierEdge()}{MMG5\_BezierEdge()}}
+{\footnotesize\ttfamily int MMG5\+\_\+\+Bezier\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{ip0,  }\item[{MMG5\+\_\+int}]{ip1,  }\item[{double}]{b0\mbox{[}3\mbox{]},  }\item[{double}]{b1\mbox{[}3\mbox{]},  }\item[{int8\+\_\+t}]{ised,  }\item[{double}]{v\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em ip0} & index of the first point of the curve. \\
+\hline
+{\em ip1} & index of the second point of the curve. \\
+\hline
+{\em b0} & the first computed extrapolated control point. \\
+\hline
+{\em b1} & the second computed extrapolated control point. \\
+\hline
+{\em ised} & flag for special edge. \\
+\hline
+{\em v} & direction for normal vectors.\\
+\hline
+\end{DoxyParams}
+Compute control points associated to the underlying curve to $[p0;p1]$. {\itshape ised} = 1 if $[p0;p1]$ must be considered as a special edge. Provide a direction {\itshape v} which will be considered as reference when dealing with choice of normal vectors. 
+
+Definition at line \mbox{\hyperlink{bezier__3d_8c_source_l00152}{152}} of file \mbox{\hyperlink{bezier__3d_8c_source}{bezier\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{bezier__3d_8c_a025bc31e4da7444ea604bee30fef7102_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bezier__3d_8c_a025bc31e4da7444ea604bee30fef7102_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bezier__3d_8c_aaff08675aafbdebc90c10d813be55ba8}\label{bezier__3d_8c_aaff08675aafbdebc90c10d813be55ba8}} 
+\index{bezier\_3d.c@{bezier\_3d.c}!MMG5\_BezierGeod@{MMG5\_BezierGeod}}
+\index{MMG5\_BezierGeod@{MMG5\_BezierGeod}!bezier\_3d.c@{bezier\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_BezierGeod()}{MMG5\_BezierGeod()}}
+{\footnotesize\ttfamily double MMG5\+\_\+\+Bezier\+Geod (\begin{DoxyParamCaption}\item[{double}]{c1\mbox{[}3\mbox{]},  }\item[{double}]{c2\mbox{[}3\mbox{]},  }\item[{double}]{t1\mbox{[}3\mbox{]},  }\item[{double}]{t2\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em c1} & coordinates of the first point of the curve. \\
+\hline
+{\em c2} & coordinates of the second point of the curve. \\
+\hline
+{\em t1} & normal at the first point of the curve. \\
+\hline
+{\em t2} & normal at the second point of the curve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parameter value.
+\end{DoxyReturn}
+Compute value of the parameter that makes the underlying Bezier curve with \textquotesingle{}constant speed\textquotesingle{} 
+
+Definition at line \mbox{\hyperlink{bezier__3d_8c_source_l00111}{111}} of file \mbox{\hyperlink{bezier__3d_8c_source}{bezier\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bezier__3d_8c_aaff08675aafbdebc90c10d813be55ba8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bezier__3d_8c_a3d0d982b6bfe1bebc2183b433f9f3fb5}\label{bezier__3d_8c_a3d0d982b6bfe1bebc2183b433f9f3fb5}} 
+\index{bezier\_3d.c@{bezier\_3d.c}!MMG5\_BezierTgt@{MMG5\_BezierTgt}}
+\index{MMG5\_BezierTgt@{MMG5\_BezierTgt}!bezier\_3d.c@{bezier\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_BezierTgt()}{MMG5\_BezierTgt()}}
+{\footnotesize\ttfamily int MMG5\+\_\+\+Bezier\+Tgt (\begin{DoxyParamCaption}\item[{double}]{c1\mbox{[}3\mbox{]},  }\item[{double}]{c2\mbox{[}3\mbox{]},  }\item[{double}]{n1\mbox{[}3\mbox{]},  }\item[{double}]{n2\mbox{[}3\mbox{]},  }\item[{double}]{t1\mbox{[}3\mbox{]},  }\item[{double}]{t2\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em c1} & coordinates of the first point of the curve. \\
+\hline
+{\em c2} & coordinates of the second point of the curve. \\
+\hline
+{\em n1} & normal at the first point of the curve. \\
+\hline
+{\em n2} & normal at the second point of the curve. \\
+\hline
+{\em t1} & computed normal at the first point of the curve. \\
+\hline
+{\em t2} & computed normal at the second point of the curve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Compute tangent to geometric support curve passing through c1,c2, with normals n1,n2 
+
+Definition at line \mbox{\hyperlink{bezier__3d_8c_source_l00053}{53}} of file \mbox{\hyperlink{bezier__3d_8c_source}{bezier\+\_\+3d.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bezier__3d_8c_a3d0d982b6bfe1bebc2183b433f9f3fb5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{bezier__3d_8c_ae28d21a4bbe2f684cbf9ee72015c3aba}\label{bezier__3d_8c_ae28d21a4bbe2f684cbf9ee72015c3aba}} 
+\index{bezier\_3d.c@{bezier\_3d.c}!MMG5\_mmg3dBezierCP@{MMG5\_mmg3dBezierCP}}
+\index{MMG5\_mmg3dBezierCP@{MMG5\_mmg3dBezierCP}!bezier\_3d.c@{bezier\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_mmg3dBezierCP()}{MMG5\_mmg3dBezierCP()}}
+{\footnotesize\ttfamily int MMG5\+\_\+mmg3d\+Bezier\+CP (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{structMMG5__Tria}{MMG5\+\_\+\+Tria}} $\ast$}]{pt,  }\item[{\mbox{\hyperlink{mmgcommon__private_8h_a76da89d731fcac55dc78dcd0e297da1e}{MMG5\+\_\+p\+Bezier}}}]{pb,  }\item[{int8\+\_\+t}]{ori }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em pt} & pointer toward the triangle structure. \\
+\hline
+{\em pb} & pointer toward the computed Bezier structure. \\
+\hline
+{\em ori} & triangle orientation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1.
+\end{DoxyReturn}
+Compute Bezier control points on triangle {\itshape pt} (cf.  \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000015}{Todo}}]merge with the MMG5\+\_\+mmgs\+Bezier\+CP function and remove the pointer toward this functions. \end{DoxyRefDesc}
+\begin{DoxyRemark}{Remarks}
+
+\begin{DoxyItemize}
+\item prior to commit f57b861966\+: we were comparing absolute values of normals projection (guessing that normals can be bad oriented). In this case, we can choose the wrong normal (normal at point related to other portion of surface) when the ridge angle is almost closed (smallest than 90°) because projection of normal at first triangle and normal at second triangle (or normal at point related to second surface) tends to -\/1;
+\item the following assert on the positivity of at least one of the projections may fail but I think that it is not a normal behaviour\+: it means that the surface approximation has degenerated. See issue \#167
+\end{DoxyItemize}
+\end{DoxyRemark}
+Orientation of the normals at non-\/manifold points
+
+Definition at line \mbox{\hyperlink{bezier__3d_8c_source_l00326}{326}} of file \mbox{\hyperlink{bezier__3d_8c_source}{bezier\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bezier__3d_8c_ae28d21a4bbe2f684cbf9ee72015c3aba_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bezier__3d_8c_ae28d21a4bbe2f684cbf9ee72015c3aba_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{bezier__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}\label{bezier__3d_8c_ab5450ef31db0c3c4df4c9f370b3a791a}} 
+\index{bezier\_3d.c@{bezier\_3d.c}!ddb@{ddb}}
+\index{ddb@{ddb}!bezier\_3d.c@{bezier\_3d.c}}
+\doxysubsubsection{\texorpdfstring{ddb}{ddb}}
+{\footnotesize\ttfamily int8\+\_\+t ddb\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{mmg3d1__delone_8c_source_l00042}{42}} of file \mbox{\hyperlink{mmg3d1__delone_8c_source}{mmg3d1\+\_\+delone.\+c}}.
+

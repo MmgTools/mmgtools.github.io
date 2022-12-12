@@ -1,0 +1,889 @@
+\hypertarget{inout_8c}{}\doxysection{src/common/inout.c File Reference}
+\label{inout_8c}\index{src/common/inout.c@{src/common/inout.c}}
+
+
+Input / Output Functions.  
+
+
+{\ttfamily \#include \char`\"{}mmgcommon\+\_\+private.\+h\char`\"{}}\newline
+Include dependency graph for inout.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{inout_8c_ad17734a89347db1dd255f79aa408215a}{MMG5\+\_\+swapbin}} (int sbin)
+\item 
+MMG5\+\_\+int \mbox{\hyperlink{inout_8c_a76095503224d8037bd7c8f68c420dc3d}{MMG5\+\_\+swapbin\+\_\+int}} (MMG5\+\_\+int sbin)
+\item 
+float \mbox{\hyperlink{inout_8c_a320bfdeaca91c2ddb9f9041bca70e5f2}{MMG5\+\_\+swapf}} (float sbin)
+\item 
+double \mbox{\hyperlink{inout_8c_a8b8879d8bdc4d05a1aa8866f517bf109}{MMG5\+\_\+swapd}} (double sbin)
+\item 
+static int \mbox{\hyperlink{inout_8c_a58e01af4d232a57c5413f3f35efe4824}{MMG5\+\_\+count\+Binary\+Elts}} (FILE $\ast$$\ast$inm, const int nelts, const int iswp, int $\ast$np, int $\ast$na, int $\ast$nt, int $\ast$nq, int $\ast$ne, int $\ast$npr)
+\item 
+int \mbox{\hyperlink{inout_8c_a70147e35916cd67e56b371c27aa256b9}{MMG5\+\_\+load\+Msh\+Mesh\+\_\+part1}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, const char $\ast$\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, FILE $\ast$$\ast$inm, long $\ast$pos\+Nodes, long $\ast$pos\+Elts, long $\ast$$\ast$pos\+Node\+Data, int $\ast$bin, int $\ast$iswp, MMG5\+\_\+int $\ast$nelts, int $\ast$nsols)
+\item 
+int \mbox{\hyperlink{inout_8c_a3808a5c10cbbdba6e7196fce89051f76}{MMG5\+\_\+check\+\_\+readed\+Mesh}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int nref)
+\item 
+int \mbox{\hyperlink{inout_8c_a9fcef603ec3edc1543cf02f852c0201e}{MMG5\+\_\+load\+Msh\+Mesh\+\_\+part2}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, FILE $\ast$$\ast$inm, const long pos\+Nodes, const long pos\+Elts, const long $\ast$pos\+Node\+Data, const int bin, const int iswp, const MMG5\+\_\+int nelts, const int nsols)
+\item 
+void \mbox{\hyperlink{inout_8c_a2673753b97a1b17f3f1a37e7ca1ea643}{MMG5\+\_\+build3\+DMetric}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, MMG5\+\_\+int ip, double dbuf\mbox{[}6\mbox{]})
+\item 
+int \mbox{\hyperlink{inout_8c_aa3e494e5fb07889a14ade07286b4ab68}{MMG5\+\_\+save\+Msh\+Mesh}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, const char $\ast$\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, int metric\+Data)
+\item 
+int \mbox{\hyperlink{inout_8c_ac57150798cee2227eee9fd3b46d3675c}{MMG5\+\_\+load\+Sol\+Header}} (const char $\ast$\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, int mesh\+Dim, FILE $\ast$$\ast$inm, int $\ast$ver, int $\ast$bin, int $\ast$iswp, MMG5\+\_\+int $\ast$np, int $\ast$dim, int $\ast$nsols, int $\ast$$\ast$type, long $\ast$posnp, int imprim)
+\item 
+int \mbox{\hyperlink{inout_8c_a8405f97e6f5bce4702c6c69a614a9674}{MMG5\+\_\+read\+Float\+Sol3D}} (\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, FILE $\ast$inm, int bin, int iswp, int pos)
+\item 
+int \mbox{\hyperlink{inout_8c_a01259fa4648438f31895dcce65ce2930}{MMG5\+\_\+read\+Double\+Sol3D}} (\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, FILE $\ast$inm, int bin, int iswp, MMG5\+\_\+int pos)
+\item 
+void \mbox{\hyperlink{inout_8c_a71f079d50b7449035629b8491cef0c8f}{MMG5\+\_\+write\+Double\+Sol3D}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, FILE $\ast$inm, int bin, MMG5\+\_\+int pos, int metric\+Data)
+\item 
+int \mbox{\hyperlink{inout_8c_a60c1365674c4a048c4c5bfa25a25b1ee}{MMG5\+\_\+save\+Sol\+Header}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, const char $\ast$\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, FILE $\ast$$\ast$inm, int ver, int $\ast$bin, MMG5\+\_\+int $\ast$bpos, MMG5\+\_\+int np, int dim, int nsols, int $\ast$entities, int $\ast$type, int $\ast$size)
+\item 
+int \mbox{\hyperlink{inout_8c_a5b599230d879ec1122711e5faa00d693}{MMG5\+\_\+save\+Sol\+At\+Triangles\+Header}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, FILE $\ast$inm, int ver, int bin, MMG5\+\_\+int $\ast$bpos, int nsols, int nsols\+At\+Triangles, int $\ast$entities, int $\ast$type, int $\ast$size)
+\item 
+int \mbox{\hyperlink{inout_8c_a77c0de14f4fbda2d9de5130321019ba7}{MMG5\+\_\+save\+Sol\+At\+Tetrahedra\+Header}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, FILE $\ast$inm, int ver, int bin, MMG5\+\_\+int $\ast$bpos, int nsols, int nsols\+At\+Tetra, int $\ast$entities, int $\ast$type, int $\ast$size)
+\item 
+int \mbox{\hyperlink{inout_8c_a1efa9a22184acb6e5a8d253590d70b1a}{MMG5\+\_\+chk\+Metric\+Type}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, int $\ast$type, int $\ast$entities, FILE $\ast$inm)
+\item 
+void \mbox{\hyperlink{inout_8c_aa89f88ecc8d0fd9291e1f2f22b5254fa}{MMG5\+\_\+print\+Met\+Stats}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met)
+\item 
+void \mbox{\hyperlink{inout_8c_a30476bdb3d9d4890f3b9857dc012817b}{MMG5\+\_\+print\+Sol\+Stats}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})
+\item 
+int \mbox{\hyperlink{inout_8c_a5d78ef45c725bd396314f664da65a246}{MMG5\+\_\+save\+Node}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, const char $\ast$\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}})
+\item 
+int \mbox{\hyperlink{inout_8c_a5dbd7db5710eb6a551e815e691363dfc}{MMG5\+\_\+save\+Edge}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, const char $\ast$\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, const char $\ast$ext)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Input / Output Functions. 
+
+\begin{DoxyAuthor}{Author}
+Charles Dapogny (UPMC) 
+
+Cécile Dobrzynski (Bx INP/\+Inria/\+UBordeaux) 
+
+Pascal Frey (UPMC) 
+
+Algiane Froehly (Inria/\+UBordeaux) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+5 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+GNU Lesser General Public License. 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000004}{Todo}}]doxygen documentation. \end{DoxyRefDesc}
+
+
+Definition in file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{inout_8c_a2673753b97a1b17f3f1a37e7ca1ea643}\label{inout_8c_a2673753b97a1b17f3f1a37e7ca1ea643}} 
+\index{inout.c@{inout.c}!MMG5\_build3DMetric@{MMG5\_build3DMetric}}
+\index{MMG5\_build3DMetric@{MMG5\_build3DMetric}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_build3DMetric()}{MMG5\_build3DMetric()}}
+{\footnotesize\ttfamily void MMG5\+\_\+build3\+DMetric (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{MMG5\+\_\+int}]{ip,  }\item[{double}]{dbuf\mbox{[}6\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em sol} & pointer toward the sol structure. \\
+\hline
+{\em index} & of point in which we want to build the metric \\
+\hline
+{\em dbuf} & builded metric\\
+\hline
+\end{DoxyParams}
+Build the metric at point {\itshape ip} depending with its type (ridge/not ridge). 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l01528}{1528}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a2673753b97a1b17f3f1a37e7ca1ea643_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a3808a5c10cbbdba6e7196fce89051f76}\label{inout_8c_a3808a5c10cbbdba6e7196fce89051f76}} 
+\index{inout.c@{inout.c}!MMG5\_check\_readedMesh@{MMG5\_check\_readedMesh}}
+\index{MMG5\_check\_readedMesh@{MMG5\_check\_readedMesh}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_check\_readedMesh()}{MMG5\_check\_readedMesh()}}
+{\footnotesize\ttfamily int MMG5\+\_\+check\+\_\+readed\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{nref }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward an Mmg mesh \\
+\hline
+{\em nref} & pointer toward the number of negative refs (replaced by abolute values).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 otherwise
+\end{DoxyReturn}
+Check the tetra orientation, print warning it negative refs have been detected, mark points as used and remove elt refs in iso mode. 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00526}{526}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a3808a5c10cbbdba6e7196fce89051f76_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a3808a5c10cbbdba6e7196fce89051f76_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a1efa9a22184acb6e5a8d253590d70b1a}\label{inout_8c_a1efa9a22184acb6e5a8d253590d70b1a}} 
+\index{inout.c@{inout.c}!MMG5\_chkMetricType@{MMG5\_chkMetricType}}
+\index{MMG5\_chkMetricType@{MMG5\_chkMetricType}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_chkMetricType()}{MMG5\_chkMetricType()}}
+{\footnotesize\ttfamily int MMG5\+\_\+chk\+Metric\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{int $\ast$}]{type,  }\item[{int $\ast$}]{entities,  }\item[{FILE $\ast$}]{inm }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em type} & type of the metric \\
+\hline
+{\em entities} & entities on which the metric applies (should be MMG5\+\_\+\+Vertex) \\
+\hline
+{\em inm} & metric file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, -\/1 if fail
+\end{DoxyReturn}
+Check metric data\+:
+\begin{DoxyEnumerate}
+\item check that the metric applies on vertices;
+\item check that the type of the metric is compatible with the remeshing mode. If not, close the metric file (note that if type is an allocated array, you must unallocate it outside). 
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02661}{2661}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a1efa9a22184acb6e5a8d253590d70b1a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a58e01af4d232a57c5413f3f35efe4824}\label{inout_8c_a58e01af4d232a57c5413f3f35efe4824}} 
+\index{inout.c@{inout.c}!MMG5\_countBinaryElts@{MMG5\_countBinaryElts}}
+\index{MMG5\_countBinaryElts@{MMG5\_countBinaryElts}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_countBinaryElts()}{MMG5\_countBinaryElts()}}
+{\footnotesize\ttfamily static int MMG5\+\_\+count\+Binary\+Elts (\begin{DoxyParamCaption}\item[{FILE $\ast$$\ast$}]{inm,  }\item[{const int}]{nelts,  }\item[{const int}]{iswp,  }\item[{int $\ast$}]{np,  }\item[{int $\ast$}]{na,  }\item[{int $\ast$}]{nt,  }\item[{int $\ast$}]{nq,  }\item[{int $\ast$}]{ne,  }\item[{int $\ast$}]{npr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em inm} & pointer toward file unit \\
+\hline
+{\em nelts} & number of elements \\
+\hline
+{\em iswap} & 1 if we need to swap bites for little/big endian conversion \\
+\hline
+{\em np} & number of points \\
+\hline
+{\em na} & number of edges \\
+\hline
+{\em nt} & number of tria \\
+\hline
+{\em nq} & number of quads \\
+\hline
+{\em ne} & number of tetra \\
+\hline
+{\em npr} & number of prisms\\
+\hline
+\end{DoxyParams}
+Count number of elts of each type. For now only int32 integers are supported. 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00127}{127}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{inout_8c_a58e01af4d232a57c5413f3f35efe4824_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a58e01af4d232a57c5413f3f35efe4824_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a70147e35916cd67e56b371c27aa256b9}\label{inout_8c_a70147e35916cd67e56b371c27aa256b9}} 
+\index{inout.c@{inout.c}!MMG5\_loadMshMesh\_part1@{MMG5\_loadMshMesh\_part1}}
+\index{MMG5\_loadMshMesh\_part1@{MMG5\_loadMshMesh\_part1}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_loadMshMesh\_part1()}{MMG5\_loadMshMesh\_part1()}}
+{\footnotesize\ttfamily int MMG5\+\_\+load\+Msh\+Mesh\+\_\+part1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{const char $\ast$}]{filename,  }\item[{FILE $\ast$$\ast$}]{inm,  }\item[{long $\ast$}]{pos\+Nodes,  }\item[{long $\ast$}]{pos\+Elts,  }\item[{long $\ast$$\ast$}]{pos\+Node\+Data,  }\item[{int $\ast$}]{bin,  }\item[{int $\ast$}]{iswp,  }\item[{MMG5\+\_\+int $\ast$}]{nelts,  }\item[{int $\ast$}]{nsols }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em filename} & pointer toward the name of file \\
+\hline
+{\em inm} & pointer toward the file pointer \\
+\hline
+{\em pos\+Nodes} & pointer toward the position of nodes data in file \\
+\hline
+{\em pos\+Elts} & pointer toward the position of elts data in file \\
+\hline
+{\em pos\+Node\+Data} & pointer toward the list of the positions of data in file \\
+\hline
+{\em bin} & 1 if binary format \\
+\hline
+{\em nelts} & number of elements in file \\
+\hline
+{\em nsol} & number of data in file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if file is not found, -\/1 if fail.
+\end{DoxyReturn}
+Begin to read mesh at MSH file format. Read the mesh size informations.
+
+\begin{DoxyRemark}{Remarks}
+For now only intput files containing int32 integers are supported. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00278}{278}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a70147e35916cd67e56b371c27aa256b9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a70147e35916cd67e56b371c27aa256b9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a9fcef603ec3edc1543cf02f852c0201e}\label{inout_8c_a9fcef603ec3edc1543cf02f852c0201e}} 
+\index{inout.c@{inout.c}!MMG5\_loadMshMesh\_part2@{MMG5\_loadMshMesh\_part2}}
+\index{MMG5\_loadMshMesh\_part2@{MMG5\_loadMshMesh\_part2}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_loadMshMesh\_part2()}{MMG5\_loadMshMesh\_part2()}}
+{\footnotesize\ttfamily int MMG5\+\_\+load\+Msh\+Mesh\+\_\+part2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$}]{sol,  }\item[{FILE $\ast$$\ast$}]{inm,  }\item[{const long}]{pos\+Nodes,  }\item[{const long}]{pos\+Elts,  }\item[{const long $\ast$}]{pos\+Node\+Data,  }\item[{const int}]{bin,  }\item[{const int}]{iswp,  }\item[{const MMG5\+\_\+int}]{nelts,  }\item[{const int}]{nsols }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh \\
+\hline
+{\em sol} & pointer toward the solutions array \\
+\hline
+{\em inm} & pointer toward the file pointer \\
+\hline
+{\em pos\+Nodes} & position of nodes data in file \\
+\hline
+{\em pos\+Elts} & position of elts data in file \\
+\hline
+{\em pos\+Node\+Data} & position of solution data in file \\
+\hline
+{\em bin} & 1 if binary format \\
+\hline
+{\em nelts} & number of elements in file \\
+\hline
+{\em nsols} & number of silutions in file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, -\/1 if fail.
+\end{DoxyReturn}
+End to read mesh and solution array at MSH file format after the mesh/solution array alloc.
+
+\begin{DoxyRemark}{Remarks}
+For now only intput files containing int32 integers are supported. 
+\end{DoxyRemark}
+Second step\+: read the nodes and elements
+
+Read the solution at nodes
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00668}{668}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a9fcef603ec3edc1543cf02f852c0201e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a9fcef603ec3edc1543cf02f852c0201e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_ac57150798cee2227eee9fd3b46d3675c}\label{inout_8c_ac57150798cee2227eee9fd3b46d3675c}} 
+\index{inout.c@{inout.c}!MMG5\_loadSolHeader@{MMG5\_loadSolHeader}}
+\index{MMG5\_loadSolHeader@{MMG5\_loadSolHeader}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_loadSolHeader()}{MMG5\_loadSolHeader()}}
+{\footnotesize\ttfamily int MMG5\+\_\+load\+Sol\+Header (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{int}]{mesh\+Dim,  }\item[{FILE $\ast$$\ast$}]{inm,  }\item[{int $\ast$}]{ver,  }\item[{int $\ast$}]{bin,  }\item[{int $\ast$}]{iswp,  }\item[{MMG5\+\_\+int $\ast$}]{np,  }\item[{int $\ast$}]{dim,  }\item[{int $\ast$}]{nsols,  }\item[{int $\ast$$\ast$}]{type,  }\item[{long $\ast$}]{posnp,  }\item[{int}]{imprim }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & name of file. \\
+\hline
+{\em mesh\+Dim} & mesh dimenson. \\
+\hline
+{\em inm} & allocatable pointer toward the FILE structure \\
+\hline
+{\em ver} & file version (1=simple precision, 2=double) \\
+\hline
+{\em bin} & 1 if the file is a binary \\
+\hline
+{\em iswp} & 1 or 0 depending on the endianness (binary only) \\
+\hline
+{\em np} & number of solutions of each type \\
+\hline
+{\em dim} & solution dimension \\
+\hline
+{\em nsols} & number of solutions of different types in the file \\
+\hline
+{\em type} & type of solutions \\
+\hline
+{\em posnp} & pointer toward the position of the point list in the file \\
+\hline
+{\em imprim} & verbosity\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 data invalid or we fail, 0 no file, 1 ok.
+\end{DoxyReturn}
+Open the \char`\"{}filename\char`\"{} solution file and read the file header. 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02080}{2080}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{inout_8c_ac57150798cee2227eee9fd3b46d3675c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_ac57150798cee2227eee9fd3b46d3675c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_aa89f88ecc8d0fd9291e1f2f22b5254fa}\label{inout_8c_aa89f88ecc8d0fd9291e1f2f22b5254fa}} 
+\index{inout.c@{inout.c}!MMG5\_printMetStats@{MMG5\_printMetStats}}
+\index{MMG5\_printMetStats@{MMG5\_printMetStats}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_printMetStats()}{MMG5\_printMetStats()}}
+{\footnotesize\ttfamily void MMG5\+\_\+print\+Met\+Stats (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em met} & pointer toward the metric structure.\\
+\hline
+\end{DoxyParams}
+print metric statistics 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02705}{2705}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_aa89f88ecc8d0fd9291e1f2f22b5254fa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a30476bdb3d9d4890f3b9857dc012817b}\label{inout_8c_a30476bdb3d9d4890f3b9857dc012817b}} 
+\index{inout.c@{inout.c}!MMG5\_printSolStats@{MMG5\_printSolStats}}
+\index{MMG5\_printSolStats@{MMG5\_printSolStats}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_printSolStats()}{MMG5\_printSolStats()}}
+{\footnotesize\ttfamily void MMG5\+\_\+print\+Sol\+Stats (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$}]{sol }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward the solutions array.\\
+\hline
+\end{DoxyParams}
+print solutions statistics 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02723}{2723}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a30476bdb3d9d4890f3b9857dc012817b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a01259fa4648438f31895dcce65ce2930}\label{inout_8c_a01259fa4648438f31895dcce65ce2930}} 
+\index{inout.c@{inout.c}!MMG5\_readDoubleSol3D@{MMG5\_readDoubleSol3D}}
+\index{MMG5\_readDoubleSol3D@{MMG5\_readDoubleSol3D}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_readDoubleSol3D()}{MMG5\_readDoubleSol3D()}}
+{\footnotesize\ttfamily int MMG5\+\_\+read\+Double\+Sol3D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{FILE $\ast$}]{inm,  }\item[{int}]{bin,  }\item[{int}]{iswp,  }\item[{MMG5\+\_\+int}]{pos }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em sol} & pointer toward an allocatable sol structure. \\
+\hline
+{\em inm} & pointer toward the solution file \\
+\hline
+{\em bin} & 1 if binary file \\
+\hline
+{\em iswp} & Endianess \\
+\hline
+{\em index} & of the readed solution\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, -\/1 if fail
+\end{DoxyReturn}
+Read the solution value for vertex of index pos in double precision. 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02269}{2269}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{inout_8c_a01259fa4648438f31895dcce65ce2930_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a01259fa4648438f31895dcce65ce2930_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a8405f97e6f5bce4702c6c69a614a9674}\label{inout_8c_a8405f97e6f5bce4702c6c69a614a9674}} 
+\index{inout.c@{inout.c}!MMG5\_readFloatSol3D@{MMG5\_readFloatSol3D}}
+\index{MMG5\_readFloatSol3D@{MMG5\_readFloatSol3D}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_readFloatSol3D()}{MMG5\_readFloatSol3D()}}
+{\footnotesize\ttfamily int MMG5\+\_\+read\+Float\+Sol3D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{FILE $\ast$}]{inm,  }\item[{int}]{bin,  }\item[{int}]{iswp,  }\item[{int}]{pos }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em sol} & pointer toward an allocatable sol structure. \\
+\hline
+{\em inm} & pointer toward the solution file \\
+\hline
+{\em bin} & 1 if binary file \\
+\hline
+{\em iswp} & Endianess \\
+\hline
+{\em index} & of the readed solution\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, -\/1 if fail
+\end{DoxyReturn}
+Read the solution value for vertex of index pos in floating precision. 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02220}{2220}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{inout_8c_a8405f97e6f5bce4702c6c69a614a9674_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a8405f97e6f5bce4702c6c69a614a9674_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a5dbd7db5710eb6a551e815e691363dfc}\label{inout_8c_a5dbd7db5710eb6a551e815e691363dfc}} 
+\index{inout.c@{inout.c}!MMG5\_saveEdge@{MMG5\_saveEdge}}
+\index{MMG5\_saveEdge@{MMG5\_saveEdge}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_saveEdge()}{MMG5\_saveEdge()}}
+{\footnotesize\ttfamily int MMG5\+\_\+save\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{const char $\ast$}]{filename,  }\item[{const char $\ast$}]{ext }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em filename} & name of file. \\
+\hline
+{\em ext} & file extension (.poly or .edge)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Save edge list at .edge file format (Tetgen/\+Triangle). 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02816}{2816}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{inout_8c_a5dbd7db5710eb6a551e815e691363dfc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a5dbd7db5710eb6a551e815e691363dfc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_aa3e494e5fb07889a14ade07286b4ab68}\label{inout_8c_aa3e494e5fb07889a14ade07286b4ab68}} 
+\index{inout.c@{inout.c}!MMG5\_saveMshMesh@{MMG5\_saveMshMesh}}
+\index{MMG5\_saveMshMesh@{MMG5\_saveMshMesh}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_saveMshMesh()}{MMG5\_saveMshMesh()}}
+{\footnotesize\ttfamily int MMG5\+\_\+save\+Msh\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} $\ast$}]{sol,  }\item[{const char $\ast$}]{filename,  }\item[{int}]{metric\+Data }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em sol} & pointer toward an array of solutions. \\
+\hline
+{\em filename} & name of file. \\
+\hline
+{\em metric\+Data} & 1 if the data saved is a metric (if only 1 data) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if failed, 1 otherwise.
+\end{DoxyReturn}
+Write mesh and a list of solutions at MSH file format (.msh extension). Write binary file for .mshb extension.\+and ASCII for .msh one. First step\+: Count the number of elements of each type
+
+Second step\+: save the elements at following format\+: \char`\"{}idx type tag\+Number tag0 tag1... v0\+\_\+elt v1\+\_\+elt...\char`\"{}
+
+Write solution
+
+Save the solution at following format\+: \char`\"{}idx sol\char`\"{}
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l01587}{1587}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{inout_8c_aa3e494e5fb07889a14ade07286b4ab68_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_aa3e494e5fb07889a14ade07286b4ab68_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a5d78ef45c725bd396314f664da65a246}\label{inout_8c_a5d78ef45c725bd396314f664da65a246}} 
+\index{inout.c@{inout.c}!MMG5\_saveNode@{MMG5\_saveNode}}
+\index{MMG5\_saveNode@{MMG5\_saveNode}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_saveNode()}{MMG5\_saveNode()}}
+{\footnotesize\ttfamily int MMG5\+\_\+save\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em filename} & name of file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail.
+\end{DoxyReturn}
+Save node list at .node file format (Tetgen/\+Triangle). 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02741}{2741}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a5d78ef45c725bd396314f664da65a246_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a77c0de14f4fbda2d9de5130321019ba7}\label{inout_8c_a77c0de14f4fbda2d9de5130321019ba7}} 
+\index{inout.c@{inout.c}!MMG5\_saveSolAtTetrahedraHeader@{MMG5\_saveSolAtTetrahedraHeader}}
+\index{MMG5\_saveSolAtTetrahedraHeader@{MMG5\_saveSolAtTetrahedraHeader}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_saveSolAtTetrahedraHeader()}{MMG5\_saveSolAtTetrahedraHeader()}}
+{\footnotesize\ttfamily int MMG5\+\_\+save\+Sol\+At\+Tetrahedra\+Header (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{FILE $\ast$}]{inm,  }\item[{int}]{ver,  }\item[{int}]{bin,  }\item[{MMG5\+\_\+int $\ast$}]{bpos,  }\item[{int}]{nsols,  }\item[{int}]{nsols\+At\+Tetra,  }\item[{int $\ast$}]{entities,  }\item[{int $\ast$}]{type,  }\item[{int $\ast$}]{size }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em inm} & pointer toward the opened file unit. \\
+\hline
+{\em ver} & file version (1=simple precision, 2=double). \\
+\hline
+{\em bin} & 1 if the file is a binary. \\
+\hline
+{\em bpos} & cumulative field position for binary Medit format. \\
+\hline
+{\em nsols} & number of solutions of different types in the file. \\
+\hline
+{\em nsols\+At\+Tetra} & number of solutions at tetra in the file. \\
+\hline
+{\em entities} & kind of entity on which the solution applies. \\
+\hline
+{\em type} & type of solutions. \\
+\hline
+{\em size} & size of solutions.\\
+\hline
+\end{DoxyParams}
+Save the number and type of solutions at Tetrahedron (not used by Mmg). 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02593}{2593}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a77c0de14f4fbda2d9de5130321019ba7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a5b599230d879ec1122711e5faa00d693}\label{inout_8c_a5b599230d879ec1122711e5faa00d693}} 
+\index{inout.c@{inout.c}!MMG5\_saveSolAtTrianglesHeader@{MMG5\_saveSolAtTrianglesHeader}}
+\index{MMG5\_saveSolAtTrianglesHeader@{MMG5\_saveSolAtTrianglesHeader}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_saveSolAtTrianglesHeader()}{MMG5\_saveSolAtTrianglesHeader()}}
+{\footnotesize\ttfamily int MMG5\+\_\+save\+Sol\+At\+Triangles\+Header (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{FILE $\ast$}]{inm,  }\item[{int}]{ver,  }\item[{int}]{bin,  }\item[{MMG5\+\_\+int $\ast$}]{bpos,  }\item[{int}]{nsols,  }\item[{int}]{nsols\+At\+Triangles,  }\item[{int $\ast$}]{entities,  }\item[{int $\ast$}]{type,  }\item[{int $\ast$}]{size }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em inm} & pointer toward the opened file unit. \\
+\hline
+{\em ver} & file version (1=simple precision, 2=double). \\
+\hline
+{\em bin} & 1 if the file is a binary. \\
+\hline
+{\em bpos} & cumulative field position for binary Medit format. \\
+\hline
+{\em nsols} & number of solutions of different types in the file. \\
+\hline
+{\em nsols\+At\+Triangles} & number of solutions at triangles in the file. \\
+\hline
+{\em entities} & kind of entity on which the solution applies. \\
+\hline
+{\em type} & type of solutions. \\
+\hline
+{\em size} & size of solutions.\\
+\hline
+\end{DoxyParams}
+Save the number and type of solutions at Triangles (not used by Mmg). 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02524}{2524}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a5b599230d879ec1122711e5faa00d693_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a60c1365674c4a048c4c5bfa25a25b1ee}\label{inout_8c_a60c1365674c4a048c4c5bfa25a25b1ee}} 
+\index{inout.c@{inout.c}!MMG5\_saveSolHeader@{MMG5\_saveSolHeader}}
+\index{MMG5\_saveSolHeader@{MMG5\_saveSolHeader}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_saveSolHeader()}{MMG5\_saveSolHeader()}}
+{\footnotesize\ttfamily int MMG5\+\_\+save\+Sol\+Header (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{const char $\ast$}]{filename,  }\item[{FILE $\ast$$\ast$}]{inm,  }\item[{int}]{ver,  }\item[{int $\ast$}]{bin,  }\item[{MMG5\+\_\+int $\ast$}]{bpos,  }\item[{MMG5\+\_\+int}]{np,  }\item[{int}]{dim,  }\item[{int}]{nsols,  }\item[{int $\ast$}]{entities,  }\item[{int $\ast$}]{type,  }\item[{int $\ast$}]{size }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure. \\
+\hline
+{\em filename} & name of file. \\
+\hline
+{\em inm} & allocatable pointer toward the FILE structure. \\
+\hline
+{\em ver} & file version (1=simple precision, 2=double). \\
+\hline
+{\em bin} & 1 if the file is a binary. \\
+\hline
+{\em bpos} & cumulative field position for binary Medit format. \\
+\hline
+{\em np} & number of solutions of each type. \\
+\hline
+{\em dim} & solution dimension. \\
+\hline
+{\em nsols} & number of solutions of different types in the file. \\
+\hline
+{\em entities} & kind of entity on which the solution applies (Vertex or Tetra) \\
+\hline
+{\em type} & type of solutions. \\
+\hline
+{\em size} & size of solutions.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if unable to open the file, 1 if success.
+\end{DoxyReturn}
+Open the \char`\"{}filename\char`\"{} solution file and save the file header and the number and type of solutions at vertices (Native solutions for Mmg). 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02387}{2387}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a60c1365674c4a048c4c5bfa25a25b1ee_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_ad17734a89347db1dd255f79aa408215a}\label{inout_8c_ad17734a89347db1dd255f79aa408215a}} 
+\index{inout.c@{inout.c}!MMG5\_swapbin@{MMG5\_swapbin}}
+\index{MMG5\_swapbin@{MMG5\_swapbin}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swapbin()}{MMG5\_swapbin()}}
+{\footnotesize\ttfamily int MMG5\+\_\+swapbin (\begin{DoxyParamCaption}\item[{int}]{sbin }\end{DoxyParamCaption})}
+
+swap bytes if needed (conversion from big/little endian toward little/big endian) 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00042}{42}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_ad17734a89347db1dd255f79aa408215a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a76095503224d8037bd7c8f68c420dc3d}\label{inout_8c_a76095503224d8037bd7c8f68c420dc3d}} 
+\index{inout.c@{inout.c}!MMG5\_swapbin\_int@{MMG5\_swapbin\_int}}
+\index{MMG5\_swapbin\_int@{MMG5\_swapbin\_int}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swapbin\_int()}{MMG5\_swapbin\_int()}}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG5\+\_\+swapbin\+\_\+int (\begin{DoxyParamCaption}\item[{MMG5\+\_\+int}]{sbin }\end{DoxyParamCaption})}
+
+swap bytes if needed (conversion from big/little endian toward little/big endian) 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00061}{61}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+\mbox{\Hypertarget{inout_8c_a8b8879d8bdc4d05a1aa8866f517bf109}\label{inout_8c_a8b8879d8bdc4d05a1aa8866f517bf109}} 
+\index{inout.c@{inout.c}!MMG5\_swapd@{MMG5\_swapd}}
+\index{MMG5\_swapd@{MMG5\_swapd}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swapd()}{MMG5\_swapd()}}
+{\footnotesize\ttfamily double MMG5\+\_\+swapd (\begin{DoxyParamCaption}\item[{double}]{sbin }\end{DoxyParamCaption})}
+
+swap bytes if needed (conversion from big/little endian toward little/big endian) 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00097}{97}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a8b8879d8bdc4d05a1aa8866f517bf109_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a320bfdeaca91c2ddb9f9041bca70e5f2}\label{inout_8c_a320bfdeaca91c2ddb9f9041bca70e5f2}} 
+\index{inout.c@{inout.c}!MMG5\_swapf@{MMG5\_swapf}}
+\index{MMG5\_swapf@{MMG5\_swapf}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_swapf()}{MMG5\_swapf()}}
+{\footnotesize\ttfamily float MMG5\+\_\+swapf (\begin{DoxyParamCaption}\item[{float}]{sbin }\end{DoxyParamCaption})}
+
+swap bytes if needed (conversion from big/little endian toward little/big endian) 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l00080}{80}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a320bfdeaca91c2ddb9f9041bca70e5f2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{inout_8c_a71f079d50b7449035629b8491cef0c8f}\label{inout_8c_a71f079d50b7449035629b8491cef0c8f}} 
+\index{inout.c@{inout.c}!MMG5\_writeDoubleSol3D@{MMG5\_writeDoubleSol3D}}
+\index{MMG5\_writeDoubleSol3D@{MMG5\_writeDoubleSol3D}!inout.c@{inout.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_writeDoubleSol3D()}{MMG5\_writeDoubleSol3D()}}
+{\footnotesize\ttfamily void MMG5\+\_\+write\+Double\+Sol3D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{sol,  }\item[{FILE $\ast$}]{inm,  }\item[{int}]{bin,  }\item[{MMG5\+\_\+int}]{pos,  }\item[{int}]{metric\+Data }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer toward the mesh structure \\
+\hline
+{\em sol} & pointer toward an allocatable sol structure. \\
+\hline
+{\em inm} & pointer toward the solution file \\
+\hline
+{\em bin} & 1 if binary file \\
+\hline
+{\em pos} & of the writted solution \\
+\hline
+{\em metric\+Data} & 1 if the data saved is a metric (if only 1 data)\\
+\hline
+\end{DoxyParams}
+Write the solution value for vertex of index pos in double precision. 
+
+Definition at line \mbox{\hyperlink{inout_8c_source_l02318}{2318}} of file \mbox{\hyperlink{inout_8c_source}{inout.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a71f079d50b7449035629b8491cef0c8f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inout_8c_a71f079d50b7449035629b8491cef0c8f_icgraph}
+\end{center}
+\end{figure}
