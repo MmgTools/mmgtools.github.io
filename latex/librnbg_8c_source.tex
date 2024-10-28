@@ -2,235 +2,235 @@
 \label{librnbg_8c_source}\index{src/common/librnbg.c@{src/common/librnbg.c}}
 \mbox{\hyperlink{librnbg_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00005}00005 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00010}00010 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00015}00015 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00022}00022 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00034}00034 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00035}00035 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgexterns__private_8h}{mmgexterns\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00036}00036 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00037}00037 \textcolor{preprocessor}{\#ifdef USE\_SCOTCH}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00038}00038 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00039}00039 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{librnbg__private_8h}{librnbg\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00040}00040 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00053}\mbox{\hyperlink{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e}{00053}} \textcolor{keywordtype}{int} \mbox{\hyperlink{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e}{MMG5\_kPartBoxCompute}}(SCOTCH\_Graph *graf, MMG5\_int vertNbr, MMG5\_int boxVertNbr,}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00054}00054                           SCOTCH\_Num *permVrtTab,\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00055}00055   MMG5\_int     boxNbr, vertIdx;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00056}00056   SCOTCH\_Num   logMaxVal, SupMaxVal, InfMaxVal, maxVal;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00057}00057   \textcolor{keywordtype}{char}         s[200];}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00058}00058   SCOTCH\_Num   *sortPartTb;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00059}00059   SCOTCH\_Strat strat ;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00060}00060   SCOTCH\_Arch  arch;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00061}00061 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00062}00062   \textcolor{comment}{/* Computing the number of boxes */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00063}00063   boxNbr = vertNbr / boxVertNbr;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00064}00064   \textcolor{keywordflow}{if} (boxNbr * boxVertNbr != vertNbr) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00065}00065     boxNbr = boxNbr + 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00066}00066   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00067}00067 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00068}00068 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00069}00069   \textcolor{comment}{/* Initializing SCOTCH functions */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00070}00070   \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_stratInit(\&strat), \textcolor{stringliteral}{"{}scotch\_stratInit"{}}, 0) ;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00071}00071   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}} || \mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}} ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00072}00072     \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_archCmplt(\&arch, boxNbr), \textcolor{stringliteral}{"{}scotch\_archCmplt"{}}, 0) ;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00073}00073   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00074}00074   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00075}00075     \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_archVcmplt(\&arch), \textcolor{stringliteral}{"{}scotch\_archVcmplt"{}}, 0) ;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00076}00076   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00077}00077   sprintf(s, \textcolor{stringliteral}{"{}m\{vert=\%"{}} MMG5\_PRId \textcolor{stringliteral}{"{},low=r\{job=t,map=t,poli=S,sep=m\{vert=80,low=h\{pass=10\}f\{bal=0.0005,move=80\},asc=f\{bal=0.005,move=80\}\}\}\}"{}}, vertNbr / boxVertNbr);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00078}00078   \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_stratGraphMap(\&strat, s), \textcolor{stringliteral}{"{}scotch\_stratGraphMap"{}}, 0) ;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00079}00079 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00080}00080   \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},2*vertNbr*\textcolor{keyword}{sizeof}(SCOTCH\_Num),\textcolor{stringliteral}{"{}sortPartTb"{}},\textcolor{keywordflow}{return} 1);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00081}00081   \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(sortPartTb,2*vertNbr,SCOTCH\_Num,\textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00082}00082 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00083}00083   \textcolor{comment}{/* Partionning the graph */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00084}00084   \textcolor{keywordflow}{if} ( 0!=SCOTCH\_graphMap(graf, \&arch, \&strat, sortPartTb) ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00085}00085     perror(\textcolor{stringliteral}{"{}scotch\_graphMap"{}});}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00086}00086     \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},sortPartTb);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00087}00087     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00088}00088   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00089}00089 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00090}00090 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00091}00091   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}} || \mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}} ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00092}00092     \textcolor{comment}{// Looking for the max value in sortPartTb and computing sortPartTb as}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00093}00093     \textcolor{comment}{// followed :}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00094}00094     \textcolor{comment}{//  -\/ sortPartTb[2i] is the box value}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00095}00095     \textcolor{comment}{//  -\/ sortPartTb[2i+1] is the vertex number}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00096}00096     maxVal = sortPartTb[0];}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00097}00097   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00098}00098   \textcolor{keywordflow}{for} (vertIdx = vertNbr -\/ 1 ; vertIdx >= 0 ; vertIdx-\/-\/) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00099}00099     sortPartTb[2*vertIdx] = sortPartTb[vertIdx];}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00100}00100     sortPartTb[2*vertIdx+1] = vertIdx + 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00101}00101     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}} ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00102}00102       \textcolor{keywordflow}{if} (sortPartTb[vertIdx] > maxVal)}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00103}00103         maxVal = sortPartTb[vertIdx];}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00104}00104     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00105}00105   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00106}00106 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00107}00107   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}} ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00108}00108     \textcolor{comment}{// Determining the log of MaxVal}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00109}00109     logMaxVal = 0;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00110}00110     \textcolor{keywordflow}{while} ( maxVal > 0) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00111}00111       logMaxVal++;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00112}00112       maxVal >>= 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00113}00113     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00114}00114 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00115}00115     \textcolor{comment}{// Infering the interval in which box values will be}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00116}00116     InfMaxVal = logMaxVal << logMaxVal;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00117}00117     SupMaxVal = (logMaxVal << (logMaxVal + 1)) -\/ 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00118}00118 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00119}00119     \textcolor{comment}{// Increasing box values until they are in the previous interval}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00120}00120     \textcolor{keywordflow}{for} (vertIdx = 0 ; vertIdx < vertNbr ; vertIdx++) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00121}00121       \textcolor{keywordflow}{while} (!(sortPartTb[2*vertIdx] >= InfMaxVal \&\& sortPartTb[2*vertIdx] <= SupMaxVal)) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00122}00122         sortPartTb[2*vertIdx] <<= 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00123}00123       \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00124}00124     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00125}00125   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00126}00126 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00127}00127   \textcolor{comment}{// Sorting the tabular, which contains box values and vertex numbers}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00128}00128   \mbox{\hyperlink{librnbg__private_8h_ac441e81313e852ea8f8ca1e950139c52}{\_SCOTCHintSort2asc1}}(sortPartTb, vertNbr);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00129}00129 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00130}00130 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00131}00131   \textcolor{comment}{/* Infering the new numbering */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00132}00132   \textcolor{keywordflow}{for} (vertIdx = 0; vertIdx < vertNbr ; vertIdx++) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00133}00133     permVrtTab[sortPartTb[2*vertIdx + 1]] = vertIdx + 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00134}00134   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00135}00135 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00136}00136   SCOTCH\_stratExit(\&strat) ;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00137}00137   SCOTCH\_archExit(\&arch) ;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00138}00138 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00139}00139   \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},sortPartTb);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00140}00140 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00141}00141   \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00142}00142 \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00143}00143 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00158}\mbox{\hyperlink{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a}{00158}} \textcolor{keywordtype}{void} \mbox{\hyperlink{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a}{MMG5\_swapNod}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}} points, \textcolor{keywordtype}{double}* sols,}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00159}00159                   \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} field,MMG5\_int* perm,MMG5\_int ind1, MMG5\_int ind2, \textcolor{keywordtype}{int} solsiz) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00160}00160   \mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}} ptttmp;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00161}00161   \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}  psl;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00162}00162   \mbox{\hyperlink{structMMG5__Sol}{MMG5\_Sol}}   soltmp;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00163}00163   \textcolor{keywordtype}{int}        i,pslsiz;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00164}00164   MMG5\_int   \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}},addr2,addr1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00165}00165 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00166}00166   \textcolor{comment}{/* swap the points */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00167}00167   memcpy(\&ptttmp      ,\&points[ind2],\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00168}00168   memcpy(\&points[ind2],\&points[ind1],\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00169}00169   memcpy(\&points[ind1],\&ptttmp      ,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00170}00170 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00171}00171   \textcolor{comment}{/* swap the sols */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00172}00172   \textcolor{keywordflow}{if} ( sols ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00173}00173     addr1 = ind1*solsiz;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00174}00174     addr2 = ind2*solsiz;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00175}00175     memcpy(\&soltmp     ,\&sols[addr2],solsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00176}00176     memcpy(\&sols[addr2],\&sols[addr1],solsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00177}00177     memcpy(\&sols[addr1],\&soltmp     ,solsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00178}00178   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00179}00179 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00180}00180   \textcolor{comment}{/* swap solution fields (for ParMmg) */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00181}00181   \textcolor{keywordflow}{if} ( field ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00182}00182     \textcolor{keywordflow}{if}( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a19907e508494e4e0d74633f4e3bc5789}{nsols}} ) \{ \textcolor{comment}{/* swap solution fields (for ParMmg) */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00183}00183       \textcolor{keywordflow}{for} ( i=0; i<\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a19907e508494e4e0d74633f4e3bc5789}{nsols}}; ++i ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00184}00184         psl    = field+i;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00185}00185         assert ( psl \&\& psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} );}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00186}00186 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00187}00187         pslsiz = psl-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}};}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00188}00188         addr1  = ind1*pslsiz;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00189}00189         addr2  = ind2*pslsiz;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00190}00190 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00191}00191         memcpy(\&soltmp       , psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr2,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00192}00192         memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr2, psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr1,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00193}00193         memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr1, \&soltmp       ,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00194}00194       \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00195}00195     \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{/* swap a single displacement field (for Lagrangian motion) */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00196}00196       psl = field;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00197}00197       assert ( psl );}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00198}00198 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00199}00199       \textcolor{keywordflow}{if}( psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} ) \{ \textcolor{comment}{/* it is null after Lagrangian step */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00200}00200         pslsiz = psl-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}};}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00201}00201         addr1  = ind1*pslsiz;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00202}00202         addr2  = ind2*pslsiz;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00203}00203 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00204}00204         memcpy(\&soltmp       , psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr2,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00205}00205         memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr2, psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr1,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00206}00206         memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} + addr1, \&soltmp       ,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00207}00207       \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00208}00208     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00209}00209   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00210}00210 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00211}00211   \textcolor{comment}{/* swap the permutaion table */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00212}00212   \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}}        = perm[ind2];}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00213}00213   perm[ind2] = perm[ind1];}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00214}00214   perm[ind1] = \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}};}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00215}00215 \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00216}00216 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00217}00217 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00231}\mbox{\hyperlink{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4}{00231}} \textcolor{keywordtype}{int} \mbox{\hyperlink{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4}{MMG5\_scotchCall}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00232}00232                     \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} fields, MMG5\_int *permNodGlob)}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00233}00233 \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00234}00234 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00235}00235 \textcolor{preprocessor}{\#ifdef USE\_SCOTCH}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00236}00236   \textcolor{keyword}{static} int8\_t mmgWarn  = 0;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00237}00237   \textcolor{keyword}{static} int8\_t mmgError = 0;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00238}00238 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00239}00239   \textcolor{comment}{/*check enough vertex to renum*/}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00240}00240   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a0d854c4409c1e85a8c55e90263cfdae9}{renum}} \&\& (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}/2. > \mbox{\hyperlink{mmgcommon__private_8h_a6598d397f5261ca74d1b526478062cf9}{MMG5\_BOXSIZE}}) ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00241}00241 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00242}00242     \textcolor{keywordflow}{if} ( (\mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}} \&\& \mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}} \&\& \mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}} ) || ( (!\mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}}) \&\& (!\mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}}) \&\& (!\mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}}) ) ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00243}00243       \textcolor{keywordflow}{if} ( !mmgWarn ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00244}00244         fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: fail to determine scotch version."{}}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00245}00245                 \textcolor{stringliteral}{"{} No renumbering.\(\backslash\)n"{}},\_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00246}00246         mmgWarn = 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00247}00247       \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00248}00248       \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00249}00249     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00250}00250 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00251}00251     \textcolor{comment}{/* renumbering begin */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00252}00252     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}} > 5 )}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00253}00253       fprintf(stdout,\textcolor{stringliteral}{"{}  -\/-\/ RENUMBERING. \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00254}00254 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00255}00255     \textcolor{keywordflow}{if} ( !MMG5\_renumbering(\mbox{\hyperlink{mmgcommon__private_8h_a6598d397f5261ca74d1b526478062cf9}{MMG5\_BOXSIZE}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, met,fields,permNodGlob) ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00256}00256       \textcolor{keywordflow}{if} ( !mmgError ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00257}00257         fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: Unable to renumber mesh. "{}}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00258}00258                 \textcolor{stringliteral}{"{}Try to run without renumbering option (-\/rn 0).\(\backslash\)n"{}},}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00259}00259                 \_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00260}00260         mmgError = 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00261}00261       \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00262}00262       \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00263}00263     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00264}00264 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00265}00265     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}} > 5) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00266}00266       fprintf(stdout,\textcolor{stringliteral}{"{}  -\/-\/ PHASE RENUMBERING COMPLETED. \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00267}00267     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00268}00268 }
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00269}00269     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}} ) \{}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00270}00270       \textcolor{keywordflow}{if} ( !MMG5\_chkmsh(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},1,0) )}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00271}00271         \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00272}00272     \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00273}00273     \textcolor{comment}{/* renumbering end */}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00274}00274   \}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00275}00275   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00276}00276 \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00277}00277   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00278}00278 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00279}00279 \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00001}00001\ \textcolor{comment}{/*\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00002}00002\ \textcolor{comment}{**\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00003}00003\ \textcolor{comment}{**\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00004}00004\ \textcolor{comment}{**\ \ Copyright\ (c)\ Bx\ INP/CNRS/Inria/UBordeaux/UPMC,\ 2004-\/}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00005}00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00006}00006\ \textcolor{comment}{**\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00007}00007\ \textcolor{comment}{**\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00008}00008\ \textcolor{comment}{**\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00009}00009\ \textcolor{comment}{**\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00011}00011\ \textcolor{comment}{**\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00012}00012\ \textcolor{comment}{**\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00013}00013\ \textcolor{comment}{**\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00014}00014\ \textcolor{comment}{**\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00016}00016\ \textcolor{comment}{**\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00017}00017\ \textcolor{comment}{**\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00018}00018\ \textcolor{comment}{**\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00019}00019\ \textcolor{comment}{**\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00020}00020\ \textcolor{comment}{**\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00021}00021\ \textcolor{comment}{**\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mmgexterns__private_8h}{mmgexterns\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00037}00037\ \textcolor{preprocessor}{\#ifdef\ USE\_SCOTCH}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00039}00039\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{librnbg__private_8h}{librnbg\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00053}\mbox{\hyperlink{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e}{00053}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{librnbg_8c_a808a7bf567a6088804de3c8dee58d71e}{MMG5\_kPartBoxCompute}}(SCOTCH\_Graph\ *graf,\ MMG5\_int\ vertNbr,\ MMG5\_int\ boxVertNbr,}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SCOTCH\_Num\ *permVrtTab,\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00055}00055\ \ \ MMG5\_int\ \ \ \ \ boxNbr,\ vertIdx;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00056}00056\ \ \ SCOTCH\_Num\ \ \ logMaxVal,\ SupMaxVal,\ InfMaxVal,\ maxVal;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00057}00057\ \ \ \textcolor{keywordtype}{char}\ \ \ \ \ \ \ \ \ s[200];}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00058}00058\ \ \ SCOTCH\_Num\ \ \ *sortPartTb;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00059}00059\ \ \ SCOTCH\_Strat\ strat\ ;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00060}00060\ \ \ SCOTCH\_Arch\ \ arch;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00062}00062\ \ \ \textcolor{comment}{/*\ Computing\ the\ number\ of\ boxes\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00063}00063\ \ \ boxNbr\ =\ vertNbr\ /\ boxVertNbr;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00064}00064\ \ \ \textcolor{keywordflow}{if}\ (boxNbr\ *\ boxVertNbr\ !=\ vertNbr)\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00065}00065\ \ \ \ \ boxNbr\ =\ boxNbr\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00066}00066\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00069}00069\ \ \ \textcolor{comment}{/*\ Initializing\ SCOTCH\ functions\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00070}00070\ \ \ \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_stratInit(\&strat),\ \textcolor{stringliteral}{"{}scotch\_stratInit"{}},\ 0)\ ;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00071}00071\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}}\ ||\ \mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00072}00072\ \ \ \ \ \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_archCmplt(\&arch,\ boxNbr),\ \textcolor{stringliteral}{"{}scotch\_archCmplt"{}},\ 0)\ ;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00073}00073\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00074}00074\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00075}00075\ \ \ \ \ \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_archVcmplt(\&arch),\ \textcolor{stringliteral}{"{}scotch\_archVcmplt"{}},\ 0)\ ;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00076}00076\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00077}00077\ \ \ sprintf(s,\ \textcolor{stringliteral}{"{}m\{vert=\%"{}}\ MMG5\_PRId\ \textcolor{stringliteral}{"{},low=r\{job=t,map=t,poli=S,sep=m\{vert=80,low=h\{pass=10\}f\{bal=0.0005,move=80\},asc=f\{bal=0.005,move=80\}\}\}\}"{}},\ vertNbr\ /\ boxVertNbr);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00078}00078\ \ \ \mbox{\hyperlink{librnbg__private_8h_a0767ed8f8b24bba8316aea3ec2189b03}{CHECK\_SCOTCH}}(SCOTCH\_stratGraphMap(\&strat,\ s),\ \textcolor{stringliteral}{"{}scotch\_stratGraphMap"{}},\ 0)\ ;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00080}00080\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},2*vertNbr*\textcolor{keyword}{sizeof}(SCOTCH\_Num),\textcolor{stringliteral}{"{}sortPartTb"{}},\textcolor{keywordflow}{return}\ 1);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00081}00081\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(sortPartTb,2*vertNbr,SCOTCH\_Num,\textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00083}00083\ \ \ \textcolor{comment}{/*\ Partionning\ the\ graph\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00084}00084\ \ \ \textcolor{keywordflow}{if}\ (\ 0!=SCOTCH\_graphMap(graf,\ \&arch,\ \&strat,\ sortPartTb)\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00085}00085\ \ \ \ \ perror(\textcolor{stringliteral}{"{}scotch\_graphMap"{}});}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},sortPartTb);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00088}00088\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00091}00091\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}}\ ||\ \mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00092}00092\ \ \ \ \ \textcolor{comment}{//\ Looking\ for\ the\ max\ value\ in\ sortPartTb\ and\ computing\ sortPartTb\ as}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00093}00093\ \ \ \ \ \textcolor{comment}{//\ followed\ :}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00094}00094\ \ \ \ \ \textcolor{comment}{//\ \ -\/\ sortPartTb[2i]\ is\ the\ box\ value}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00095}00095\ \ \ \ \ \textcolor{comment}{//\ \ -\/\ sortPartTb[2i+1]\ is\ the\ vertex\ number}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00096}00096\ \ \ \ \ maxVal\ =\ sortPartTb[0];}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00097}00097\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00098}00098\ \ \ \textcolor{keywordflow}{for}\ (vertIdx\ =\ vertNbr\ -\/\ 1\ ;\ vertIdx\ >=\ 0\ ;\ vertIdx-\/-\/)\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00099}00099\ \ \ \ \ sortPartTb[2*vertIdx]\ =\ sortPartTb[vertIdx];}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00100}00100\ \ \ \ \ sortPartTb[2*vertIdx+1]\ =\ vertIdx\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00102}00102\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sortPartTb[vertIdx]\ >\ maxVal)}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ maxVal\ =\ sortPartTb[vertIdx];}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00104}00104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00105}00105\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00107}00107\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00108}00108\ \ \ \ \ \textcolor{comment}{//\ Determining\ the\ log\ of\ MaxVal}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00109}00109\ \ \ \ \ logMaxVal\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{while}\ (\ maxVal\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00111}00111\ \ \ \ \ \ \ logMaxVal++;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00112}00112\ \ \ \ \ \ \ maxVal\ >>=\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00115}00115\ \ \ \ \ \textcolor{comment}{//\ Infering\ the\ interval\ in\ which\ box\ values\ will\ be}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00116}00116\ \ \ \ \ InfMaxVal\ =\ logMaxVal\ <<\ logMaxVal;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00117}00117\ \ \ \ \ SupMaxVal\ =\ (logMaxVal\ <<\ (logMaxVal\ +\ 1))\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00119}00119\ \ \ \ \ \textcolor{comment}{//\ Increasing\ box\ values\ until\ they\ are\ in\ the\ previous\ interval}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00120}00120\ \ \ \ \ \textcolor{keywordflow}{for}\ (vertIdx\ =\ 0\ ;\ vertIdx\ <\ vertNbr\ ;\ vertIdx++)\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00121}00121\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!(sortPartTb[2*vertIdx]\ >=\ InfMaxVal\ \&\&\ sortPartTb[2*vertIdx]\ <=\ SupMaxVal))\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ sortPartTb[2*vertIdx]\ <<=\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00123}00123\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00125}00125\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00127}00127\ \ \ \textcolor{comment}{//\ Sorting\ the\ tabular,\ which\ contains\ box\ values\ and\ vertex\ numbers}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00128}00128\ \ \ \mbox{\hyperlink{librnbg__private_8h_ac441e81313e852ea8f8ca1e950139c52}{\_SCOTCHintSort2asc1}}(sortPartTb,\ vertNbr);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00131}00131\ \ \ \textcolor{comment}{/*\ Infering\ the\ new\ numbering\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00132}00132\ \ \ \textcolor{keywordflow}{for}\ (vertIdx\ =\ 0;\ vertIdx\ <\ vertNbr\ ;\ vertIdx++)\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00133}00133\ \ \ \ \ permVrtTab[sortPartTb[2*vertIdx\ +\ 1]]\ =\ vertIdx\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00134}00134\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00136}00136\ \ \ SCOTCH\_stratExit(\&strat)\ ;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00137}00137\ \ \ SCOTCH\_archExit(\&arch)\ ;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00139}00139\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},sortPartTb);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00141}00141\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00142}00142\ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00158}\mbox{\hyperlink{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a}{00158}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{librnbg_8c_ab564ea04406ef6b0b3ad58e039c80e2a}{MMG5\_swapNod}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ points,\ \textcolor{keywordtype}{double}*\ sols,}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ field,MMG5\_int*\ perm,MMG5\_int\ ind1,\ MMG5\_int\ ind2,\ \textcolor{keywordtype}{int}\ solsiz)\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00160}00160\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}\ ptttmp;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00161}00161\ \ \ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ \ psl;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00162}00162\ \ \ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_Sol}}\ \ \ soltmp;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00163}00163\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ i,pslsiz;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00164}00164\ \ \ MMG5\_int\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}},addr2,addr1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00166}00166\ \ \ \textcolor{comment}{/*\ swap\ the\ points\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00167}00167\ \ \ memcpy(\&ptttmp\ \ \ \ \ \ ,\&points[ind2],\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00168}00168\ \ \ memcpy(\&points[ind2],\&points[ind1],\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00169}00169\ \ \ memcpy(\&points[ind1],\&ptttmp\ \ \ \ \ \ ,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00171}00171\ \ \ \textcolor{comment}{/*\ swap\ the\ sols\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00172}00172\ \ \ \textcolor{keywordflow}{if}\ (\ sols\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00173}00173\ \ \ \ \ addr1\ =\ ind1*solsiz;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00174}00174\ \ \ \ \ addr2\ =\ ind2*solsiz;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00175}00175\ \ \ \ \ memcpy(\&soltmp\ \ \ \ \ ,\&sols[addr2],solsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00176}00176\ \ \ \ \ memcpy(\&sols[addr2],\&sols[addr1],solsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00177}00177\ \ \ \ \ memcpy(\&sols[addr1],\&soltmp\ \ \ \ \ ,solsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00178}00178\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00180}00180\ \ \ \textcolor{comment}{/*\ swap\ solution\ fields\ (for\ ParMmg)\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00181}00181\ \ \ \textcolor{keywordflow}{if}\ (\ field\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a19907e508494e4e0d74633f4e3bc5789}{nsols}}\ )\ \{\ \textcolor{comment}{/*\ swap\ solution\ fields\ (for\ ParMmg)\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00183}00183\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ i=0;\ i<\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a19907e508494e4e0d74633f4e3bc5789}{nsols}};\ ++i\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ psl\ \ \ \ =\ field+i;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ assert\ (\ psl\ \&\&\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ );}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ pslsiz\ =\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}};}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ addr1\ \ =\ ind1*pslsiz;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ addr2\ \ =\ ind2*pslsiz;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ memcpy(\&soltmp\ \ \ \ \ \ \ ,\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr2,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr2,\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr1,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr1,\ \&soltmp\ \ \ \ \ \ \ ,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00194}00194\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00195}00195\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{comment}{/*\ swap\ a\ single\ displacement\ field\ (for\ Lagrangian\ motion)\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00196}00196\ \ \ \ \ \ \ psl\ =\ field;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00197}00197\ \ \ \ \ \ \ assert\ (\ psl\ );}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00199}00199\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ )\ \{\ \textcolor{comment}{/*\ it\ is\ null\ after\ Lagrangian\ step\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ pslsiz\ =\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}};}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ addr1\ \ =\ ind1*pslsiz;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ addr2\ \ =\ ind2*pslsiz;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ memcpy(\&soltmp\ \ \ \ \ \ \ ,\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr2,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr2,\ psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr1,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ memcpy(psl-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ +\ addr1,\ \&soltmp\ \ \ \ \ \ \ ,pslsiz*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00207}00207\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00208}00208\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00209}00209\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00211}00211\ \ \ \textcolor{comment}{/*\ swap\ the\ permutaion\ table\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00212}00212\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}}\ \ \ \ \ \ \ \ =\ perm[ind2];}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00213}00213\ \ \ perm[ind2]\ =\ perm[ind1];}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00214}00214\ \ \ perm[ind1]\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_a5be62287edda5e00fb0cde8ab34e70c5}{tmp}};}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00215}00215\ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00216}00216\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00231}\mbox{\hyperlink{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4}{00231}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{librnbg_8c_aba0725242dda8f86a5fad61f769d6dd4}{MMG5\_scotchCall}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ met,}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ fields,\ MMG5\_int\ *permNodGlob)}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00233}00233\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00235}00235\ \textcolor{preprocessor}{\#ifdef\ USE\_SCOTCH}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00236}00236\ \ \ \textcolor{keyword}{static}\ int8\_t\ mmgWarn\ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00237}00237\ \ \ \textcolor{keyword}{static}\ int8\_t\ mmgError\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00239}00239\ \ \ \textcolor{comment}{/*check\ enough\ vertex\ to\ renum*/}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00240}00240\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a0d854c4409c1e85a8c55e90263cfdae9}{renum}}\ \&\&\ (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}/2.\ >\ \mbox{\hyperlink{mmgcommon__private_8h_a6598d397f5261ca74d1b526478062cf9}{MMG5\_BOXSIZE}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00242}00242\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ (\mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}}\ \&\&\ \mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}}\ \&\&\ \mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}}\ )\ ||\ (\ (!\mbox{\hyperlink{librnbg__private_8h_a8ae079aef54ec065840a6a069b7468de}{SCOTCH\_5}})\ \&\&\ (!\mbox{\hyperlink{librnbg__private_8h_a6f0021d5be2d70247a7195a5c1f4cb0e}{SCOTCH\_6}})\ \&\&\ (!\mbox{\hyperlink{librnbg__private_8h_a2bb1183f17dbcc3ded4dcd3634a6fa3c}{SCOTCH\_7}})\ )\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00243}00243\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00244}00244\ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Warning:\ \%s:\ fail\ to\ determine\ scotch\ version."{}}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ No\ renumbering.\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ mmgWarn\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00247}00247\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00248}00248\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00249}00249\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00251}00251\ \ \ \ \ \textcolor{comment}{/*\ renumbering\ begin\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}}\ >\ 5\ )}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00253}00253\ \ \ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ -\/-\/\ RENUMBERING.\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00255}00255\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !MMG5\_renumbering(\mbox{\hyperlink{mmgcommon__private_8h_a6598d397f5261ca74d1b526478062cf9}{MMG5\_BOXSIZE}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\ met,fields,permNodGlob)\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00256}00256\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgError\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ Unable\ to\ renumber\ mesh.\ "{}}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Try\ to\ run\ without\ renumbering\ option\ (-\/rn\ 0).\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ mmgError\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00261}00261\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00262}00262\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00263}00263\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00265}00265\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}}\ >\ 5)\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00266}00266\ \ \ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ -\/-\/\ PHASE\ RENUMBERING\ COMPLETED.\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00267}00267\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00269}00269\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00270}00270\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !MMG5\_chkmsh(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},1,0)\ )}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00272}00272\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00273}00273\ \ \ \ \ \textcolor{comment}{/*\ renumbering\ end\ */}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00274}00274\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00275}00275\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00276}00276\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00277}00277\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00278}00278\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{librnbg_8c_source_l00279}00279\ \}}
 
 \end{DoxyCode}

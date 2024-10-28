@@ -2,103 +2,103 @@
 \label{d_2squareGeneration__example0_2main_8c_source}\index{libexamples/mmg2d/squareGeneration\_example0/main.c@{libexamples/mmg2d/squareGeneration\_example0/main.c}}
 \mbox{\hyperlink{d_2squareGeneration__example0_2main_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00001}00001 \textcolor{comment}{/*Authors Cécile Dobrzynski}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00002}00002 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00003}00003 \textcolor{comment}{  Example for using mmg2dlib}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00004}00004 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00005}00005 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <assert.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00007}00007 \textcolor{preprocessor}{\#include <stdio.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00008}00008 \textcolor{preprocessor}{\#include <stdlib.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00009}00009 \textcolor{preprocessor}{\#include <signal.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00010}00010 \textcolor{preprocessor}{\#include <string.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00011}00011 \textcolor{preprocessor}{\#include <ctype.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00012}00012 \textcolor{preprocessor}{\#include <math.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00013}00013 \textcolor{preprocessor}{\#include <float.h>}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00014}00014 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00016}00016 \textcolor{comment}{// if the header file is in the "{}include"{} directory}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00017}00017 \textcolor{comment}{// \#include "{}libmmg2d.h"{}}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00018}00018 \textcolor{comment}{// if the header file is in "{}include/mmg/mmg2d"{}}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00019}00019 \textcolor{preprocessor}{\#include "{}mmg/mmg2d/libmmg2d.h"{}}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00020}00020 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00021}\mbox{\hyperlink{d_2squareGeneration__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}{00021}} \textcolor{keywordtype}{int} \mbox{\hyperlink{adaptation__example0__fortran_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}(\textcolor{keywordtype}{int} argc,\textcolor{keywordtype}{char} *argv[]) \{}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00022}00022   \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}      mmgMesh;}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00023}00023   \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}       mmgSol;}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00024}00024   \textcolor{keywordtype}{char}            *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}, *outname;}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00025}00025 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00026}00026   \textcolor{keywordtype}{int}             \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00027}00027 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00028}00028   fprintf(stdout,\textcolor{stringliteral}{"{}  -\/-\/ TEST MMG2DMESH \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00029}00029 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00030}00030 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00031}00031   \textcolor{keywordflow}{if} ( argc != 3 ) \{}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00032}00032     printf(\textcolor{stringliteral}{"{} Usage: \%s filein fileout \(\backslash\)n"{}},argv[0]);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00033}00033     \textcolor{keywordflow}{return}(1);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00034}00034   \}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00035}00035 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00036}00036   \textcolor{comment}{/* Name and path of the mesh file */}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00037}00037   \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[1]) + 1, \textcolor{keyword}{sizeof}(char));}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00038}00038   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} == NULL ) \{}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00039}00039     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00040}00040     exit(EXIT\_FAILURE);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00041}00041   \}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00042}00042   strcpy(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},argv[1]);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00043}00043 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00044}00044   outname = (\textcolor{keywordtype}{char} *) calloc(strlen(argv[2]) + 1, \textcolor{keyword}{sizeof}(char));}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00045}00045   \textcolor{keywordflow}{if} ( outname == NULL ) \{}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00046}00046     perror(\textcolor{stringliteral}{"{}  \#\# Memory problem: calloc"{}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00047}00047     exit(EXIT\_FAILURE);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00048}00048   \}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00049}00049   strcpy(outname,argv[2]);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00050}00050 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00053}00053   \textcolor{comment}{/* args of InitMesh:}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00054}00054 \textcolor{comment}{   * MMG5\_ARG\_start: we start to give the args of a variadic func}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00055}00055 \textcolor{comment}{   * MMG5\_ARG\_ppMesh: next arg will be a pointer over a MMG5\_pMesh}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00056}00056 \textcolor{comment}{   * \&mmgMesh: pointer toward your MMG5\_pMesh (that store your mesh)}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00057}00057 \textcolor{comment}{   * MMG5\_ARG\_ppMet: next arg will be a pointer over a MMG5\_pSol storing a metric}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00058}00058 \textcolor{comment}{   * \&mmgSol: pointer toward your MMG5\_pSol (that store your metric) */}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00059}00059 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00060}00060   mmgMesh = NULL;}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00061}00061   mmgSol  = NULL;}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00062}00062   \mbox{\hyperlink{API__functions__2d_8c_a34d42982555797a0c6ba089f674279f4}{MMG2D\_Init\_mesh}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00063}00063                   \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh,\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00064}00064                   \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00065}00065 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00071}00071   \mbox{\hyperlink{inout__2d_8c_aa1b89c52440c3f359d0081e56200308c}{MMG2D\_loadMesh}}(mmgMesh,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00072}00072 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00074}00074   \mbox{\hyperlink{API__functions__2d_8c_ae39cf56a1e0f69f392990222a252e776}{MMG2D\_Set\_dparameter}}(mmgMesh,mmgSol,\mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adca8fa193b02fd7a0d7cde8aa880b34766b}{MMG2D\_DPARAM\_hmax}},0.1);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00075}00075 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00077}00077   \mbox{\hyperlink{API__functions__2d_8c_a3639c1a88f62b23d23203b2fbebd7a23}{MMG2D\_Set\_iparameter}}(mmgMesh,mmgSol,\mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adcad48a1f20de6a5e7c16644ff7e5031c63}{MMG2D\_IPARAM\_verbose}},5);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00078}00078 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00079}00079 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00081}00081   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmg2d_8c_a42bfab87a9b4592077466822f970abcf}{MMG2D\_mmg2dmesh}}(mmgMesh,mmgSol);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00082}00082 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00083}00083   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a2ed44e9232d89d6464b89b86652f1090}{MMG5\_STRONGFAILURE}} ) \{}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00084}00084     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMG2DMESH: UNABLE TO SAVE MESH\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00085}00085     \textcolor{keywordflow}{return}(\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00086}00086   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} == \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\_LOWFAILURE}} )}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00087}00087     fprintf(stdout,\textcolor{stringliteral}{"{}BAD ENDING OF MMG2DMESH\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00088}00088 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00089}00089   \textcolor{comment}{/*save result*/}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00090}00090   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_a2d6241f92b0eb89b4f55ae402aebf571}{MMG2D\_saveMesh}}(mmgMesh,outname) != 1 )}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00091}00091     exit(EXIT\_FAILURE);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00092}00092 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00093}00093   \textcolor{comment}{/*save metric*/}}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00094}00094   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{inout__2d_8c_a9c104e177e141b7396288e1018bf59db}{MMG2D\_saveSol}}(mmgMesh,mmgSol,outname) != 1 )}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00095}00095     exit(EXIT\_FAILURE);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00096}00096 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00098}00098   \mbox{\hyperlink{API__functions__2d_8c_ae54958922cfa83be04e5b76f4dad570c}{MMG2D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00099}00099                  \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh,\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00100}00100                  \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00101}00101 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00102}00102   free(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00103}00103   \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}} = NULL;}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00104}00104 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00105}00105 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00106}00106   free(outname);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00107}00107   outname = NULL;}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00108}00108 }
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00109}00109   \textcolor{keywordflow}{return}(0);}
-\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00110}00110 \}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00001}00001\ \textcolor{comment}{/*Authors\ Cécile\ Dobrzynski}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00002}00002\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00003}00003\ \textcolor{comment}{\ \ Example\ for\ using\ mmg2dlib}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00004}00004\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00005}00005\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <signal.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <ctype.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <float.h>}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00016}00016\ \textcolor{comment}{//\ if\ the\ header\ file\ is\ in\ the\ "{}include"{}\ directory}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00017}00017\ \textcolor{comment}{//\ \#include\ "{}libmmg2d.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00018}00018\ \textcolor{comment}{//\ if\ the\ header\ file\ is\ in\ "{}include/mmg/mmg2d"{}}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}mmg/mmg2d/libmmg2d.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00021}\mbox{\hyperlink{d_2squareGeneration__example0_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}{00021}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{adaptation__example0__fortran_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}(\textcolor{keywordtype}{int}\ argc,\textcolor{keywordtype}{char}\ *argv[])\ \{}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00022}00022\ \ \ \mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \ \ \ \ \ mmgMesh;}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00023}00023\ \ \ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ \ \ \ \ \ \ mmgSol;}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00024}00024\ \ \ \textcolor{keywordtype}{char}\ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},\ *outname;}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00026}00026\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}};}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00028}00028\ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ -\/-\/\ TEST\ MMG2DMESH\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00031}00031\ \ \ \textcolor{keywordflow}{if}\ (\ argc\ !=\ 3\ )\ \{}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00032}00032\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ Usage:\ \%s\ filein\ fileout\ \(\backslash\)n"{}},argv[0]);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{return}(1);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00034}00034\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00036}00036\ \ \ \textcolor{comment}{/*\ Name\ and\ path\ of\ the\ mesh\ file\ */}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00037}00037\ \ \ \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}\ =\ (\textcolor{keywordtype}{char}\ *)\ calloc(strlen(argv[1])\ +\ 1,\ \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00038}00038\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}\ ==\ NULL\ )\ \{}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00039}00039\ \ \ \ \ perror(\textcolor{stringliteral}{"{}\ \ \#\#\ Memory\ problem:\ calloc"{}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00040}00040\ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00041}00041\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00042}00042\ \ \ strcpy(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}},argv[1]);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00044}00044\ \ \ outname\ =\ (\textcolor{keywordtype}{char}\ *)\ calloc(strlen(argv[2])\ +\ 1,\ \textcolor{keyword}{sizeof}(char));}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00045}00045\ \ \ \textcolor{keywordflow}{if}\ (\ outname\ ==\ NULL\ )\ \{}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00046}00046\ \ \ \ \ perror(\textcolor{stringliteral}{"{}\ \ \#\#\ Memory\ problem:\ calloc"{}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00047}00047\ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00048}00048\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00049}00049\ \ \ strcpy(outname,argv[2]);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00053}00053\ \ \ \textcolor{comment}{/*\ args\ of\ InitMesh:}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00054}00054\ \textcolor{comment}{\ \ \ *\ MMG5\_ARG\_start:\ we\ start\ to\ give\ the\ args\ of\ a\ variadic\ func}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00055}00055\ \textcolor{comment}{\ \ \ *\ MMG5\_ARG\_ppMesh:\ next\ arg\ will\ be\ a\ pointer\ over\ a\ MMG5\_pMesh}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00056}00056\ \textcolor{comment}{\ \ \ *\ \&mmgMesh:\ pointer\ toward\ your\ MMG5\_pMesh\ (that\ store\ your\ mesh)}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00057}00057\ \textcolor{comment}{\ \ \ *\ MMG5\_ARG\_ppMet:\ next\ arg\ will\ be\ a\ pointer\ over\ a\ MMG5\_pSol\ storing\ a\ metric}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00058}00058\ \textcolor{comment}{\ \ \ *\ \&mmgSol:\ pointer\ toward\ your\ MMG5\_pSol\ (that\ store\ your\ metric)\ */}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00060}00060\ \ \ mmgMesh\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00061}00061\ \ \ mmgSol\ \ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00062}00062\ \ \ \mbox{\hyperlink{API__functions__2d_8c_a34d42982555797a0c6ba089f674279f4}{MMG2D\_Init\_mesh}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh,\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00071}00071\ \ \ \mbox{\hyperlink{inout__2d_8c_aa1b89c52440c3f359d0081e56200308c}{MMG2D\_loadMesh}}(mmgMesh,\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00074}00074\ \ \ \mbox{\hyperlink{API__functions__2d_8c_ae39cf56a1e0f69f392990222a252e776}{MMG2D\_Set\_dparameter}}(mmgMesh,mmgSol,\mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adca8fa193b02fd7a0d7cde8aa880b34766b}{MMG2D\_DPARAM\_hmax}},0.1);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00077}00077\ \ \ \mbox{\hyperlink{API__functions__2d_8c_a3639c1a88f62b23d23203b2fbebd7a23}{MMG2D\_Set\_iparameter}}(mmgMesh,mmgSol,\mbox{\hyperlink{libmmg2d_8h_a4d6eb9f3d94d73ae9a1429425c3a3adcad48a1f20de6a5e7c16644ff7e5031c63}{MMG2D\_IPARAM\_verbose}},5);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00081}00081\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ \mbox{\hyperlink{libmmg2d_8c_a42bfab87a9b4592077466822f970abcf}{MMG2D\_mmg2dmesh}}(mmgMesh,mmgSol);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00083}00083\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ ==\ \mbox{\hyperlink{libmmgtypes_8h_a2ed44e9232d89d6464b89b86652f1090}{MMG5\_STRONGFAILURE}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00084}00084\ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}BAD\ ENDING\ OF\ MMG2DMESH:\ UNABLE\ TO\ SAVE\ MESH\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}(\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00086}00086\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ ==\ \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\_LOWFAILURE}}\ )}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00087}00087\ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}BAD\ ENDING\ OF\ MMG2DMESH\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00089}00089\ \ \ \textcolor{comment}{/*save\ result*/}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00090}00090\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{inout__2d_8c_a2d6241f92b0eb89b4f55ae402aebf571}{MMG2D\_saveMesh}}(mmgMesh,outname)\ !=\ 1\ )}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00091}00091\ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00093}00093\ \ \ \textcolor{comment}{/*save\ metric*/}}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00094}00094\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{inout__2d_8c_a9c104e177e141b7396288e1018bf59db}{MMG2D\_saveSol}}(mmgMesh,mmgSol,outname)\ !=\ 1\ )}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00095}00095\ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00098}00098\ \ \ \mbox{\hyperlink{API__functions__2d_8c_ae54958922cfa83be04e5b76f4dad570c}{MMG2D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&mmgMesh,\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&mmgSol,}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00102}00102\ \ \ free(\mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}});}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00103}00103\ \ \ \mbox{\hyperlink{API__functionsf__3d_8c_a539b7c333f2633a43adfe1fcb5b0430b}{filename}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00106}00106\ \ \ free(outname);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00107}00107\ \ \ outname\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00109}00109\ \ \ \textcolor{keywordflow}{return}(0);}
+\DoxyCodeLine{\Hypertarget{d_2squareGeneration__example0_2main_8c_source_l00110}00110\ \}}
 
 \end{DoxyCode}

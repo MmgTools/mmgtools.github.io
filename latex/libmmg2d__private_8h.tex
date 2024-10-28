@@ -80,7 +80,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 static void \mbox{\hyperlink{libmmg2d__private_8h_a7e3c9361ae2799b97e86fdbe54a88d72}{MMG2\+D\+\_\+excfun}} (int sigid)
 \item 
-MMG5\+\_\+int \mbox{\hyperlink{libmmg2d__private_8h_ab38dbe56c664a422e544af037464535b}{MMG2\+D\+\_\+new\+Pt}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double c\mbox{[}2\mbox{]}, int16\+\_\+t tag)
+MMG5\+\_\+int \mbox{\hyperlink{libmmg2d__private_8h_a69c4f2597620d21e597bc054f72e255a}{MMG2\+D\+\_\+new\+Pt}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, double c\mbox{[}2\mbox{]}, uint16\+\_\+t tag)
 \item 
 void \mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2\+D\+\_\+del\+Pt}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\+\_\+int ip)
 \item 
@@ -514,34 +514,34 @@ Definition at line \mbox{\hyperlink{libmmg2d__private_8h_source_l00059}{59}} of 
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{  \textcolor{keywordflow}{do}       \(\backslash\)}
-\DoxyCodeLine{  \{                                                                     \(\backslash\)}
-\DoxyCodeLine{    MMG5\_int klink;                                                     \(\backslash\)}
-\DoxyCodeLine{                                                                        \(\backslash\)}
-\DoxyCodeLine{    assert ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}} \&\& \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}} );                                     \(\backslash\)}
-\DoxyCodeLine{    MMG5\_TAB\_RECALLOC(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}},wantedGap,\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}}, \(\backslash\)}
-\DoxyCodeLine{                       \textcolor{stringliteral}{"{}larger point table"{}},law);                       \(\backslash\)}
-\DoxyCodeLine{                                                                        \(\backslash\)}
-\DoxyCodeLine{    \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_af24552f88d01c854c29a1a649ce132c0}{npnil}} = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}+1;                                           \(\backslash\)}
-\DoxyCodeLine{    for (klink=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_af24552f88d01c854c29a1a649ce132c0}{npnil}}; klink<mesh-\/>npmax-\/1; klink++)               \(\backslash\)}
-\DoxyCodeLine{      \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[klink].\mbox{\hyperlink{structMMG5__Point_a524cf4be0f45609cea00c228ee7f2c9f}{tmp}}  = klink+1;                                \(\backslash\)}
-\DoxyCodeLine{                                                                        \(\backslash\)}
-\DoxyCodeLine{    \textcolor{comment}{/* solution */}                                                      \(\backslash\)}
-\DoxyCodeLine{    if ( \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}} ) \{                                                        \(\backslash\)}
-\DoxyCodeLine{      if ( \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m ) \{                                                   \(\backslash\)}
-\DoxyCodeLine{        MMG5\_ADD\_MEM(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size*(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}-\/\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}))*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}), \(\backslash\)}
-\DoxyCodeLine{                     \textcolor{stringliteral}{"{}larger solution"{}},law);                            \(\backslash\)}
-\DoxyCodeLine{        MMG5\_SAFE\_REALLOC(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m,\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size*(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}+1),              \(\backslash\)}
-\DoxyCodeLine{                          \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size*(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}+1),                    \(\backslash\)}
-\DoxyCodeLine{                          \textcolor{keywordtype}{double},\textcolor{stringliteral}{"{}larger solution"{}},law);                \(\backslash\)}
-\DoxyCodeLine{      \}                                                                 \(\backslash\)}
-\DoxyCodeLine{      \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}} = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}};                                         \(\backslash\)}
-\DoxyCodeLine{    \}                                                                   \(\backslash\)}
-\DoxyCodeLine{                                                                        \(\backslash\)}
-\DoxyCodeLine{    \textcolor{comment}{/* We try again to add the point */}                                 \(\backslash\)}
-\DoxyCodeLine{    ip = \mbox{\hyperlink{libmmg2d__private_8h_ab38dbe56c664a422e544af037464535b}{MMG2D\_newPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},o,tag);                                      \(\backslash\)}
-\DoxyCodeLine{    if ( !ip ) \{law;\}                                                   \(\backslash\)}
-\DoxyCodeLine{  \}\textcolor{keywordflow}{while}(0)}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ MMG5\_int\ klink;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ assert\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}\ \&\&\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ MMG5\_TAB\_RECALLOC(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}},wantedGap,\mbox{\hyperlink{structMMG5__Point}{MMG5\_Point}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}larger\ point\ table"{}},law);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_af24552f88d01c854c29a1a649ce132c0}{npnil}}\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}+1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ for\ (klink=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_af24552f88d01c854c29a1a649ce132c0}{npnil}};\ klink<mesh-\/>npmax-\/1;\ klink++)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[klink].\mbox{\hyperlink{structMMG5__Point_a524cf4be0f45609cea00c228ee7f2c9f}{tmp}}\ \ =\ klink+1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ solution\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}\ )\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ if\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m\ )\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ MMG5\_ADD\_MEM(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size*(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}-\/\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}))*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}larger\ solution"{}},law);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ MMG5\_SAFE\_REALLOC(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m,\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size*(\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}+1),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>size*(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}+1),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double},\textcolor{stringliteral}{"{}larger\ solution"{}},law);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}}\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a90a4a021f6a820b20ef9a48b30171a01}{npmax}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ We\ try\ again\ to\ add\ the\ point\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ ip\ =\ \mbox{\hyperlink{libmmg2d__private_8h_a69c4f2597620d21e597bc054f72e255a}{MMG2D\_newPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},o,tag);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if\ (\ !ip\ )\ \{law;\}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\textcolor{keywordflow}{while}(0)}
 
 \end{DoxyCode}
 Reallocation of point table and sol table and creation of point ip with coordinates o and tag tag 
@@ -566,16 +566,16 @@ Definition at line \mbox{\hyperlink{libmmg2d__private_8h_source_l00054}{54}} of 
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{  \textcolor{keywordflow}{do}               \(\backslash\)}
-\DoxyCodeLine{  \{                                                                 \(\backslash\)}
-\DoxyCodeLine{    if ( !\mbox{\hyperlink{API__functions__2d_8c_ae54958922cfa83be04e5b76f4dad570c}{MMG2D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},                            \(\backslash\)}
-\DoxyCodeLine{                         \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&met, \(\backslash\)}
-\DoxyCodeLine{                         \mbox{\hyperlink{libmmgtypes_8h_a1b406687c01170a57f12038a26a40859}{MMG5\_ARG\_ppLs}},\&ls,\mbox{\hyperlink{libmmgtypes_8h_a91cc9b9044f566fb407225e5d5bbd586}{MMG5\_ARG\_ppDisp}},\&disp,   \(\backslash\)}
-\DoxyCodeLine{                         \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}}) ) \{                          \(\backslash\)}
-\DoxyCodeLine{      \textcolor{keywordflow}{return} \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\_LOWFAILURE}};                                       \(\backslash\)}
-\DoxyCodeLine{    \}                                                               \(\backslash\)}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} val;                                                    \(\backslash\)}
-\DoxyCodeLine{  \}\textcolor{keywordflow}{while}(0)}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if\ (\ !\mbox{\hyperlink{API__functions__2d_8c_ae54958922cfa83be04e5b76f4dad570c}{MMG2D\_Free\_all}}(\mbox{\hyperlink{libmmgtypes_8h_aacbd03d96b61ae96d7f41ef83ef4c4b7}{MMG5\_ARG\_start}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgtypes_8h_a13b5408584e0e7410c424fdbeae368c8}{MMG5\_ARG\_ppMesh}},\&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{libmmgtypes_8h_ae8a444f3fcce97d6fdf31739946a39c5}{MMG5\_ARG\_ppMet}},\&met,\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgtypes_8h_a1b406687c01170a57f12038a26a40859}{MMG5\_ARG\_ppLs}},\&ls,\mbox{\hyperlink{libmmgtypes_8h_a91cc9b9044f566fb407225e5d5bbd586}{MMG5\_ARG\_ppDisp}},\&disp,\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgtypes_8h_a13d6070b21dd2b77154afb86198808e6}{MMG5\_ARG\_end}})\ )\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{libmmgtypes_8h_a3f7f4f4f89f2b378b6f4c91e7533f9c4}{MMG5\_LOWFAILURE}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ val;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \}\textcolor{keywordflow}{while}(0)}
 
 \end{DoxyCode}
 Free allocated pointers of mesh and sol structure and return value val 
@@ -635,9 +635,9 @@ Definition at line \mbox{\hyperlink{libmmg2d__private_8h_source_l00148}{148}} of
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the metric\\
+{\em sol} & pointer to the metric\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -695,7 +695,7 @@ Definition at line \mbox{\hyperlink{length__2d_8c_source_l00027}{27}} of file \m
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -703,7 +703,7 @@ Definition at line \mbox{\hyperlink{length__2d_8c_source_l00027}{27}} of file \m
 \end{DoxyReturn}
 Check mesh data for a Msh mesh \+: mark the vertices as used if no triangles in the mesh (mesh generation) and check that all z-\/componants are 0. 
 
-Definition at line \mbox{\hyperlink{inout__2d_8c_source_l00674}{674}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{inout__2d_8c_source_l00679}{679}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -744,9 +744,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure.\\
+{\em met} & pointer to the metric structure.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -830,7 +830,7 @@ possible time improvment here\+: in lssurf mode, the second call of \mbox{\hyper
 \end{DoxyWarning}
 
 
-Definition at line \mbox{\hyperlink{analys__2d_8c_source_l01010}{1010}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l01014}{1014}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -878,7 +878,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh\\
+{\em mesh} & pointer to the mesh\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -886,7 +886,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Transfer some input edge data to the corresponding triangles fields The cleaning of required tags inside triangles has been initially added by commit da4b099c. It probably followed the report of a bug arising when several library functions are successively called without cleaning the mesh structure but on december 2022 I am not able to reproduce this bug. Due to tags cleaning, input required edges are lost in ls discretization mode (see issue \#171). The met\+Ridtyp field (previsouly not used in 2D) is now used to mark if {\itshape MMG2\+D\+\_\+assign\+Edge} function is called for the first time inside the library and if we have to clean triangle tags (in order to fix issue \#171 without breaking again the initial fix).
 
-Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00331}{331}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00334}{334}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -916,7 +916,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh\\
+{\em mesh} & pointer to the mesh\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -931,7 +931,7 @@ Call in debug mode only
 \end{DoxyRemark}
 
 
-Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00446}{446}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00449}{449}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
 
 \mbox{\Hypertarget{libmmg2d__private_8h_ab3851bf575a34cbee2dd5e97d09b3f98}\label{libmmg2d__private_8h_ab3851bf575a34cbee2dd5e97d09b3f98}} 
 \index{libmmg2d\_private.h@{libmmg2d\_private.h}!MMG2D\_bdryenforcement@{MMG2D\_bdryenforcement}}
@@ -941,9 +941,9 @@ Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00446}{446}} of file \mb
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward the sol structure. \\
+{\em sol} & pointer to the sol structure. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -992,7 +992,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em start} & index of triangle to start. \\
 \hline
@@ -1021,7 +1021,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
 {\em start} & index of the first tria \\
 \hline
@@ -1045,7 +1045,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=284pt]{libmmg2d__private_8h_a9504a2d7516c1d9acd2bb42c47c456f9_cgraph}
+\includegraphics[width=283pt]{libmmg2d__private_8h_a9504a2d7516c1d9acd2bb42c47c456f9_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1103,11 +1103,11 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em pointer} & toward the mesh \\
+{\em pointer} & to the mesh \\
 \hline
-{\em pointer} & toward the metric (for compatibility with aniso interface) \\
+{\em pointer} & to the metric (for compatibility with aniso interface) \\
 \hline
-{\em pt} & pointer toward the tria\\
+{\em pt} & pointer to the tria\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1121,7 +1121,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=330pt]{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3_cgraph}
+\includegraphics[width=329pt]{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1174,7 +1174,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=320pt]{libmmg2d__private_8h_ac513cbd3a92f55d7e3fdcd9aca745ab8_cgraph}
+\includegraphics[width=319pt]{libmmg2d__private_8h_ac513cbd3a92f55d7e3fdcd9aca745ab8_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1223,9 +1223,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric \\
+{\em met} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -1282,9 +1282,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric \\
+{\em met} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -1302,7 +1302,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=309pt]{libmmg2d__private_8h_a600555587a0debdb3e05d1ff1628ab8c_cgraph}
+\includegraphics[width=308pt]{libmmg2d__private_8h_a600555587a0debdb3e05d1ff1628ab8c_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1374,7 +1374,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=284pt]{libmmg2d__private_8h_a4f941f3d17239d565a30d0150bef1db3_cgraph}
+\includegraphics[width=283pt]{libmmg2d__private_8h_a4f941f3d17239d565a30d0150bef1db3_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1398,7 +1398,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=289pt]{libmmg2d__private_8h_a405b6a6b905ba43ed85629138691272b_cgraph}
+\includegraphics[width=288pt]{libmmg2d__private_8h_a405b6a6b905ba43ed85629138691272b_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1422,7 +1422,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=289pt]{libmmg2d__private_8h_ae554d264b71ef4724b79072b6acda853_cgraph}
+\includegraphics[width=288pt]{libmmg2d__private_8h_ae554d264b71ef4724b79072b6acda853_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1463,7 +1463,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=307pt]{libmmg2d__private_8h_a7625f38c507f2d5e51f88d043f83218c_cgraph}
+\includegraphics[width=306pt]{libmmg2d__private_8h_a7625f38c507f2d5e51f88d043f83218c_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1505,11 +1505,11 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the level-\/set \\
+{\em sol} & pointer to the level-\/set \\
 \hline
-{\em met} & pointer toward a metric (non-\/mandatory)\\
+{\em met} & pointer to a metric (non-\/mandatory)\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1541,9 +1541,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric \\
+{\em met} & pointer to the metric \\
 \hline
 {\em k} & elt index \\
 \hline
@@ -1572,9 +1572,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric \\
+{\em met} & pointer to the metric \\
 \hline
 {\em k} & index of the tria in which we work \\
 \hline
@@ -1592,7 +1592,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=313pt]{libmmg2d__private_8h_a9a1f7f7022c6e4347e07dc478da9c7b8_cgraph}
+\includegraphics[width=312pt]{libmmg2d__private_8h_a9a1f7f7022c6e4347e07dc478da9c7b8_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1610,9 +1610,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric\\
+{\em met} & pointer to the metric\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1646,9 +1646,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric\\
+{\em met} & pointer to the metric\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1688,7 +1688,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00105}{105}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00107}{107}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -1705,9 +1705,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the solution (metric) structure \\
+{\em sol} & pointer to the solution (metric) structure \\
 \hline
 {\em ip} & index of point to insert \\
 \hline
@@ -1762,13 +1762,13 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & element index. \\
 \hline
-{\em vx} & pointer toward table of edges to split. \\
+{\em vx} & pointer to table of edges to split. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1800,9 +1800,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure \\
+{\em mesh} & pointer to the mesh structure \\
 \hline
-{\em sol} & pointer toward the sol structure \\
+{\em sol} & pointer to the sol structure \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1834,9 +1834,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure \\
+{\em mesh} & pointer to the mesh structure \\
 \hline
-{\em sol} & pointer toward the sol structure \\
+{\em sol} & pointer to the sol structure \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1890,7 +1890,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward mesh \\
+{\em mesh} & pointer to mesh \\
 \hline
 {\em ip} & point index \\
 \hline
@@ -1944,13 +1944,13 @@ Here is the caller graph for this function\+:\nopagebreak
 {\em argptr} & list of the mmg structures that must be deallocated. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG} preprocessor variable that allow to identify it.\\
 \hline
 \end{DoxyParams}
-{\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword)
+{\itshape argptr} contains at least a pointer to a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword)
 
-To call the {\itshape MMG2\+D\+\_\+mmg2dlib} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
+To call the {\itshape MMG2\+D\+\_\+mmg2dlib} function, you must also provide a pointer to a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
 
 To call the {\itshape MMG2\+D\+\_\+mmg2dls} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the level-\/set function and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Ls keyword).
 
-To call the {\itshape MMG2\+D\+\_\+mmg2dmov} library, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure storing the displacement (and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Disp keyword).
+To call the {\itshape MMG2\+D\+\_\+mmg2dmov} library, you must also provide a pointer to a {\itshape MMG5\+\_\+p\+Sol} structure storing the displacement (and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Disp keyword).
 
 \begin{DoxyReturn}{Returns}
 0 if fail, 1 if success
@@ -1986,7 +1986,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em argptr} & list of the mmg structures for whose we want to deallocate the name. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG$\ast$} preprocessor variable that allow to identify it. {\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword) and a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).\\
+{\em argptr} & list of the mmg structures for whose we want to deallocate the name. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG$\ast$} preprocessor variable that allow to identify it. {\itshape argptr} contains at least a pointer to a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword) and a pointer to a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).\\
 \hline
 \end{DoxyParams}
 Internal function for name deallocations before return (taking a va\+\_\+list as argument).
@@ -2023,12 +2023,12 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em argptr} & list of the mmg structures that must be deallocated. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG$\ast$} preprocessor variable that allow to identify it. {\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword) and a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).\\
+{\em argptr} & list of the mmg structures that must be deallocated. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG$\ast$} preprocessor variable that allow to identify it. {\itshape argptr} contains at least a pointer to a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword) and a pointer to a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).\\
 \hline
 \end{DoxyParams}
 To call the {\itshape MMG2\+D\+\_\+mmg2dls} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the level-\/set function and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Ls keyword).
 
-To call the {\itshape MMG2\+D\+\_\+mmg2dmov} library, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure storing the displacement (and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Disp keyword).
+To call the {\itshape MMG2\+D\+\_\+mmg2dmov} library, you must also provide a pointer to a {\itshape MMG5\+\_\+p\+Sol} structure storing the displacement (and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Disp keyword).
 
 \begin{DoxyReturn}{Returns}
 1 if success, 0 if fail
@@ -2064,7 +2064,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-Definition at line \mbox{\hyperlink{libmmg2d__tools_8c_source_l00629}{629}} of file \mbox{\hyperlink{libmmg2d__tools_8c_source}{libmmg2d\+\_\+tools.\+c}}.
+Definition at line \mbox{\hyperlink{libmmg2d__tools_8c_source_l00691}{691}} of file \mbox{\hyperlink{libmmg2d__tools_8c_source}{libmmg2d\+\_\+tools.\+c}}.
 
 \mbox{\Hypertarget{libmmg2d__private_8h_a227121f564ee1fd6f3c44584c15b94d9}\label{libmmg2d__private_8h_a227121f564ee1fd6f3c44584c15b94d9}} 
 \index{libmmg2d\_private.h@{libmmg2d\_private.h}!MMG2D\_grad2met\_ani@{MMG2D\_grad2met\_ani}}
@@ -2074,11 +2074,11 @@ Definition at line \mbox{\hyperlink{libmmg2d__tools_8c_source_l00629}{629}} of f
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric \\
+{\em met} & pointer to the metric \\
 \hline
-{\em pt} & pointer toward the processed triangle. \\
+{\em pt} & pointer to the processed triangle. \\
 \hline
 {\em np1} & first edge extremity (global index) \\
 \hline
@@ -2116,11 +2116,11 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric \\
+{\em met} & pointer to the metric \\
 \hline
-{\em pt} & pointer toward the processed tria. \\
+{\em pt} & pointer to the processed tria. \\
 \hline
 {\em npmaster} & edge extremity that cannot be modified \\
 \hline
@@ -2170,7 +2170,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure.\\
+{\em mesh} & pointer to the mesh structure.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2183,7 +2183,7 @@ adja[4*(k1-1)+1+i1] = -(3*k2+i2) $. Step 1\+: Fill adjacendies between quadrangl
 
 Step 2\+: Fill adjacencies between quadrangles and triangles
 
-Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00150}{150}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00151}{151}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -2207,13 +2207,13 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 1 if success, 0 if fail
 \end{DoxyReturn}
-Create adjacency relations between the triangles dein the mesh 
+Create adjacency relations between the triangles in the mesh 
 
 Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00035}{35}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
 
@@ -2232,7 +2232,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em kel} & index of the element in the unpacked mesh\\
 \hline
@@ -2259,7 +2259,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em kp} & index of the point in the unpacked mesh\\
 \hline
@@ -2289,13 +2289,13 @@ Here is the caller graph for this function\+:\nopagebreak
 {\em argptr} & list of the mmg structures that must be initialized. Each structure must follow one of the {\itshape MMG5\+\_\+\+ARG$\ast$} preprocessor variable that allow to identify it.\\
 \hline
 \end{DoxyParams}
-{\itshape argptr} contains at least a pointer toward a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword)
+{\itshape argptr} contains at least a pointer to a {\itshape MMG5\+\_\+p\+Mesh} structure (that will contain the mesh and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Mesh keyword)
 
-To call the {\itshape MMG2\+D\+\_\+mmg2dlib} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
+To call the {\itshape MMG2\+D\+\_\+mmg2dlib} function, you must also provide a pointer to a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the ouput metric (and the input one, if provided) and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Met keyword).
 
 To call the {\itshape MMG2\+D\+\_\+mmg2dls} function, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure (that will contain the level-\/set function and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Ls keyword).
 
-To call the {\itshape MMG2\+D\+\_\+mmg2dmov} library, you must also provide a pointer toward a {\itshape MMG5\+\_\+p\+Sol} structure storing the displacement (and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Disp keyword).
+To call the {\itshape MMG2\+D\+\_\+mmg2dmov} library, you must also provide a pointer to a {\itshape MMG5\+\_\+p\+Sol} structure storing the displacement (and identified by the MMG5\+\_\+\+ARG\+\_\+pp\+Disp keyword).
 
 \begin{DoxyReturn}{Returns}
 0 if fail, 1 otherwise
@@ -2373,7 +2373,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=321pt]{libmmg2d__private_8h_a0661df4c3f51c99f92d19fae7792904a_cgraph}
+\includegraphics[width=320pt]{libmmg2d__private_8h_a0661df4c3f51c99f92d19fae7792904a_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -2391,7 +2391,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em nsd} & index of subdomain to keep.\\
 \hline
@@ -2456,15 +2456,15 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
 {\em ia} & index of first extremity of the edge \\
 \hline
 {\em ib} & index of second extremity of the edge \\
 \hline
-{\em kdep} & pointer toward the index of the first element intersecting the edge \\
+{\em kdep} & pointer to the index of the first element intersecting the edge \\
 \hline
-{\em list} & pointer toward the list of elts intersected by the edge\\
+{\em list} & pointer to the list of elts intersected by the edge\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2504,7 +2504,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure\\
+{\em mesh} & pointer to the mesh structure\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2512,7 +2512,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 memory repartition for the -\/m option 
 
-Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00233}{233}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00237}{237}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -2542,9 +2542,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward the sol structure. \\
+{\em sol} & pointer to the sol structure. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2576,9 +2576,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward the sol structure. \\
+{\em sol} & pointer to the sol structure. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2586,7 +2586,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Mesh triangulation. 
 
-Definition at line \mbox{\hyperlink{mmg2d2_8c_source_l00508}{508}} of file \mbox{\hyperlink{mmg2d2_8c_source}{mmg2d2.\+c}}.
+Definition at line \mbox{\hyperlink{mmg2d2_8c_source_l00507}{507}} of file \mbox{\hyperlink{mmg2d2_8c_source}{mmg2d2.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -2672,11 +2672,11 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
-{\em list} & pointer toward the ball of the point. \\
+{\em list} & pointer to the ball of the point. \\
 \hline
 {\em ilist} & size of the ball. \\
 \hline
@@ -2694,7 +2694,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=325pt]{libmmg2d__private_8h_add70ae6e4e3978eea6cada594f0e0e28_cgraph}
+\includegraphics[width=324pt]{libmmg2d__private_8h_add70ae6e4e3978eea6cada594f0e0e28_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -2712,11 +2712,11 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
-{\em list} & pointer toward the ball of the point. \\
+{\em list} & pointer to the ball of the point. \\
 \hline
 {\em ilist} & size of the ball. \\
 \hline
@@ -2793,7 +2793,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00085}{85}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00087}{87}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -2802,11 +2802,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{libmmg2d__private_8h_af0e004c8ef91b4966e80145dbfc5b171_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{libmmg2d__private_8h_ab38dbe56c664a422e544af037464535b}\label{libmmg2d__private_8h_ab38dbe56c664a422e544af037464535b}} 
+\mbox{\Hypertarget{libmmg2d__private_8h_a69c4f2597620d21e597bc054f72e255a}\label{libmmg2d__private_8h_a69c4f2597620d21e597bc054f72e255a}} 
 \index{libmmg2d\_private.h@{libmmg2d\_private.h}!MMG2D\_newPt@{MMG2D\_newPt}}
 \index{MMG2D\_newPt@{MMG2D\_newPt}!libmmg2d\_private.h@{libmmg2d\_private.h}}
 \doxysubsubsection{\texorpdfstring{MMG2D\_newPt()}{MMG2D\_newPt()}}
-{\footnotesize\ttfamily MMG5\+\_\+int MMG2\+D\+\_\+new\+Pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double}]{c\mbox{[}2\mbox{]},  }\item[{int16\+\_\+t}]{tag }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily MMG5\+\_\+int MMG2\+D\+\_\+new\+Pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{double}]{c\mbox{[}2\mbox{]},  }\item[{uint16\+\_\+t}]{tag }\end{DoxyParamCaption})}
 
 
 
@@ -2816,7 +2816,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{libmmg2d__private_8h_ab38dbe56c664a422e544af037464535b_icgraph}
+\includegraphics[width=350pt]{libmmg2d__private_8h_a69c4f2597620d21e597bc054f72e255a_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{libmmg2d__private_8h_a6ef5d915346976497c14dc4d87523ae3}\label{libmmg2d__private_8h_a6ef5d915346976497c14dc4d87523ae3}} 
@@ -2827,7 +2827,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure \\
+{\em mesh} & pointer to the mesh structure \\
 \hline
 {\em ref} & reference of the boundary to analyze (analyze all the boundaries if MMG5\+\_\+\+UNSET)\\
 \hline
@@ -2837,7 +2837,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Calculate normal vectors at vertices of the mesh. Mark the points that we don\textquotesingle{}t want to analyze
 
-Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00410}{410}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00414}{414}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -2861,9 +2861,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure.\\
+{\em met} & pointer to the metric structure.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2895,11 +2895,11 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward a solution structure. \\
+{\em sol} & pointer to a solution structure. \\
 \hline
-{\em met} & pointer toward a solution structure.\\
+{\em met} & pointer to a solution structure.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2929,7 +2929,7 @@ Reset ppt-\/\texorpdfstring{$>$}{>}tmp field
 
 Reset garbage collector
 
-Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00527}{527}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{hash__2d_8c_source_l00530}{530}} of file \mbox{\hyperlink{hash__2d_8c_source}{hash\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -2977,9 +2977,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em pt} & pointer toward the tria\\
+{\em pt} & pointer to the tria\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -2993,7 +2993,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=312pt]{libmmg2d__private_8h_a1a0f3d9b3a83e2524ec4dae2af677bdd_cgraph}
+\includegraphics[width=310pt]{libmmg2d__private_8h_a1a0f3d9b3a83e2524ec4dae2af677bdd_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3011,7 +3011,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh\\
+{\em mesh} & pointer to the mesh\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -3019,13 +3019,13 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Regularize normal vectors at boundary non singular edges with a Laplacian / antilaplacian smoothing 
 
-Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00515}{515}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00519}{519}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=305pt]{libmmg2d__private_8h_ab710f3f14a8b2ab96027583c5e92fb31_cgraph}
+\includegraphics[width=303pt]{libmmg2d__private_8h_ab710f3f14a8b2ab96027583c5e92fb31_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3043,7 +3043,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh\\
+{\em mesh} & pointer to the mesh\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -3051,7 +3051,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Regularize vertices coordinates at boundary non singular edges with a Laplacian / antilaplacian smoothing 
 
-Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00849}{849}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00853}{853}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -3075,7 +3075,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01984}{1984}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01989}{1989}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
 
 \mbox{\Hypertarget{libmmg2d__private_8h_a465d68a6dba51737862fc58c54fe2087}\label{libmmg2d__private_8h_a465d68a6dba51737862fc58c54fe2087}} 
 \index{libmmg2d\_private.h@{libmmg2d\_private.h}!MMG2D\_savemesh\_db@{MMG2D\_savemesh\_db}}
@@ -3085,7 +3085,7 @@ Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01984}{1984}} of file \
 
 
 
-Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01776}{1776}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01781}{1781}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
 
 \mbox{\Hypertarget{libmmg2d__private_8h_a6fc2e3bdeb50db8b6440a387779e16c6}\label{libmmg2d__private_8h_a6fc2e3bdeb50db8b6440a387779e16c6}} 
 \index{libmmg2d\_private.h@{libmmg2d\_private.h}!MMG2D\_savemet\_db@{MMG2D\_savemet\_db}}
@@ -3095,7 +3095,7 @@ Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01776}{1776}} of file \
 
 
 
-Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01869}{1869}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01874}{1874}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
 
 \mbox{\Hypertarget{libmmg2d__private_8h_af687abc234d4bda4a58434335c4ff423}\label{libmmg2d__private_8h_af687abc234d4bda4a58434335c4ff423}} 
 \index{libmmg2d\_private.h@{libmmg2d\_private.h}!MMG2D\_savenor\_db@{MMG2D\_savenor\_db}}
@@ -3105,7 +3105,7 @@ Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01869}{1869}} of file \
 
 
 
-Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01929}{1929}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01934}{1934}} of file \mbox{\hyperlink{inout__2d_8c_source}{inout\+\_\+2d.\+c}}.
 
 \mbox{\Hypertarget{libmmg2d__private_8h_aa79c287b20cd9be33485b11bc9033aa0}\label{libmmg2d__private_8h_aa79c287b20cd9be33485b11bc9033aa0}} 
 \index{libmmg2d\_private.h@{libmmg2d\_private.h}!MMG2D\_set\_metricAtPointsOnReqEdges@{MMG2D\_set\_metricAtPointsOnReqEdges}}
@@ -3115,9 +3115,9 @@ Definition at line \mbox{\hyperlink{inout__2d_8c_source_l01929}{1929}} of file \
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em met} & pointer toward the metric \\
+{\em met} & pointer to the metric \\
 \hline
 {\em ismet} & 1 if user provided metric\\
 \hline
@@ -3151,7 +3151,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
 {\em init\+\_\+cc} & 1 if we need to reinitialized {\itshape cc} field of tria because setadj has already been called (isosurf mode)\\
 \hline
@@ -3180,7 +3180,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure.\\
+{\em mesh} & pointer to the mesh structure.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -3188,7 +3188,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Allocation of the array fields of the mesh. 
 
-Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00252}{252}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00256}{256}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -3229,7 +3229,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure \\
+{\em mesh} & pointer to the mesh structure \\
 \hline
 {\em ref} & reference of the boundary to analyze (analyze all the boundaries if MMG5\+\_\+\+UNSET)\\
 \hline
@@ -3241,13 +3241,13 @@ Identify singularities in the mesh. Mark the points that we don\textquotesingle{
 
 Singularity identification
 
-Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00276}{276}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{analys__2d_8c_source_l00280}{280}} of file \mbox{\hyperlink{analys__2d_8c_source}{analys\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=277pt]{libmmg2d__private_8h_a5313c9f4deaa3679782a242bea0077a2_cgraph}
+\includegraphics[width=276pt]{libmmg2d__private_8h_a5313c9f4deaa3679782a242bea0077a2_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3265,9 +3265,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the metric \\
+{\em sol} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -3285,7 +3285,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=287pt]{libmmg2d__private_8h_a67d4bbb3909ba9ee18648e42592b4a73_cgraph}
+\includegraphics[width=285pt]{libmmg2d__private_8h_a67d4bbb3909ba9ee18648e42592b4a73_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3303,9 +3303,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the metric \\
+{\em sol} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -3339,7 +3339,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{MMG2D\_split1b()}{MMG2D\_split1b()}}
 {\footnotesize\ttfamily int MMG2\+D\+\_\+split1b (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{MMG5\+\_\+int}]{k,  }\item[{int8\+\_\+t}]{i,  }\item[{MMG5\+\_\+int}]{ip }\end{DoxyParamCaption})}
 
-\textbackslash{}parma mesh pointer toward the mesh 
+\textbackslash{}parma mesh pointer to the mesh 
 \begin{DoxyParams}{Parameters}
 {\em k} & index of the tria to split \\
 \hline
@@ -3359,7 +3359,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=292pt]{libmmg2d__private_8h_a6198476458beef80586f922ab4854bc4_cgraph}
+\includegraphics[width=291pt]{libmmg2d__private_8h_a6198476458beef80586f922ab4854bc4_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3377,9 +3377,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the metric \\
+{\em sol} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -3397,7 +3397,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=287pt]{libmmg2d__private_8h_a55830c8a952eea9c9f0129797ea6896f_cgraph}
+\includegraphics[width=285pt]{libmmg2d__private_8h_a55830c8a952eea9c9f0129797ea6896f_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3415,9 +3415,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the metric \\
+{\em sol} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -3453,9 +3453,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the metric \\
+{\em sol} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -3473,7 +3473,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=287pt]{libmmg2d__private_8h_a2f9cf03a9469cd423f1cebd62ddaf4ac_cgraph}
+\includegraphics[width=285pt]{libmmg2d__private_8h_a2f9cf03a9469cd423f1cebd62ddaf4ac_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{libmmg2d__private_8h_ae8fb782e40922318fa00d915510ff2f7}\label{libmmg2d__private_8h_ae8fb782e40922318fa00d915510ff2f7}} 
@@ -3484,9 +3484,9 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
-{\em sol} & pointer toward the metric \\
+{\em sol} & pointer to the metric \\
 \hline
 {\em k} & triangle index \\
 \hline
@@ -3522,7 +3522,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh \\
+{\em mesh} & pointer to the mesh \\
 \hline
 {\em k} & index of the tria to split \\
 \hline
@@ -3540,7 +3540,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=307pt]{libmmg2d__private_8h_a38c8958ef7aac82f162de9dc78363133_cgraph}
+\includegraphics[width=306pt]{libmmg2d__private_8h_a38c8958ef7aac82f162de9dc78363133_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3558,9 +3558,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em pt} & tetra to process. \\
 \hline
@@ -3685,7 +3685,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure\\
+{\em mesh} & pointer to the mesh structure\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -3693,7 +3693,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 allocate main structure 
 
-Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00303}{303}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00307}{307}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -3717,7 +3717,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00070}{70}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
+Definition at line \mbox{\hyperlink{zaldy__2d_8c_source_l00072}{72}} of file \mbox{\hyperlink{zaldy__2d_8c_source}{zaldy\+\_\+2d.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -3740,7 +3740,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=311pt]{libmmg2d__private_8h_ae38918396862f4d5e697a4961b5af24a_cgraph}
+\includegraphics[width=310pt]{libmmg2d__private_8h_ae38918396862f4d5e697a4961b5af24a_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -3771,7 +3771,7 @@ Definition at line \mbox{\hyperlink{tools_8c_source_l00852}{852}} of file \mbox{
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em severe} & level of performed check \\
 \hline
@@ -3797,7 +3797,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=323pt]{libmmg2d__private_8h_a935c3a639f035807dcda91d1a66cb2f2_cgraph}
+\includegraphics[width=322pt]{libmmg2d__private_8h_a935c3a639f035807dcda91d1a66cb2f2_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak

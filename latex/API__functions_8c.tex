@@ -24,6 +24,8 @@ int \mbox{\hyperlink{API__functions_8c_a532ff3730b240eb981db4adcff4695b9}{MMG5\+
 \item 
 int \mbox{\hyperlink{API__functions_8c_a3f4a6dcd5fdcca636720ebbe1065e004}{MMG5\+\_\+\+Set\+\_\+input\+Sol\+Name}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, const char $\ast$solin)
 \item 
+int \mbox{\hyperlink{API__functions_8c_a1880db76ce85a8ce8a2cb2653e7c1ebd}{MMG5\+\_\+\+Set\+\_\+input\+Param\+Name}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, const char $\ast$fparamin)
+\item 
 int \mbox{\hyperlink{API__functions_8c_a236fc78b6e1cbcdc9ece6735f68436af}{MMG5\+\_\+\+Set\+\_\+output\+Mesh\+Name}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, const char $\ast$meshout)
 \item 
 int \mbox{\hyperlink{API__functions_8c_ad78b716f2b949885b3110d60dc908ee5}{MMG5\+\_\+\+Set\+\_\+output\+Sol\+Name}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}, const char $\ast$solout)
@@ -46,7 +48,7 @@ const char $\ast$ \mbox{\hyperlink{API__functions_8c_a7969a2ecc75885c0abb5655c25
 \item 
 const char $\ast$ \mbox{\hyperlink{API__functions_8c_a0fdf8d31ea9c9ec32aeec4321f7b0846}{MMG5\+\_\+\+Get\+\_\+type\+Name}} (enum \mbox{\hyperlink{libmmgtypes_8h_a68ad1024791ce7577a19c0ee1dde271e}{MMG5\+\_\+type}} typ)
 \item 
-const char $\ast$ \mbox{\hyperlink{API__functions_8c_a6fbbff0a87b35c3a821d7d38ea086025}{MMG5\+\_\+\+Get\+\_\+tag\+Name}} (int tag)
+const char $\ast$ \mbox{\hyperlink{API__functions_8c_a00fef27554c580f1ea55d7c14cccb776}{MMG5\+\_\+\+Get\+\_\+tag\+Name}} (uint16\+\_\+t tag)
 \item 
 int \mbox{\hyperlink{API__functions_8c_a99e5535ce9b64741e3a50a275c9c8b34}{MMG5\+\_\+\+Get\+\_\+format}} (char $\ast$ptr, int fmt)
 \item 
@@ -99,9 +101,9 @@ Definition in file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric. \\
+{\em met} & pointer to the metric. \\
 \hline
 {\em hsiz} & computed constant size to impose.\\
 \hline
@@ -111,7 +113,7 @@ Definition in file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions
 \end{DoxyReturn}
 Compute the constant size to impose according to hmin and hmax and store it in {\itshape hsiz}. Fill hmin and hamx if they are not setted by the user. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00572}{572}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00623}{623}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -135,9 +137,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward an array of solution structure (that stores solution fields). \\
+{\em sol} & pointer to an array of solution structure (that stores solution fields). \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -145,7 +147,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Deallocation of an array of solution fields 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00440}{440}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00491}{491}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -162,14 +164,14 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward the sol structure.\\
+{\em sol} & pointer to the sol structure.\\
 \hline
 \end{DoxyParams}
 Structures unallocation before return (common structures between all codes). 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00462}{462}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00513}{513}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -190,11 +192,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a pointer toward the allocated string that contains the file basename.
+a pointer to the allocated string that contains the file basename.
 \end{DoxyReturn}
 Extract basename from a path (allocate a string to store it). 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00632}{632}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00683}{683}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -219,7 +221,7 @@ the name of the enum field
 \end{DoxyReturn}
 Print the name associated to the {\itshape ent} value in the {\itshape MMG5\+\_\+entities} enum. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00642}{642}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00693}{693}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -240,11 +242,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-pointer toward the filename extension or toward the end of the string if no extension have been founded
+pointer to the filename extension or toward the end of the string if no extension have been founded
 \end{DoxyReturn}
 Get the extension of the filename string. Do not consider \textquotesingle{}.o\textquotesingle{} as an extension. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00856}{856}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00912}{912}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -261,7 +263,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em ptr} & pointer toward the file extension (dot included) \\
+{\em ptr} & pointer to the file extension (dot included) \\
 \hline
 {\em fmt} & default file format.\\
 \hline
@@ -271,7 +273,7 @@ and index associated to the file format detected from the extension.
 \end{DoxyReturn}
 Get the wanted file format from the mesh extension. If {\itshape fmt} is provided, it is used as default file format ({\itshape ptr==NULL}), otherwise, the default file format is the medit one. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00760}{760}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00816}{816}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -296,7 +298,7 @@ The name of the file format in a string.
 \end{DoxyReturn}
 Print the name of the file format associated to {\itshape fmt}. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00808}{808}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00864}{864}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -317,24 +319,24 @@ Here is the caller graph for this function\+:\nopagebreak
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a pointer toward the path allocated here
+a pointer to the path allocated here
 \end{DoxyReturn}
 Remove filename from a path and return the path in a newly allocated string. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00883}{883}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00939}{939}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=256pt]{API__functions_8c_ac9b329d9ab2d62228dfd012760de7e37_cgraph}
+\includegraphics[width=255pt]{API__functions_8c_ac9b329d9ab2d62228dfd012760de7e37_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{API__functions_8c_a6fbbff0a87b35c3a821d7d38ea086025}\label{API__functions_8c_a6fbbff0a87b35c3a821d7d38ea086025}} 
+\mbox{\Hypertarget{API__functions_8c_a00fef27554c580f1ea55d7c14cccb776}\label{API__functions_8c_a00fef27554c580f1ea55d7c14cccb776}} 
 \index{API\_functions.c@{API\_functions.c}!MMG5\_Get\_tagName@{MMG5\_Get\_tagName}}
 \index{MMG5\_Get\_tagName@{MMG5\_Get\_tagName}!API\_functions.c@{API\_functions.c}}
 \doxysubsubsection{\texorpdfstring{MMG5\_Get\_tagName()}{MMG5\_Get\_tagName()}}
-{\footnotesize\ttfamily const char $\ast$ MMG5\+\_\+\+Get\+\_\+tag\+Name (\begin{DoxyParamCaption}\item[{int}]{tag }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily const char $\ast$ MMG5\+\_\+\+Get\+\_\+tag\+Name (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{tag }\end{DoxyParamCaption})}
 
 
 \begin{DoxyParams}{Parameters}
@@ -351,13 +353,13 @@ for debug purpose, no thread safe.
 \end{DoxyWarning}
 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00686}{686}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00737}{737}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{API__functions_8c_a6fbbff0a87b35c3a821d7d38ea086025_icgraph}
+\includegraphics[width=350pt]{API__functions_8c_a00fef27554c580f1ea55d7c14cccb776_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{API__functions_8c_a0fdf8d31ea9c9ec32aeec4321f7b0846}\label{API__functions_8c_a0fdf8d31ea9c9ec32aeec4321f7b0846}} 
@@ -376,7 +378,7 @@ the name of the enum field
 \end{DoxyReturn}
 Print the name associated to the {\itshape typ} value in the {\itshape MMG5\+\_\+type} enum. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00665}{665}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00716}{716}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -393,14 +395,14 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward the sol structure.\\
+{\em sol} & pointer to the sol structure.\\
 \hline
 \end{DoxyParams}
 Initialize file names to their default values. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00128}{128}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00132}{132}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -424,7 +426,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure.\\
+{\em mesh} & pointer to the mesh structure.\\
 \hline
 \end{DoxyParams}
 Initialization of the input parameters. MMG3\+D\+\_\+\+IPARAM\+\_\+lag is used by mmg3d only but need to be negative in the scale\+Mesh function
@@ -435,7 +437,7 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=327pt]{API__functions_8c_a661831729f82f00fc60ddde66825e622_cgraph}
+\includegraphics[width=326pt]{API__functions_8c_a661831729f82f00fc60ddde66825e622_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -453,14 +455,14 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the sol structure.\\
+{\em met} & pointer to the sol structure.\\
 \hline
 \end{DoxyParams}
 File name deallocations before return. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00511}{511}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00562}{562}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -485,13 +487,13 @@ allocated string or NULL if the allocation fail.
 \end{DoxyReturn}
 Allocate a new string and copy {\itshape path} without extension in it. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00918}{918}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00974}{974}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=272pt]{API__functions_8c_a96e5e6a6f99a8156112f07c72eaca362_cgraph}
+\includegraphics[width=270pt]{API__functions_8c_a96e5e6a6f99a8156112f07c72eaca362_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{API__functions_8c_acbb93450f5c56262f121f71725a3c008}\label{API__functions_8c_acbb93450f5c56262f121f71725a3c008}} 
@@ -502,9 +504,9 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the sol structure. \\
+{\em met} & pointer to the sol structure. \\
 \hline
 {\em hsiz} & wanted edge size\\
 \hline
@@ -513,7 +515,7 @@ fill the metric field with the size {\itshape hsiz}
 
 \textbackslash{}\+Remark not for extern users. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00395}{395}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00446}{446}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -530,7 +532,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em sethmin} & 1 if hmin is already setted (\texorpdfstring{$>$}{>}0.) \\
 \hline
@@ -544,7 +546,7 @@ Set default values for hmin and hmax from the bounding box.
 
 \textbackslash{}\+Remark not for extern users. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00535}{535}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00586}{586}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -561,7 +563,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em meshin} & input mesh name. \\
 \hline
@@ -571,13 +573,40 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Set the name of input mesh. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00149}{149}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00153}{153}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{API__functions_8c_a532ff3730b240eb981db4adcff4695b9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{API__functions_8c_a1880db76ce85a8ce8a2cb2653e7c1ebd}\label{API__functions_8c_a1880db76ce85a8ce8a2cb2653e7c1ebd}} 
+\index{API\_functions.c@{API\_functions.c}!MMG5\_Set\_inputParamName@{MMG5\_Set\_inputParamName}}
+\index{MMG5\_Set\_inputParamName@{MMG5\_Set\_inputParamName}!API\_functions.c@{API\_functions.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_Set\_inputParamName()}{MMG5\_Set\_inputParamName()}}
+{\footnotesize\ttfamily int MMG5\+\_\+\+Set\+\_\+input\+Param\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}}}]{mesh,  }\item[{const char $\ast$}]{fparamin }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & pointer to the mesh structure. \\
+\hline
+{\em fparamin} & name of the input solution file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if success, 0 if fail
+\end{DoxyReturn}
+Set the name of input parameter file. 
+
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00245}{245}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{API__functions_8c_a1880db76ce85a8ce8a2cb2653e7c1ebd_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{API__functions_8c_a3f4a6dcd5fdcca636720ebbe1065e004}\label{API__functions_8c_a3f4a6dcd5fdcca636720ebbe1065e004}} 
@@ -588,9 +617,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward the sol structure. \\
+{\em sol} & pointer to the sol structure. \\
 \hline
 {\em solin} & name of the input solution file. \\
 \hline
@@ -600,7 +629,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Set the name of input solution file. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00185}{185}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00189}{189}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -617,7 +646,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
 {\em meshout} & name of the output mesh file. \\
 \hline
@@ -627,7 +656,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Set the name of output mesh file. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00233}{233}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00273}{273}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -651,9 +680,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em sol} & pointer toward the sol structure. \\
+{\em sol} & pointer to the sol structure. \\
 \hline
 {\em solout} & name of the output solution file. \\
 \hline
@@ -663,7 +692,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Set the name of output solution file. 
 
-Definition at line \mbox{\hyperlink{API__functions_8c_source_l00348}{348}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
+Definition at line \mbox{\hyperlink{API__functions_8c_source_l00388}{388}} of file \mbox{\hyperlink{API__functions_8c_source}{API\+\_\+functions.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]

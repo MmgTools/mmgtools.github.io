@@ -2,325 +2,325 @@
 \label{mmgs2_8c_source}\index{src/mmgs/mmgs2.c@{src/mmgs/mmgs2.c}}
 \mbox{\hyperlink{mmgs2_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00005}00005 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00010}00010 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00015}00015 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00022}00022 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00035}00035 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmgs__private_8h}{libmmgs\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00036}00036 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgexterns__private_8h}{mmgexterns\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00037}00037 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00048}\mbox{\hyperlink{mmgs2_8c_ab5481619200a3e12757e234196f3f55a}{00048}} \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{mmgs2_8c_ab5481619200a3e12757e234196f3f55a}{MMGS\_cuttri}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met)\{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00049}00049   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}   pt;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00050}00050   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}  p0,p1;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00051}00051   \mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}    hash;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00052}00052   \textcolor{keywordtype}{double}       c[3],v0,v1,s;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00053}00053   MMG5\_int     vx[3],k,np,refint,refext;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00054}00054   MMG5\_int     ip0,ip1,ns,nt,\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}},nb;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00055}00055   int8\_t       i;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00056}00056 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00057}00057   \textcolor{comment}{/* Reset flag field for points */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00058}00058   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++)}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00059}00059     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00060}00060 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00061}00061   \textcolor{comment}{/* Evaluate the number of intersected edges by the 0 level set */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00062}00062   nb = 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00063}00063   for (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00064}00064     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00065}00065     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00066}00066 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00067}00067     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00068}00068       \textcolor{comment}{/* If only surface edges are discretized, skip non boundary entities: as}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00069}00069 \textcolor{comment}{       * mmgs doesn't add MG\_BDY tags, we check if an edge is bdy from the}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00070}00070 \textcolor{comment}{       * MG\_REF tag */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00071}00071       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}} \&\& !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] \& \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}}) ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00072}00072 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00073}00073       ip0 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00074}00074       ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00075}00075       p0  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip0];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00076}00076       p1  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00077}00077 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00078}00078       \textcolor{keywordflow}{if} ( p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} \&\& p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00079}00079 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00080}00080       v0 = \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip0];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00081}00081       v1 = \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip1];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00082}00082 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00083}00083       \textcolor{keywordflow}{if} ( fabs(v0) > \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}} \&\& fabs(v1) > \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}} \&\& v0*v1 < 0.0 ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00084}00084         nb++;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00085}00085         \textcolor{keywordflow}{if} ( !p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} ) p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = nb;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00086}00086         \textcolor{keywordflow}{if} ( !p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} ) p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = nb;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00087}00087       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00088}00088     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00089}00089   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00090}00090   \textcolor{keywordflow}{if} ( !nb ) \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00091}00091 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00092}00092   \textcolor{comment}{/* Create the intersection points between the edges in the mesh and the 0}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00093}00093 \textcolor{comment}{   * level set */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00094}00094   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{hash_8c_a8dafcb56c527c1ed983952055b52668c}{MMG5\_hashNew}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&hash,nb,2*nb) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00095}00095 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00096}00096   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00097}00097     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00098}00098     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00099}00099 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00100}00100     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00101}00101       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}} \&\& !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] \& \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00102}00102         \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00103}00103       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00104}00104 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00105}00105       ip0 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00106}00106       ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00107}00107 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00108}00108       np = \mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{MMG5\_hashGet}}(\&hash,ip0,ip1);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00109}00109       \textcolor{keywordflow}{if} ( np ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00110}00110 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00111}00111       \textcolor{comment}{/* Look either at the triangle ref or at the boundary one */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00112}00112       MMG5\_int ref;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00113}00113       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}} ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00114}00114         ref = pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00115}00115       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00116}00116       \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00117}00117         ref = pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00118}00118       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00119}00119 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00120}00120       \textcolor{comment}{/* If user asks to keep input refs, ignore multi-\/mat mode */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00121}00121       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}}!=2 ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00122}00122         \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmg2_8c_aa86cd46131685a79a7f09be392f2ac77}{MMG5\_isSplit}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ref,\&refint,\&refext) ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00123}00123       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00124}00124 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00125}00125       v0 = \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip0];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00126}00126       v1 = \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip1];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00127}00127 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00128}00128       p0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip0];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00129}00129       p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00130}00130 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00131}00131       \textcolor{keywordflow}{if} ( fabs(v0) < \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}} || fabs(v1) < \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}} )  \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00132}00132       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_adae698bd10172b8839b3adb7c95d8926}{MG\_SMSGN}}(v0,v1) )  \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00133}00133       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} || !p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} )  \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00134}00134 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00135}00135       \textcolor{comment}{/* Intersection point between edge p0p1 and the 0 level set */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00136}00136       s = v0 / (v0-\/v1);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00137}00137       s = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(\mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(s,1.0-\/\mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}}),\mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00138}00138 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00139}00139       c[0] = p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] + s*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00140}00140       c[1] = p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] + s*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00141}00141       c[2] = p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2] + s*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00142}00142 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00143}00143       np = \mbox{\hyperlink{libmmgs__private_8h_a0b7b978371c90e3af3caeb2a837ce0c2}{MMGS\_newPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},c,NULL);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00144}00144       \textcolor{keywordflow}{if} ( !np ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00145}00145         \mbox{\hyperlink{libmmgs__private_8h_a4d0aab3588bad229409880c7c6c7e1ff}{MMGS\_POINT\_REALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},np,0.2,}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00146}00146                             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: unable to"{}}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00147}00147                                     \textcolor{stringliteral}{"{} allocate a new point\(\backslash\)n"{}},\_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00148}00148                             \mbox{\hyperlink{mmgcommon__private_8h_a39637ec72523047aff8a4aa73d7014c9}{MMG5\_INCREASE\_MEM\_MESSAGE}}();}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00149}00149                             \textcolor{keywordflow}{return} 0}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00150}00150                             ,c,NULL);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00151}00151       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00152}00152       \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[np] = 0.0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00153}00153 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00154}00154       \textcolor{comment}{/* If user provide a metric, interpolate it at the new point */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00155}00155       \textcolor{keywordflow}{if} ( met \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00156}00156         \textcolor{keywordflow}{if} ( met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}} > 1 ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00157}00157           \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{intmet__s_8c_aac6590ef1d5b729d80fc39636967a675}{MMGS\_intmet33\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,i,np,s);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00158}00158         \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00159}00159         \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00160}00160           \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{intmet__s_8c_ab1e1b163d95776a7a480cf213c489a0d}{intmet\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,i,np,s);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00161}00161         \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00162}00162         \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} <= 0 ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00163}00163           \textcolor{comment}{// Unable to compute the metric}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00164}00164           fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: unable to"{}}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00165}00165                   \textcolor{stringliteral}{"{} interpolate the metric during the level-\/set"{}}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00166}00166                   \textcolor{stringliteral}{"{} discretization\(\backslash\)n"{}},\_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00167}00167           \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00168}00168         \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00169}00169       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00170}00170 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00171}00171       \mbox{\hyperlink{hash_8c_abf9ecdc9c796612c38768d7d15d28642}{MMG5\_hashEdge}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&hash,ip0,ip1,np);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00172}00172     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00173}00173   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00174}00174 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00175}00175   \textcolor{comment}{/* Proceed to splitting by calling patterns */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00176}00176   nt  = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00177}00177   ns  = 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00178}00178   \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = 1;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00179}00179   \textcolor{keywordflow}{for} (k=1; k<=nt; k++) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00180}00180 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00181}00181     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00182}00182     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00183}00183     pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}} = 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00184}00184     memset(vx,0,3*\textcolor{keyword}{sizeof}(MMG5\_int));}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00185}00185     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00186}00186       vx[i] = \mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{MMG5\_hashGet}}(\&hash,pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]]);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00187}00187       \textcolor{keywordflow}{if} ( vx[i] ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00188}00188         \mbox{\hyperlink{mmgcommon__private_8h_afd5d6500dd622fcafa85f310a11b77d9}{MG\_SET}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}},i);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00189}00189       \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00190}00190     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00191}00191     \textcolor{keywordflow}{switch} (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}}) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00192}00192     \textcolor{keywordflow}{case} 1: \textcolor{comment}{/* 1 edge split */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00193}00193       \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmgs__private_8h_a2a75ebf1b6a007e5535785eaea589850}{MMGS\_split1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,0,vx);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00194}00194       ns++;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00195}00195       \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00196}00196 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00197}00197     \textcolor{keywordflow}{case} 2: \textcolor{comment}{/* 1 edge split */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00198}00198       \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmgs__private_8h_a2a75ebf1b6a007e5535785eaea589850}{MMGS\_split1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,1,vx);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00199}00199       ns++;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00200}00200       \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00201}00201 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00202}00202     \textcolor{keywordflow}{case} 4: \textcolor{comment}{/* 1 edge split */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00203}00203       \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmgs__private_8h_a2a75ebf1b6a007e5535785eaea589850}{MMGS\_split1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,2,vx);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00204}00204       ns++;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00205}00205       \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00206}00206 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00207}00207     \textcolor{keywordflow}{case} 3: \textcolor{keywordflow}{case} 5: \textcolor{keywordflow}{case} 6: \textcolor{comment}{/* 2 edges split */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00208}00208       \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} = \mbox{\hyperlink{libmmgs__private_8h_acdb38b10e66129aad4d524a8b8434ae8}{MMGS\_split2}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,vx);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00209}00209       ns++;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00210}00210       \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00211}00211 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00212}00212     default :}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00213}00213       assert(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}} == 0);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00214}00214       \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00215}00215     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00216}00216     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}} ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00217}00217   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00218}00218 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00219}00219   \textcolor{keywordflow}{if} ( (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}} || abs(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}}) > 5) \&\& ns > 0 )}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00220}00220     fprintf(stdout,\textcolor{stringliteral}{"{}     \%7"{}} MMG5\_PRId \textcolor{stringliteral}{"{} splitted\(\backslash\)n"{}},ns);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00221}00221 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00222}00222   \textcolor{comment}{/* reset point flags */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00223}00223   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++)}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00224}00224     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}} = 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00225}00225 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00226}00226   \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash.\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00227}00227   \textcolor{keywordflow}{return} ns;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00228}00228 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00229}00229 \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00230}00230 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00241}\mbox{\hyperlink{libmmgs__private_8h_a41c0df0efb22d646ae4e0568c95a92d8}{00241}} \textcolor{keywordtype}{int} \mbox{\hyperlink{mmgs2_8c_af5e2ddcef4378ad937b0a9b45c3c6a50}{MMGS\_mmgs2}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00242}00242   \textcolor{keywordtype}{char} str[16]=\textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00243}00243   MMG5\_int k;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00244}00244 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00245}00245   assert ( (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}} || \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}}) \&\& \textcolor{stringliteral}{"{}level-\/set discretization mode not specified"{}} );}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00246}00246 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00247}00247   assert ( (!(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}} \&\& \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}})) \&\& \textcolor{stringliteral}{"{}unable to determine level-\/set discretization mode"{}} );}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00248}00248 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00249}00249   \textcolor{comment}{/* Set function pointers */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00250}00250   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}} ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00251}00251     strcat(str,\textcolor{stringliteral}{"{}(BOUNDARY PART)"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00252}00252 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00253}00253     MMG5\_snpval   = \mbox{\hyperlink{mmg2s_8c_ad16e6bc7b5da0a92d42c99793255551d}{MMG5\_snpval\_lssurf}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00254}00254     MMG5\_resetRef = \mbox{\hyperlink{mmg2s_8c_a917ae09010eb1073adafdd58d18e52c4}{MMG5\_resetRef\_lssurf}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00255}00255     MMG5\_setref   = \mbox{\hyperlink{mmg2s_8c_aee003bcb6e1461aced1325d0a15824f4}{MMG5\_setref\_lssurf}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00256}00256   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00257}00257   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00258}00258     MMG5\_snpval   = \mbox{\hyperlink{mmg2_8c_a9fd0952760131a7dc6c72bfcb81738a4}{MMG5\_snpval\_ls}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00259}00259     MMG5\_resetRef = \mbox{\hyperlink{mmg2_8c_ac8e90b955177ee0029b1363729fb1f73}{MMG5\_resetRef\_ls}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00260}00260     MMG5\_setref   = \mbox{\hyperlink{mmg2_8c_afa1a1d246795c5981a876ae222350a70}{MMG5\_setref\_ls}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00261}00261   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00262}00262 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00263}00263   \textcolor{keywordflow}{if} ( abs(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}}) > 3 ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00264}00264     fprintf(stdout,\textcolor{stringliteral}{"{}  ** ISOSURFACE EXTRACTION \%s\(\backslash\)n"{}},str);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00265}00265   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00266}00266 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00267}00267   \textcolor{comment}{/* Work only with the 0 level set */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00268}00268   \textcolor{keywordflow}{for} (k=1; k<= \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}; k++)}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00269}00269     \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[k] -\/= \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a9309965b00e7ff9d2d0da23156b80c3b}{ls}};}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00270}00270 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00271}00271   \textcolor{comment}{/* Transfer the boundary edge references to the triangles */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00272}00272   \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}} ( !\mbox{\hyperlink{hash__s_8c_a0bacd760c9cb29dc284f0ed24ccaa623}{MMGS\_assignEdge}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00273}00273     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Problem in setting boundary. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00274}00274     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00275}00275   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00276}00276 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00277}00277   \textcolor{comment}{/* Snap values of level set function if need be, then discretize it */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00278}00278   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9}{MMGS\_hashTria}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00279}00279     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: hashing problem (1). Exit program.\(\backslash\)n"{}},}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00280}00280             \_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00281}00281     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00282}00282   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00283}00283   \textcolor{comment}{/* identify connexity and reorient triangles (needed for manifoldness checks) */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00284}00284   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{analys__s_8c_ace8fdea6c63188275828a67279878b8a}{MMGS\_setadj}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00285}00285     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Topology problem. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00286}00286     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00287}00287   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00288}00288 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00289}00289   \textcolor{comment}{/* Snap values of the level set function which are very close to 0 to 0 exactly */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00290}00290   \textcolor{keywordflow}{if} ( !MMG5\_snpval(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00291}00291     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Problem with implicit function. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00292}00292     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00293}00293   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00294}00294 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00295}00295   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}} ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00296}00296     \textcolor{comment}{/* Removal of small parasitic components */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00297}00297     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a472383bea8b5a44e293eb5bd2f2002d2}{rmc}} > 0. \&\& !\mbox{\hyperlink{mmg2_8c_a442b1b896d636a5759be1d9749865b5e}{MMG5\_rmc}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00298}00298       fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error in removing small parasitic components. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00299}00299       \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00300}00300     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00301}00301   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00302}00302   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00303}00303     \textcolor{comment}{/* RMC : on verra */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00304}00304     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a472383bea8b5a44e293eb5bd2f2002d2}{rmc}} > 0 ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00305}00305       fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: rmc option not implemented for boundary"{}}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00306}00306               \textcolor{stringliteral}{"{} isosurface extraction.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00307}00307     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00308}00308   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00309}00309 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00310}00310   \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00311}00311 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00312}00312   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}} != 2 ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00313}00313     \textcolor{comment}{/* Reset the mesh-\/>info.isoref field everywhere it appears */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00314}00314     \textcolor{keywordflow}{if} ( !MMG5\_resetRef(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00315}00315       fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Problem in resetting references. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00316}00316       \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00317}00317     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00318}00318   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00319}00319 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00320}00320   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgs2_8c_ab5481619200a3e12757e234196f3f55a}{MMGS\_cuttri}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},met) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00321}00321     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Problem in discretizing implicit function. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00322}00322     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00323}00323   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00324}00324 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00325}00325   \textcolor{keywordflow}{if} ( !MMG5\_setref(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00326}00326     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Problem in setting references. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00327}00327     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00328}00328   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00329}00329 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00330}00330   \textcolor{comment}{/* Creation of adjacency relations in the mesh */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00331}00331   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9}{MMGS\_hashTria}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00332}00332     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Hashing problem. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00333}00333     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00334}00334   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00335}00335 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00336}00336   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}} ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00337}00337     \textcolor{comment}{/* Check that the resulting mesh is manifold */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00338}00338     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmg2_8c_af07d72e766506c61413c3ebc7d332a9f}{MMG5\_chkmanimesh}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}) ) \{}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00339}00339       fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# No manifold resulting situation. Exit program.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00340}00340       \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00341}00341     \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00342}00342   \}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00343}00343 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00344}00344   \textcolor{comment}{/* Clean memory */}}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00345}00345   \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m);}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00346}00346   \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}} = 0;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00347}00347 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00348}00348   \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a5b3ade23ea802aa3fb3d5039b3b9c52d}{mat}} );}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00349}00349 }
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00350}00350   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00351}00351 \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00001}00001\ \textcolor{comment}{/*\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00002}00002\ \textcolor{comment}{**\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00003}00003\ \textcolor{comment}{**\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00004}00004\ \textcolor{comment}{**\ \ Copyright\ (c)\ Bx\ INP/CNRS/Inria/UBordeaux/UPMC,\ 2004-\/}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00005}00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00006}00006\ \textcolor{comment}{**\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00007}00007\ \textcolor{comment}{**\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00008}00008\ \textcolor{comment}{**\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00009}00009\ \textcolor{comment}{**\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00011}00011\ \textcolor{comment}{**\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00012}00012\ \textcolor{comment}{**\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00013}00013\ \textcolor{comment}{**\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00014}00014\ \textcolor{comment}{**\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00016}00016\ \textcolor{comment}{**\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00017}00017\ \textcolor{comment}{**\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00018}00018\ \textcolor{comment}{**\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00019}00019\ \textcolor{comment}{**\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00020}00020\ \textcolor{comment}{**\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00021}00021\ \textcolor{comment}{**\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libmmgs__private_8h}{libmmgs\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mmgexterns__private_8h}{mmgexterns\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00048}\mbox{\hyperlink{mmgs2_8c_ab5481619200a3e12757e234196f3f55a}{00048}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{mmgs2_8c_ab5481619200a3e12757e234196f3f55a}{MMGS\_cuttri}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ met)\{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00049}00049\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ \ pt;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00050}00050\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ \ p0,p1;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00051}00051\ \ \ \mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ \ \ \ hash;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00052}00052\ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ c[3],v0,v1,s;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00053}00053\ \ \ MMG5\_int\ \ \ \ \ vx[3],k,np,refint,refext;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00054}00054\ \ \ MMG5\_int\ \ \ \ \ ip0,ip1,ns,nt,\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}},nb;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00055}00055\ \ \ int8\_t\ \ \ \ \ \ \ i;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00057}00057\ \ \ \textcolor{comment}{/*\ Reset\ flag\ field\ for\ points\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00058}00058\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}};\ k++)}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00059}00059\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00061}00061\ \ \ \textcolor{comment}{/*\ Evaluate\ the\ number\ of\ intersected\ edges\ by\ the\ 0\ level\ set\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00062}00062\ \ \ nb\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00063}00063\ \ \ for\ (k=1;\ k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}};\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00064}00064\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{for}\ (i=0;\ i<3;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00068}00068\ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ only\ surface\ edges\ are\ discretized,\ skip\ non\ boundary\ entities:\ as}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00069}00069\ \textcolor{comment}{\ \ \ \ \ \ \ *\ mmgs\ doesn't\ add\ MG\_BDY\ tags,\ we\ check\ if\ an\ edge\ is\ bdy\ from\ the}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00070}00070\ \textcolor{comment}{\ \ \ \ \ \ \ *\ MG\_REF\ tag\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00071}00071\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}}\ \&\&\ !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}})\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00073}00073\ \ \ \ \ \ \ ip0\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00074}00074\ \ \ \ \ \ \ ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00075}00075\ \ \ \ \ \ \ p0\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip0];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00076}00076\ \ \ \ \ \ \ p1\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00078}00078\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ \&\&\ p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00080}00080\ \ \ \ \ \ \ v0\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip0];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00081}00081\ \ \ \ \ \ \ v1\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip1];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00083}00083\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ fabs(v0)\ >\ \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}}\ \&\&\ fabs(v1)\ >\ \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}}\ \&\&\ v0*v1\ <\ 0.0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ nb++;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ )\ p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ =\ nb;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ )\ p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ =\ nb;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00087}00087\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00089}00089\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00090}00090\ \ \ \textcolor{keywordflow}{if}\ (\ !nb\ )\ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00092}00092\ \ \ \textcolor{comment}{/*\ Create\ the\ intersection\ points\ between\ the\ edges\ in\ the\ mesh\ and\ the\ 0}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00093}00093\ \textcolor{comment}{\ \ \ *\ level\ set\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00094}00094\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{hash_8c_a8dafcb56c527c1ed983952055b52668c}{MMG5\_hashNew}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&hash,nb,2*nb)\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00096}00096\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}};\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00097}00097\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{for}\ (i=0;\ i<3;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00101}00101\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}}\ \&\&\ !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00103}00103\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00105}00105\ \ \ \ \ \ \ ip0\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00106}00106\ \ \ \ \ \ \ ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00108}00108\ \ \ \ \ \ \ np\ =\ \mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{MMG5\_hashGet}}(\&hash,ip0,ip1);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00109}00109\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ np\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00111}00111\ \ \ \ \ \ \ \textcolor{comment}{/*\ Look\ either\ at\ the\ triangle\ ref\ or\ at\ the\ boundary\ one\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00112}00112\ \ \ \ \ \ \ MMG5\_int\ ref;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00113}00113\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ ref\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00115}00115\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00116}00116\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ ref\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00118}00118\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00120}00120\ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ user\ asks\ to\ keep\ input\ refs,\ ignore\ multi-\/mat\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00121}00121\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}}!=2\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmg2_8c_aa86cd46131685a79a7f09be392f2ac77}{MMG5\_isSplit}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ref,\&refint,\&refext)\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00123}00123\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00125}00125\ \ \ \ \ \ \ v0\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip0];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00126}00126\ \ \ \ \ \ \ v1\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[ip1];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00128}00128\ \ \ \ \ \ \ p0\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip0];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00129}00129\ \ \ \ \ \ \ p1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00131}00131\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ fabs(v0)\ <\ \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}}\ ||\ fabs(v1)\ <\ \mbox{\hyperlink{mmgcommon__private_8h_aeac8d21b860ed84f6cafab536c23bdb8}{MMG5\_EPSD2}}\ )\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00132}00132\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_adae698bd10172b8839b3adb7c95d8926}{MG\_SMSGN}}(v0,v1)\ )\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00133}00133\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ !p0-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ ||\ !p1-\/>\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ )\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00135}00135\ \ \ \ \ \ \ \textcolor{comment}{/*\ Intersection\ point\ between\ edge\ p0p1\ and\ the\ 0\ level\ set\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00136}00136\ \ \ \ \ \ \ s\ =\ v0\ /\ (v0-\/v1);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00137}00137\ \ \ \ \ \ \ s\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(\mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(s,1.0-\/\mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}}),\mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00139}00139\ \ \ \ \ \ \ c[0]\ =\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]\ +\ s*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00140}00140\ \ \ \ \ \ \ c[1]\ =\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]\ +\ s*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00141}00141\ \ \ \ \ \ \ c[2]\ =\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]\ +\ s*(p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]-\/p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00143}00143\ \ \ \ \ \ \ np\ =\ \mbox{\hyperlink{libmmgs__private_8h_a0b7b978371c90e3af3caeb2a837ce0c2}{MMGS\_newPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},c,NULL);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00144}00144\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !np\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{libmmgs__private_8h_a4d0aab3588bad229409880c7c6c7e1ff}{MMGS\_POINT\_REALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},np,0.2,}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ unable\ to"{}}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ allocate\ a\ new\ point\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a39637ec72523047aff8a4aa73d7014c9}{MMG5\_INCREASE\_MEM\_MESSAGE}}();}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,c,NULL);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00151}00151\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00152}00152\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[np]\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00154}00154\ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ user\ provide\ a\ metric,\ interpolate\ it\ at\ the\ new\ point\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00155}00155\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ met\ \&\&\ met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}}\ >\ 1\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ \mbox{\hyperlink{intmet__s_8c_aac6590ef1d5b729d80fc39636967a675}{MMGS\_intmet33\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,i,np,s);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ \mbox{\hyperlink{intmet__s_8c_ab1e1b163d95776a7a480cf213c489a0d}{intmet\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,i,np,s);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ <=\ 0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Unable\ to\ compute\ the\ metric}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ unable\ to"{}}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ interpolate\ the\ metric\ during\ the\ level-\/set"{}}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ discretization\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00169}00169\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00171}00171\ \ \ \ \ \ \ \mbox{\hyperlink{hash_8c_abf9ecdc9c796612c38768d7d15d28642}{MMG5\_hashEdge}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\&hash,ip0,ip1,np);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00172}00172\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00173}00173\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00175}00175\ \ \ \textcolor{comment}{/*\ Proceed\ to\ splitting\ by\ calling\ patterns\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00176}00176\ \ \ nt\ \ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00177}00177\ \ \ ns\ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00178}00178\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00179}00179\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=nt;\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00181}00181\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00183}00183\ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00184}00184\ \ \ \ \ memset(vx,0,3*\textcolor{keyword}{sizeof}(MMG5\_int));}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00185}00185\ \ \ \ \ \textcolor{keywordflow}{for}\ (i=0;\ i<3;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00186}00186\ \ \ \ \ \ \ vx[i]\ =\ \mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{MMG5\_hashGet}}(\&hash,pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]]);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00187}00187\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ vx[i]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afd5d6500dd622fcafa85f310a11b77d9}{MG\_SET}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}},i);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00189}00189\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00190}00190\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00191}00191\ \ \ \ \ \textcolor{keywordflow}{switch}\ (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}})\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00192}00192\ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ \textcolor{comment}{/*\ 1\ edge\ split\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00193}00193\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ \mbox{\hyperlink{libmmgs__private_8h_a2a75ebf1b6a007e5535785eaea589850}{MMGS\_split1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,0,vx);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00194}00194\ \ \ \ \ \ \ ns++;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00195}00195\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00197}00197\ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ \textcolor{comment}{/*\ 1\ edge\ split\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00198}00198\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ \mbox{\hyperlink{libmmgs__private_8h_a2a75ebf1b6a007e5535785eaea589850}{MMGS\_split1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,1,vx);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00199}00199\ \ \ \ \ \ \ ns++;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00200}00200\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00202}00202\ \ \ \ \ \textcolor{keywordflow}{case}\ 4:\ \textcolor{comment}{/*\ 1\ edge\ split\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00203}00203\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ \mbox{\hyperlink{libmmgs__private_8h_a2a75ebf1b6a007e5535785eaea589850}{MMGS\_split1}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,2,vx);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00204}00204\ \ \ \ \ \ \ ns++;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00205}00205\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00207}00207\ \ \ \ \ \textcolor{keywordflow}{case}\ 3:\ \textcolor{keywordflow}{case}\ 5:\ \textcolor{keywordflow}{case}\ 6:\ \textcolor{comment}{/*\ 2\ edges\ split\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00208}00208\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ =\ \mbox{\hyperlink{libmmgs__private_8h_acdb38b10e66129aad4d524a8b8434ae8}{MMGS\_split2}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,k,vx);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00209}00209\ \ \ \ \ \ \ ns++;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00210}00210\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00212}00212\ \ \ \ \ default\ :}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00213}00213\ \ \ \ \ \ \ assert(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}}\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00214}00214\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00215}00215\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00216}00216\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{API__functionsf__2d_8c_a2d9a01f2692fe17d62f00d0fd343d981}{ier}}\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00217}00217\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00219}00219\ \ \ \textcolor{keywordflow}{if}\ (\ (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}}\ ||\ abs(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}})\ >\ 5)\ \&\&\ ns\ >\ 0\ )}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00220}00220\ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ \ \ \ \%7"{}}\ MMG5\_PRId\ \textcolor{stringliteral}{"{}\ splitted\(\backslash\)n"{}},ns);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00222}00222\ \ \ \textcolor{comment}{/*\ reset\ point\ flags\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00223}00223\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}};\ k++)}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00224}00224\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[k].\mbox{\hyperlink{structMMG5__Point_ace563cf1feca2ac9c6baad7b54292bf5}{flag}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00226}00226\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash.\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00227}00227\ \ \ \textcolor{keywordflow}{return}\ ns;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00229}00229\ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00241}\mbox{\hyperlink{libmmgs__private_8h_a41c0df0efb22d646ae4e0568c95a92d8}{00241}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{mmgs2_8c_af5e2ddcef4378ad937b0a9b45c3c6a50}{MMGS\_mmgs2}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ met)\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00242}00242\ \ \ \textcolor{keywordtype}{char}\ str[16]=\textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00243}00243\ \ \ MMG5\_int\ k;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00245}00245\ \ \ assert\ (\ (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}}\ ||\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}})\ \&\&\ \textcolor{stringliteral}{"{}level-\/set\ discretization\ mode\ not\ specified"{}}\ );}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00247}00247\ \ \ assert\ (\ (!(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}}\ \&\&\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}}))\ \&\&\ \textcolor{stringliteral}{"{}unable\ to\ determine\ level-\/set\ discretization\ mode"{}}\ );}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00249}00249\ \ \ \textcolor{comment}{/*\ Set\ function\ pointers\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00250}00250\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a1f7ef74c3dfc6c5eaf0e933cf5513c0a}{isosurf}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00251}00251\ \ \ \ \ strcat(str,\textcolor{stringliteral}{"{}(BOUNDARY\ PART)"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00253}00253\ \ \ \ \ MMG5\_snpval\ \ \ =\ \mbox{\hyperlink{mmg2s_8c_ad16e6bc7b5da0a92d42c99793255551d}{MMG5\_snpval\_lssurf}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00254}00254\ \ \ \ \ MMG5\_resetRef\ =\ \mbox{\hyperlink{mmg2s_8c_a917ae09010eb1073adafdd58d18e52c4}{MMG5\_resetRef\_lssurf}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00255}00255\ \ \ \ \ MMG5\_setref\ \ \ =\ \mbox{\hyperlink{mmg2s_8c_aee003bcb6e1461aced1325d0a15824f4}{MMG5\_setref\_lssurf}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00256}00256\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00257}00257\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00258}00258\ \ \ \ \ MMG5\_snpval\ \ \ =\ \mbox{\hyperlink{mmg2_8c_a9fd0952760131a7dc6c72bfcb81738a4}{MMG5\_snpval\_ls}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00259}00259\ \ \ \ \ MMG5\_resetRef\ =\ \mbox{\hyperlink{mmg2_8c_ac8e90b955177ee0029b1363729fb1f73}{MMG5\_resetRef\_ls}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00260}00260\ \ \ \ \ MMG5\_setref\ \ \ =\ \mbox{\hyperlink{mmg2_8c_afa1a1d246795c5981a876ae222350a70}{MMG5\_setref\_ls}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00261}00261\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00263}00263\ \ \ \textcolor{keywordflow}{if}\ (\ abs(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}})\ >\ 3\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00264}00264\ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ **\ ISOSURFACE\ EXTRACTION\ \%s\(\backslash\)n"{}},str);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00265}00265\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00267}00267\ \ \ \textcolor{comment}{/*\ Work\ only\ with\ the\ 0\ level\ set\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00268}00268\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=\ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}};\ k++)}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00269}00269\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m[k]\ -\/=\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a9309965b00e7ff9d2d0da23156b80c3b}{ls}};}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00271}00271\ \ \ \textcolor{comment}{/*\ Transfer\ the\ boundary\ edge\ references\ to\ the\ triangles\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00272}00272\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}}\ (\ !\mbox{\hyperlink{hash__s_8c_a0bacd760c9cb29dc284f0ed24ccaa623}{MMGS\_assignEdge}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00273}00273\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Problem\ in\ setting\ boundary.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00274}00274\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00275}00275\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00277}00277\ \ \ \textcolor{comment}{/*\ Snap\ values\ of\ level\ set\ function\ if\ need\ be,\ then\ discretize\ it\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00278}00278\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9}{MMGS\_hashTria}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00279}00279\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ hashing\ problem\ (1).\ Exit\ program.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00281}00281\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00282}00282\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00283}00283\ \ \ \textcolor{comment}{/*\ identify\ connexity\ and\ reorient\ triangles\ (needed\ for\ manifoldness\ checks)\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00284}00284\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{analys__s_8c_ace8fdea6c63188275828a67279878b8a}{MMGS\_setadj}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00285}00285\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Topology\ problem.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00286}00286\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00287}00287\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00289}00289\ \ \ \textcolor{comment}{/*\ Snap\ values\ of\ the\ level\ set\ function\ which\ are\ very\ close\ to\ 0\ to\ 0\ exactly\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00290}00290\ \ \ \textcolor{keywordflow}{if}\ (\ !MMG5\_snpval(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00291}00291\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Problem\ with\ implicit\ function.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00292}00292\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00293}00293\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00295}00295\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00296}00296\ \ \ \ \ \textcolor{comment}{/*\ Removal\ of\ small\ parasitic\ components\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00297}00297\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a472383bea8b5a44e293eb5bd2f2002d2}{rmc}}\ >\ 0.\ \&\&\ !\mbox{\hyperlink{mmg2_8c_a442b1b896d636a5759be1d9749865b5e}{MMG5\_rmc}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00298}00298\ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error\ in\ removing\ small\ parasitic\ components.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00299}00299\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00300}00300\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00301}00301\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00302}00302\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00303}00303\ \ \ \ \ \textcolor{comment}{/*\ RMC\ :\ on\ verra\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00304}00304\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a472383bea8b5a44e293eb5bd2f2002d2}{rmc}}\ >\ 0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00305}00305\ \ \ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Warning:\ rmc\ option\ not\ implemented\ for\ boundary"{}}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ isosurface\ extraction.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00308}00308\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00310}00310\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00312}00312\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}}\ !=\ 2\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00313}00313\ \ \ \ \ \textcolor{comment}{/*\ Reset\ the\ mesh-\/>info.isoref\ field\ everywhere\ it\ appears\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00314}00314\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !MMG5\_resetRef(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00315}00315\ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Problem\ in\ resetting\ references.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00316}00316\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00317}00317\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00318}00318\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00320}00320\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgs2_8c_ab5481619200a3e12757e234196f3f55a}{MMGS\_cuttri}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}},met)\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00321}00321\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Problem\ in\ discretizing\ implicit\ function.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00322}00322\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00323}00323\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00325}00325\ \ \ \textcolor{keywordflow}{if}\ (\ !MMG5\_setref(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00326}00326\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Problem\ in\ setting\ references.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00327}00327\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00328}00328\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00330}00330\ \ \ \textcolor{comment}{/*\ Creation\ of\ adjacency\ relations\ in\ the\ mesh\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00331}00331\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{hash__s_8c_a1233a38bc6805c4e74e00b61500a42b9}{MMGS\_hashTria}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00332}00332\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Hashing\ problem.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00333}00333\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00334}00334\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00336}00336\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a04471d8c7bf1a0d989b6146ca1f65eba}{iso}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00337}00337\ \ \ \ \ \textcolor{comment}{/*\ Check\ that\ the\ resulting\ mesh\ is\ manifold\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00338}00338\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmg2_8c_af07d72e766506c61413c3ebc7d332a9f}{MMG5\_chkmanimesh}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00339}00339\ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ No\ manifold\ resulting\ situation.\ Exit\ program.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00340}00340\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00341}00341\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00342}00342\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00343}00343\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00344}00344\ \ \ \textcolor{comment}{/*\ Clean\ memory\ */}}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00345}00345\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>m);}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00346}00346\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a75584f1b13bdd380dfef977b340126da}{sol}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00348}00348\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a5b3ade23ea802aa3fb3d5039b3b9c52d}{mat}}\ );}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00350}00350\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{mmgs2_8c_source_l00351}00351\ \}}
 
 \end{DoxyCode}

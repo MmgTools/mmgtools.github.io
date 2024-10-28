@@ -2,339 +2,339 @@
 \label{boulep__2d_8c_source}\index{src/mmg2d/boulep\_2d.c@{src/mmg2d/boulep\_2d.c}}
 \mbox{\hyperlink{boulep__2d_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00005}00005 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00010}00010 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00015}00015 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00022}00022 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00024}00024 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d_8h}{libmmg2d.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00025}00025 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00026}00026 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00027}00027 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00028}\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{00028}} \textcolor{keyword}{static} uint8\_t \mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[3]  = \{1,2,0\};}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00029}\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{00029}} \textcolor{keyword}{static} uint8\_t \mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[3] = \{2,0,1\};}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00030}00030 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00031}00031 \textcolor{comment}{/* Function boulep should be eventually removed (after all its occurences are removed) */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00032}00032 \textcolor{comment}{/* Find all triangles sharing P}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00033}00033 \textcolor{comment}{   in:  ifirst    : triangle containing p}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00034}00034 \textcolor{comment}{   iploc     : index of p in start}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00035}00035 \textcolor{comment}{   out: list  : list of triangles */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00036}\mbox{\hyperlink{boulep__2d_8c_a09736376a71a000f01b9112d24b8ed43}{00036}} \textcolor{keywordtype}{int} \mbox{\hyperlink{boulep__2d_8c_a09736376a71a000f01b9112d24b8ed43}{MMG2D\_boulep}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\_int ifirst, \textcolor{keywordtype}{int} iploc, MMG5\_int * list) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00037}00037   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}  pt;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00038}00038   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}} ppt;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00039}00039   MMG5\_int    ip,iel,*adja,iadr;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00040}00040   \textcolor{keywordtype}{int}         voy,ilist,i;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00041}00041 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00042}00042   \textcolor{keywordflow}{if} ( ifirst < 1 ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00043}00043   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[ifirst];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00044}00044   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00045}00045   ip = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[iploc];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00046}00046   ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00047}00047   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_aacf41a0e0a3fdf65d77fa5a97fa83bce}{MG\_VOK}}(ppt) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00048}00048 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00049}00049   \textcolor{comment}{/* init list */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00050}00050   ilist       = 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00051}00051   list[ilist] = 3*ifirst + iploc;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00052}00052 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00053}00053   iadr = 3*(ifirst-\/1) + 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00054}00054   adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00055}00055   iel  = adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[iploc]]/3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00056}00056   voy  = adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[iploc]]\%3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00057}00057   i    = \mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[voy];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00058}00058 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00059}00059   \textcolor{keywordflow}{while} ( iel \&\& (iel != ifirst) \&\& \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel].\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0])\{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00060}00060     \textcolor{keywordflow}{if}(ilist==\mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/1) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00061}00061     list[++ilist] = 3*iel + i;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00062}00062     assert( ip==(\&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel])-\/>v[i] );}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00063}00063     iadr = 3*(iel-\/1) + 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00064}00064     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00065}00065     iel  = adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[i]]/3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00066}00066     voy = adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[i]]\%3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00067}00067     i   = \mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[voy];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00068}00068   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00069}00069 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00070}00070   \textcolor{keywordflow}{if} ( iel!=ifirst ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00071}00071     iadr = 3*(ifirst-\/1) + 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00072}00072     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00073}00073     iel  = adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[iploc]]/3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00074}00074     voy  = adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[iploc]]\%3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00075}00075     i    = \mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[voy];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00076}00076 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00077}00077     \textcolor{keywordflow}{while} ( iel \&\& (iel != ifirst) \&\& \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel].\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0]) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00078}00078       \textcolor{keywordflow}{if}(ilist==\mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/1) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00079}00079       list[++ilist] = 3*iel + i;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00080}00080       assert( ip==(\&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel])-\/>v[i] );}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00081}00081       iadr = 3*(iel-\/1) + 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00082}00082       adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00083}00083       iel  = adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[i]]/3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00084}00084       \textcolor{keywordflow}{if} (!iel) \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00085}00085       voy = adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[i]]\%3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00086}00086       i   = \mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[voy];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00087}00087 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00088}00088     \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00089}00089   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00090}00090 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00091}00091   \textcolor{keywordflow}{return} ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00092}00092 \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00093}00093 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00115}\mbox{\hyperlink{boulep__2d_8c_aa2060cdff526410b31b96e703bfe4772}{00115}} \textcolor{keywordtype}{int} \mbox{\hyperlink{boulep__2d_8c_aa2060cdff526410b31b96e703bfe4772}{MMG2D\_boulen}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\_int start,int8\_t ip, MMG5\_int *pleft, MMG5\_int *pright, \textcolor{keywordtype}{double} *nn) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00116}00116   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}        pt;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00117}00117   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}       p1,p2;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00118}00118   \textcolor{keywordtype}{double}            ux,uy,dd,n1[2],n2[2];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00119}00119   MMG5\_int          *adja,k,kk,refs;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00120}00120   int8\_t            notedg;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00121}00121   int8\_t            i,ii,i1,i2;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00122}00122 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00123}00123   \textcolor{comment}{/* First travel of the ball of ip; initialization */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00124}00124   kk = start;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00125}00125   ii = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[ip];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00126}00126   refs = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[start].\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}};}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00127}00127 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00128}00128   \textcolor{keywordflow}{do} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00129}00129     k = kk;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00130}00130     i = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[ii];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00131}00131     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00132}00132     kk = adja[i] / 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00133}00133     ii = adja[i] \% 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00134}00134 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00135}00135     notedg = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a7a6c2103edd0e51c30a7fdb2942cf526}{opnbdy}} ?}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00136}00136       (!\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k].\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i]) : (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kk].\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}} == refs);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00137}00137   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00138}00138   \textcolor{keywordflow}{while} ( kk \&\& (kk != start) \&\& notedg );}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00139}00139 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00140}00140   \textcolor{keywordflow}{if} ( kk == start ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00141}00141     fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Error: \%s: Unable to find a boundary edge in"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00142}00142             \textcolor{stringliteral}{"{} the ball of point \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{}.\(\backslash\)n"{}},\_\_func\_\_,\mbox{\hyperlink{libmmg2d__private_8h_a24f98f9a8ce783988dab098202ae9a65}{MMG2D\_indPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[start].\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[ip]));}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00143}00143     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00144}00144   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00145}00145 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00146}00146   \textcolor{comment}{/* Calculation of the first normal vector */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00147}00147   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00148}00148   i1 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00149}00149   i2 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00150}00150 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00151}00151   p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00152}00152   p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00153}00153   ux = p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00154}00154   uy = p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00155}00155   dd = ux*ux + uy*uy;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00156}00156 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00157}00157   \textcolor{keywordflow}{if} ( dd < \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00158}00158     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: Null edge"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00159}00159             \textcolor{stringliteral}{"{} length (\%e).\(\backslash\)n"{}},\_\_func\_\_,dd);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00160}00160     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00161}00161   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00162}00162 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00163}00163   dd = 1.0 / sqrt(dd);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00164}00164   n1[0] = -\/uy*dd;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00165}00165   n1[1] = ux*dd;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00166}00166 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00167}00167   *pright = 3*k+i1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00168}00168 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00169}00169   \textcolor{comment}{/* Second travel */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00170}00170   kk = start;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00171}00171   ii = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[ip];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00172}00172 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00173}00173   \textcolor{keywordflow}{do} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00174}00174     k = kk;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00175}00175     i = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[ii];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00176}00176     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00177}00177     kk = adja[i] / 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00178}00178     ii = adja[i] \% 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00179}00179 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00180}00180     notedg = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a7a6c2103edd0e51c30a7fdb2942cf526}{opnbdy}} ?}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00181}00181       !\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k].\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] : \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kk].\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}} == refs;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00182}00182   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00183}00183   \textcolor{keywordflow}{while} ( kk \&\& (kk != start) \&\& notedg );}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00184}00184 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00185}00185   \textcolor{comment}{/* Calculation of the second normal vector */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00186}00186   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00187}00187   i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00188}00188   i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00189}00189 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00190}00190   p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00191}00191   p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00192}00192   ux = p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00193}00193   uy = p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00194}00194   dd = ux*ux + uy*uy;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00195}00195 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00196}00196   \textcolor{keywordflow}{if} ( dd < \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00197}00197     fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: Null edge length"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00198}00198             \textcolor{stringliteral}{"{} (\%e).\(\backslash\)n"{}},\_\_func\_\_,dd);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00199}00199     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00200}00200   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00201}00201 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00202}00202   dd = 1.0 / sqrt(dd);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00203}00203   n2[0] = uy*dd;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00204}00204   n2[1] = -\/ux*dd;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00205}00205 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00206}00206   *pleft = 3*k+i1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00207}00207 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00208}00208   \textcolor{comment}{/* Averaging of normal vectors */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00209}00209   nn[0] = n1[0] + n2[0];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00210}00210   nn[1] = n1[1] + n2[1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00211}00211   dd = nn[0]*nn[0] + nn[1]*nn[1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00212}00212   \textcolor{keywordflow}{if} ( dd > \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}} )\{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00213}00213     dd = 1.0 / sqrt(dd);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00214}00214     nn[0] *= dd;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00215}00215     nn[1] *= dd;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00216}00216   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00217}00217 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00218}00218   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00219}00219 \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00220}00220 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00231}\mbox{\hyperlink{boulep__2d_8c_a3aed0a837d26fc658ecf03d287666360}{00231}} \textcolor{keywordtype}{int} \mbox{\hyperlink{boulep__2d_8c_a3aed0a837d26fc658ecf03d287666360}{MMG2D\_bouleendp}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int start,int8\_t ip,MMG5\_int *ip1,MMG5\_int *ip2,MMG5\_int *list) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00232}00232   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}    pt;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00233}00233   MMG5\_int      *adja,k;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00234}00234   int8\_t        i,i1,i2;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00235}00235   \textcolor{keyword}{static} int8\_t mmgWarn0=0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00236}00236   \textcolor{keywordtype}{int}           ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00237}00237 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00238}00238   *ip1 = 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00239}00239   *ip2 = 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00240}00240   \textcolor{keywordflow}{if} ( start < 1 ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00241}00241   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[start];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00242}00242   \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00243}00243 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00244}00244   \textcolor{comment}{/* Travel elements in the forward sense */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00245}00245   ilist= 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00246}00246   k = start;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00247}00247   i = ip;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00248}00248   \textcolor{keywordflow}{do} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00249}00249 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00250}00250     \textcolor{keywordflow}{if} ( ilist > \mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/2 )  \textcolor{keywordflow}{return} -\/ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00251}00251     list[ilist] = k;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00252}00252     ++ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00253}00253 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00254}00254     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00255}00255     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00256}00256     i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00257}00257     i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00258}00258 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00259}00259     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1]) ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00260}00260       \textcolor{keywordflow}{if} ( *ip1 == 0 ) *ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00261}00261       \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00262}00262         \textcolor{keywordflow}{if} ( *ip2 != 0 \&\& *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] \&\& *ip2 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00263}00263           \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00264}00264             mmgWarn0 = 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00265}00265             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 non singular"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00266}00266                     \textcolor{stringliteral}{"{} point at the intersection of 3 edges.\(\backslash\)n"{}},}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00267}00267                     \_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00268}00268           \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00269}00269           \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00270}00270         \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00271}00271         \textcolor{keywordflow}{if} ( *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] ) *ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00272}00272       \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00273}00273     \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00274}00274 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00275}00275     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00276}00276       \textcolor{keywordflow}{if} ( *ip1 == 0 )}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00277}00277         *ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00278}00278       \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00279}00279         \textcolor{keywordflow}{if} ( *ip2 != 0 \&\& *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] \&\& *ip2 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00280}00280           \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00281}00281             mmgWarn0 = 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00282}00282             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 non singular"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00283}00283                     \textcolor{stringliteral}{"{} point at the intersection of 3 edges.\(\backslash\)n"{}},}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00284}00284                     \_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00285}00285           \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00286}00286           \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00287}00287         \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00288}00288         \textcolor{keywordflow}{if} ( *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] ) *ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00289}00289       \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00290}00290     \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00291}00291 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00292}00292     k  = adja[i1] / 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00293}00293     i  = adja[i1] \% 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00294}00294     i  = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00295}00295 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00296}00296   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00297}00297   \textcolor{keywordflow}{while} ( k \&\& k != start );}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00298}00298   \textcolor{keywordflow}{if} ( k > 0 ) \textcolor{keywordflow}{return} ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00299}00299 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00300}00300   \textcolor{comment}{/* Travel the ball in the reverse sense when a boundary is hit, starting from the neighbor of k */}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00301}00301   k = start;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00302}00302   i = ip;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00303}00303   adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00304}00304   i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00305}00305   k = adja[i2] / 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00306}00306   i = adja[i2] \% 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00307}00307   i = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00308}00308 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00309}00309   \textcolor{keywordflow}{if} ( !k ) \textcolor{keywordflow}{return} ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00310}00310 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00311}00311   \textcolor{keywordflow}{do} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00312}00312 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00313}00313     \textcolor{keywordflow}{if} ( ilist > \mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/2 )  \textcolor{keywordflow}{return} -\/ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00314}00314     list[ilist] = k ;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00315}00315     ++ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00316}00316 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00317}00317     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00318}00318     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00319}00319     i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00320}00320     i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00321}00321 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00322}00322     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1]) ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00323}00323       \textcolor{keywordflow}{if} ( *ip1 == 0 )}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00324}00324         *ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00325}00325       \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00326}00326         \textcolor{keywordflow}{if} ( *ip2 != 0 \&\& *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] \&\& *ip2 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00327}00327           \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00328}00328             mmgWarn0 = 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00329}00329             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 non singular"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00330}00330                     \textcolor{stringliteral}{"{} point at the intersection of 3 edges.\(\backslash\)n"{}},}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00331}00331                     \_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00332}00332           \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00333}00333           \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00334}00334         \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00335}00335         \textcolor{keywordflow}{if} ( *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2] ) *ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00336}00336       \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00337}00337     \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00338}00338 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00339}00339     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00340}00340       \textcolor{keywordflow}{if} ( *ip1 == 0 ) *ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00341}00341       \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00342}00342         \textcolor{keywordflow}{if} ( *ip2 != 0 \&\& *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] \&\& *ip2 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00343}00343           \textcolor{keywordflow}{if} ( !mmgWarn0 ) \{}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00344}00344             mmgWarn0 = 1;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00345}00345             fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Error: \%s: at least 1 non singular"{}}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00346}00346                     \textcolor{stringliteral}{"{} point at the intersection of 3 edges.\(\backslash\)n"{}},}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00347}00347                     \_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00348}00348           \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00349}00349           \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00350}00350         \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00351}00351         \textcolor{keywordflow}{if} ( *ip1 != pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1] ) *ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00352}00352       \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00353}00353     \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00354}00354 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00355}00355     k  = adja[i2] / 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00356}00356     \textcolor{keywordflow}{if} ( k == 0 )  \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00357}00357     i  = adja[i2] \% 3;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00358}00358     i  = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00359}00359 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00360}00360   \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00361}00361   \textcolor{keywordflow}{while} ( k );}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00362}00362 }
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00363}00363   \textcolor{keywordflow}{return} ilist;}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00364}00364 \}}
-\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00365}00365 }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00001}00001\ \textcolor{comment}{/*\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00002}00002\ \textcolor{comment}{**\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00003}00003\ \textcolor{comment}{**\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00004}00004\ \textcolor{comment}{**\ \ Copyright\ (c)\ Bx\ INP/CNRS/Inria/UBordeaux/UPMC,\ 2004-\/}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00005}00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00006}00006\ \textcolor{comment}{**\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00007}00007\ \textcolor{comment}{**\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00008}00008\ \textcolor{comment}{**\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00009}00009\ \textcolor{comment}{**\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00011}00011\ \textcolor{comment}{**\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00012}00012\ \textcolor{comment}{**\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00013}00013\ \textcolor{comment}{**\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00014}00014\ \textcolor{comment}{**\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00016}00016\ \textcolor{comment}{**\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00017}00017\ \textcolor{comment}{**\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00018}00018\ \textcolor{comment}{**\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00019}00019\ \textcolor{comment}{**\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00020}00020\ \textcolor{comment}{**\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00021}00021\ \textcolor{comment}{**\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libmmg2d_8h}{libmmg2d.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00028}\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{00028}}\ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[3]\ \ =\ \{1,2,0\};}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00029}\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{00029}}\ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[3]\ =\ \{2,0,1\};}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00031}00031\ \textcolor{comment}{/*\ Function\ boulep\ should\ be\ eventually\ removed\ (after\ all\ its\ occurences\ are\ removed)\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00032}00032\ \textcolor{comment}{/*\ Find\ all\ triangles\ sharing\ P}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00033}00033\ \textcolor{comment}{\ \ \ in:\ \ ifirst\ \ \ \ :\ triangle\ containing\ p}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00034}00034\ \textcolor{comment}{\ \ \ iploc\ \ \ \ \ :\ index\ of\ p\ in\ start}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00035}00035\ \textcolor{comment}{\ \ \ out:\ list\ \ :\ list\ of\ triangles\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00036}\mbox{\hyperlink{boulep__2d_8c_a09736376a71a000f01b9112d24b8ed43}{00036}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{boulep__2d_8c_a09736376a71a000f01b9112d24b8ed43}{MMG2D\_boulep}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\ MMG5\_int\ ifirst,\ \textcolor{keywordtype}{int}\ iploc,\ MMG5\_int\ *\ list)\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00037}00037\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ pt;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00038}00038\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ ppt;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00039}00039\ \ \ MMG5\_int\ \ \ \ ip,iel,*adja,iadr;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00040}00040\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ voy,ilist,i;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00042}00042\ \ \ \textcolor{keywordflow}{if}\ (\ ifirst\ <\ 1\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00043}00043\ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[ifirst];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00044}00044\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00045}00045\ \ \ ip\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[iploc];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00046}00046\ \ \ ppt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00047}00047\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_aacf41a0e0a3fdf65d77fa5a97fa83bce}{MG\_VOK}}(ppt)\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00049}00049\ \ \ \textcolor{comment}{/*\ init\ list\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00050}00050\ \ \ ilist\ \ \ \ \ \ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00051}00051\ \ \ list[ilist]\ =\ 3*ifirst\ +\ iploc;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00053}00053\ \ \ iadr\ =\ 3*(ifirst-\/1)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00054}00054\ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00055}00055\ \ \ iel\ \ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[iploc]]/3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00056}00056\ \ \ voy\ \ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[iploc]]\%3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00057}00057\ \ \ i\ \ \ \ =\ \mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[voy];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00059}00059\ \ \ \textcolor{keywordflow}{while}\ (\ iel\ \&\&\ (iel\ !=\ ifirst)\ \&\&\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel].\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0])\{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{if}(ilist==\mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/1)\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00061}00061\ \ \ \ \ list[++ilist]\ =\ 3*iel\ +\ i;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00062}00062\ \ \ \ \ assert(\ ip==(\&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel])-\/>v[i]\ );}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00063}00063\ \ \ \ \ iadr\ =\ 3*(iel-\/1)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00064}00064\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00065}00065\ \ \ \ \ iel\ \ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[i]]/3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00066}00066\ \ \ \ \ voy\ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[i]]\%3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00067}00067\ \ \ \ \ i\ \ \ =\ \mbox{\hyperlink{boulep__2d_8c_a4c82d41a550bc228329f016176e50cd8}{inxt}}[voy];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00068}00068\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00070}00070\ \ \ \textcolor{keywordflow}{if}\ (\ iel!=ifirst\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00071}00071\ \ \ \ \ iadr\ =\ 3*(ifirst-\/1)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00072}00072\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00073}00073\ \ \ \ \ iel\ \ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[iploc]]/3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00074}00074\ \ \ \ \ voy\ \ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[iploc]]\%3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00075}00075\ \ \ \ \ i\ \ \ \ =\ \mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[voy];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{while}\ (\ iel\ \&\&\ (iel\ !=\ ifirst)\ \&\&\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel].\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0])\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00078}00078\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(ilist==\mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/1)\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00079}00079\ \ \ \ \ \ \ list[++ilist]\ =\ 3*iel\ +\ i;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00080}00080\ \ \ \ \ \ \ assert(\ ip==(\&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel])-\/>v[i]\ );}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00081}00081\ \ \ \ \ \ \ iadr\ =\ 3*(iel-\/1)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00082}00082\ \ \ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[iadr];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00083}00083\ \ \ \ \ \ \ iel\ \ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[i]]/3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00084}00084\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!iel)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00085}00085\ \ \ \ \ \ \ voy\ =\ adja[\mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[i]]\%3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00086}00086\ \ \ \ \ \ \ i\ \ \ =\ \mbox{\hyperlink{boulep__2d_8c_a29c926893d0df9aec7a095b0c99ca15e}{iprev}}[voy];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00089}00089\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00091}00091\ \ \ \textcolor{keywordflow}{return}\ ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00092}00092\ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00115}\mbox{\hyperlink{boulep__2d_8c_aa2060cdff526410b31b96e703bfe4772}{00115}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{boulep__2d_8c_aa2060cdff526410b31b96e703bfe4772}{MMG2D\_boulen}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\ MMG5\_int\ start,int8\_t\ ip,\ MMG5\_int\ *pleft,\ MMG5\_int\ *pright,\ \textcolor{keywordtype}{double}\ *nn)\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00116}00116\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ \ \ \ \ \ \ pt;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00117}00117\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ \ \ \ \ \ \ p1,p2;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00118}00118\ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ ux,uy,dd,n1[2],n2[2];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00119}00119\ \ \ MMG5\_int\ \ \ \ \ \ \ \ \ \ *adja,k,kk,refs;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00120}00120\ \ \ int8\_t\ \ \ \ \ \ \ \ \ \ \ \ notedg;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00121}00121\ \ \ int8\_t\ \ \ \ \ \ \ \ \ \ \ \ i,ii,i1,i2;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00123}00123\ \ \ \textcolor{comment}{/*\ First\ travel\ of\ the\ ball\ of\ ip;\ initialization\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00124}00124\ \ \ kk\ =\ start;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00125}00125\ \ \ ii\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[ip];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00126}00126\ \ \ refs\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[start].\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}};}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00128}00128\ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00129}00129\ \ \ \ \ k\ =\ kk;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00130}00130\ \ \ \ \ i\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[ii];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00131}00131\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00132}00132\ \ \ \ \ kk\ =\ adja[i]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00133}00133\ \ \ \ \ ii\ =\ adja[i]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00135}00135\ \ \ \ \ notedg\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a7a6c2103edd0e51c30a7fdb2942cf526}{opnbdy}}\ ?}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00136}00136\ \ \ \ \ \ \ (!\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k].\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i])\ :\ (\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kk].\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}}\ ==\ refs);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00137}00137\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00138}00138\ \ \ \textcolor{keywordflow}{while}\ (\ kk\ \&\&\ (kk\ !=\ start)\ \&\&\ notedg\ );}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00140}00140\ \ \ \textcolor{keywordflow}{if}\ (\ kk\ ==\ start\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00141}00141\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\ \ \#\#\ Error:\ \%s:\ Unable\ to\ find\ a\ boundary\ edge\ in"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ the\ ball\ of\ point\ \%"{}}\ MMG5\_PRId\ \textcolor{stringliteral}{"{}.\(\backslash\)n"{}},\_\_func\_\_,\mbox{\hyperlink{libmmg2d__private_8h_a24f98f9a8ce783988dab098202ae9a65}{MMG2D\_indPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[start].\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[ip]));}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00144}00144\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00146}00146\ \ \ \textcolor{comment}{/*\ Calculation\ of\ the\ first\ normal\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00147}00147\ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00148}00148\ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00149}00149\ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00151}00151\ \ \ p1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00152}00152\ \ \ p2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00153}00153\ \ \ ux\ =\ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]\ -\/\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00154}00154\ \ \ uy\ =\ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]\ -\/\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00155}00155\ \ \ dd\ =\ ux*ux\ +\ uy*uy;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00157}00157\ \ \ \textcolor{keywordflow}{if}\ (\ dd\ <\ \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00158}00158\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ Null\ edge"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ length\ (\%e).\(\backslash\)n"{}},\_\_func\_\_,dd);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00160}00160\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00161}00161\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00163}00163\ \ \ dd\ =\ 1.0\ /\ sqrt(dd);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00164}00164\ \ \ n1[0]\ =\ -\/uy*dd;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00165}00165\ \ \ n1[1]\ =\ ux*dd;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00167}00167\ \ \ *pright\ =\ 3*k+i1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00169}00169\ \ \ \textcolor{comment}{/*\ Second\ travel\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00170}00170\ \ \ kk\ =\ start;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00171}00171\ \ \ ii\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[ip];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00173}00173\ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00174}00174\ \ \ \ \ k\ =\ kk;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00175}00175\ \ \ \ \ i\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[ii];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00176}00176\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00177}00177\ \ \ \ \ kk\ =\ adja[i]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00178}00178\ \ \ \ \ ii\ =\ adja[i]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00180}00180\ \ \ \ \ notedg\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a7a6c2103edd0e51c30a7fdb2942cf526}{opnbdy}}\ ?}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00181}00181\ \ \ \ \ \ \ !\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k].\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ :\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kk].\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}}\ ==\ refs;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00182}00182\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00183}00183\ \ \ \textcolor{keywordflow}{while}\ (\ kk\ \&\&\ (kk\ !=\ start)\ \&\&\ notedg\ );}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00185}00185\ \ \ \textcolor{comment}{/*\ Calculation\ of\ the\ second\ normal\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00186}00186\ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00187}00187\ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00188}00188\ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00190}00190\ \ \ p1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00191}00191\ \ \ p2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00192}00192\ \ \ ux\ =\ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]\ -\/\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00193}00193\ \ \ uy\ =\ p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]\ -\/\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00194}00194\ \ \ dd\ =\ ux*ux\ +\ uy*uy;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00196}00196\ \ \ \textcolor{keywordflow}{if}\ (\ dd\ <\ \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00197}00197\ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ Null\ edge\ length"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ (\%e).\(\backslash\)n"{}},\_\_func\_\_,dd);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00200}00200\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00202}00202\ \ \ dd\ =\ 1.0\ /\ sqrt(dd);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00203}00203\ \ \ n2[0]\ =\ uy*dd;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00204}00204\ \ \ n2[1]\ =\ -\/ux*dd;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00206}00206\ \ \ *pleft\ =\ 3*k+i1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00208}00208\ \ \ \textcolor{comment}{/*\ Averaging\ of\ normal\ vectors\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00209}00209\ \ \ nn[0]\ =\ n1[0]\ +\ n2[0];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00210}00210\ \ \ nn[1]\ =\ n1[1]\ +\ n2[1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00211}00211\ \ \ dd\ =\ nn[0]*nn[0]\ +\ nn[1]*nn[1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00212}00212\ \ \ \textcolor{keywordflow}{if}\ (\ dd\ >\ \mbox{\hyperlink{eigenv__private_8h_a6cb898fb52de6878afc45c81fb376e62}{MMG5\_EPSD}}\ )\{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00213}00213\ \ \ \ \ dd\ =\ 1.0\ /\ sqrt(dd);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00214}00214\ \ \ \ \ nn[0]\ *=\ dd;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00215}00215\ \ \ \ \ nn[1]\ *=\ dd;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00216}00216\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00218}00218\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00219}00219\ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00231}\mbox{\hyperlink{boulep__2d_8c_a3aed0a837d26fc658ecf03d287666360}{00231}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{boulep__2d_8c_a3aed0a837d26fc658ecf03d287666360}{MMG2D\_bouleendp}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int\ start,int8\_t\ ip,MMG5\_int\ *ip1,MMG5\_int\ *ip2,MMG5\_int\ *list)\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00232}00232\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ \ \ pt;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00233}00233\ \ \ MMG5\_int\ \ \ \ \ \ *adja,k;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00234}00234\ \ \ int8\_t\ \ \ \ \ \ \ \ i,i1,i2;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00235}00235\ \ \ \textcolor{keyword}{static}\ int8\_t\ mmgWarn0=0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00236}00236\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00238}00238\ \ \ *ip1\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00239}00239\ \ \ *ip2\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00240}00240\ \ \ \textcolor{keywordflow}{if}\ (\ start\ <\ 1\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00241}00241\ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[start];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00242}00242\ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00244}00244\ \ \ \textcolor{comment}{/*\ Travel\ elements\ in\ the\ forward\ sense\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00245}00245\ \ \ ilist=\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00246}00246\ \ \ k\ =\ start;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00247}00247\ \ \ i\ =\ ip;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00248}00248\ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00250}00250\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ilist\ >\ \mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/2\ )\ \ \textcolor{keywordflow}{return}\ -\/ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00251}00251\ \ \ \ \ list[ilist]\ =\ k;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00252}00252\ \ \ \ \ ++ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00254}00254\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00255}00255\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00256}00256\ \ \ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00257}00257\ \ \ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00259}00259\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1])\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00260}00260\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ ==\ 0\ )\ *ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00261}00261\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip2\ !=\ 0\ \&\&\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]\ \&\&\ *ip2\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ mmgWarn0\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ at\ least\ 1\ non\ singular"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ point\ at\ the\ intersection\ of\ 3\ edges.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00270}00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]\ )\ *ip2\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00272}00272\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00273}00273\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00275}00275\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i2])\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00276}00276\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ *ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00278}00278\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00279}00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip2\ !=\ 0\ \&\&\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]\ \&\&\ *ip2\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ mmgWarn0\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ at\ least\ 1\ non\ singular"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ point\ at\ the\ intersection\ of\ 3\ edges.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]\ )\ *ip2\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00289}00289\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00290}00290\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00292}00292\ \ \ \ \ k\ \ =\ adja[i1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00293}00293\ \ \ \ \ i\ \ =\ adja[i1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00294}00294\ \ \ \ \ i\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00296}00296\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00297}00297\ \ \ \textcolor{keywordflow}{while}\ (\ k\ \&\&\ k\ !=\ start\ );}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00298}00298\ \ \ \textcolor{keywordflow}{if}\ (\ k\ >\ 0\ )\ \textcolor{keywordflow}{return}\ ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00300}00300\ \ \ \textcolor{comment}{/*\ Travel\ the\ ball\ in\ the\ reverse\ sense\ when\ a\ boundary\ is\ hit,\ starting\ from\ the\ neighbor\ of\ k\ */}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00301}00301\ \ \ k\ =\ start;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00302}00302\ \ \ i\ =\ ip;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00303}00303\ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00304}00304\ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00305}00305\ \ \ k\ =\ adja[i2]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00306}00306\ \ \ i\ =\ adja[i2]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00307}00307\ \ \ i\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00309}00309\ \ \ \textcolor{keywordflow}{if}\ (\ !k\ )\ \textcolor{keywordflow}{return}\ ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00311}00311\ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00313}00313\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ilist\ >\ \mbox{\hyperlink{libmmg2d_8h_aafe6388febe43b3e034033d8e8a38ded}{MMG2D\_LMAX}}-\/2\ )\ \ \textcolor{keywordflow}{return}\ -\/ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00314}00314\ \ \ \ \ list[ilist]\ =\ k\ ;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00315}00315\ \ \ \ \ ++ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00317}00317\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00318}00318\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00319}00319\ \ \ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00320}00320\ \ \ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00322}00322\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1])\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00323}00323\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ *ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00325}00325\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip2\ !=\ 0\ \&\&\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]\ \&\&\ *ip2\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ mmgWarn0\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ at\ least\ 1\ non\ singular"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ point\ at\ the\ intersection\ of\ 3\ edges.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00334}00334\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00335}00335\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]\ )\ *ip2\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00336}00336\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00337}00337\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00339}00339\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i2])\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00340}00340\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ ==\ 0\ )\ *ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00341}00341\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip2\ !=\ 0\ \&\&\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]\ \&\&\ *ip2\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ mmgWarn0\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Error:\ \%s:\ at\ least\ 1\ non\ singular"{}}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ point\ at\ the\ intersection\ of\ 3\ edges.\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00350}00350\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00351}00351\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ *ip1\ !=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]\ )\ *ip2\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00352}00352\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00353}00353\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00355}00355\ \ \ \ \ k\ \ =\ adja[i2]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00356}00356\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ k\ ==\ 0\ )\ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00357}00357\ \ \ \ \ i\ \ =\ adja[i2]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00358}00358\ \ \ \ \ i\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00360}00360\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00361}00361\ \ \ \textcolor{keywordflow}{while}\ (\ k\ );}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00363}00363\ \ \ \textcolor{keywordflow}{return}\ ilist;}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00364}00364\ \}}
+\DoxyCodeLine{\Hypertarget{boulep__2d_8c_source_l00365}00365\ }
 
 \end{DoxyCode}

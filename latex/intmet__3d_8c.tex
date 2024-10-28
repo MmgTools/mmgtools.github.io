@@ -20,7 +20,11 @@ int \mbox{\hyperlink{intmet__3d_8c_aa6af77aa8f09d81ecb987cdd6786d8de}{MMG5\+\_\+
 \item 
 int \mbox{\hyperlink{intmet__3d_8c_a1939ea42c9110a4c2f27309a4fd9a871}{MMG3\+D\+\_\+intmet33\+\_\+ani}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t i, MMG5\+\_\+int ip, double s)
 \item 
+int \mbox{\hyperlink{intmet__3d_8c_a9ba7161322dc5b5bfab097c4f2200001}{MMG3\+D\+\_\+intmet33\+\_\+ani\+\_\+edge}} (\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int ip1, MMG5\+\_\+int ip2, MMG5\+\_\+int ip, double s)
+\item 
 int \mbox{\hyperlink{intmet__3d_8c_a933fed6684196ef1a877061a8e7b34b5}{MMG5\+\_\+intmet\+\_\+iso}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t i, MMG5\+\_\+int ip, double s)
+\item 
+int \mbox{\hyperlink{intmet__3d_8c_add73b4e403f5f690cdf2a7e9ebdd5105}{MMG5\+\_\+intmet\+\_\+iso\+\_\+edge}} (\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int ip1, MMG5\+\_\+int ip2, MMG5\+\_\+int ip, double s)
 \item 
 int \mbox{\hyperlink{intmet__3d_8c_aef1a80f8bc2acc527227a19cc7d4fba9}{MMG5\+\_\+intregmet}} (\mbox{\hyperlink{libmmgtypes_8h_a906478a19c4819942a0eea48823b774b}{MMG5\+\_\+p\+Mesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}} met, MMG5\+\_\+int k, int8\+\_\+t i, double s, double mr\mbox{[}6\mbox{]})
 \item 
@@ -73,9 +77,9 @@ Definition in file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & element index. \\
 \hline
@@ -91,7 +95,7 @@ Definition in file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 \end{DoxyReturn}
 Interpolation of anisotropic sizemap at parameter {\itshape s} along edge {\itshape i} of elt {\itshape k} for a classic storage of ridges metrics (before defsiz call). 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00101}{101}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00126}{126}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -107,6 +111,46 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{intmet__3d_8c_a1939ea42c9110a4c2f27309a4fd9a871_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{intmet__3d_8c_a9ba7161322dc5b5bfab097c4f2200001}\label{intmet__3d_8c_a9ba7161322dc5b5bfab097c4f2200001}} 
+\index{intmet\_3d.c@{intmet\_3d.c}!MMG3D\_intmet33\_ani\_edge@{MMG3D\_intmet33\_ani\_edge}}
+\index{MMG3D\_intmet33\_ani\_edge@{MMG3D\_intmet33\_ani\_edge}!intmet\_3d.c@{intmet\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG3D\_intmet33\_ani\_edge()}{MMG3D\_intmet33\_ani\_edge()}}
+{\footnotesize\ttfamily int MMG3\+D\+\_\+intmet33\+\_\+ani\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{ip1,  }\item[{MMG5\+\_\+int}]{ip2,  }\item[{MMG5\+\_\+int}]{ip,  }\item[{double}]{s }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em met} & pointer to the metric structure. \\
+\hline
+{\em ip1} & first global index of edge extremities. \\
+\hline
+{\em ip2} & second global index of edge extremities. \\
+\hline
+{\em ip} & global index of the new point in which we want to compute the metric. \\
+\hline
+{\em s} & interpolation parameter (between 0 and 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Interpolation of anisotropic sizemap at parameter {\itshape s} along edge \mbox{[}ip1,ip2\mbox{]} for a classic storage of ridges metrics (before defsiz call). 
+
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00150}{150}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{intmet__3d_8c_a9ba7161322dc5b5bfab097c4f2200001_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{intmet__3d_8c_a9ba7161322dc5b5bfab097c4f2200001_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{intmet__3d_8c_a090f09b8769518aa9d51562d24c196da}\label{intmet__3d_8c_a090f09b8769518aa9d51562d24c196da}} 
 \index{intmet\_3d.c@{intmet\_3d.c}!MMG5\_interp4bar33\_ani@{MMG5\_interp4bar33\_ani}}
 \index{MMG5\_interp4bar33\_ani@{MMG5\_interp4bar33\_ani}!intmet\_3d.c@{intmet\_3d.c}}
@@ -115,9 +159,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & index of the tetra. \\
 \hline
@@ -131,7 +175,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Linear interpolation of anisotropic sizemap in a tetra given the barycentric coordinates of the new point in {\itshape k}. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00462}{462}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00522}{522}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -155,9 +199,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & index of the tetra. \\
 \hline
@@ -171,7 +215,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Linear interpolation of anisotropic sizemap in a tetra given the barycentric coordinates of the new point in {\itshape k}. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00390}{390}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00450}{450}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -195,9 +239,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & index of the tetra. \\
 \hline
@@ -211,7 +255,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Linear interpolation of isotropic sizemap in a tetra given the barycentric coordinates of the new point in {\itshape k}. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00320}{320}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00380}{380}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -228,7 +272,7 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em ip} & index of the point on which we compute the metric. \\
 \hline
@@ -248,13 +292,13 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Linear interpolation of anisotropic sizemap in a tetra given the barycentric coordinates of the new point in a tetra. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00348}{348}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00408}{408}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=314pt]{intmet__3d_8c_ad604c3f125cdc5507ed5d8099592f86e_cgraph}
+\includegraphics[width=313pt]{intmet__3d_8c_ad604c3f125cdc5507ed5d8099592f86e_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -272,9 +316,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & element index. \\
 \hline
@@ -288,9 +332,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{DoxyReturn}{Returns}
 0 if fail, 1 otherwise.
 \end{DoxyReturn}
-Interpolation of anisotropic sizemap at parameter {\itshape s} along edge {\itshape i} of elt {\itshape k} for a special storage of ridges metric (after defsiz call). 
+Interpolation of anisotropic sizemap at parameter {\itshape s} along edge {\itshape i} of elt {\itshape k} for a special storage of ridges metric (after defsiz call).
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00051}{51}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+\begin{DoxyRemark}{Remarks}
+for boundary edges this function has to be called from a boundary face to ensure that the boundary edge will not be interpreted as an internal edge by error. It is due to the fact that regular boundary edges are not always marked as boundary inside a xtetra and tetra with boundary edges but no boundary faces are not always associated to an xtetra (moreover, for edges not belonging to a face inside the xtetra, the tag is not always up to date). 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00057}{57}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -314,9 +363,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & element index. \\
 \hline
@@ -330,15 +379,15 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{DoxyReturn}{Returns}
 0 if fail, 1 otherwise.
 \end{DoxyReturn}
-Interpolation of anisotropic sizemap at parameter {\itshape s} along edge {\itshape i} of elt {\itshape k}. 
+Interpolation of isotropic sizemap at parameter {\itshape s} along edge {\itshape i} of elt {\itshape k}. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00131}{131}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00174}{174}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=305pt]{intmet__3d_8c_a933fed6684196ef1a877061a8e7b34b5_cgraph}
+\includegraphics[width=350pt]{intmet__3d_8c_a933fed6684196ef1a877061a8e7b34b5_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -346,6 +395,46 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{intmet__3d_8c_a933fed6684196ef1a877061a8e7b34b5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{intmet__3d_8c_add73b4e403f5f690cdf2a7e9ebdd5105}\label{intmet__3d_8c_add73b4e403f5f690cdf2a7e9ebdd5105}} 
+\index{intmet\_3d.c@{intmet\_3d.c}!MMG5\_intmet\_iso\_edge@{MMG5\_intmet\_iso\_edge}}
+\index{MMG5\_intmet\_iso\_edge@{MMG5\_intmet\_iso\_edge}!intmet\_3d.c@{intmet\_3d.c}}
+\doxysubsubsection{\texorpdfstring{MMG5\_intmet\_iso\_edge()}{MMG5\_intmet\_iso\_edge()}}
+{\footnotesize\ttfamily int MMG5\+\_\+intmet\+\_\+iso\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{libmmgtypes_8h_a73ac506fe087cc604bb892e46373719a}{MMG5\+\_\+p\+Sol}}}]{met,  }\item[{MMG5\+\_\+int}]{ip1,  }\item[{MMG5\+\_\+int}]{ip2,  }\item[{MMG5\+\_\+int}]{ip,  }\item[{double}]{s }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em met} & pointer to the metric structure. \\
+\hline
+{\em ip1} & first global index of edge extremities. \\
+\hline
+{\em ip2} & second global index of edge extremities. \\
+\hline
+{\em ip} & global index of the new point in which we want to compute the metric. \\
+\hline
+{\em s} & interpolation parameter (between 0 and 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if fail, 1 otherwise.
+\end{DoxyReturn}
+Interpolation of isotropic sizemap at parameter {\itshape s} along edge \mbox{[}ip1,ip2\mbox{]}. 
+
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00197}{197}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{intmet__3d_8c_add73b4e403f5f690cdf2a7e9ebdd5105_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{intmet__3d_8c_add73b4e403f5f690cdf2a7e9ebdd5105_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{intmet__3d_8c_aef1a80f8bc2acc527227a19cc7d4fba9}\label{intmet__3d_8c_aef1a80f8bc2acc527227a19cc7d4fba9}} 
@@ -356,9 +445,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & element index. \\
 \hline
@@ -374,7 +463,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Metric interpolation on edge {\itshape i} in elt {\itshape it} at parameter $ 0 <= s0 <= 1 $ from {\itshape p1} result is stored in {\itshape mr}. edge $ p_1-p_2 $ must not be a ridge. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00162}{162}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00222}{222}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -412,7 +501,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Linear interpolation of anisotropic sizemap along an internal edge. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00215}{215}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00275}{275}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -436,9 +525,9 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \begin{DoxyParams}{Parameters}
-{\em mesh} & pointer toward the mesh structure. \\
+{\em mesh} & pointer to the mesh structure. \\
 \hline
-{\em met} & pointer toward the metric structure. \\
+{\em met} & pointer to the metric structure. \\
 \hline
 {\em k} & element index. \\
 \hline
@@ -454,7 +543,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \end{DoxyReturn}
 Metric interpolation on edge {\itshape i} in elt {\itshape it} at parameter $ 0 <= s0 <= 1 $ from {\itshape p1} result is stored in {\itshape mr}. edge $ p_1-p_2 $ is an internal edge. 
 
-Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00260}{260}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
+Definition at line \mbox{\hyperlink{intmet__3d_8c_source_l00320}{320}} of file \mbox{\hyperlink{intmet__3d_8c_source}{intmet\+\_\+3d.\+c}}.
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]

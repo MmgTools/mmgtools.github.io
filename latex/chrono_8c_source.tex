@@ -2,144 +2,144 @@
 \label{chrono_8c_source}\index{src/common/chrono.c@{src/common/chrono.c}}
 \mbox{\hyperlink{chrono_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00005}00005 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00010}00010 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00015}00015 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00022}00022 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00037}00037 \textcolor{preprocessor}{\#include <assert.h>}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00038}00038 \textcolor{preprocessor}{\#include <stdio.h>}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00039}00039 \textcolor{preprocessor}{\#include <stdlib.h>}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00040}00040 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{chrono__private_8h}{chrono\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00041}00041 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00049}\mbox{\hyperlink{chrono_8c_a67921c69e98250518e09b9443656ddad}{00049}} \textcolor{keywordtype}{void}  \mbox{\hyperlink{chrono_8c_a67921c69e98250518e09b9443656ddad}{chrono}}(\textcolor{keywordtype}{int} cmode,\mbox{\hyperlink{structmytime}{mytime}} *ptt) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00050}00050 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00051}00051   \textcolor{keywordflow}{if} ( cmode == RESET ) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00052}00052     ptt-\/>\mbox{\hyperlink{structmytime_a652a1f4b8b1cae29b8dadf363faeef1b}{call}} = 0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00053}00053     ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}} = ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}} = ptt-\/>\mbox{\hyperlink{structmytime_a15ad87647893f180a2036c324595d4a4}{gdif}} = 0.0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00054}00054     ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}} = ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}} = ptt-\/>\mbox{\hyperlink{structmytime_a304822b75fd7ca822695ed91acd27245}{sdif}} = 0.0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00055}00055     ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}} = ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}} = ptt-\/>\mbox{\hyperlink{structmytime_aee3e99eea253744fca5c9b42588420c3}{udif}} = 0.0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00056}00056   \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00057}00057   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00058}00058 \textcolor{preprocessor}{\#ifdef MMG\_POSIX}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00059}00059     gettimeofday(\&(ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}), NULL);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00060}00060 \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00061}00061           QueryPerformanceCounter(\&ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}});}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00062}00062 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00063}00063     GetProcessTimes(ptt-\/>\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}}, \&ptt-\/>\mbox{\hyperlink{structmytime_a4c92bc853a997fa938401e1bc22fa676}{ftIni}}, \&ptt-\/>\mbox{\hyperlink{structmytime_a099960ee829757bb8571c9a060c87c68}{ftEnd}}, \&ptt-\/>\mbox{\hyperlink{structmytime_a5689f6782c823cb7f286f10f842b5a77}{ftSys}}, \&ptt-\/>\mbox{\hyperlink{structmytime_a7ff30fa63e7c477185fc1dbaa2884d40}{ftUser}});}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00064}00064     FileTimeToSystemTime(\&ptt-\/>\mbox{\hyperlink{structmytime_a5689f6782c823cb7f286f10f842b5a77}{ftSys}} , \&ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}} );}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00065}00065     FileTimeToSystemTime(\&ptt-\/>\mbox{\hyperlink{structmytime_a7ff30fa63e7c477185fc1dbaa2884d40}{ftUser}}, \&ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}});}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00066}00066 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00067}00067     \textcolor{keywordflow}{if} ( cmode == ON ) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00068}00068 \textcolor{preprocessor}{\#ifdef MMG\_POSIX}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00069}00069       ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}}  = (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec ) + (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec) * \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}});}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00070}00070 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00071}00071       getrusage(RUSAGE\_SELF,\&(ptt-\/>ru));}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00072}00072       ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}} = ptt-\/>ru.ru\_utime;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00073}00073       ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}}  = (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec) * \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00074}00074       ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}} = ptt-\/>ru.ru\_stime;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00075}00075       ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}}  = (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec )* \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00076}00076 \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00077}00077       ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}} = (double)(ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.QuadPart / ptt-\/>\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}}.QuadPart);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00078}00078 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00079}00079       ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}} = ((double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wHour * 3600 + (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMinute * 60}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00080}00080         + (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wSecond) * \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMilliseconds * 1000;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00081}00081       ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}} = ((\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wHour * 3600 + (double)ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMinute * 60}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00082}00082         + (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wSecond) * \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMilliseconds * 1000;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00083}00083 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00084}00084     \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00085}00085     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( cmode == OFF ) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00086}00086 \textcolor{preprocessor}{\#ifdef MMG\_POSIX}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00087}00087       ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}}  = (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec ) + (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec) * \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}});}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00088}00088 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00089}00089       getrusage(RUSAGE\_SELF,\&(ptt-\/>ru));}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00090}00090       ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}} = ptt-\/>ru.ru\_utime;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00091}00091       ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}}  = (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec ) * \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00092}00092       ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}} = ptt-\/>ru.ru\_stime;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00093}00093       ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}}  = (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec ) * \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00094}00094 \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00095}00095       ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}} = (double)(ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.QuadPart / ptt-\/>\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}}.QuadPart);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00096}00096 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00097}00097       ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}} = ((double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wHour * 3600 + (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMinute * 60}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00098}00098         + (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wSecond) * \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMilliseconds * 1000;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00099}00099       ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}} = ((\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wHour * 3600 + (double)ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMinute * 60}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00100}00100         + (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wSecond) * \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}} + (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMilliseconds * 1000;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00101}00101 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00102}00102 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00103}00103       ptt-\/>\mbox{\hyperlink{structmytime_a15ad87647893f180a2036c324595d4a4}{gdif}} += ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}} -\/ ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}};}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00104}00104 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00105}00105       ptt-\/>\mbox{\hyperlink{structmytime_aee3e99eea253744fca5c9b42588420c3}{udif}} += (ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}} -\/ ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}}) * \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}};}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00106}00106       ptt-\/>\mbox{\hyperlink{structmytime_a304822b75fd7ca822695ed91acd27245}{sdif}} += (ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}} -\/ ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}}) * \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}};}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00107}00107 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00108}00108       ptt-\/>\mbox{\hyperlink{structmytime_a652a1f4b8b1cae29b8dadf363faeef1b}{call}}++;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00109}00109     \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00110}00110   \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00111}00111 \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00112}00112 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00113}00113 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00120}\mbox{\hyperlink{chrono_8c_a131699bc03717cfe1f21d602f81089fd}{00120}} \textcolor{keywordtype}{void}  \mbox{\hyperlink{chrono_8c_a131699bc03717cfe1f21d602f81089fd}{tminit}}(\mbox{\hyperlink{structmytime}{mytime}} *t,\textcolor{keywordtype}{int} maxtim) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00121}00121   \mbox{\hyperlink{structmytime}{mytime}}  *ptt;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00122}00122   \textcolor{keywordtype}{int}      k;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00123}00123 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00124}00124 \textcolor{preprocessor}{\#ifndef MMG\_POSIX}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00125}00125   QueryPerformanceFrequency(\&t[0].frequency);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00126}00126 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00127}00127   t[0].\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}} = GetCurrentProcess();}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00128}00128   \textcolor{keywordflow}{for} (k = 1; k < maxtim; k++) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00129}00129     t[k].\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}}   = t[0].\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}};}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00130}00130     t[k].\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}} = t[0].\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}};}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00131}00131   \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00132}00132 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00133}00133   \textcolor{keywordflow}{for} (k=0; k<maxtim; k++) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00134}00134     ptt = \&t[k];}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00135}00135     ptt-\/>\mbox{\hyperlink{structmytime_a652a1f4b8b1cae29b8dadf363faeef1b}{call}} = 0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00136}00136     ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}} = ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}} = ptt-\/>\mbox{\hyperlink{structmytime_a15ad87647893f180a2036c324595d4a4}{gdif}} = 0.0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00137}00137     ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}} = ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}} = ptt-\/>\mbox{\hyperlink{structmytime_a304822b75fd7ca822695ed91acd27245}{sdif}} = 0.0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00138}00138     ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}} = ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}} = ptt-\/>\mbox{\hyperlink{structmytime_aee3e99eea253744fca5c9b42588420c3}{udif}} = 0.0;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00139}00139   \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00140}00140 \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00141}00141 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00142}00142 \textcolor{preprocessor}{\#ifdef MMG\_COMPARABLE\_OUTPUT}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00149}00149 \textcolor{keywordtype}{void} \mbox{\hyperlink{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}{printim}}(\textcolor{keywordtype}{double} elps,\textcolor{keywordtype}{char} *stim) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00150}00150   sprintf(stim,\textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00151}00151 \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00152}00152 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00153}00153 \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00160}\mbox{\hyperlink{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}{00160}} \textcolor{keywordtype}{void} \mbox{\hyperlink{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}{printim}}(\textcolor{keywordtype}{double} elps,\textcolor{keywordtype}{char} *stim) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00161}00161   \textcolor{keywordtype}{int}    hh,mm,ss;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00162}00162 }
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00163}00163   \textcolor{keywordflow}{if} ( elps < 60.0 )}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00164}00164     sprintf(stim,\textcolor{stringliteral}{"{}\%5.3lfs"{}},elps);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00165}00165   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( elps < 3600.0 ) \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00166}00166     mm = (int)(elps / 60.0);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00167}00167     ss = (int)elps -\/ mm * 60;}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00168}00168     sprintf(stim,\textcolor{stringliteral}{"{}\%dm\%ds (\%7.3lfs)"{}},mm,ss,elps);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00169}00169   \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00170}00170   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00171}00171     hh = (int)(elps / 3600);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00172}00172     mm = (int)((elps -\/ hh*3600) / 60);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00173}00173     ss = (int)(elps -\/ mm*60 -\/ hh*3600);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00174}00174     sprintf(stim,\textcolor{stringliteral}{"{}\%dh\%dm\%ds"{}},hh,mm,ss);}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00175}00175   \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00176}00176 \}}
-\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00177}00177 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00001}00001\ \textcolor{comment}{/*\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00002}00002\ \textcolor{comment}{**\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00003}00003\ \textcolor{comment}{**\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00004}00004\ \textcolor{comment}{**\ \ Copyright\ (c)\ Bx\ INP/CNRS/Inria/UBordeaux/UPMC,\ 2004-\/}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00005}00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00006}00006\ \textcolor{comment}{**\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00007}00007\ \textcolor{comment}{**\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00008}00008\ \textcolor{comment}{**\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00009}00009\ \textcolor{comment}{**\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00011}00011\ \textcolor{comment}{**\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00012}00012\ \textcolor{comment}{**\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00013}00013\ \textcolor{comment}{**\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00014}00014\ \textcolor{comment}{**\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00016}00016\ \textcolor{comment}{**\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00017}00017\ \textcolor{comment}{**\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00018}00018\ \textcolor{comment}{**\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00019}00019\ \textcolor{comment}{**\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00020}00020\ \textcolor{comment}{**\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00021}00021\ \textcolor{comment}{**\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00038}00038\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00039}00039\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00040}00040\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chrono__private_8h}{chrono\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00049}\mbox{\hyperlink{chrono_8c_a67921c69e98250518e09b9443656ddad}{00049}}\ \textcolor{keywordtype}{void}\ \ \mbox{\hyperlink{chrono_8c_a67921c69e98250518e09b9443656ddad}{chrono}}(\textcolor{keywordtype}{int}\ cmode,\mbox{\hyperlink{structmytime}{mytime}}\ *ptt)\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00051}00051\ \ \ \textcolor{keywordflow}{if}\ (\ cmode\ ==\ RESET\ )\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00052}00052\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a652a1f4b8b1cae29b8dadf363faeef1b}{call}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00053}00053\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_a15ad87647893f180a2036c324595d4a4}{gdif}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00054}00054\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_a304822b75fd7ca822695ed91acd27245}{sdif}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00055}00055\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_aee3e99eea253744fca5c9b42588420c3}{udif}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00056}00056\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00057}00057\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00058}00058\ \textcolor{preprocessor}{\#ifdef\ MMG\_POSIX}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00059}00059\ \ \ \ \ gettimeofday(\&(ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}),\ NULL);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00060}00060\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ QueryPerformanceCounter(\&ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}});}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00063}00063\ \ \ \ \ GetProcessTimes(ptt-\/>\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}},\ \&ptt-\/>\mbox{\hyperlink{structmytime_a4c92bc853a997fa938401e1bc22fa676}{ftIni}},\ \&ptt-\/>\mbox{\hyperlink{structmytime_a099960ee829757bb8571c9a060c87c68}{ftEnd}},\ \&ptt-\/>\mbox{\hyperlink{structmytime_a5689f6782c823cb7f286f10f842b5a77}{ftSys}},\ \&ptt-\/>\mbox{\hyperlink{structmytime_a7ff30fa63e7c477185fc1dbaa2884d40}{ftUser}});}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00064}00064\ \ \ \ \ FileTimeToSystemTime(\&ptt-\/>\mbox{\hyperlink{structmytime_a5689f6782c823cb7f286f10f842b5a77}{ftSys}}\ ,\ \&ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}\ );}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00065}00065\ \ \ \ \ FileTimeToSystemTime(\&ptt-\/>\mbox{\hyperlink{structmytime_a7ff30fa63e7c477185fc1dbaa2884d40}{ftUser}},\ \&ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}});}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00066}00066\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ cmode\ ==\ ON\ )\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00068}00068\ \textcolor{preprocessor}{\#ifdef\ MMG\_POSIX}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00069}00069\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}}\ \ =\ (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec\ )\ +\ (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec)\ *\ \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}});}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00071}00071\ \ \ \ \ \ \ getrusage(RUSAGE\_SELF,\&(ptt-\/>ru));}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00072}00072\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}\ =\ ptt-\/>ru.ru\_utime;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00073}00073\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}}\ \ =\ (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec)\ *\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00074}00074\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}\ =\ ptt-\/>ru.ru\_stime;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00075}00075\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}}\ \ =\ (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec\ )*\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00076}00076\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00077}00077\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}}\ =\ (double)(ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.QuadPart\ /\ ptt-\/>\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}}.QuadPart);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00079}00079\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}}\ =\ ((double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wHour\ *\ 3600\ +\ (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMinute\ *\ 60}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ +\ (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wSecond)\ *\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMilliseconds\ *\ 1000;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00081}00081\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}}\ =\ ((\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wHour\ *\ 3600\ +\ (double)ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMinute\ *\ 60}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ +\ (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wSecond)\ *\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMilliseconds\ *\ 1000;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00083}00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00084}00084\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ cmode\ ==\ OFF\ )\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00086}00086\ \textcolor{preprocessor}{\#ifdef\ MMG\_POSIX}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00087}00087\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}}\ \ =\ (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec\ )\ +\ (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec)\ *\ \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}});}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00089}00089\ \ \ \ \ \ \ getrusage(RUSAGE\_SELF,\&(ptt-\/>ru));}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00090}00090\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}\ =\ ptt-\/>ru.ru\_utime;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00091}00091\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}}\ \ =\ (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec\ )\ *\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00092}00092\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}\ =\ ptt-\/>ru.ru\_stime;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00093}00093\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}}\ \ =\ (double)((ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_sec\ )\ *\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.tv\_usec));}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00094}00094\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00095}00095\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}}\ =\ (double)(ptt-\/>\mbox{\hyperlink{structmytime_a4a2fd775dd3d8c896041bdc3f1c72be7}{rutim}}.QuadPart\ /\ ptt-\/>\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}}.QuadPart);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00097}00097\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}}\ =\ ((double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wHour\ *\ 3600\ +\ (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMinute\ *\ 60}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ +\ (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wSecond)\ *\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (double)ptt-\/>\mbox{\hyperlink{structmytime_a68ebcae4459e5ebbae9e1c2ccb53965e}{stUser}}.wMilliseconds\ *\ 1000;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00099}00099\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}}\ =\ ((\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wHour\ *\ 3600\ +\ (double)ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMinute\ *\ 60}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ +\ (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wSecond)\ *\ \mbox{\hyperlink{chrono__private_8h_a38eb76aa0a9a1bb1dac30c75be4a05b6}{BIG}}\ +\ (\textcolor{keywordtype}{double})ptt-\/>\mbox{\hyperlink{structmytime_a54669ad18d23647324805e306dc69887}{stSys}}.wMilliseconds\ *\ 1000;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00101}00101\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00103}00103\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a15ad87647893f180a2036c324595d4a4}{gdif}}\ +=\ ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}}\ -\/\ ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}};}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00105}00105\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_aee3e99eea253744fca5c9b42588420c3}{udif}}\ +=\ (ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}}\ -\/\ ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}})\ *\ \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}};}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00106}00106\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a304822b75fd7ca822695ed91acd27245}{sdif}}\ +=\ (ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}}\ -\/\ ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}})\ *\ \mbox{\hyperlink{chrono__private_8h_ae0e50a203d251eb62d4e4fe338384df7}{BIG1}};}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00108}00108\ \ \ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a652a1f4b8b1cae29b8dadf363faeef1b}{call}}++;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00109}00109\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00110}00110\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00120}\mbox{\hyperlink{chrono_8c_a131699bc03717cfe1f21d602f81089fd}{00120}}\ \textcolor{keywordtype}{void}\ \ \mbox{\hyperlink{chrono_8c_a131699bc03717cfe1f21d602f81089fd}{tminit}}(\mbox{\hyperlink{structmytime}{mytime}}\ *t,\textcolor{keywordtype}{int}\ maxtim)\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00121}00121\ \ \ \mbox{\hyperlink{structmytime}{mytime}}\ \ *ptt;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00122}00122\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ k;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00124}00124\ \textcolor{preprocessor}{\#ifndef\ MMG\_POSIX}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00125}00125\ \ \ QueryPerformanceFrequency(\&t[0].frequency);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00127}00127\ \ \ t[0].\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}}\ =\ GetCurrentProcess();}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00128}00128\ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 1;\ k\ <\ maxtim;\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00129}00129\ \ \ \ \ t[k].\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}}\ \ \ =\ t[0].\mbox{\hyperlink{structmytime_a815404b743a8783223ee10a0c8a2a457}{frequency}};}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00130}00130\ \ \ \ \ t[k].\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}}\ =\ t[0].\mbox{\hyperlink{structmytime_ab69ab4596f523bfe9fa95f5f289bcd54}{thisProcess}};}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00131}00131\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00132}00132\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00133}00133\ \ \ \textcolor{keywordflow}{for}\ (k=0;\ k<maxtim;\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00134}00134\ \ \ \ \ ptt\ =\ \&t[k];}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00135}00135\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a652a1f4b8b1cae29b8dadf363faeef1b}{call}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00136}00136\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_a4d636aa420ad7bc2aba9ba88f548e688}{gini}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_a8e3b7da1c24e1e1cf90c602f5ded4021}{gend}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_a15ad87647893f180a2036c324595d4a4}{gdif}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00137}00137\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_aa527d49c9a4275b71524b090d48190d9}{sini}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_adfb5d7f560eff5bbd3533509a4e429ce}{send}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_a304822b75fd7ca822695ed91acd27245}{sdif}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00138}00138\ \ \ \ \ ptt-\/>\mbox{\hyperlink{structmytime_adf039817cf6483ebf0d0a4e4de9a1a1d}{uini}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_aedf143e81fc9530eff2662f3a2dfb9db}{uend}}\ =\ ptt-\/>\mbox{\hyperlink{structmytime_aee3e99eea253744fca5c9b42588420c3}{udif}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00139}00139\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00140}00140\ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00142}00142\ \textcolor{preprocessor}{\#ifdef\ MMG\_COMPARABLE\_OUTPUT}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00149}00149\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}{printim}}(\textcolor{keywordtype}{double}\ elps,\textcolor{keywordtype}{char}\ *stim)\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00150}00150\ \ \ sprintf(stim,\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00151}00151\ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00153}00153\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00160}\mbox{\hyperlink{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}{00160}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{chrono_8c_a5600a1b0dfbd188cddb2923c07d828ac}{printim}}(\textcolor{keywordtype}{double}\ elps,\textcolor{keywordtype}{char}\ *stim)\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00161}00161\ \ \ \textcolor{keywordtype}{int}\ \ \ \ hh,mm,ss;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00163}00163\ \ \ \textcolor{keywordflow}{if}\ (\ elps\ <\ 60.0\ )}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00164}00164\ \ \ \ \ sprintf(stim,\textcolor{stringliteral}{"{}\%5.3lfs"{}},elps);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00165}00165\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ elps\ <\ 3600.0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00166}00166\ \ \ \ \ mm\ =\ (int)(elps\ /\ 60.0);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00167}00167\ \ \ \ \ ss\ =\ (int)elps\ -\/\ mm\ *\ 60;}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00168}00168\ \ \ \ \ sprintf(stim,\textcolor{stringliteral}{"{}\%dm\%ds\ (\%7.3lfs)"{}},mm,ss,elps);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00169}00169\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00170}00170\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00171}00171\ \ \ \ \ hh\ =\ (int)(elps\ /\ 3600);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00172}00172\ \ \ \ \ mm\ =\ (int)((elps\ -\/\ hh*3600)\ /\ 60);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00173}00173\ \ \ \ \ ss\ =\ (int)(elps\ -\/\ mm*60\ -\/\ hh*3600);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00174}00174\ \ \ \ \ sprintf(stim,\textcolor{stringliteral}{"{}\%dh\%dm\%ds"{}},hh,mm,ss);}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00175}00175\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00176}00176\ \}}
+\DoxyCodeLine{\Hypertarget{chrono_8c_source_l00177}00177\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

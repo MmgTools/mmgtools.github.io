@@ -1,15 +1,15 @@
-\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md67}{}\doxysection{I/ Implementation}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md67}
+\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md68}{}\doxysection{I/ Implementation}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md68}
 To call the {\bfseries{mmg3d}} library, you must\+: ~\newline
 
 \begin{DoxyEnumerate}
 \item build mesh and sol at MMG5 format;
 \item call the MMG3D library;
 \item get the final mesh and sol.
-\end{DoxyEnumerate}\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md68}{}\doxysubsection{example0\+\_\+a}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md68}
-We read mesh and solution files using the {\bfseries{MMG3\+D\+\_\+load\+Mesh}} and {\bfseries{MMG3\+D\+\_\+load\+Sol}} functions. Results are saved using {\bfseries{MMG3\+D\+\_\+save\+Mesh}} and {\bfseries{MMG3\+D\+\_\+save\+Sol}} functions.\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md69}{}\doxysubsection{example0\+\_\+b}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md69}
+\end{DoxyEnumerate}\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md69}{}\doxysubsection{example0\+\_\+a}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md69}
+We read mesh and solution files using the {\bfseries{MMG3\+D\+\_\+load\+Mesh}} and {\bfseries{MMG3\+D\+\_\+load\+Sol}} functions. Results are saved using {\bfseries{MMG3\+D\+\_\+save\+Mesh}} and {\bfseries{MMG3\+D\+\_\+save\+Sol}} functions.\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md70}{}\doxysubsection{example0\+\_\+b}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md70}
 The mesh and solution are hard coded. ~\newline
  They are build in MMG5 format using API functions and are recovered by the same way. ~\newline
- We show how to recover the mesh/sol by writting it in a file.\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md70}{}\doxysection{II/ Compilation}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md70}
+ We show how to recover the mesh/sol by writting it in a file.\hypertarget{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md71}{}\doxysection{II/ Compilation}\label{md_libexamples_mmg3d_adaptation_example0_README_autotoc_md71}
 
 \begin{DoxyEnumerate}
 \item Build and install the {\bfseries{mmg3d}} shared and static library. We suppose in the following that you have installed the {\bfseries{mmg3d}} library in the $\ast$$\ast$\+\_\+\$\+CMAKE\+\_\+\+INSTALL\+\_\+\+PREFIX\+\_\+$\ast$$\ast$ directory (see the \href{https://github.com/MmgTools/Mmg/wiki/Setup-guide\#iii-installation}{\texttt{ installation}} section of the setup guide);
@@ -28,7 +28,7 @@ Example 1 ~\newline
  Command line to link the application with the {\bfseries{mmg3d}} static library (we supposed here that the scotch library is installed in the $\ast$$\ast$\+\_\+\$\+SCOTCH\+\_\+\+PATH\+\_\+$\ast$$\ast$ directory)\+: ~\newline
  
 \begin{DoxyCode}{0}
-\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg3d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/L\$SCOTCH\_PATH -\/lmmg3d -\/lscotch -\/lscotcherr -\/lm}
+\DoxyCodeLine{gcc\ -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg3d\ main.c\ -\/L\$CMAKE\_INSTALL\_PREFIX/lib\ -\/L\$SCOTCH\_PATH\ -\/lmmg3d\ -\/lscotch\ -\/lscotcherr\ -\/lm}
 
 \end{DoxyCode}
  \end{quote}
@@ -37,8 +37,8 @@ Example 2 ~\newline
  Command line to link the application with the {\bfseries{mmg3d}} shared library\+: ~\newline
  
 \begin{DoxyCode}{0}
-\DoxyCodeLine{gcc -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg3d main.c -\/L\$CMAKE\_INSTALL\_PREFIX/lib -\/lmmg3d}
-\DoxyCodeLine{export LD\_LIBRARY\_PATH=\$CMAKE\_INSTALL\_PREFIX/lib:\$LD\_LIBRARY\_PATH}
+\DoxyCodeLine{gcc\ -\/I\$CMAKE\_INSTALL\_PREFIX/include/mmg/mmg3d\ main.c\ -\/L\$CMAKE\_INSTALL\_PREFIX/lib\ -\/lmmg3d}
+\DoxyCodeLine{export\ LD\_LIBRARY\_PATH=\$CMAKE\_INSTALL\_PREFIX/lib:\$LD\_LIBRARY\_PATH}
 
 \end{DoxyCode}
  \end{quote}

@@ -2,450 +2,450 @@
 \label{colver__2d_8c_source}\index{src/mmg2d/colver\_2d.c@{src/mmg2d/colver\_2d.c}}
 \mbox{\hyperlink{colver__2d_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00005}00005 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00010}00010 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00015}00015 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00022}00022 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00023}00023 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00024}00024 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmg2dexterns__private_8h}{mmg2dexterns\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00025}00025 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00026}00026 \textcolor{keyword}{extern} uint8\_t \mbox{\hyperlink{colver__2d_8c_a70ec6efea084210f83687ac3d70027dc}{ddb}};}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00027}00027 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00042}\mbox{\hyperlink{colver__2d_8c_a6c8e45d8f13d2ca90adb3d95316f6255}{00042}} \textcolor{keywordtype}{int} \mbox{\hyperlink{colver__2d_8c_a6c8e45d8f13d2ca90adb3d95316f6255}{MMG2D\_chkcol}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,MMG5\_int k,int8\_t i,MMG5\_int *list,int8\_t typchk) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00043}00043   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}     pt0,pt,pt1,pt2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00044}00044   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}    ppt,p2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00045}00045   \textcolor{keywordtype}{double}         lon,len,calold,calnew,caltmp;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00046}00046   MMG5\_int       ip1,ip2,ipb,l,ll,lj,jel,kel,*adja;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00047}00047   \textcolor{keywordtype}{int}            ilist;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00048}00048   uint8\_t        i1,i2,j,jj,j2,voy,open;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00049}00049 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00050}00050   pt0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00051}00051   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00052}00052 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00053}00053   i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00054}00054   i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00055}00055 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00056}00056   ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00057}00057   ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00058}00058 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00059}00059   open = 1;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00060}00060   adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00061}00061 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00062}00062   calold = calnew = DBL\_MAX;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00063}00063 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00064}00064   \textcolor{comment}{/* If typchk == 2, avoid recreating long edges */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00065}00065   lon = 0.0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00066}00066   \textcolor{keywordflow}{if} ( typchk == 2 \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00067}00067     lon = MMG2D\_lencurv(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,ip1,ip2);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00068}00068     lon = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(2.-\/lon,1.6);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00069}00069   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00070}00070 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00071}00071   \textcolor{comment}{/* Avoid collapsing a boundary point over a regular one (leads to boundary degeneration) */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00072}00072   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) \&\& !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00073}00073 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00074}00074   \textcolor{comment}{/* Avoid subdivising one ref. component consisting of only one layer of elements */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00075}00075   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) \&\& (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1]||pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00076}00076 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00077}00077   \textcolor{comment}{/* Avoid closing one ref. component consisting of only one element (maybe}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00078}00078 \textcolor{comment}{   * redondant with previous test)*/}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00079}00079   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1]) \&\& \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00080}00080 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00081}00081   jel = adja[i] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00082}00082   \textcolor{keywordflow}{if} ( jel ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00083}00083     open = 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00084}00084     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00085}00085     j = adja[i] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00086}00086     jj = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00087}00087     j2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00088}00088     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[jj]) \&\& \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j2]) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00089}00089   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00090}00090 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00091}00091   \textcolor{comment}{/* collect all triangles around vertex i1}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00092}00092 \textcolor{comment}{   simplification w.r.to the surface case: no need to use spacial ball boulechknm (impossible situation in 2d) */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00093}00093   int8\_t dummy;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00094}00094   ilist = \mbox{\hyperlink{boulep_8c_a71f8e5d4eb5962634fdd646773a14e09}{MMG5\_boulet}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},k,i1,list,0,\&dummy);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00095}00095   \textcolor{keywordflow}{if} ( ilist <= 0 )}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00096}00096     \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00097}00097 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00098}00098   \textcolor{comment}{/* Avoid collapsing a "{}void triangle"{} */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00099}00099   \textcolor{keywordflow}{if} ( open ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00100}00100     jel = list[ilist-\/1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00101}00101     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00102}00102     j = list[ilist-\/1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00103}00103     j2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00104}00104     ipb = pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00105}00105 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00106}00106     \textcolor{comment}{/* Travel the ball of ip2 until a boundary is met */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00107}00107     jel = k;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00108}00108     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00109}00109     j = i1;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00110}00110 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00111}00111     \textcolor{keywordflow}{while} ( jel \&\& !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j]) ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00112}00112       adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00113}00113       jel = adja[j] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00114}00114       pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00115}00115       j = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[adja[j] \% 3];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00116}00116     \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00117}00117     j = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00118}00118 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00119}00119     \textcolor{keywordflow}{if} ( ipb == pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j] ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00120}00120   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00121}00121 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00122}00122   \textcolor{comment}{/* Avoid creating edges with two BDY endpoints, which are not themselves BDY */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00123}00123   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_afbff0a58e26e6ef7c1b8b3e0e00b132a}{fem}} ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00124}00124     p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00125}00125     \textcolor{keywordflow}{if} ( p2-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} \& \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}} ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00126}00126       \textcolor{comment}{/* Travel all edges in the ball but for the first and last */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00127}00127       \textcolor{keywordflow}{for} (l=0; l<ilist-\/1; l++) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00128}00128         jel = list[l] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00129}00129         j = list[l] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00130}00130         jj = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00131}00131         j2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00132}00132         pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00133}00133         p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2]];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00134}00134         \textcolor{keywordflow}{if} ( (p2-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} \& \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}}) \&\& !(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[jj] \& \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}}) ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00135}00135       \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00136}00136     \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00137}00137   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00138}00138 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00139}00139   \textcolor{keywordflow}{if} ( ilist > 3 || ( ilist == 3 \&\& open ) ) \{      \textcolor{comment}{// ADD : Second test should work too}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00140}00140     \textcolor{comment}{/* Avoid a collapse that would close one ref. component that consists only of one element */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00141}00141     \textcolor{comment}{/* Useless test I believe */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00142}00142     \textcolor{comment}{/*if ( MG\_EDG(pt-\/>tag[i2]) ) \{}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00143}00143 \textcolor{comment}{      jel = list[1] / 3;}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00144}00144 \textcolor{comment}{      if ( ! jel ) return 0;}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00145}00145 \textcolor{comment}{      pt1 = \&mesh-\/>tria[jel];}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00146}00146 \textcolor{comment}{      if ( MMG5\_abs(pt-\/>ref) != MMG5\_abs(pt1-\/>ref) )  return 0;}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00147}00147 \textcolor{comment}{    \}*/}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00148}00148 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00149}00149     \textcolor{comment}{/* Travel the ball of i1 (but for the two elements 0 and ilist-\/1 (the last one in the case of}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00150}00150 \textcolor{comment}{     a closed ball) which will disappear */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00151}00151     \textcolor{keywordflow}{for} (l=1; l<ilist-\/1+open; l++) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00152}00152       jel = list[l] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00153}00153       j = list[l] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00154}00154       jj = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00155}00155       j2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00156}00156       pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00157}00157 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00158}00158       memcpy(pt0,pt1,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00159}00159       pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j] = ip2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00160}00160 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00161}00161       \textcolor{comment}{/* Check length to avoid recreating long elements */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00162}00162       \textcolor{keywordflow}{if} ( typchk == 2 \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} \&\& !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00163}00163         ip1 = pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00164}00164         len = MMG2D\_lencurv(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,ip1,ip2);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00165}00165         \textcolor{keywordflow}{if} ( len > lon )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00166}00166       \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00167}00167 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00168}00168       \textcolor{comment}{/* Check that the newly created triangles will not have to be split again */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00169}00169       \textcolor{keywordflow}{if} ( l == 1 ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00170}00170         pt0-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j2] |= pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00171}00171       \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00172}00172       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( l == ilist-\/2 \&\& !open ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00173}00173         ll = list[ilist-\/1+open] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00174}00174 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00175}00175         \textcolor{keywordflow}{if} ( ll > \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}} )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00176}00176         lj = list[ilist-\/1+open] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00177}00177         pt0-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[jj] |= \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[ll].\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[lj];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00178}00178       \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00179}00179 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00180}00180       \textcolor{keywordflow}{if} ( typchk == 1 )}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00181}00181         \textcolor{keywordflow}{if} ( \mbox{\hyperlink{bezier__2d_8c_a9932587ef813f432c421c91812f2cc86}{MMG2D\_chkedg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},0) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00182}00182 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00183}00183 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00184}00184       \textcolor{comment}{/* Check quality and volume inversion */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00185}00185       \textcolor{keywordflow}{if} ( typchk == 2 \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}} == 3 )}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00186}00186         caltmp = \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_a5ffcb74d20d198e2a96e25cbd32552f1}{MMG2D\_caltri\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,pt1);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00187}00187       \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00188}00188         caltmp = \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt1);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00189}00189 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00190}00190       calold = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(calold,caltmp);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00191}00191 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00192}00192       \textcolor{keywordflow}{if} ( typchk == 2 \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}} \&\& met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}} == 3 )}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00193}00193         caltmp = \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_a5ffcb74d20d198e2a96e25cbd32552f1}{MMG2D\_caltri\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,pt0);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00194}00194       \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00195}00195         caltmp = \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt0);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00196}00196 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00197}00197       \textcolor{keywordflow}{if} ( caltmp < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00198}00198       calnew = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(calnew,caltmp);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00199}00199       \textcolor{keywordflow}{if} ( calold < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} \&\& calnew <= calold )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00200}00200       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( calnew < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} || calnew < 0.001*calold )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00201}00201     \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00202}00202   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00203}00203 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00204}00204   \textcolor{comment}{/* Specific test: no collapse if any interior edge is EDG */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00205}00205   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( ilist == 3 ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00206}00206     ppt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00207}00207     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(ppt-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00208}00208     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) \&\& !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i]) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00209}00209     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) \&\& \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i]) )  \textcolor{keywordflow}{return} 0; \textcolor{comment}{// What is the use of that?}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00210}00210     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i2]) \&\& \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i]) \&\& \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1]) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00211}00211 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00212}00212     \textcolor{comment}{/* Check geometric approximation */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00213}00213     jel = list[1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00214}00214     j   = list[1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00215}00215     jj  = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00216}00216     j2  = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00217}00217     pt0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00218}00218     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00219}00219     memcpy(pt0,pt1,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00220}00220     pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j] = ip2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00221}00221 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00222}00222     jel = list[2] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00223}00223     j   = list[2] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00224}00224     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00225}00225     pt0-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[jj] |= pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00226}00226     pt0-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j2] |= pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j]];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00227}00227 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00228}00228     \textcolor{keywordflow}{if} ( typchk == 1 )}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00229}00229       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{bezier__2d_8c_a9932587ef813f432c421c91812f2cc86}{MMG2D\_chkedg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},0) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00230}00230 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00231}00231   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00232}00232 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00233}00233   \textcolor{comment}{/* Particular case when there are two triangles in the ball of the collapsed point ip1 */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00234}00234   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00235}00235     assert ( ilist == 2 );  \textcolor{comment}{// Not necessarily! Check for that case too!}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00236}00236     \textcolor{keywordflow}{if} ( ilist !=2 ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00237}00237     \textcolor{keywordflow}{if} ( !open )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00238}00238 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00239}00239     jel = list[1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00240}00240     j   = list[1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00241}00241 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00242}00242     \textcolor{comment}{/* Topological test : avoid creating twice the same triangle */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00243}00243     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00244}00244     kel = adja[j] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00245}00245     voy = adja[j] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00246}00246     pt2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00247}00247     \textcolor{keywordflow}{if} ( pt2-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[voy] == ip2 ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00248}00248 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00249}00249     jj  = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00250}00250     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00251}00251     \textcolor{keywordflow}{if} ( MMG5\_abs(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}}) != MMG5\_abs(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}}) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00252}00252     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[jj] \& \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}}) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00253}00253 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00254}00254     \textcolor{comment}{/* Check quality and geometric approximation: elements with two trias in the}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00255}00255 \textcolor{comment}{     * ball should be removed */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00256}00256     pt0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00257}00257     memcpy(pt0,pt1,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00258}00258     pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j] = ip2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00259}00259 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00260}00260     calold = \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt1);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00261}00261     calnew = \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt0);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00262}00262     \textcolor{keywordflow}{if} ( calnew < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00263}00263     \textcolor{keywordflow}{if} ( calold < \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}} \&\& calnew <= calold )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00264}00264 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00265}00265     \textcolor{keywordflow}{if} ( typchk == 1 )}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00266}00266       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{bezier__2d_8c_a9932587ef813f432c421c91812f2cc86}{MMG2D\_chkedg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},0) )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00267}00267   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00268}00268 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00269}00269   \textcolor{keywordflow}{return} ilist;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00270}00270 \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00271}00271 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00272}00272 \textcolor{comment}{/* Perform effective collapse of edge i in tria k, i1-\/>i2 */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00273}\mbox{\hyperlink{colver__2d_8c_a2eaa1c0113a75d8708f122c6bb3b2799}{00273}} \textcolor{keywordtype}{int} \mbox{\hyperlink{colver__2d_8c_a2eaa1c0113a75d8708f122c6bb3b2799}{MMG2D\_colver}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\textcolor{keywordtype}{int} ilist,MMG5\_int *list) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00274}00274   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}   pt,pt1,pt2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00275}00275   MMG5\_int     iel,jel,ip1,ip2,k,kel,*adja;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00276}00276   uint8\_t      i,j,jj,i1,i2,open;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00277}00277 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00278}00278   iel = list[0] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00279}00279   i1 =   list[0] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00280}00280   i = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00281}00281   i2 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00282}00282   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00283}00283   ip1 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00284}00284   ip2 = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00285}00285 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00286}00286   \textcolor{comment}{/* Check for open ball */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00287}00287   adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00288}00288   open = adja[i] == 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00289}00289 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00290}00290   \textcolor{comment}{/* Update of the vertex ip1 -\/> ip2 */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00291}00291   \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}};}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00292}00292 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00293}00293   \textcolor{keywordflow}{for} (k=1; k<ilist-\/1+open; k++) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00294}00294     jel = list[k] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00295}00295     jj  = list[k] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00296}00296     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00297}00297     pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[jj] = ip2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00298}00298     pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}}  = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};    \textcolor{comment}{// What is the use of updating the base field?}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00299}00299   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00300}00300 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00301}00301   \textcolor{comment}{/* Update adjacent with the first element (which necessarily exists) */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00302}00302   jel = list[1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00303}00303   jj  = list[1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00304}00304   j   = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[jj];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00305}00305   pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00306}00306 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00307}00307   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j] |= pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00308}00308   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j] = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j],pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i1]);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00309}00309 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00310}00310   \textcolor{keywordflow}{if} ( adja[i1] ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00311}00311     kel = adja[i1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00312}00312     k   = adja[i1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00313}00313     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k] = 3*jel+j;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00314}00314     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j] = 3*kel+k;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00315}00315     pt2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00316}00316     pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[k] |= pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00317}00317     pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k] = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j],pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00318}00318   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00319}00319   \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00320}00320     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j] = 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00321}00321 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00322}00322   \textcolor{comment}{/* When the boundary is not open, update the adjacency relation with the second element */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00323}00323   \textcolor{keywordflow}{if} ( !open ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00324}00324     iel = list[ilist-\/1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00325}00325     i1 = list[ilist-\/1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00326}00326     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00327}00327 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00328}00328     jel = list[ilist-\/2] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00329}00329     jj  = list[ilist-\/2] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00330}00330     j   = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[jj];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00331}00331     pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00332}00332     pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j] |= pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00333}00333     pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j] = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i1],pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j]);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00334}00334     adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00335}00335 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00336}00336     \textcolor{keywordflow}{if} ( adja[i1] ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00337}00337       kel = adja[i1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00338}00338       k   = adja[i1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00339}00339       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k] = 3*jel + j;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00340}00340       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j] = 3*kel + k;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00341}00341       pt2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00342}00342       pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[k] |= pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00343}00343       pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k] = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j],pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00344}00344     \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00345}00345     \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00346}00346       \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j] = 0;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00347}00347   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00348}00348 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00349}00349   \textcolor{comment}{/* Delete removed point and elements */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00350}00350   \mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2D\_delPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip1);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00351}00351   \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},list[0] / 3);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00352}00352   \textcolor{keywordflow}{if} ( !open )  \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},list[ilist-\/1] / 3);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00353}00353 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00354}00354   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00355}00355 \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00356}00356 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00357}00357 \textcolor{comment}{/* Perform effective collapse of edge i in tria k, i1-\/>i2}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00358}00358 \textcolor{comment}{   in the particular case where only three elements are in the ball of i */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00359}\mbox{\hyperlink{colver__2d_8c_aa5365f3228043c4d30146957b2dcf7c9}{00359}} \textcolor{keywordtype}{int} \mbox{\hyperlink{colver__2d_8c_aa5365f3228043c4d30146957b2dcf7c9}{MMG2D\_colver3}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int *list) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00360}00360   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}  pt,pt1,pt2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00361}00361   MMG5\_int    iel,jel,kel,mel,ip,*adja;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00362}00362   uint8\_t     i,i1,j,j1,j2,k,m;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00363}00363 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00364}00364   \textcolor{comment}{/* Update of the new point for triangle list[0] */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00365}00365   iel = list[0] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00366}00366   i = list[0] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00367}00367   i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00368}00368   pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00369}00369   ip = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00370}00370   jel = list[1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00371}00371   j   = list[1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00372}00372   j1  = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00373}00373   j2  = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00374}00374   pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00375}00375 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00376}00376   kel = list[2] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00377}00377   k   = list[2] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00378}00378   pt2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00379}00379 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00380}00380   \textcolor{comment}{/* update info */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00381}00381   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j]     = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00382}00382   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j1] |= pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[k];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00383}00383   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j1]  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j1],pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00384}00384   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j2] |= pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00385}00385   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j2]  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j2],pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i]);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00386}00386   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}}     = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00387}00387 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00388}00388   \textcolor{comment}{/* Update adjacency relations */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00389}00389   adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00390}00390   adja[j1] = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00391}00391   adja[j2] = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1+i];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00392}00392 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00393}00393   mel  = adja[j2] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00394}00394   \textcolor{keywordflow}{if} ( mel ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00395}00395     m    = adja[j2] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00396}00396     pt   = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[mel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00397}00397     pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[m]  = pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00398}00398     pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[m]  = pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00399}00399     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(mel-\/1)+1+m] = 3*jel + j2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00400}00400   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00401}00401 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00402}00402   mel = adja[j1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00403}00403   \textcolor{keywordflow}{if} ( mel ) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00404}00404     m    = adja[j1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00405}00405     pt   = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[mel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00406}00406     pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[m]  = pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00407}00407     pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[m]  = pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00408}00408     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(mel-\/1)+1+m] = 3*jel + j1;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00409}00409   \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00410}00410 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00411}00411   \textcolor{comment}{/* remove vertex + elements */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00412}00412   \mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2D\_delPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00413}00413   \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},iel);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00414}00414   \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},kel);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00415}00415 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00416}00416   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00417}00417 \}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00418}00418 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00419}00419 \textcolor{comment}{/* Perform effective collapse of edge i in tria k, i1-\/>i2}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00420}00420 \textcolor{comment}{ in the particular case where only two elements are in the ball of i */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00421}\mbox{\hyperlink{colver__2d_8c_aed327671ea0fec9ce172da593494e877}{00421}} \textcolor{keywordtype}{int} \mbox{\hyperlink{colver__2d_8c_aed327671ea0fec9ce172da593494e877}{MMG2D\_colver2}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int *list) \{}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00422}00422   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}   pt,pt1;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00423}00423   MMG5\_int     *adja,iel,jel,kel,ip1,ip2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00424}00424   int8\_t       i1,i2,jj,j2,k;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00425}00425 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00426}00426   \textcolor{comment}{/* update of new point for triangle list[0] */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00427}00427   iel = list[0] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00428}00428   i1  = list[0] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00429}00429   i2  = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00430}00430   pt  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00431}00431   ip1  = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00432}00432   ip2  = pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00433}00433 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00434}00434   jel = list[1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00435}00435   j2  = list[1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00436}00436   jj  = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j2];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00437}00437   pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00438}00438 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00439}00439   \textcolor{comment}{/* update info */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00440}00440   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2] = ip2;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00441}00441   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[jj] |= pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00442}00442   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[jj] = pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00443}00443   pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}} = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00444}00444 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00445}00445   \textcolor{comment}{/* update neighbours of new triangle */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00446}00446   adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00447}00447   adja[jj] = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1+i1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00448}00448   adja = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00449}00449   kel  = adja[i1] / 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00450}00450   k    = adja[i1] \% 3;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00451}00451   \textcolor{keywordflow}{if} ( kel )}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00452}00452     \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k] = 3*jel + jj;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00453}00453 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00454}00454   \textcolor{comment}{/* remove vertex + element */}}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00455}00455   \mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2D\_delPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip1);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00456}00456   \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},iel);}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00457}00457 }
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00458}00458   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00459}00459 \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00001}00001\ \textcolor{comment}{/*\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00002}00002\ \textcolor{comment}{**\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00003}00003\ \textcolor{comment}{**\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00004}00004\ \textcolor{comment}{**\ \ Copyright\ (c)\ Bx\ INP/CNRS/Inria/UBordeaux/UPMC,\ 2004-\/}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00005}00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00006}00006\ \textcolor{comment}{**\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00007}00007\ \textcolor{comment}{**\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00008}00008\ \textcolor{comment}{**\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00009}00009\ \textcolor{comment}{**\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00011}00011\ \textcolor{comment}{**\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00012}00012\ \textcolor{comment}{**\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00013}00013\ \textcolor{comment}{**\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00014}00014\ \textcolor{comment}{**\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00016}00016\ \textcolor{comment}{**\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00017}00017\ \textcolor{comment}{**\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00018}00018\ \textcolor{comment}{**\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00019}00019\ \textcolor{comment}{**\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00020}00020\ \textcolor{comment}{**\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00021}00021\ \textcolor{comment}{**\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{libmmg2d__private_8h}{libmmg2d\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mmg2dexterns__private_8h}{mmg2dexterns\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00026}00026\ \textcolor{keyword}{extern}\ uint8\_t\ \mbox{\hyperlink{colver__2d_8c_a70ec6efea084210f83687ac3d70027dc}{ddb}};}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00042}\mbox{\hyperlink{colver__2d_8c_a6c8e45d8f13d2ca90adb3d95316f6255}{00042}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{colver__2d_8c_a6c8e45d8f13d2ca90adb3d95316f6255}{MMG2D\_chkcol}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\ \mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ met,MMG5\_int\ k,int8\_t\ i,MMG5\_int\ *list,int8\_t\ typchk)\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00043}00043\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ \ \ \ pt0,pt,pt1,pt2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00044}00044\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ \ \ \ ppt,p2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00045}00045\ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ lon,len,calold,calnew,caltmp;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00046}00046\ \ \ MMG5\_int\ \ \ \ \ \ \ ip1,ip2,ipb,l,ll,lj,jel,kel,*adja;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00047}00047\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ ilist;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00048}00048\ \ \ uint8\_t\ \ \ \ \ \ \ \ i1,i2,j,jj,j2,voy,open;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00050}00050\ \ \ pt0\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00051}00051\ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00053}00053\ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00054}00054\ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00056}00056\ \ \ ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00057}00057\ \ \ ip2\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00059}00059\ \ \ open\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00060}00060\ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(k-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00062}00062\ \ \ calold\ =\ calnew\ =\ DBL\_MAX;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00064}00064\ \ \ \textcolor{comment}{/*\ If\ typchk\ ==\ 2,\ avoid\ recreating\ long\ edges\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00065}00065\ \ \ lon\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00066}00066\ \ \ \textcolor{keywordflow}{if}\ (\ typchk\ ==\ 2\ \&\&\ met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00067}00067\ \ \ \ \ lon\ =\ MMG2D\_lencurv(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,ip1,ip2);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00068}00068\ \ \ \ \ lon\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(2.-\/lon,1.6);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00069}00069\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00071}00071\ \ \ \textcolor{comment}{/*\ Avoid\ collapsing\ a\ boundary\ point\ over\ a\ regular\ one\ (leads\ to\ boundary\ degeneration)\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00072}00072\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ \&\&\ !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00074}00074\ \ \ \textcolor{comment}{/*\ Avoid\ subdivising\ one\ ref.\ component\ consisting\ of\ only\ one\ layer\ of\ elements\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00075}00075\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ \&\&\ (pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1]||pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i2])\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00077}00077\ \ \ \textcolor{comment}{/*\ Avoid\ closing\ one\ ref.\ component\ consisting\ of\ only\ one\ element\ (maybe}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00078}00078\ \textcolor{comment}{\ \ \ *\ redondant\ with\ previous\ test)*/}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00079}00079\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1])\ \&\&\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i2])\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00081}00081\ \ \ jel\ =\ adja[i]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00082}00082\ \ \ \textcolor{keywordflow}{if}\ (\ jel\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00083}00083\ \ \ \ \ open\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00084}00084\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00085}00085\ \ \ \ \ j\ =\ adja[i]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00086}00086\ \ \ \ \ jj\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00087}00087\ \ \ \ \ j2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[jj])\ \&\&\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j2])\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00089}00089\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00091}00091\ \ \ \textcolor{comment}{/*\ collect\ all\ triangles\ around\ vertex\ i1}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00092}00092\ \textcolor{comment}{\ \ \ simplification\ w.r.to\ the\ surface\ case:\ no\ need\ to\ use\ spacial\ ball\ boulechknm\ (impossible\ situation\ in\ 2d)\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00093}00093\ \ \ int8\_t\ dummy;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00094}00094\ \ \ ilist\ =\ \mbox{\hyperlink{boulep_8c_a71f8e5d4eb5962634fdd646773a14e09}{MMG5\_boulet}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},k,i1,list,0,\&dummy);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00095}00095\ \ \ \textcolor{keywordflow}{if}\ (\ ilist\ <=\ 0\ )}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00098}00098\ \ \ \textcolor{comment}{/*\ Avoid\ collapsing\ a\ "{}void\ triangle"{}\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00099}00099\ \ \ \textcolor{keywordflow}{if}\ (\ open\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00100}00100\ \ \ \ \ jel\ =\ list[ilist-\/1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00101}00101\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00102}00102\ \ \ \ \ j\ =\ list[ilist-\/1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00103}00103\ \ \ \ \ j2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00104}00104\ \ \ \ \ ipb\ =\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00106}00106\ \ \ \ \ \textcolor{comment}{/*\ Travel\ the\ ball\ of\ ip2\ until\ a\ boundary\ is\ met\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00107}00107\ \ \ \ \ jel\ =\ k;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00108}00108\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00109}00109\ \ \ \ \ j\ =\ i1;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{while}\ (\ jel\ \&\&\ !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j])\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00112}00112\ \ \ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00113}00113\ \ \ \ \ \ \ jel\ =\ adja[j]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00114}00114\ \ \ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00115}00115\ \ \ \ \ \ \ j\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[adja[j]\ \%\ 3];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00117}00117\ \ \ \ \ j\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ipb\ ==\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j]\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00120}00120\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00122}00122\ \ \ \textcolor{comment}{/*\ Avoid\ creating\ edges\ with\ two\ BDY\ endpoints,\ which\ are\ not\ themselves\ BDY\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00123}00123\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_afbff0a58e26e6ef7c1b8b3e0e00b132a}{fem}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00124}00124\ \ \ \ \ p2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ p2-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00126}00126\ \ \ \ \ \ \ \textcolor{comment}{/*\ Travel\ all\ edges\ in\ the\ ball\ but\ for\ the\ first\ and\ last\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00127}00127\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (l=0;\ l<ilist-\/1;\ l++)\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ jel\ =\ list[l]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ j\ =\ list[l]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ jj\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ j2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ p2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2]];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ (p2-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}})\ \&\&\ !(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[jj]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}})\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00135}00135\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00137}00137\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00139}00139\ \ \ \textcolor{keywordflow}{if}\ (\ ilist\ >\ 3\ ||\ (\ ilist\ ==\ 3\ \&\&\ open\ )\ )\ \{\ \ \ \ \ \ \textcolor{comment}{//\ ADD\ :\ Second\ test\ should\ work\ too}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00140}00140\ \ \ \ \ \textcolor{comment}{/*\ Avoid\ a\ collapse\ that\ would\ close\ one\ ref.\ component\ that\ consists\ only\ of\ one\ element\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00141}00141\ \ \ \ \ \textcolor{comment}{/*\ Useless\ test\ I\ believe\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00142}00142\ \ \ \ \ \textcolor{comment}{/*if\ (\ MG\_EDG(pt-\/>tag[i2])\ )\ \{}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00143}00143\ \textcolor{comment}{\ \ \ \ \ \ jel\ =\ list[1]\ /\ 3;}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00144}00144\ \textcolor{comment}{\ \ \ \ \ \ if\ (\ !\ jel\ )\ return\ 0;}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00145}00145\ \textcolor{comment}{\ \ \ \ \ \ pt1\ =\ \&mesh-\/>tria[jel];}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00146}00146\ \textcolor{comment}{\ \ \ \ \ \ if\ (\ MMG5\_abs(pt-\/>ref)\ !=\ MMG5\_abs(pt1-\/>ref)\ )\ \ return\ 0;}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00147}00147\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00149}00149\ \ \ \ \ \textcolor{comment}{/*\ Travel\ the\ ball\ of\ i1\ (but\ for\ the\ two\ elements\ 0\ and\ ilist-\/1\ (the\ last\ one\ in\ the\ case\ of}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00150}00150\ \textcolor{comment}{\ \ \ \ \ a\ closed\ ball)\ which\ will\ disappear\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00151}00151\ \ \ \ \ \textcolor{keywordflow}{for}\ (l=1;\ l<ilist-\/1+open;\ l++)\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00152}00152\ \ \ \ \ \ \ jel\ =\ list[l]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00153}00153\ \ \ \ \ \ \ j\ =\ list[l]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00154}00154\ \ \ \ \ \ \ jj\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00155}00155\ \ \ \ \ \ \ j2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00156}00156\ \ \ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00158}00158\ \ \ \ \ \ \ memcpy(pt0,pt1,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00159}00159\ \ \ \ \ \ \ pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j]\ =\ ip2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00161}00161\ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ length\ to\ avoid\ recreating\ long\ elements\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00162}00162\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ typchk\ ==\ 2\ \&\&\ met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ \&\&\ !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ ip1\ =\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ len\ =\ MMG2D\_lencurv(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,ip1,ip2);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ len\ >\ lon\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00166}00166\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00168}00168\ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ that\ the\ newly\ created\ triangles\ will\ not\ have\ to\ be\ split\ again\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00169}00169\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ l\ ==\ 1\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ pt0-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j2]\ |=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00171}00171\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00172}00172\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ l\ ==\ ilist-\/2\ \&\&\ !open\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ ll\ =\ list[ilist-\/1+open]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ll\ >\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ lj\ =\ list[ilist-\/1+open]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ pt0-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[jj]\ |=\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[ll].\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[lj];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00178}00178\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00180}00180\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ typchk\ ==\ 1\ )}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{bezier__2d_8c_a9932587ef813f432c421c91812f2cc86}{MMG2D\_chkedg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},0)\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00184}00184\ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ quality\ and\ volume\ inversion\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00185}00185\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ typchk\ ==\ 2\ \&\&\ met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ \&\&\ met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}}\ ==\ 3\ )}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ caltmp\ =\ \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_a5ffcb74d20d198e2a96e25cbd32552f1}{MMG2D\_caltri\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,pt1);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00187}00187\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ caltmp\ =\ \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt1);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00190}00190\ \ \ \ \ \ \ calold\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(calold,caltmp);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00192}00192\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ typchk\ ==\ 2\ \&\&\ met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}\ \&\&\ met-\/>\mbox{\hyperlink{structMMG5__Sol_a1aacf473a7ba4fb5fbc004f2e0b447a8}{size}}\ ==\ 3\ )}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ caltmp\ =\ \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_a5ffcb74d20d198e2a96e25cbd32552f1}{MMG2D\_caltri\_ani}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,pt0);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00194}00194\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ caltmp\ =\ \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt0);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00197}00197\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ caltmp\ <\ \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}}\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00198}00198\ \ \ \ \ \ \ calnew\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(calnew,caltmp);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00199}00199\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ calold\ <\ \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}}\ \&\&\ calnew\ <=\ calold\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00200}00200\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ calnew\ <\ \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}}\ ||\ calnew\ <\ 0.001*calold\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00201}00201\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00202}00202\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00204}00204\ \ \ \textcolor{comment}{/*\ Specific\ test:\ no\ collapse\ if\ any\ interior\ edge\ is\ EDG\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00205}00205\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ ilist\ ==\ 3\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00206}00206\ \ \ \ \ ppt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1]];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00207}00207\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(ppt-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i2])\ \&\&\ !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i])\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00209}00209\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i2])\ \&\&\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i])\ )\ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ What\ is\ the\ use\ of\ that?}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00210}00210\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i2])\ \&\&\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i])\ \&\&\ \mbox{\hyperlink{mmgcommon__private_8h_a52a1b183522115c52d6ca38f438221cb}{MG\_EDG}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1])\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00212}00212\ \ \ \ \ \textcolor{comment}{/*\ Check\ geometric\ approximation\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00213}00213\ \ \ \ \ jel\ =\ list[1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00214}00214\ \ \ \ \ j\ \ \ =\ list[1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00215}00215\ \ \ \ \ jj\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00216}00216\ \ \ \ \ j2\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00217}00217\ \ \ \ \ pt0\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00218}00218\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00219}00219\ \ \ \ \ memcpy(pt0,pt1,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00220}00220\ \ \ \ \ pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j]\ =\ ip2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00222}00222\ \ \ \ \ jel\ =\ list[2]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00223}00223\ \ \ \ \ j\ \ \ =\ list[2]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00224}00224\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00225}00225\ \ \ \ \ pt0-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[jj]\ |=\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00226}00226\ \ \ \ \ pt0-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j2]\ |=\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j]];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00228}00228\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ typchk\ ==\ 1\ )}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00229}00229\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{bezier__2d_8c_a9932587ef813f432c421c91812f2cc86}{MMG2D\_chkedg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},0)\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00231}00231\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00233}00233\ \ \ \textcolor{comment}{/*\ Particular\ case\ when\ there\ are\ two\ triangles\ in\ the\ ball\ of\ the\ collapsed\ point\ ip1\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00234}00234\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00235}00235\ \ \ \ \ assert\ (\ ilist\ ==\ 2\ );\ \ \textcolor{comment}{//\ Not\ necessarily!\ Check\ for\ that\ case\ too!}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ilist\ !=2\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00237}00237\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !open\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00239}00239\ \ \ \ \ jel\ =\ list[1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00240}00240\ \ \ \ \ j\ \ \ =\ list[1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00242}00242\ \ \ \ \ \textcolor{comment}{/*\ Topological\ test\ :\ avoid\ creating\ twice\ the\ same\ triangle\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00243}00243\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00244}00244\ \ \ \ \ kel\ =\ adja[j]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00245}00245\ \ \ \ \ voy\ =\ adja[j]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00246}00246\ \ \ \ \ pt2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ pt2-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[voy]\ ==\ ip2\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00249}00249\ \ \ \ \ jj\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00250}00250\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00251}00251\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ MMG5\_abs(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}})\ !=\ MMG5\_abs(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}})\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ !(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[jj]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}})\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00254}00254\ \ \ \ \ \textcolor{comment}{/*\ Check\ quality\ and\ geometric\ approximation:\ elements\ with\ two\ trias\ in\ the}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00255}00255\ \textcolor{comment}{\ \ \ \ \ *\ ball\ should\ be\ removed\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00256}00256\ \ \ \ \ pt0\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[0];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00257}00257\ \ \ \ \ memcpy(pt0,pt1,\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__Tria}{MMG5\_Tria}}));}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00258}00258\ \ \ \ \ pt0-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j]\ =\ ip2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00260}00260\ \ \ \ \ calold\ =\ \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt1);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00261}00261\ \ \ \ \ calnew\ =\ \mbox{\hyperlink{libmmg2d__private_8h_ab9d846792d5698d9d79c5395b1a39e10}{MMG2D\_ALPHAD}}*\mbox{\hyperlink{libmmg2d__private_8h_aae48a4d9c216e63e23a5d5054e78c2f3}{MMG2D\_caltri\_iso}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},NULL,pt0);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00262}00262\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ calnew\ <\ \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}}\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00263}00263\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ calold\ <\ \mbox{\hyperlink{libmmg2d__private_8h_a8656e911497f48bf5329295d89aebe87}{MMG2D\_NULKAL}}\ \&\&\ calnew\ <=\ calold\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00265}00265\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ typchk\ ==\ 1\ )}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00266}00266\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{bezier__2d_8c_a9932587ef813f432c421c91812f2cc86}{MMG2D\_chkedg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},0)\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00267}00267\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00269}00269\ \ \ \textcolor{keywordflow}{return}\ ilist;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00270}00270\ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00272}00272\ \textcolor{comment}{/*\ Perform\ effective\ collapse\ of\ edge\ i\ in\ tria\ k,\ i1-\/>i2\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00273}\mbox{\hyperlink{colver__2d_8c_a2eaa1c0113a75d8708f122c6bb3b2799}{00273}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{colver__2d_8c_a2eaa1c0113a75d8708f122c6bb3b2799}{MMG2D\_colver}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\textcolor{keywordtype}{int}\ ilist,MMG5\_int\ *list)\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00274}00274\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ \ pt,pt1,pt2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00275}00275\ \ \ MMG5\_int\ \ \ \ \ iel,jel,ip1,ip2,k,kel,*adja;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00276}00276\ \ \ uint8\_t\ \ \ \ \ \ i,j,jj,i1,i2,open;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00278}00278\ \ \ iel\ =\ list[0]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00279}00279\ \ \ i1\ =\ \ \ list[0]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00280}00280\ \ \ i\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00281}00281\ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00282}00282\ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00283}00283\ \ \ ip1\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00284}00284\ \ \ ip2\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00286}00286\ \ \ \textcolor{comment}{/*\ Check\ for\ open\ ball\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00287}00287\ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00288}00288\ \ \ open\ =\ adja[i]\ ==\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00290}00290\ \ \ \textcolor{comment}{/*\ Update\ of\ the\ vertex\ ip1\ -\/>\ ip2\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00291}00291\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ |=\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}};}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00293}00293\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<ilist-\/1+open;\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00294}00294\ \ \ \ \ jel\ =\ list[k]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00295}00295\ \ \ \ \ jj\ \ =\ list[k]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00296}00296\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00297}00297\ \ \ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[jj]\ =\ ip2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00298}00298\ \ \ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}}\ \ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};\ \ \ \ \textcolor{comment}{//\ What\ is\ the\ use\ of\ updating\ the\ base\ field?}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00299}00299\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00301}00301\ \ \ \textcolor{comment}{/*\ Update\ adjacent\ with\ the\ first\ element\ (which\ necessarily\ exists)\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00302}00302\ \ \ jel\ =\ list[1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00303}00303\ \ \ jj\ \ =\ list[1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00304}00304\ \ \ j\ \ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[jj];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00305}00305\ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00307}00307\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j]\ |=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00308}00308\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j]\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j],pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i1]);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00310}00310\ \ \ \textcolor{keywordflow}{if}\ (\ adja[i1]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00311}00311\ \ \ \ \ kel\ =\ adja[i1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00312}00312\ \ \ \ \ k\ \ \ =\ adja[i1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00313}00313\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k]\ =\ 3*jel+j;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00314}00314\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j]\ =\ 3*kel+k;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00315}00315\ \ \ \ \ pt2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00316}00316\ \ \ \ \ pt2-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[k]\ |=\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00317}00317\ \ \ \ \ pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j],pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00318}00318\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00319}00319\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00320}00320\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00322}00322\ \ \ \textcolor{comment}{/*\ When\ the\ boundary\ is\ not\ open,\ update\ the\ adjacency\ relation\ with\ the\ second\ element\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00323}00323\ \ \ \textcolor{keywordflow}{if}\ (\ !open\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00324}00324\ \ \ \ \ iel\ =\ list[ilist-\/1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00325}00325\ \ \ \ \ i1\ =\ list[ilist-\/1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00326}00326\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00328}00328\ \ \ \ \ jel\ =\ list[ilist-\/2]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00329}00329\ \ \ \ \ jj\ \ =\ list[ilist-\/2]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00330}00330\ \ \ \ \ j\ \ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[jj];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00331}00331\ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00332}00332\ \ \ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j]\ |=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00333}00333\ \ \ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j]\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i1],pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j]);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00334}00334\ \ \ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00336}00336\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ adja[i1]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00337}00337\ \ \ \ \ \ \ kel\ =\ adja[i1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00338}00338\ \ \ \ \ \ \ k\ \ \ =\ adja[i1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00339}00339\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k]\ =\ 3*jel\ +\ j;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00340}00340\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j]\ =\ 3*kel\ +\ k;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00341}00341\ \ \ \ \ \ \ pt2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00342}00342\ \ \ \ \ \ \ pt2-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[k]\ |=\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00343}00343\ \ \ \ \ \ \ pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j],pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00344}00344\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00345}00345\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00346}00346\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1+j]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00347}00347\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00349}00349\ \ \ \textcolor{comment}{/*\ Delete\ removed\ point\ and\ elements\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00350}00350\ \ \ \mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2D\_delPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip1);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00351}00351\ \ \ \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},list[0]\ /\ 3);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00352}00352\ \ \ \textcolor{keywordflow}{if}\ (\ !open\ )\ \ \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},list[ilist-\/1]\ /\ 3);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00354}00354\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00355}00355\ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00357}00357\ \textcolor{comment}{/*\ Perform\ effective\ collapse\ of\ edge\ i\ in\ tria\ k,\ i1-\/>i2}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00358}00358\ \textcolor{comment}{\ \ \ in\ the\ particular\ case\ where\ only\ three\ elements\ are\ in\ the\ ball\ of\ i\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00359}\mbox{\hyperlink{colver__2d_8c_aa5365f3228043c4d30146957b2dcf7c9}{00359}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{colver__2d_8c_aa5365f3228043c4d30146957b2dcf7c9}{MMG2D\_colver3}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int\ *list)\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00360}00360\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ pt,pt1,pt2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00361}00361\ \ \ MMG5\_int\ \ \ \ iel,jel,kel,mel,ip,*adja;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00362}00362\ \ \ uint8\_t\ \ \ \ \ i,i1,j,j1,j2,k,m;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00363}00363\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00364}00364\ \ \ \textcolor{comment}{/*\ Update\ of\ the\ new\ point\ for\ triangle\ list[0]\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00365}00365\ \ \ iel\ =\ list[0]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00366}00366\ \ \ i\ =\ list[0]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00367}00367\ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00368}00368\ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00369}00369\ \ \ ip\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00370}00370\ \ \ jel\ =\ list[1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00371}00371\ \ \ j\ \ \ =\ list[1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00372}00372\ \ \ j1\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00373}00373\ \ \ j2\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00374}00374\ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00376}00376\ \ \ kel\ =\ list[2]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00377}00377\ \ \ k\ \ \ =\ list[2]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00378}00378\ \ \ pt2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[kel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00380}00380\ \ \ \textcolor{comment}{/*\ update\ info\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00381}00381\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j]\ \ \ \ \ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00382}00382\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j1]\ |=\ pt2-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[k];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00383}00383\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j1]\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j1],pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[k]);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00384}00384\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j2]\ |=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00385}00385\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j2]\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j2],pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i]);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00386}00386\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}}\ \ \ \ \ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00388}00388\ \ \ \textcolor{comment}{/*\ Update\ adjacency\ relations\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00389}00389\ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00390}00390\ \ \ adja[j1]\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00391}00391\ \ \ adja[j2]\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1+i];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00393}00393\ \ \ mel\ \ =\ adja[j2]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00394}00394\ \ \ \textcolor{keywordflow}{if}\ (\ mel\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00395}00395\ \ \ \ \ m\ \ \ \ =\ adja[j2]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00396}00396\ \ \ \ \ pt\ \ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[mel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00397}00397\ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[m]\ \ =\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00398}00398\ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[m]\ \ =\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00399}00399\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(mel-\/1)+1+m]\ =\ 3*jel\ +\ j2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00400}00400\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00402}00402\ \ \ mel\ =\ adja[j1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00403}00403\ \ \ \textcolor{keywordflow}{if}\ (\ mel\ )\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00404}00404\ \ \ \ \ m\ \ \ \ =\ adja[j1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00405}00405\ \ \ \ \ pt\ \ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[mel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00406}00406\ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[m]\ \ =\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00407}00407\ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[m]\ \ =\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[j1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00408}00408\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(mel-\/1)+1+m]\ =\ 3*jel\ +\ j1;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00409}00409\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00411}00411\ \ \ \textcolor{comment}{/*\ remove\ vertex\ +\ elements\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00412}00412\ \ \ \mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2D\_delPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00413}00413\ \ \ \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},iel);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00414}00414\ \ \ \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},kel);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00416}00416\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00417}00417\ \}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00418}00418\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00419}00419\ \textcolor{comment}{/*\ Perform\ effective\ collapse\ of\ edge\ i\ in\ tria\ k,\ i1-\/>i2}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00420}00420\ \textcolor{comment}{\ in\ the\ particular\ case\ where\ only\ two\ elements\ are\ in\ the\ ball\ of\ i\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00421}\mbox{\hyperlink{colver__2d_8c_aed327671ea0fec9ce172da593494e877}{00421}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{colver__2d_8c_aed327671ea0fec9ce172da593494e877}{MMG2D\_colver2}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int\ *list)\ \{}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00422}00422\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ \ pt,pt1;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00423}00423\ \ \ MMG5\_int\ \ \ \ \ *adja,iel,jel,kel,ip1,ip2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00424}00424\ \ \ int8\_t\ \ \ \ \ \ \ i1,i2,jj,j2,k;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00426}00426\ \ \ \textcolor{comment}{/*\ update\ of\ new\ point\ for\ triangle\ list[0]\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00427}00427\ \ \ iel\ =\ list[0]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00428}00428\ \ \ i1\ \ =\ list[0]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00429}00429\ \ \ i2\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00430}00430\ \ \ pt\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[iel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00431}00431\ \ \ ip1\ \ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00432}00432\ \ \ ip2\ \ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00434}00434\ \ \ jel\ =\ list[1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00435}00435\ \ \ j2\ \ =\ list[1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00436}00436\ \ \ jj\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[j2];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00437}00437\ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00439}00439\ \ \ \textcolor{comment}{/*\ update\ info\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00440}00440\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j2]\ =\ ip2;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00441}00441\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[jj]\ |=\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00442}00442\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[jj]\ =\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_a224dfed682ca131cfbd0ee79694cf613}{edg}}[i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00443}00443\ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}}\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00445}00445\ \ \ \textcolor{comment}{/*\ update\ neighbours\ of\ new\ triangle\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00446}00446\ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(jel-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00447}00447\ \ \ adja[jj]\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1+i1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00448}00448\ \ \ adja\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(iel-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00449}00449\ \ \ kel\ \ =\ adja[i1]\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00450}00450\ \ \ k\ \ \ \ =\ adja[i1]\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00451}00451\ \ \ \textcolor{keywordflow}{if}\ (\ kel\ )}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00452}00452\ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a62e926e2281a655962d433617e42aa97}{adja}}[3*(kel-\/1)+1+k]\ =\ 3*jel\ +\ jj;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00454}00454\ \ \ \textcolor{comment}{/*\ remove\ vertex\ +\ element\ */}}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00455}00455\ \ \ \mbox{\hyperlink{libmmg2d__private_8h_a8c5f824622c0339d06869ccd643a02a0}{MMG2D\_delPt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},ip1);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00456}00456\ \ \ \mbox{\hyperlink{libmmg2d__private_8h_a6ed995d638ab5929d97f1471aa074232}{MMG2D\_delElt}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},iel);}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00457}00457\ }
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00458}00458\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{colver__2d_8c_source_l00459}00459\ \}}
 
 \end{DoxyCode}

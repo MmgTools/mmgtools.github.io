@@ -2,110 +2,110 @@
 \label{d_2IsosurfDiscretization__lsOnly_2main_8F90_source}\index{libexamples/mmg3d/IsosurfDiscretization\_lsOnly/main.F90@{libexamples/mmg3d/IsosurfDiscretization\_lsOnly/main.F90}}
 \mbox{\hyperlink{d_2IsosurfDiscretization__lsOnly_2main_8F90}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00001}00001 \textcolor{comment}{!! =============================================================================}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00002}00002 \textcolor{comment}{!!  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00003}00003 \textcolor{comment}{!!  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00004}00004 \textcolor{comment}{!!  Copyright (c) Bx INP/Inria/UBordeaux/UPMC, 2004-\/ .}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00005}00005 \textcolor{comment}{!!}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00006}00006 \textcolor{comment}{!!  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00007}00007 \textcolor{comment}{!!  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00008}00008 \textcolor{comment}{!!  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00009}00009 \textcolor{comment}{!!  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00010}00010 \textcolor{comment}{!!}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00011}00011 \textcolor{comment}{!!  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00012}00012 \textcolor{comment}{!!  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00013}00013 \textcolor{comment}{!!  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00014}00014 \textcolor{comment}{!!  License for more details.}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00015}00015 \textcolor{comment}{!!}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00016}00016 \textcolor{comment}{!!  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00017}00017 \textcolor{comment}{!!  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00018}00018 \textcolor{comment}{!!  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00019}00019 \textcolor{comment}{!!  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00020}00020 \textcolor{comment}{!!  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00021}00021 \textcolor{comment}{!! =============================================================================}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00022}00022 \textcolor{comment}{!!}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00034}00034 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00035}\mbox{\hyperlink{d_2IsosurfDiscretization__lsOnly_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{00035}} \textcolor{keyword}{PROGRAM} \mbox{\hyperlink{mmg2d_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00036}00036 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00037}00037   \textcolor{keywordtype}{IMPLICIT NONE}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00038}00038 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00040}00040 \textcolor{comment}{! if the header file is in the "{}include"{} directory}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00041}00041 \textcolor{comment}{! \#include "{}libmmg3df.h"{}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00042}00042 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00043}00043 \textcolor{comment}{! if the header file is in "{}include/mmg/mmg3d"{}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00044}00044 \textcolor{preprocessor}{\#include "{}mmg/mmg3d/libmmg3df.h"{}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00045}00045 \textcolor{preprocessor}{}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00046}00046   mmg5\_data\_ptr\_t    :: mmgmesh}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00047}00047   mmg5\_data\_ptr\_t    :: mmgls}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00048}00048   \textcolor{keywordtype}{INTEGER}            :: ier,argc}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00049}00049   \textcolor{keywordtype}{CHARACTER(len=300)} :: exec\_name,inname,outname,lsname}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00051}00051   \textcolor{keywordtype}{INTEGER},\textcolor{keywordtype}{PARAMETER} :: immg = mmg5f\_int}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00052}00052 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00053}00053   \textcolor{keyword}{WRITE}(*,*) \textcolor{stringliteral}{"{}  -\/-\/ TEST MMG3DLIB"{}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00054}00054 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00055}00055   argc =  command\_argument\_count();}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00056}00056   \textcolor{keyword}{CALL }get\_command\_argument(0, exec\_name)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00057}00057 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00058}00058   \textcolor{keywordflow}{IF} ( argc /=3 ) \textcolor{keywordflow}{THEN}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00059}00059      print*,\textcolor{stringliteral}{"{} Usage: "{}},trim(exec\_name),\textcolor{stringliteral}{"{} meshfile lsfile meshout"{}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00060}00060      \textcolor{keyword}{CALL }exit(1);}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00061}00061 \textcolor{keywordflow}{  ENDIF}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00062}00062 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00063}00063   \textcolor{comment}{! Name and path of the mesh file}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00064}00064   \textcolor{keyword}{CALL }get\_command\_argument(1, inname)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00065}00065   \textcolor{keyword}{CALL }get\_command\_argument(2, lsname)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00066}00066   \textcolor{keyword}{CALL }get\_command\_argument(3, outname)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00067}00067 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00076}00076 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00077}00077   mmgmesh = 0}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00078}00078   mmgls   = 0}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00079}00079 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00080}00080   \textcolor{keyword}{CALL }mmg3d\_init\_mesh(mmg5\_arg\_start, \&}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00081}00081        mmg5\_arg\_ppmesh,mmgmesh,mmg5\_arg\_ppls,mmgls, \&}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00082}00082        mmg5\_arg\_end)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00083}00083 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00084}00084   \textcolor{comment}{!!-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Level set discretization option -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00085}00085   \textcolor{comment}{! Ask for level set discretization: note that it is important to do this step}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00086}00086   \textcolor{comment}{! here because in iso mode, some filters are applied at mesh loading}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00087}00087   \textcolor{keyword}{CALL }mmg3d\_set\_iparameter(mmgmesh,mmgls,mmg3d\_iparam\_iso, 1\_immg,ier)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00088}00088   \textcolor{keywordflow}{IF} ( ier == 0 )  \textcolor{keyword}{CALL }exit(101)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00089}00089 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00093}00093 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00095}00095   \textcolor{keyword}{CALL }mmg3d\_loadmesh(mmgmesh,trim(adjustl(inname)),\&}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00096}00096        len(trim(adjustl(inname))),ier)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00097}00097   \textcolor{keywordflow}{IF} ( ier == 0 )  \textcolor{keyword}{CALL }exit(102)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00098}00098 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00102}00102 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00104}00104   \textcolor{keyword}{CALL }mmg3d\_loadsol(mmgmesh,mmgls,trim(adjustl(lsname)),\&}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00105}00105        len(trim(adjustl(lsname))),ier)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00106}00106   \textcolor{keywordflow}{IF} ( ier /= 1 ) \textcolor{keywordflow}{THEN}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00107}00107      \textcolor{keyword}{CALL }exit(104)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00108}00108 \textcolor{keywordflow}{  ENDIF}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00109}00109 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00111}00111   \textcolor{keyword}{CALL }mmg3d\_chk\_meshdata(mmgmesh,mmgls,ier)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00112}00112   \textcolor{keywordflow}{IF} ( ier /= 1 ) \textcolor{keyword}{CALL }exit(105)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00113}00113 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00117}00117   \textcolor{keyword}{CALL }mmg3d\_mmg3dls(mmgmesh,mmgls,\%val(0\_8),ier)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00118}00118 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00119}00119   \textcolor{keywordflow}{IF} ( ier == mmg5\_strongfailure ) \textcolor{keywordflow}{THEN}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00120}00120      print*,\textcolor{stringliteral}{"{}BAD ENDING OF MMG3DLIB: UNABLE TO SAVE MESH"{}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00121}00121      stop 2}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00122}00122   \textcolor{keywordflow}{ELSE} \textcolor{keywordflow}{IF} ( ier == mmg5\_lowfailure ) \textcolor{keywordflow}{THEN}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00123}00123      print*,\textcolor{stringliteral}{"{}BAD ENDING OF MMG3DLIB"{}}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00124}00124 \textcolor{keywordflow}{  ENDIF}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00125}00125 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00131}00131 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00133}00133   \textcolor{keyword}{CALL }mmg3d\_savemesh(mmgmesh,trim(adjustl(outname)),\&}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00134}00134        len(trim(adjustl(outname))),ier)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00135}00135   \textcolor{keywordflow}{IF} ( ier /= 1 ) \textcolor{keywordflow}{THEN}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00136}00136      \textcolor{keyword}{CALL }exit(106)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00137}00137 \textcolor{keywordflow}{  ENDIF}}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00138}00138 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00140}00140   \textcolor{keyword}{CALL }mmg3d\_free\_all(mmg5\_arg\_start, \&}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00141}00141        mmg5\_arg\_ppmesh,mmgmesh,mmg5\_arg\_ppls,mmgls, \&}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00142}00142        mmg5\_arg\_end)}
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00143}00143 }
-\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00144}00144 \textcolor{keyword}{END PROGRAM}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00001}00001\ \textcolor{comment}{!!\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00002}00002\ \textcolor{comment}{!!\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00003}00003\ \textcolor{comment}{!!\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00004}00004\ \textcolor{comment}{!!\ \ Copyright\ (c)\ Bx\ INP/Inria/UBordeaux/UPMC,\ 2004-\/\ .}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00005}00005\ \textcolor{comment}{!!}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00006}00006\ \textcolor{comment}{!!\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00007}00007\ \textcolor{comment}{!!\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00008}00008\ \textcolor{comment}{!!\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00009}00009\ \textcolor{comment}{!!\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00010}00010\ \textcolor{comment}{!!}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00011}00011\ \textcolor{comment}{!!\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00012}00012\ \textcolor{comment}{!!\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00013}00013\ \textcolor{comment}{!!\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00014}00014\ \textcolor{comment}{!!\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00015}00015\ \textcolor{comment}{!!}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00016}00016\ \textcolor{comment}{!!\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00017}00017\ \textcolor{comment}{!!\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00018}00018\ \textcolor{comment}{!!\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00019}00019\ \textcolor{comment}{!!\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00020}00020\ \textcolor{comment}{!!\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00021}00021\ \textcolor{comment}{!!\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00022}00022\ \textcolor{comment}{!!}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00035}\mbox{\hyperlink{d_2IsosurfDiscretization__lsOnly_2main_8F90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{00035}}\ \textcolor{keyword}{PROGRAM}\ \mbox{\hyperlink{mmg2d_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00037}00037\ \ \ \textcolor{keywordtype}{IMPLICIT\ NONE}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00040}00040\ \textcolor{comment}{!\ if\ the\ header\ file\ is\ in\ the\ "{}include"{}\ directory}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00041}00041\ \textcolor{comment}{!\ \#include\ "{}libmmg3df.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00043}00043\ \textcolor{comment}{!\ if\ the\ header\ file\ is\ in\ "{}include/mmg/mmg3d"{}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00044}00044\ \textcolor{preprocessor}{\#include\ "{}mmg/mmg3d/libmmg3df.h"{}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00045}00045\ \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00046}00046\ \ \ mmg5\_data\_ptr\_t\ \ \ \ ::\ mmgmesh}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00047}00047\ \ \ mmg5\_data\_ptr\_t\ \ \ \ ::\ mmgls}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00048}00048\ \ \ \textcolor{keywordtype}{INTEGER}\ \ \ \ \ \ \ \ \ \ \ \ ::\ ier,argc}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00049}00049\ \ \ \textcolor{keywordtype}{CHARACTER(len=300)}\ ::\ exec\_name,inname,outname,lsname}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00051}00051\ \ \ \textcolor{keywordtype}{INTEGER},\textcolor{keywordtype}{PARAMETER}\ ::\ immg\ =\ mmg5f\_int}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00053}00053\ \ \ \textcolor{keyword}{WRITE}(*,*)\ \textcolor{stringliteral}{"{}\ \ -\/-\/\ TEST\ MMG3DLIB"{}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00055}00055\ \ \ argc\ =\ \ command\_argument\_count();}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00056}00056\ \ \ \textcolor{keyword}{CALL\ }get\_command\_argument(0,\ exec\_name)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00058}00058\ \ \ \textcolor{keywordflow}{IF}\ (\ argc\ /=3\ )\ \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00059}00059\ \ \ \ \ \ print*,\textcolor{stringliteral}{"{}\ Usage:\ "{}},trim(exec\_name),\textcolor{stringliteral}{"{}\ meshfile\ lsfile\ meshout"{}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00060}00060\ \ \ \ \ \ \textcolor{keyword}{CALL\ }exit(1);}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00061}00061\ \textcolor{keywordflow}{\ \ ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00063}00063\ \ \ \textcolor{comment}{!\ Name\ and\ path\ of\ the\ mesh\ file}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00064}00064\ \ \ \textcolor{keyword}{CALL\ }get\_command\_argument(1,\ inname)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00065}00065\ \ \ \textcolor{keyword}{CALL\ }get\_command\_argument(2,\ lsname)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00066}00066\ \ \ \textcolor{keyword}{CALL\ }get\_command\_argument(3,\ outname)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00077}00077\ \ \ mmgmesh\ =\ 0}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00078}00078\ \ \ mmgls\ \ \ =\ 0}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00080}00080\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_init\_mesh(mmg5\_arg\_start,\ \&}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00081}00081\ \ \ \ \ \ \ \ mmg5\_arg\_ppmesh,mmgmesh,mmg5\_arg\_ppls,mmgls,\ \&}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00082}00082\ \ \ \ \ \ \ \ mmg5\_arg\_end)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00084}00084\ \ \ \textcolor{comment}{!!-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Level\ set\ discretization\ option\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00085}00085\ \ \ \textcolor{comment}{!\ Ask\ for\ level\ set\ discretization:\ note\ that\ it\ is\ important\ to\ do\ this\ step}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00086}00086\ \ \ \textcolor{comment}{!\ here\ because\ in\ iso\ mode,\ some\ filters\ are\ applied\ at\ mesh\ loading}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00087}00087\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_set\_iparameter(mmgmesh,mmgls,mmg3d\_iparam\_iso,\ 1\_immg,ier)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00088}00088\ \ \ \textcolor{keywordflow}{IF}\ (\ ier\ ==\ 0\ )\ \ \textcolor{keyword}{CALL\ }exit(101)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00095}00095\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_loadmesh(mmgmesh,trim(adjustl(inname)),\&}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00096}00096\ \ \ \ \ \ \ \ len(trim(adjustl(inname))),ier)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00097}00097\ \ \ \textcolor{keywordflow}{IF}\ (\ ier\ ==\ 0\ )\ \ \textcolor{keyword}{CALL\ }exit(102)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00104}00104\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_loadsol(mmgmesh,mmgls,trim(adjustl(lsname)),\&}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00105}00105\ \ \ \ \ \ \ \ len(trim(adjustl(lsname))),ier)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00106}00106\ \ \ \textcolor{keywordflow}{IF}\ (\ ier\ /=\ 1\ )\ \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00107}00107\ \ \ \ \ \ \textcolor{keyword}{CALL\ }exit(104)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00108}00108\ \textcolor{keywordflow}{\ \ ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00111}00111\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_chk\_meshdata(mmgmesh,mmgls,ier)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00112}00112\ \ \ \textcolor{keywordflow}{IF}\ (\ ier\ /=\ 1\ )\ \textcolor{keyword}{CALL\ }exit(105)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00117}00117\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_mmg3dls(mmgmesh,mmgls,\%val(0\_8),ier)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00119}00119\ \ \ \textcolor{keywordflow}{IF}\ (\ ier\ ==\ mmg5\_strongfailure\ )\ \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00120}00120\ \ \ \ \ \ print*,\textcolor{stringliteral}{"{}BAD\ ENDING\ OF\ MMG3DLIB:\ UNABLE\ TO\ SAVE\ MESH"{}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00121}00121\ \ \ \ \ \ stop\ 2}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00122}00122\ \ \ \textcolor{keywordflow}{ELSE}\ \textcolor{keywordflow}{IF}\ (\ ier\ ==\ mmg5\_lowfailure\ )\ \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00123}00123\ \ \ \ \ \ print*,\textcolor{stringliteral}{"{}BAD\ ENDING\ OF\ MMG3DLIB"{}}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00124}00124\ \textcolor{keywordflow}{\ \ ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00133}00133\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_savemesh(mmgmesh,trim(adjustl(outname)),\&}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00134}00134\ \ \ \ \ \ \ \ len(trim(adjustl(outname))),ier)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00135}00135\ \ \ \textcolor{keywordflow}{IF}\ (\ ier\ /=\ 1\ )\ \textcolor{keywordflow}{THEN}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00136}00136\ \ \ \ \ \ \textcolor{keyword}{CALL\ }exit(106)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00137}00137\ \textcolor{keywordflow}{\ \ ENDIF}}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00140}00140\ \ \ \textcolor{keyword}{CALL\ }mmg3d\_free\_all(mmg5\_arg\_start,\ \&}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00141}00141\ \ \ \ \ \ \ \ mmg5\_arg\_ppmesh,mmgmesh,mmg5\_arg\_ppls,mmgls,\ \&}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00142}00142\ \ \ \ \ \ \ \ mmg5\_arg\_end)}
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{d_2IsosurfDiscretization__lsOnly_2main_8F90_source_l00144}00144\ \textcolor{keyword}{END\ PROGRAM}}
 
 \end{DoxyCode}

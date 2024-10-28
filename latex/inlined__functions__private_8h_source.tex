@@ -2,286 +2,285 @@
 \label{inlined__functions__private_8h_source}\index{src/common/inlined\_functions\_private.h@{src/common/inlined\_functions\_private.h}}
 \mbox{\hyperlink{inlined__functions__private_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00005}00005 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00010}00010 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00015}00015 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00022}00022 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00034}00034 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00035}00035 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00036}00036 \textcolor{preprocessor}{\#ifndef \_INLINED\_FUNC\_H}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00037}00037 \textcolor{preprocessor}{\#define \_INLINED\_FUNC\_H}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00038}00038 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00052}00052 \textcolor{keyword}{static} \textcolor{keyword}{inline}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00053}\mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{00053}} \textcolor{keywordtype}{double} \mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{MMG5\_lenEdg}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int np0,MMG5\_int np1,}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00054}00054                     \textcolor{keywordtype}{double} *m0,\textcolor{keywordtype}{double} *m1,int8\_t isedg) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00055}00055   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}   p0,p1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00056}00056   \textcolor{keywordtype}{double}        gammaprim0[3],gammaprim1[3],t[3],*n1,*n2,ux,uy,uz,ps1,ps2,l0,l1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00057}00057   \textcolor{keyword}{static} int8\_t mmgWarn=0;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00058}00058 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00059}00059   p0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00060}00060   p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00061}00061 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00062}00062   ux = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00063}00063   uy = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00064}00064   uz = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2] -\/ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00065}00065 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00066}00066   \textcolor{comment}{/* computation of the two tangent vectors to the underlying curve of [i0i1] */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00067}00067   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) || (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}} \& p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00068}00068     gammaprim0[0] = ux;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00069}00069     gammaprim0[1] = uy;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00070}00070     gammaprim0[2] = uz;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00071}00071   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00072}00072   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( isedg ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00073}00073     memcpy(t,p0-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}},3*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00074}00074     ps1 = ux*t[0] + uy*t[1] + uz*t[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00075}00075     gammaprim0[0] = ps1*t[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00076}00076     gammaprim0[1] = ps1*t[1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00077}00077     gammaprim0[2] = ps1*t[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00078}00078   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00079}00079   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00080}00080     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}} \& p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00081}00081       \textcolor{comment}{//assert(p0-\/>xp);}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00082}00082       n1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00083}00083       n2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00084}00084       ps1 = ux*n1[0] + uy*n1[1] + uz*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00085}00085       ps2 = ux*n2[0] + uy*n2[1] + uz*n2[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00086}00086 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00087}00087       \textcolor{keywordflow}{if} ( fabs(ps2) < fabs(ps1) ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00088}00088         n1  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00089}00089         ps1 = ps2;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00090}00090       \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00091}00091     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00092}00092     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}} \& p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} || \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}} \& p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00093}00093       \textcolor{comment}{// ( MG\_BDY  \& p0-\/>tag ) => mmg3d}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00094}00094       n1  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00095}00095       ps1 = ux*n1[0] + uy*n1[1] + uz*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00096}00096     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00097}00097     \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00098}00098       \textcolor{comment}{// we come from mmgs because in mmg3d the boundary points are tagged}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00099}00099       \textcolor{comment}{// MG\_BDY.}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00100}00100       n1  = \&(p0-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[0]);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00101}00101       ps1 = ux*n1[0] + uy*n1[1] + uz*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00102}00102     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00103}00103     gammaprim0[0] = ux -\/ ps1*n1[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00104}00104     gammaprim0[1] = uy -\/ ps1*n1[1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00105}00105     gammaprim0[2] = uz -\/ ps1*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00106}00106   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00107}00107 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00108}00108   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) || (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}} \& p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00109}00109     gammaprim1[0] = -\/ux;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00110}00110     gammaprim1[1] = -\/uy;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00111}00111     gammaprim1[2] = -\/uz;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00112}00112   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00113}00113   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( isedg ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00114}00114     memcpy(t,p1-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}},3*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00115}00115     ps1 = -\/ux*t[0] -\/ uy*t[1] -\/ uz*t[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00116}00116     gammaprim1[0] = ps1*t[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00117}00117     gammaprim1[1] = ps1*t[1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00118}00118     gammaprim1[2] = ps1*t[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00119}00119   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00120}00120   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00121}00121     \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}} \& p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00122}00122       n1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00123}00123       n2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00124}00124       ps1 = -\/ux*n1[0] -\/ uy*n1[1] -\/ uz*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00125}00125       ps2 = -\/ux*n2[0] -\/ uy*n2[1] -\/ uz*n2[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00126}00126 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00127}00127       \textcolor{keywordflow}{if} ( fabs(ps2) < fabs(ps1) ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00128}00128         n1  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00129}00129         ps1 = ps2;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00130}00130       \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00131}00131     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00132}00132     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}} \& p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} || \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}} \& p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00133}00133       \textcolor{comment}{// ( MG\_BDY  \& p1-\/>tag ) => mmg3d )}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00134}00134       n1  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00135}00135       ps1 = -\/ ux*n1[0] -\/ uy*n1[1] -\/ uz*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00136}00136     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00137}00137     \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00138}00138       \textcolor{comment}{// we come from mmgs because in mmg3d the boundary points are tagged}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00139}00139       \textcolor{comment}{// MG\_BDY.}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00140}00140       n1  = \&(p1-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[0]);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00141}00141       ps1 = -\/ux*n1[0] -\/ uy*n1[1] -\/ uz*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00142}00142     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00143}00143     gammaprim1[0] = -\/ ux -\/ ps1*n1[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00144}00144     gammaprim1[1] = -\/ uy -\/ ps1*n1[1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00145}00145     gammaprim1[2] = -\/ uz -\/ ps1*n1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00146}00146   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00147}00147 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00148}00148   \textcolor{comment}{/* computation of the length of the two tangent vectors in their respective}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00149}00149 \textcolor{comment}{   * tangent plane */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00150}00150   \textcolor{comment}{/* l\_ab = int\_a\string^b sqrt(m\_ij d\_t x\_i(t) d\_t x\_j(t) ) : evaluated by a 2-\/point}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00151}00151 \textcolor{comment}{   * quadrature method. */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00152}00152   l0 = m0[0]*gammaprim0[0]*gammaprim0[0] + m0[3]*gammaprim0[1]*gammaprim0[1] \(\backslash\)}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00153}00153     + m0[5]*gammaprim0[2]*gammaprim0[2] \(\backslash\)}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00154}00154     + 2.0*m0[1]*gammaprim0[0]*gammaprim0[1]  + 2.0*m0[2]*gammaprim0[0]*gammaprim0[2] \(\backslash\)}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00155}00155     + 2.0*m0[4]*gammaprim0[1]*gammaprim0[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00156}00156 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00157}00157   l1 = m1[0]*gammaprim1[0]*gammaprim1[0] + m1[3]*gammaprim1[1]*gammaprim1[1] \(\backslash\)}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00158}00158     + m1[5]*gammaprim1[2]*gammaprim1[2] \(\backslash\)}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00159}00159     +2.0*m1[1]*gammaprim1[0]*gammaprim1[1]  + 2.0*m1[2]*gammaprim1[0]*gammaprim1[2] \(\backslash\)}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00160}00160     + 2.0*m1[4]*gammaprim1[1]*gammaprim1[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00161}00161 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00162}00162   \textcolor{keywordflow}{if}( l0 < 0.) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00163}00163     \textcolor{keywordflow}{if} ( !mmgWarn ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00164}00164       fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Warning: \%s: at least 1 negative edge length "{}}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00165}00165               \textcolor{stringliteral}{"{}(\%e)\(\backslash\)n"{}},\_\_func\_\_,l0);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00166}00166       mmgWarn = 1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00167}00167     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00168}00168     \textcolor{keywordflow}{return} 0.;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00169}00169   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00170}00170   \textcolor{keywordflow}{if}(l1 < 0.) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00171}00171     \textcolor{keywordflow}{if} ( !mmgWarn ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00172}00172       fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Warning: \%s: at least 1 negative edge length "{}}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00173}00173               \textcolor{stringliteral}{"{}(\%e)\(\backslash\)n"{}},\_\_func\_\_,l1);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00174}00174       mmgWarn = 1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00175}00175     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00176}00176     \textcolor{keywordflow}{return} 0.;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00177}00177   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00178}00178   l0 = 0.5*(sqrt(l0) + sqrt(l1));}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00179}00179 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00180}00180   \textcolor{keywordflow}{return} l0;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00181}00181 \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00182}00182 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00196}00196 \textcolor{keyword}{static} \textcolor{keyword}{inline}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00197}\mbox{\hyperlink{inlined__functions__private_8h_ae37ac28bb21ba156ef9d26e102646992}{00197}} \textcolor{keywordtype}{double} \mbox{\hyperlink{inlined__functions__private_8h_ae37ac28bb21ba156ef9d26e102646992}{MMG5\_lenSurfEdg\_ani}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,MMG5\_int np0,MMG5\_int np1,int8\_t isedg) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00198}00198   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}   p0,p1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00199}00199   \textcolor{keywordtype}{double}        *m0,*m1,met0[6],met1[6],ux,uy,uz,rbasis[3][3];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00200}00200   \textcolor{keyword}{static} int8\_t mmgWarn = 0;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00201}00201 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00202}00202   p0 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00203}00203   p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00204}00204 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00205}00205   ux = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0] -\/ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00206}00206   uy = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1] -\/ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00207}00207   uz = p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2] -\/ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00208}00208 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00209}00209   \textcolor{comment}{/* Set metrics */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00210}00210   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) || (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}} \& p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}})) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00211}00211     m0 = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00212}00212   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00213}00213   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}} \& p0-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00214}00214     \textcolor{comment}{/* Note that rbasis isn't used here */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00215}00215     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mettools_8c_ab9abc1963a552fd343bc5c27a753a58a}{MMG5\_buildridmet}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,np0,ux,uy,uz,met0,rbasis) )  \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00216}00216       \textcolor{keywordflow}{if} ( !mmgWarn ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00217}00217         fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Warning: \%s: a-\/ unable to compute at least 1 ridge"{}}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00218}00218                 \textcolor{stringliteral}{"{} metric.\(\backslash\)n"{}},\_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00219}00219         mmgWarn = 1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00220}00220       \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00221}00221       \textcolor{keywordflow}{return} 0.;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00222}00222     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00223}00223     m0 = met0;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00224}00224   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00225}00225   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00226}00226     m0 = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00227}00227   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00228}00228 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00229}00229   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}}) || (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}} \& p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}})) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00230}00230     m1 = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00231}00231   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00232}00232   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}} \& p1-\/>\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00233}00233     \textcolor{comment}{/* Note that rbasis isn't used here */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00234}00234     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mettools_8c_ab9abc1963a552fd343bc5c27a753a58a}{MMG5\_buildridmet}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,np1,ux,uy,uz,met1,rbasis) )  \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00235}00235       \textcolor{keywordflow}{if} ( !mmgWarn ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00236}00236         fprintf(stderr,\textcolor{stringliteral}{"{}  \#\# Warning: \%s: b-\/ unable to compute at least 1 ridge"{}}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00237}00237                 \textcolor{stringliteral}{"{} metric.\(\backslash\)n"{}},\_\_func\_\_);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00238}00238         mmgWarn = 1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00239}00239       \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00240}00240       \textcolor{keywordflow}{return} 0.;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00241}00241     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00242}00242     m1 = met1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00243}00243   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00244}00244   \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00245}00245     m1 = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00246}00246   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00247}00247 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00248}00248   \textcolor{keywordflow}{return} \mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{MMG5\_lenEdg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},np0,np1,m0,m1,isedg);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00249}00249 \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00250}00250 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00251}00251 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00264}00264 \textcolor{keyword}{static} \textcolor{keyword}{inline}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00265}\mbox{\hyperlink{inlined__functions__private_8h_a7b9b1b9af66388894bcaf0d347b0da71}{00265}} \textcolor{keywordtype}{double} \mbox{\hyperlink{inlined__functions__private_8h_a7b9b1b9af66388894bcaf0d347b0da71}{MMG5\_lenSurfEdg33\_ani}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00266}00266                               MMG5\_int np0,MMG5\_int np1,int8\_t isedg) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00267}00267   \textcolor{keywordtype}{double}        *m0,*m1;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00268}00268 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00269}00269   \textcolor{comment}{/* Set metrics */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00270}00270   m0 = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np0];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00271}00271   m1 = \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00272}00272 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00273}00273   \textcolor{keywordflow}{return} \mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{MMG5\_lenEdg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},np0,np1,m0,m1,isedg);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00274}00274 \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00275}00275 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00289}00289 \textcolor{keyword}{static}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00290}\mbox{\hyperlink{inlined__functions__private_8h_a2764ba495bf15419565494fc6141474b}{00290}} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{inlined__functions__private_8h_a2764ba495bf15419565494fc6141474b}{MMG5\_lenSurfEdg\_iso}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}} met,MMG5\_int ip1,MMG5\_int ip2, int8\_t isedg) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00291}00291   \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}   p1,p2;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00292}00292   \textcolor{keywordtype}{double}        h1,h2,l,r,len;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00293}00293 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00294}00294   p1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00295}00295   p2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00296}00296   h1 = met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[ip1];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00297}00297   h2 = met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[ip2];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00298}00298   l = (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]) + (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]) \(\backslash\)}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00299}00299     + (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00300}00300   l = sqrt(l);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00301}00301   r = h2 / h1 -\/ 1.0;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00302}00302   len = fabs(r) < \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}} ? l / h1 : l / (h2-\/h1) * log1p(r);}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00303}00303 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00304}00304   \textcolor{keywordflow}{return} len;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00305}00305 \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00306}00306 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00320}00320 \textcolor{keyword}{static} \textcolor{keyword}{inline}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00321}\mbox{\hyperlink{inlined__functions__private_8h_ad791c6f688b31a04f3910b8691d95e6b}{00321}} \textcolor{keywordtype}{void} \mbox{\hyperlink{inlined__functions__private_8h_ad791c6f688b31a04f3910b8691d95e6b}{MMG5\_simredmat}}(int8\_t dim,\textcolor{keywordtype}{double} *m,\textcolor{keywordtype}{double} *dm,\textcolor{keywordtype}{double} *iv) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00322}00322   int8\_t i,j,k,ij;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00323}00323 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00324}00324   \textcolor{comment}{/* Storage of a matrix as a one-\/dimensional array: dim*(dim+1)/2 entries for}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00325}00325 \textcolor{comment}{   * a symmetric matrix. */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00326}00326   ij = 0;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00327}00327 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00328}00328   \textcolor{comment}{/* Loop on matrix rows */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00329}00329   \textcolor{keywordflow}{for}( i = 0; i < dim; i++ ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00330}00330     \textcolor{comment}{/* Loop on the upper-\/triangular part of the matrix */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00331}00331     \textcolor{keywordflow}{for}( j = i; j < dim; j++ ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00332}00332       \textcolor{comment}{/* Initialize matrix entry */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00333}00333       m[ij] = 0.0;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00334}00334       \textcolor{comment}{/* Compute matrix entry as the recomposition of diagonal values after}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00335}00335 \textcolor{comment}{       * projection on the coreduction basis, using the inverse of the}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00336}00336 \textcolor{comment}{       * transformation:}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00337}00337 \textcolor{comment}{       *}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00338}00338 \textcolor{comment}{       * M\_\{ij\} = \(\backslash\)sum\_\{k,l\} V\string^\{-\/1\}\_\{ki\} Lambda\_\{kl\} V\string^\{-\/1\}\_\{lj\} =}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00339}00339 \textcolor{comment}{       *        = \(\backslash\)sum\_\{k\} lambda\_\{k\} V\string^\{-\/1\}\_\{ki\} V\string^\{-\/1\}\_\{kj\}}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00340}00340 \textcolor{comment}{       *}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00341}00341 \textcolor{comment}{       * Since the inverse of the transformation is the inverse of an}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00342}00342 \textcolor{comment}{       * eigenvectors matrix (which is stored in Mmg by columns, and not by}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00343}00343 \textcolor{comment}{       * rows), the storage of the inverse matrix is also transposed and the}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00344}00344 \textcolor{comment}{       * indices have to be exchanged when implementing the above formula. */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00345}00345       \textcolor{keywordflow}{for}( k = 0; k < dim; k++ ) \{}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00346}00346         m[ij] += dm[k]*iv[i*dim+k]*iv[j*dim+k];}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00347}00347       \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00348}00348       \textcolor{comment}{/* Go to the next entry */}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00349}00349       ++ij;}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00350}00350     \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00351}00351   \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00352}00352   assert( ij == (dim+1)*dim/2 );}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00353}00353 \}}
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00354}00354 }
-\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00355}00355 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00001}00001\ \textcolor{comment}{/*\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00002}00002\ \textcolor{comment}{**\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00003}00003\ \textcolor{comment}{**\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00004}00004\ \textcolor{comment}{**\ \ Copyright\ (c)\ Bx\ INP/CNRS/Inria/UBordeaux/UPMC,\ 2004-\/}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00005}00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00006}00006\ \textcolor{comment}{**\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00007}00007\ \textcolor{comment}{**\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00008}00008\ \textcolor{comment}{**\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00009}00009\ \textcolor{comment}{**\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00011}00011\ \textcolor{comment}{**\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00012}00012\ \textcolor{comment}{**\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00013}00013\ \textcolor{comment}{**\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00014}00014\ \textcolor{comment}{**\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00016}00016\ \textcolor{comment}{**\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00017}00017\ \textcolor{comment}{**\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00018}00018\ \textcolor{comment}{**\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00019}00019\ \textcolor{comment}{**\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00020}00020\ \textcolor{comment}{**\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00021}00021\ \textcolor{comment}{**\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00036}00036\ \textcolor{preprocessor}{\#ifndef\ \_INLINED\_FUNC\_H}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00037}00037\ \textcolor{preprocessor}{\#define\ \_INLINED\_FUNC\_H}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00053}00053\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00054}\mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{00054}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{MMG5\_lenEdg}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},MMG5\_int\ np0,MMG5\_int\ np1,}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *m0,\textcolor{keywordtype}{double}\ *m1,int8\_t\ isedg)\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00056}00056\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ \ \ p0,p1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00057}00057\ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ gammaprim0[3],gammaprim1[3],t[3],*n1,*n2,ux,uy,uz,ps1,ps2,l0,l1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00058}00058\ \ \ \textcolor{keyword}{static}\ int8\_t\ mmgWarn=0;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00060}00060\ \ \ p0\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00061}00061\ \ \ p1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00063}00063\ \ \ ux\ =\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]\ -\/\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00064}00064\ \ \ uy\ =\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]\ -\/\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00065}00065\ \ \ uz\ =\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]\ -\/\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00067}00067\ \ \ \textcolor{comment}{/*\ computation\ of\ the\ two\ tangent\ vectors\ to\ the\ underlying\ curve\ of\ [i0i1]\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00068}00068\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ ||\ (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}}\ \&\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00069}00069\ \ \ \ \ gammaprim0[0]\ =\ ux;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00070}00070\ \ \ \ \ gammaprim0[1]\ =\ uy;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00071}00071\ \ \ \ \ gammaprim0[2]\ =\ uz;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00072}00072\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00073}00073\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ isedg\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00074}00074\ \ \ \ \ memcpy(t,p0-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}},3*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00075}00075\ \ \ \ \ ps1\ =\ ux*t[0]\ +\ uy*t[1]\ +\ uz*t[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00076}00076\ \ \ \ \ gammaprim0[0]\ =\ ps1*t[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00077}00077\ \ \ \ \ gammaprim0[1]\ =\ ps1*t[1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00078}00078\ \ \ \ \ gammaprim0[2]\ =\ ps1*t[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00079}00079\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00080}00080\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}}\ \&\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00082}00082\ \ \ \ \ \ \ \textcolor{comment}{//assert(p0-\/>xp);}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00083}00083\ \ \ \ \ \ \ n1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00084}00084\ \ \ \ \ \ \ n2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00085}00085\ \ \ \ \ \ \ ps1\ =\ ux*n1[0]\ +\ uy*n1[1]\ +\ uz*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00086}00086\ \ \ \ \ \ \ ps2\ =\ ux*n2[0]\ +\ uy*n2[1]\ +\ uz*n2[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00087}00087\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ fabs(ps2)\ <\ fabs(ps1)\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ n1\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ ps1\ =\ ps2;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00090}00090\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}}\ \&\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ ||\ \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}}\ \&\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00093}00093\ \ \ \ \ \ \ \textcolor{comment}{//\ (\ MG\_BDY\ \ \&\ p0-\/>tag\ )\ =>\ mmg3d}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00094}00094\ \ \ \ \ \ \ n1\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p0-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00095}00095\ \ \ \ \ \ \ ps1\ =\ ux*n1[0]\ +\ uy*n1[1]\ +\ uz*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00098}00098\ \ \ \ \ \ \ \textcolor{comment}{//\ we\ come\ from\ mmgs\ because\ in\ mmg3d\ the\ boundary\ points\ are\ tagged}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00099}00099\ \ \ \ \ \ \ \textcolor{comment}{//\ MG\_BDY.}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00100}00100\ \ \ \ \ \ \ n1\ \ =\ \&(p0-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[0]);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00101}00101\ \ \ \ \ \ \ ps1\ =\ ux*n1[0]\ +\ uy*n1[1]\ +\ uz*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00103}00103\ \ \ \ \ gammaprim0[0]\ =\ ux\ -\/\ ps1*n1[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00104}00104\ \ \ \ \ gammaprim0[1]\ =\ uy\ -\/\ ps1*n1[1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00105}00105\ \ \ \ \ gammaprim0[2]\ =\ uz\ -\/\ ps1*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00106}00106\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00108}00108\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ ||\ (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}}\ \&\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00109}00109\ \ \ \ \ gammaprim1[0]\ =\ -\/ux;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00110}00110\ \ \ \ \ gammaprim1[1]\ =\ -\/uy;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00111}00111\ \ \ \ \ gammaprim1[2]\ =\ -\/uz;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00112}00112\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00113}00113\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ isedg\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00114}00114\ \ \ \ \ memcpy(t,p1-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}},3*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00115}00115\ \ \ \ \ ps1\ =\ -\/ux*t[0]\ -\/\ uy*t[1]\ -\/\ uz*t[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00116}00116\ \ \ \ \ gammaprim1[0]\ =\ ps1*t[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00117}00117\ \ \ \ \ gammaprim1[1]\ =\ ps1*t[1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00118}00118\ \ \ \ \ gammaprim1[2]\ =\ ps1*t[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00119}00119\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00120}00120\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00121}00121\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}}\ \&\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00122}00122\ \ \ \ \ \ \ n1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00123}00123\ \ \ \ \ \ \ n2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00124}00124\ \ \ \ \ \ \ ps1\ =\ -\/ux*n1[0]\ -\/\ uy*n1[1]\ -\/\ uz*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00125}00125\ \ \ \ \ \ \ ps2\ =\ -\/ux*n2[0]\ -\/\ uy*n2[1]\ -\/\ uz*n2[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00127}00127\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ fabs(ps2)\ <\ fabs(ps1)\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00128}00128\ \ \ \ \ \ \ \ \ n1\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_a4f012ef35696ca160d3f7fffcaf0ec64}{n2}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00129}00129\ \ \ \ \ \ \ \ \ ps1\ =\ ps2;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00130}00130\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00131}00131\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00132}00132\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_aed4613c0f3a1afbcea3325f68c87989d}{MG\_REF}}\ \&\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ ||\ \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}}\ \&\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00133}00133\ \ \ \ \ \ \ \textcolor{comment}{//\ (\ MG\_BDY\ \ \&\ p1-\/>tag\ )\ =>\ mmg3d\ )}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00134}00134\ \ \ \ \ \ \ n1\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a94c60b23c5a20278669ac1b4e04e9192}{xpoint}}[p1-\/>\mbox{\hyperlink{structMMG5__Point_a8167ac2be5624d2afd1f0ad716b9cdac}{xp}}].\mbox{\hyperlink{structMMG5__xPoint_ac17b4709dce885f22b9762bc51d01a35}{n1}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00135}00135\ \ \ \ \ \ \ ps1\ =\ -\/\ ux*n1[0]\ -\/\ uy*n1[1]\ -\/\ uz*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00137}00137\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00138}00138\ \ \ \ \ \ \ \textcolor{comment}{//\ we\ come\ from\ mmgs\ because\ in\ mmg3d\ the\ boundary\ points\ are\ tagged}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00139}00139\ \ \ \ \ \ \ \textcolor{comment}{//\ MG\_BDY.}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00140}00140\ \ \ \ \ \ \ n1\ \ =\ \&(p1-\/>\mbox{\hyperlink{structMMG5__Point_a02f5943fcbe2b8388205907c01a47f68}{n}}[0]);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00141}00141\ \ \ \ \ \ \ ps1\ =\ -\/ux*n1[0]\ -\/\ uy*n1[1]\ -\/\ uz*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00142}00142\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00143}00143\ \ \ \ \ gammaprim1[0]\ =\ -\/\ ux\ -\/\ ps1*n1[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00144}00144\ \ \ \ \ gammaprim1[1]\ =\ -\/\ uy\ -\/\ ps1*n1[1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00145}00145\ \ \ \ \ gammaprim1[2]\ =\ -\/\ uz\ -\/\ ps1*n1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00146}00146\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00148}00148\ \ \ \textcolor{comment}{/*\ computation\ of\ the\ length\ of\ the\ two\ tangent\ vectors\ in\ their\ respective}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00149}00149\ \textcolor{comment}{\ \ \ *\ tangent\ plane\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00150}00150\ \ \ \textcolor{comment}{/*\ l\_ab\ =\ int\_a\string^b\ sqrt(m\_ij\ d\_t\ x\_i(t)\ d\_t\ x\_j(t)\ )\ :\ evaluated\ by\ a\ 2-\/point}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00151}00151\ \textcolor{comment}{\ \ \ *\ quadrature\ method.\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00152}00152\ \ \ l0\ =\ m0[0]*gammaprim0[0]*gammaprim0[0]\ +\ m0[3]*gammaprim0[1]*gammaprim0[1]\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00153}00153\ \ \ \ \ +\ m0[5]*gammaprim0[2]*gammaprim0[2]\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00154}00154\ \ \ \ \ +\ 2.0*m0[1]*gammaprim0[0]*gammaprim0[1]\ \ +\ 2.0*m0[2]*gammaprim0[0]*gammaprim0[2]\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00155}00155\ \ \ \ \ +\ 2.0*m0[4]*gammaprim0[1]*gammaprim0[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00157}00157\ \ \ l1\ =\ m1[0]*gammaprim1[0]*gammaprim1[0]\ +\ m1[3]*gammaprim1[1]*gammaprim1[1]\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00158}00158\ \ \ \ \ +\ m1[5]*gammaprim1[2]*gammaprim1[2]\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00159}00159\ \ \ \ \ +2.0*m1[1]*gammaprim1[0]*gammaprim1[1]\ \ +\ 2.0*m1[2]*gammaprim1[0]*gammaprim1[2]\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00160}00160\ \ \ \ \ +\ 2.0*m1[4]*gammaprim1[1]*gammaprim1[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00162}00162\ \ \ \textcolor{keywordflow}{if}(\ l0\ <\ 0.)\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00163}00163\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00164}00164\ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\ \ \#\#\ Warning:\ \%s:\ at\ least\ 1\ negative\ edge\ length\ "{}}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}(\%e)\(\backslash\)n"{}},\_\_func\_\_,l0);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00166}00166\ \ \ \ \ \ \ mmgWarn\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00167}00167\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00168}00168\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00169}00169\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00170}00170\ \ \ \textcolor{keywordflow}{if}(l1\ <\ 0.)\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00171}00171\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00172}00172\ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\ \ \#\#\ Warning:\ \%s:\ at\ least\ 1\ negative\ edge\ length\ "{}}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}(\%e)\(\backslash\)n"{}},\_\_func\_\_,l1);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00174}00174\ \ \ \ \ \ \ mmgWarn\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00175}00175\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00176}00176\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00177}00177\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00178}00178\ \ \ l0\ =\ 0.5*(sqrt(l0)\ +\ sqrt(l1));}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00180}00180\ \ \ \textcolor{keywordflow}{return}\ l0;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00181}00181\ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00198}00198\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00199}\mbox{\hyperlink{inlined__functions__private_8h_ae37ac28bb21ba156ef9d26e102646992}{00199}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{inlined__functions__private_8h_ae37ac28bb21ba156ef9d26e102646992}{MMG5\_lenSurfEdg\_ani}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ met,MMG5\_int\ np0,MMG5\_int\ np1,int8\_t\ isedg)\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00200}00200\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ \ \ p0,p1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00201}00201\ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ *m0,*m1,met0[6],met1[6],ux,uy,uz,rbasis[3][3];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00202}00202\ \ \ \textcolor{keyword}{static}\ int8\_t\ mmgWarn\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00204}00204\ \ \ p0\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00205}00205\ \ \ p1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[np1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00207}00207\ \ \ ux\ =\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]\ -\/\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00208}00208\ \ \ uy\ =\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]\ -\/\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00209}00209\ \ \ uz\ =\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]\ -\/\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00211}00211\ \ \ \textcolor{comment}{/*\ Set\ metrics\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00212}00212\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ ||\ (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}}\ \&\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}))\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00213}00213\ \ \ \ \ m0\ =\ \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00214}00214\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00215}00215\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}}\ \&\ p0-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00216}00216\ \ \ \ \ \textcolor{comment}{/*\ Note\ that\ rbasis\ isn't\ used\ here\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00217}00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mettools_8c_ab9abc1963a552fd343bc5c27a753a58a}{MMG5\_buildridmet}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,np0,ux,uy,uz,met0,rbasis)\ )\ \ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00218}00218\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00219}00219\ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\ \ \#\#\ Warning:\ \%s:\ a-\/\ unable\ to\ compute\ at\ least\ 1\ ridge"{}}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ metric.\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00221}00221\ \ \ \ \ \ \ \ \ mmgWarn\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00222}00222\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00223}00223\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00224}00224\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00225}00225\ \ \ \ \ m0\ =\ met0;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00226}00226\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00227}00227\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00228}00228\ \ \ \ \ m0\ =\ \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00229}00229\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00231}00231\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a7d17f22a784b2da53dad4d1fa7785ce0}{MG\_SIN}}(p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}})\ ||\ (\mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}}\ \&\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}))\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00232}00232\ \ \ \ \ m1\ =\ \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00233}00233\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00234}00234\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{mmgcommon__private_8h_a0776e940d2dc5be4b516dbd5ff3d30dd}{MG\_GEO}}\ \&\ p1-\/>\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00235}00235\ \ \ \ \ \textcolor{comment}{/*\ Note\ that\ rbasis\ isn't\ used\ here\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mettools_8c_ab9abc1963a552fd343bc5c27a753a58a}{MMG5\_buildridmet}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},met,np1,ux,uy,uz,met1,rbasis)\ )\ \ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00237}00237\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !mmgWarn\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00238}00238\ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\ \ \#\#\ Warning:\ \%s:\ b-\/\ unable\ to\ compute\ at\ least\ 1\ ridge"{}}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ metric.\(\backslash\)n"{}},\_\_func\_\_);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00240}00240\ \ \ \ \ \ \ \ \ mmgWarn\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00241}00241\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00242}00242\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00244}00244\ \ \ \ \ m1\ =\ met1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00245}00245\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00246}00246\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00247}00247\ \ \ \ \ m1\ =\ \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00248}00248\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00250}00250\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{MMG5\_lenEdg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},np0,np1,m0,m1,isedg);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00251}00251\ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00267}00267\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00268}\mbox{\hyperlink{inlined__functions__private_8h_a7b9b1b9af66388894bcaf0d347b0da71}{00268}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{inlined__functions__private_8h_a7b9b1b9af66388894bcaf0d347b0da71}{MMG5\_lenSurfEdg33\_ani}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ met,}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MMG5\_int\ np0,MMG5\_int\ np1,int8\_t\ isedg)\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00270}00270\ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ *m0,*m1;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00272}00272\ \ \ \textcolor{comment}{/*\ Set\ metrics\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00273}00273\ \ \ m0\ =\ \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np0];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00274}00274\ \ \ m1\ =\ \&met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[6*np1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00276}00276\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{inlined__functions__private_8h_afe942c2e4817beea365ef9d9668c691c}{MMG5\_lenEdg}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},np0,np1,m0,m1,isedg);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00277}00277\ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00292}00292\ \textcolor{keyword}{static}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00293}\mbox{\hyperlink{inlined__functions__private_8h_a2764ba495bf15419565494fc6141474b}{00293}}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{inlined__functions__private_8h_a2764ba495bf15419565494fc6141474b}{MMG5\_lenSurfEdg\_iso}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Sol}{MMG5\_pSol}}\ met,MMG5\_int\ ip1,MMG5\_int\ ip2,\ int8\_t\ isedg)\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00294}00294\ \ \ \mbox{\hyperlink{structMMG5__Point}{MMG5\_pPoint}}\ \ \ p1,p2;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00295}00295\ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ h1,h2,l,r,len;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00297}00297\ \ \ p1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00298}00298\ \ \ p2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ip2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00299}00299\ \ \ h1\ =\ met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[ip1];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00300}00300\ \ \ h2\ =\ met-\/>\mbox{\hyperlink{structMMG5__Sol_ad560357d85168138d78249eb4879b5d8}{m}}[ip2];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00301}00301\ \ \ l\ =\ (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[0])\ +\ (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[1])\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00302}00302\ \ \ \ \ +\ (p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2])*(p2-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]-\/p1-\/>\mbox{\hyperlink{structMMG5__Point_a76168a52c07a87e2f49ee6877c63c4eb}{c}}[2]);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00303}00303\ \ \ l\ =\ sqrt(l);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00304}00304\ \ \ r\ =\ h2\ /\ h1\ -\/\ 1.0;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00305}00305\ \ \ len\ =\ fabs(r)\ <\ \mbox{\hyperlink{eigenv__private_8h_ac8c37cc50aa41bddbfbba868a1a6aa3c}{MMG5\_EPS}}\ ?\ l\ /\ h1\ :\ l\ /\ (h2-\/h1)\ *\ log1p(r);}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00307}00307\ \ \ \textcolor{keywordflow}{return}\ len;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00308}00308\ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00323}00323\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00324}\mbox{\hyperlink{inlined__functions__private_8h_ad791c6f688b31a04f3910b8691d95e6b}{00324}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{inlined__functions__private_8h_ad791c6f688b31a04f3910b8691d95e6b}{MMG5\_simredmat}}(int8\_t\ dim,\textcolor{keywordtype}{double}\ *m,\textcolor{keywordtype}{double}\ *dm,\textcolor{keywordtype}{double}\ *iv)\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00325}00325\ \ \ int8\_t\ i,j,k,ij;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00327}00327\ \ \ \textcolor{comment}{/*\ Storage\ of\ a\ matrix\ as\ a\ one-\/dimensional\ array:\ dim*(dim+1)/2\ entries\ for}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00328}00328\ \textcolor{comment}{\ \ \ *\ a\ symmetric\ matrix.\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00329}00329\ \ \ ij\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00331}00331\ \ \ \textcolor{comment}{/*\ Loop\ on\ matrix\ rows\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00332}00332\ \ \ \textcolor{keywordflow}{for}(\ i\ =\ 0;\ i\ <\ dim;\ i++\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00333}00333\ \ \ \ \ \textcolor{comment}{/*\ Loop\ on\ the\ upper-\/triangular\ part\ of\ the\ matrix\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00334}00334\ \ \ \ \ \textcolor{keywordflow}{for}(\ j\ =\ i;\ j\ <\ dim;\ j++\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00335}00335\ \ \ \ \ \ \ \textcolor{comment}{/*\ Initialize\ matrix\ entry\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00336}00336\ \ \ \ \ \ \ m[ij]\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00337}00337\ \ \ \ \ \ \ \textcolor{comment}{/*\ Compute\ matrix\ entry\ as\ the\ recomposition\ of\ diagonal\ values\ after}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00338}00338\ \textcolor{comment}{\ \ \ \ \ \ \ *\ projection\ on\ the\ coreduction\ basis,\ using\ the\ inverse\ of\ the}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00339}00339\ \textcolor{comment}{\ \ \ \ \ \ \ *\ transformation:}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00340}00340\ \textcolor{comment}{\ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00341}00341\ \textcolor{comment}{\ \ \ \ \ \ \ *\ M\_\{ij\}\ =\ \(\backslash\)sum\_\{k,l\}\ V\string^\{-\/1\}\_\{ki\}\ Lambda\_\{kl\}\ V\string^\{-\/1\}\_\{lj\}\ =}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00342}00342\ \textcolor{comment}{\ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ =\ \(\backslash\)sum\_\{k\}\ lambda\_\{k\}\ V\string^\{-\/1\}\_\{ki\}\ V\string^\{-\/1\}\_\{kj\}}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00343}00343\ \textcolor{comment}{\ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00344}00344\ \textcolor{comment}{\ \ \ \ \ \ \ *\ Since\ the\ inverse\ of\ the\ transformation\ is\ the\ inverse\ of\ an}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00345}00345\ \textcolor{comment}{\ \ \ \ \ \ \ *\ eigenvectors\ matrix\ (which\ is\ stored\ in\ Mmg\ by\ columns,\ and\ not\ by}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00346}00346\ \textcolor{comment}{\ \ \ \ \ \ \ *\ rows),\ the\ storage\ of\ the\ inverse\ matrix\ is\ also\ transposed\ and\ the}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00347}00347\ \textcolor{comment}{\ \ \ \ \ \ \ *\ indices\ have\ to\ be\ exchanged\ when\ implementing\ the\ above\ formula.\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00348}00348\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ k\ =\ 0;\ k\ <\ dim;\ k++\ )\ \{}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00349}00349\ \ \ \ \ \ \ \ \ m[ij]\ +=\ dm[k]*iv[i*dim+k]*iv[j*dim+k];}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00350}00350\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00351}00351\ \ \ \ \ \ \ \textcolor{comment}{/*\ Go\ to\ the\ next\ entry\ */}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00352}00352\ \ \ \ \ \ \ ++ij;}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00353}00353\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00354}00354\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00355}00355\ \ \ assert(\ ij\ ==\ (dim+1)*dim/2\ );}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00356}00356\ \}}
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00357}00357\ }
+\DoxyCodeLine{\Hypertarget{inlined__functions__private_8h_source_l00358}00358\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

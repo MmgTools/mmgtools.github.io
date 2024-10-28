@@ -2,449 +2,450 @@
 \label{hash_8c_source}\index{src/common/hash.c@{src/common/hash.c}}
 \mbox{\hyperlink{hash_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00001}00001 \textcolor{comment}{/* =============================================================================}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00002}00002 \textcolor{comment}{**  This file is part of the mmg software package for the tetrahedral}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00003}00003 \textcolor{comment}{**  mesh modification.}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00004}00004 \textcolor{comment}{**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-\/}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00005}00005 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00006}00006 \textcolor{comment}{**  mmg is free software: you can redistribute it and/or modify it}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00007}00007 \textcolor{comment}{**  under the terms of the GNU Lesser General Public License as published}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00008}00008 \textcolor{comment}{**  by the Free Software Foundation, either version 3 of the License, or}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00009}00009 \textcolor{comment}{**  (at your option) any later version.}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00010}00010 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00011}00011 \textcolor{comment}{**  mmg is distributed in the hope that it will be useful, but WITHOUT}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00012}00012 \textcolor{comment}{**  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00013}00013 \textcolor{comment}{**  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00014}00014 \textcolor{comment}{**  License for more details.}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00015}00015 \textcolor{comment}{**}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00016}00016 \textcolor{comment}{**  You should have received a copy of the GNU Lesser General Public}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00017}00017 \textcolor{comment}{**  License and of the GNU General Public License along with mmg (in}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00018}00018 \textcolor{comment}{**  files COPYING.LESSER and COPYING). If not, see}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00019}00019 \textcolor{comment}{**  <http://www.gnu.org/licenses/>. Please read their terms carefully and}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00020}00020 \textcolor{comment}{**  use this copy of the mmg distribution only if you accept them.}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00021}00021 \textcolor{comment}{** =============================================================================}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00022}00022 \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00035}00035 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00036}00036 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00058}\mbox{\hyperlink{hash_8c_a2d05251a69b6f626d88af66ac1aed14a}{00058}} \textcolor{keywordtype}{int} \mbox{\hyperlink{hash_8c_a2d05251a69b6f626d88af66ac1aed14a}{MMG5\_mmgHashTria}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}, MMG5\_int *adjt, \mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}} *hash, \textcolor{keywordtype}{int} chkISO) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00059}00059   \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}     pt,pt1,pt2;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00060}00060   \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}     *ph;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00061}00061   MMG5\_int       kk;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00062}00062   MMG5\_int       *adja,hmax,k,ia,ib,jel,lel,dup,nmf;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00063}00063   int8\_t         i,i1,i2,j,l;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00064}00064   MMG5\_int       key;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00065}00065 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00066}00066   \textcolor{comment}{/* adjust hash table params */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00067}00067   hmax =(MMG5\_int)(3.71*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00068}00068   hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}}  = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00069}00069   hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}  = hmax + 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00070}00070   hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}  = hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00071}00071   \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1)*\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}),\textcolor{stringliteral}{"{}hash table"{}},\textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00072}00072   \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1,\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},\textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00073}00073 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00074}00074   \textcolor{keywordflow}{for} (k=hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}}; k<hash-\/>max; k++)}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00075}00075     hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[k].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = k+1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00076}00076 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00077}00077   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}} )  fprintf(stdout,\textcolor{stringliteral}{"{}  h-\/ stage 1: init\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00078}00078 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00079}00079   \textcolor{comment}{/* hash triangles */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00080}00080   ++\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00081}00081   dup = nmf = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00082}00082   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00083}00083     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00084}00084     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) )  \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00085}00085 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00086}00086     pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}} = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00087}00087     \textcolor{comment}{// base field of triangles has to be setted because it is used in setadj (mmgs}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00088}00088     \textcolor{comment}{// and mmg3d) to detect moebius strip and to flip tria orientation}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00089}00089     pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}} = \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00090}00090 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00091}00091     adja = \&adjt[3*(k-\/1)+1];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00092}00092     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00093}00093 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00094}00094       \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) )  \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00095}00095 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00096}00096       \textcolor{comment}{/* Skip parallel edges */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00097}00097       \textcolor{keywordflow}{if}( (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] \& \mbox{\hyperlink{mmgcommon__private_8h_a3ce2c9eede0b495fb73c8d1993ed965c}{MG\_PARBDY}}) \&\& !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] \& \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}}) ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00098}00098 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00099}00099       i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00100}00100       i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00101}00101 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00102}00102       \textcolor{comment}{/* compute key */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00103}00103       ia  = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00104}00104       ib  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00105}00105       key = (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia + \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib) \% hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00106}00106       ph  = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00107}00107 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00108}00108       \textcolor{comment}{/* store edge */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00109}00109       \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == 0 ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00110}00110         ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} = ia;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00111}00111         ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} = ib;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00112}00112         ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} = 3*k + i;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00113}00113         ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00114}00114         ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00115}00115         \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00116}00116       \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00117}00117       \textcolor{comment}{/* update info about adjacent */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00118}00118 \textcolor{preprocessor}{\#ifndef NDEBUG}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00119}00119       int8\_t ok = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00120}00120 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00121}00121       \textcolor{keywordflow}{while} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00122}00122         \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00123}00123           jel = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} / 3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00124}00124           j   = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} \% 3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00125}00125           pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00126}00126           \textcolor{comment}{/* discard duplicate face */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00127}00127           \textcolor{keywordflow}{if} ( pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j] == pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i] ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00128}00128             pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0] = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00129}00129             dup++;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00130}00130           \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00131}00131           \textcolor{comment}{/* update adjacent */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00132}00132           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !adjt[3*(jel-\/1)+1+j] ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00133}00133             adja[i] = 3*jel + j;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00134}00134             adjt[3*(jel-\/1)+1+j] = 3*k + i;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00135}00135             ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00136}00136           \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00137}00137           \textcolor{comment}{/* non-\/manifold case */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00138}00138           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( adja[i] != 3*jel+j ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00139}00139             lel = adjt[3*(jel-\/1)+1+j]/3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00140}00140             l   = adjt[3*(jel-\/1)+1+j]\%3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00141}00141             pt2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[lel];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00142}00142 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00143}00143             \textcolor{keywordflow}{if} ( chkISO \&\& ( (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}} == \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a8003c2f9ed8dc445cb2d577be01c3389}{isoref}}) || (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}} < 0)) ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00144}00144               adjt[3*(lel-\/1)+1+l] = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00145}00145               adja[i] = 3*jel+j;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00146}00146               adjt[3*(jel-\/1)+1+j] = 3*k + i;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00147}00147             \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00148}00148             pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] |= \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00149}00149             pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j] |= \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00150}00150             pt2-\/>tag[l] |= \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00151}00151             nmf++;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00152}00152             ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00153}00153           \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00154}00154 \textcolor{preprocessor}{\#ifndef NDEBUG}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00155}00155           ok = 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00156}00156 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00157}00157           \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00158}00158         \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00159}00159         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00160}00160           ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00161}00161           ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00162}00162           assert(ph);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00163}00163 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00164}00164           \textcolor{keywordflow}{if} ( hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} >= hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}-\/1 ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00165}00165             \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00166}00166               fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: memory alloc problem (edge):"{}}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00167}00167                       \textcolor{stringliteral}{"{} \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\_\_func\_\_,hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00168}00168             \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00169}00169             \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{mmgcommon__private_8h_a50b381cd31a4a90064ce1d936a7c037d}{MMG5\_GAP}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00170}00170                                \textcolor{stringliteral}{"{}MMG5\_edge"{}},}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00171}00171                                \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00172}00172                                \textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00173}00173 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00174}00174             ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00175}00175 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00176}00176             \textcolor{keywordflow}{for} (kk=ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}; kk<hash-\/>max; kk++)}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00177}00177               hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[kk].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = kk+1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00178}00178           \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00179}00179 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00180}00180           hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00181}00181           ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} = ia;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00182}00182           ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} = ib;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00183}00183           ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} = 3*k + i;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00184}00184           ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00185}00185           ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00186}00186 \textcolor{preprocessor}{\#ifndef NDEBUG}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00187}00187           ok = 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00188}00188 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00189}00189           \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00190}00190         \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00191}00191         \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00192}00192           ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00193}00193       \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00194}00194       assert(ok);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00195}00195     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00196}00196   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00197}00197 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00198}00198   \textcolor{comment}{/* Now loop on "{}only"{} parallel edges in order to add a MG\_BDY tag on those}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00199}00199 \textcolor{comment}{   * that are found in the hash table and their adjacents (if manifold; in the}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00200}00200 \textcolor{comment}{   * non-\/manifold case the MG\_NOM tag suffices).}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00201}00201 \textcolor{comment}{   *}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00202}00202 \textcolor{comment}{   * Rationale:}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00203}00203 \textcolor{comment}{   *   -\/ put MG\_BDY tags on edges that are contact edges between a "{}true"{}}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00204}00204 \textcolor{comment}{   *     geometrical boundary (!MG\_PARBDY || (MG\_PARBDY \&\& MG\_PARBDYBDY) and a}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00205}00205 \textcolor{comment}{   *     purele parallel (non-\/geometrical) one (MG\_PARBDY \&\& !MG\_PARBDYBDY);}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00206}00206 \textcolor{comment}{   *   -\/ add also a MG\_PARBDYBDY tag on those edges (as it cannot be inherited}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00207}00207 \textcolor{comment}{   *     from any triangle there) and their extremities.}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00208}00208 \textcolor{comment}{   */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00209}00209   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00210}00210     pt = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00211}00211     \textcolor{keywordflow}{if} ( !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt) )  \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00212}00212     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00213}00213       \textcolor{keywordflow}{if}( !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] \& \mbox{\hyperlink{mmgcommon__private_8h_a3ce2c9eede0b495fb73c8d1993ed965c}{MG\_PARBDY}}) || (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] \& \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}}) ) \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00214}00214       i1 = \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00215}00215       i2 = \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00216}00216 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00217}00217       \textcolor{comment}{/* compute key */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00218}00218       ia  = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00219}00219       ib  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00220}00220       key = (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia + \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib) \% hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00221}00221       ph  = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00222}00222 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00223}00223       \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == 0 )  \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00224}00224       \textcolor{keywordflow}{while}( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00225}00225         \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00226}00226           jel = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} / 3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00227}00227           j   = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} \% 3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00228}00228           pt1 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00229}00229           pt1-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[j] |= \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}} + \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00230}00230           \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ia].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00231}00231           \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ib].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00232}00232           \textcolor{comment}{/* update adjacent */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00233}00233           lel = adjt[3*(jel-\/1)+1+j]/3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00234}00234           l   = adjt[3*(jel-\/1)+1+j]\%3;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00235}00235           \textcolor{keywordflow}{if}( lel ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00236}00236             pt2 = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[lel];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00237}00237             pt2-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[l] |= \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}} + \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00238}00238             \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ia].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00239}00239             \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ib].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00240}00240           \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00241}00241           \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00242}00242         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00243}00243           \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00244}00244         \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00245}00245           ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00246}00246         \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00247}00247       \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00248}00248     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00249}00249   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00250}00250 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00251}00251   \textcolor{comment}{/* set tag */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00252}00252   \textcolor{keywordflow}{for} (k=1; k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}}; k++) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00253}00253     pt  = \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00254}00254     \textcolor{keywordflow}{for} (i=0; i<3; i++) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00255}00255       \textcolor{keywordflow}{if} ( pt-\/>\mbox{\hyperlink{structMMG5__Tria_a35a279506f5223627de41580a94c52d0}{tag}}[i] \& \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00256}00256         \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]]].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00257}00257         \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]]].\mbox{\hyperlink{structMMG5__Point_a041bd4b5aed20f9f78fe53f74dae0d9b}{tag}} |= \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00258}00258       \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00259}00259     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00260}00260   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00261}00261 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00262}00262   \textcolor{keywordflow}{if} ( abs(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}}) > 5 \&\& dup+nmf > 0 ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00263}00263     fprintf(stdout,\textcolor{stringliteral}{"{}  \#\# "{}});  fflush(stdout);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00264}00264     \textcolor{keywordflow}{if} ( nmf > 0 )  fprintf(stdout,\textcolor{stringliteral}{"{}[non-\/manifold model]  "{}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00265}00265     \textcolor{keywordflow}{if} ( dup > 0 )  fprintf(stdout,\textcolor{stringliteral}{"{} \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{} duplicate removed"{}},dup);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00266}00266     fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00267}00267   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00268}00268   \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}} )  fprintf(stdout,\textcolor{stringliteral}{"{}  h-\/ completed.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00269}00269 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00270}00270   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00271}00271 \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00272}00272 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00286}\mbox{\hyperlink{hash_8c_a1ae4cce82722658e88253895a214a815}{00286}} MMG5\_int \mbox{\hyperlink{hash_8c_a1ae4cce82722658e88253895a214a815}{MMG5\_hashFace}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}} *hash,MMG5\_int ia,MMG5\_int ib,MMG5\_int ic,MMG5\_int k) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00287}00287   \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}     *ph;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00288}00288   MMG5\_int       key;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00289}00289   MMG5\_int       mins,maxs,sum,j;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00290}00290 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00291}00291   mins = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(ia,\mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(ib,ic));}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00292}00292   maxs = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(ia,\mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(ib,ic));}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00293}00293 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00294}00294   \textcolor{comment}{/* compute key */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00295}00295   sum = ia + ib + ic;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00296}00296   key = (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)mins + \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)maxs) \% hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00297}00297   ph  = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00298}00298 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00299}00299   \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00300}00300     \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == mins \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == maxs \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}} == sum )}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00301}00301       \textcolor{keywordflow}{return} ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00302}00302     \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00303}00303       \textcolor{keywordflow}{while} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} < hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00304}00304         ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00305}00305         \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == mins \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == maxs \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}} == sum )  \textcolor{keywordflow}{return} ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00306}00306       \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00307}00307     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00308}00308     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00309}00309     ph      = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00310}00310     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}   = mins;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00311}00311     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}   = maxs;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00312}00312     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}}   = sum;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00313}00313     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}   = k;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00314}00314     hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00315}00315     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00316}00316 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00317}00317     \textcolor{keywordflow}{if} ( hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} >= hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00318}00318       \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{mmgcommon__private_8h_a50b381cd31a4a90064ce1d936a7c037d}{MMG5\_GAP}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},\textcolor{stringliteral}{"{}face"{}},\textcolor{keywordflow}{return} 0;);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00319}00319       \textcolor{keywordflow}{for} (j=hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}; j<hash-\/>max; j++)  hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[j].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = j+1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00320}00320     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00321}00321     \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00322}00322   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00323}00323 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00324}00324   \textcolor{comment}{/* insert new face */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00325}00325   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} = mins;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00326}00326   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} = maxs;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00327}00327   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}} = sum;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00328}00328   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} = k;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00329}00329   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00330}00330 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00331}00331   \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00332}00332 \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00333}00333 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00345}\mbox{\hyperlink{hash_8c_abf9ecdc9c796612c38768d7d15d28642}{00345}} \textcolor{keywordtype}{int} \mbox{\hyperlink{hash_8c_abf9ecdc9c796612c38768d7d15d28642}{MMG5\_hashEdge}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}} *hash, MMG5\_int a,MMG5\_int b,MMG5\_int k) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00346}00346   \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}  *ph;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00347}00347   MMG5\_int     key;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00348}00348   MMG5\_int    ia,ib,j;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00349}00349 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00350}00350   ia  = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00351}00351   ib  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00352}00352   key = (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia + \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib) \% hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00353}00353   ph  = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00354}00354 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00355}00355   \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib )}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00356}00356     \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00357}00357   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00358}00358     \textcolor{keywordflow}{while} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} < hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00359}00359       ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00360}00360       \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib )  \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00361}00361     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00362}00362     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}   = hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00363}00363     ph        = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00364}00364 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00365}00365     \textcolor{keywordflow}{if} ( hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} >= hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}-\/1 ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00366}00366       \textcolor{keywordflow}{if} ( \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}} )}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00367}00367         fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n  \#\# Warning: \%s: memory alloc problem (edge):"{}}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00368}00368                 \textcolor{stringliteral}{"{} \%"{}} MMG5\_PRId \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\_\_func\_\_,hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}});}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00369}00369 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00370}00370       \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{mmgcommon__private_8h_a50b381cd31a4a90064ce1d936a7c037d}{MMG5\_GAP}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00371}00371                          \textcolor{stringliteral}{"{}MMG5\_edge"{}},\textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00372}00372       \textcolor{comment}{/* ph pointer may be false after realloc */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00373}00373       ph        = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00374}00374 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00375}00375       \textcolor{keywordflow}{for} (j=ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}; j<hash-\/>max; j++)  hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[j].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = j+1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00376}00376     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00377}00377     hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00378}00378   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00379}00379 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00380}00380   \textcolor{comment}{/* insert new edge */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00381}00381   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} = ia;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00382}00382   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} = ib;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00383}00383   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} = k;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00384}00384   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00385}00385 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00386}00386   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00387}00387 \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00388}00388 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00400}\mbox{\hyperlink{hash_8c_a664448f735b3d71e4e122a1874b2ebd1}{00400}} \textcolor{keywordtype}{int} \mbox{\hyperlink{hash_8c_a664448f735b3d71e4e122a1874b2ebd1}{MMG5\_hashUpdate}}(\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}} *hash, MMG5\_int a,MMG5\_int b,MMG5\_int k) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00401}00401   \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}  *ph;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00402}00402   MMG5\_int     key;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00403}00403   MMG5\_int    ia,ib;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00404}00404 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00405}00405   ia  = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00406}00406   ib  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00407}00407   key = (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia + \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib) \% hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00408}00408   ph  = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00409}00409 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00410}00410   while ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00411}00411     \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00412}00412       ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} = k;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00413}00413       \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00414}00414     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00415}00415 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00416}00416     \textcolor{keywordflow}{if} ( !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00417}00417 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00418}00418     ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00419}00419 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00420}00420   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00421}00421 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00422}00422   \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00423}00423 \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00424}00424 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00437}\mbox{\hyperlink{hash_8c_a266799d3b2b0bcba745fc85c8593de3d}{00437}} \textcolor{keywordtype}{int} \mbox{\hyperlink{hash_8c_a266799d3b2b0bcba745fc85c8593de3d}{MMG5\_hashEdgeTag}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}} *hash, MMG5\_int a,MMG5\_int b,int16\_t tag) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00438}00438   \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}  *ph;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00439}00439   MMG5\_int     key;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00440}00440   MMG5\_int    ia,ib,j;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00441}00441 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00442}00442   ia  = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00443}00443   ib  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00444}00444   key = (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia + \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib) \% hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00445}00445   ph  = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00446}00446 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00447}00447   \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00448}00448     \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00449}00449       ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} |= tag;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00450}00450       \textcolor{keywordflow}{return} ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00451}00451     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00452}00452     \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00453}00453       \textcolor{keywordflow}{while} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} < hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00454}00454         ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00455}00455         \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib )  \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00456}00456           ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}} |= tag;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00457}00457           \textcolor{keywordflow}{return} ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00458}00458         \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00459}00459       \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00460}00460     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00461}00461     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}   = hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00462}00462     ph        = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00463}00463     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}     = ia;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00464}00464     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}     = ib;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00465}00465     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}     = tag;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00466}00466     hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} = ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00467}00467     ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}   = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00468}00468 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00469}00469     \textcolor{keywordflow}{if} ( hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}} >= hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00470}00470       \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aa236af3993812da0fae647a11e9088b9}{gap}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00471}00471                         \textcolor{stringliteral}{"{}edge hash table"{}},\textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00472}00472       \textcolor{keywordflow}{for} (j=hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}; j<hash-\/>max; j++)  hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[j].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = j+1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00473}00473     \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00474}00474     \textcolor{keywordflow}{return} tag;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00475}00475   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00476}00476 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00477}00477   \textcolor{comment}{/* insert new edge */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00478}00478   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}     = ia;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00479}00479   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}     = ib;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00480}00480   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}     = tag;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00481}00481   ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}   = 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00482}00482 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00483}00483   \textcolor{keywordflow}{return} tag;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00484}00484 \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00485}00485 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00495}\mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{00495}} MMG5\_int \mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{MMG5\_hashGet}}(\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}} *hash,MMG5\_int a,MMG5\_int b) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00496}00496   \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}  *ph;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00497}00497   MMG5\_int    key;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00498}00498   MMG5\_int    ia,ib;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00499}00499 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00500}00500   \textcolor{keywordflow}{if} ( !hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}} ) \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00501}00501 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00502}00502   ia  = \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00503}00503   ib  = \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00504}00504   key = (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia + \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib) \% hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00505}00505   ph  = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00506}00506 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00507}00507   \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}} ( !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} )  \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00508}00508   \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib )  \textcolor{keywordflow}{return} ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00509}00509   \textcolor{keywordflow}{while} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} ) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00510}00510     ph = \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00511}00511     \textcolor{keywordflow}{if} ( ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}} == ia \&\& ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}} == ib )  \textcolor{keywordflow}{return} ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00512}00512   \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00513}00513   \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00514}00514 \}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00515}00515 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00526}\mbox{\hyperlink{hash_8c_a8dafcb56c527c1ed983952055b52668c}{00526}} \textcolor{keywordtype}{int} \mbox{\hyperlink{hash_8c_a8dafcb56c527c1ed983952055b52668c}{MMG5\_hashNew}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}} \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}} *hash,MMG5\_int hsiz,MMG5\_int hmax) \{}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00527}00527   MMG5\_int   k;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00528}00528 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00529}00529   \textcolor{comment}{/* adjust hash table params */}}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00530}00530   hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}}  = hsiz+1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00531}00531   hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}  = hmax + 2;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00532}00532   hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}  = hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00533}00533 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00534}00534   \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1)*\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}),\textcolor{stringliteral}{"{}hash table"{}},}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00535}00535                 \textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00536}00536   \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1),\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},\textcolor{keywordflow}{return} 0);}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00537}00537 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00538}00538   \textcolor{keywordflow}{for} (k=hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}}; k<hash-\/>max; k++)}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00539}00539     hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[k].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}} = k+1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00540}00540 }
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00541}00541   \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{hash_8c_source_l00542}00542 \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00001}00001\ \textcolor{comment}{/*\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00002}00002\ \textcolor{comment}{**\ \ This\ file\ is\ part\ of\ the\ mmg\ software\ package\ for\ the\ tetrahedral}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00003}00003\ \textcolor{comment}{**\ \ mesh\ modification.}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00004}00004\ \textcolor{comment}{**\ \ Copyright\ (c)\ Bx\ INP/CNRS/Inria/UBordeaux/UPMC,\ 2004-\/}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00005}00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00006}00006\ \textcolor{comment}{**\ \ mmg\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00007}00007\ \textcolor{comment}{**\ \ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public\ License\ as\ published}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00008}00008\ \textcolor{comment}{**\ \ by\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00009}00009\ \textcolor{comment}{**\ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00011}00011\ \textcolor{comment}{**\ \ mmg\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00012}00012\ \textcolor{comment}{**\ \ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00013}00013\ \textcolor{comment}{**\ \ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00014}00014\ \textcolor{comment}{**\ \ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00016}00016\ \textcolor{comment}{**\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00017}00017\ \textcolor{comment}{**\ \ License\ and\ of\ the\ GNU\ General\ Public\ License\ along\ with\ mmg\ (in}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00018}00018\ \textcolor{comment}{**\ \ files\ COPYING.LESSER\ and\ COPYING).\ If\ not,\ see}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00019}00019\ \textcolor{comment}{**\ \ <http://www.gnu.org/licenses/>.\ Please\ read\ their\ terms\ carefully\ and}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00020}00020\ \textcolor{comment}{**\ \ use\ this\ copy\ of\ the\ mmg\ distribution\ only\ if\ you\ accept\ them.}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00021}00021\ \textcolor{comment}{**\ =============================================================================}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mmgcommon__private_8h}{mmgcommon\_private.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00058}\mbox{\hyperlink{hash_8c_a2d05251a69b6f626d88af66ac1aed14a}{00058}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{hash_8c_a2d05251a69b6f626d88af66ac1aed14a}{MMG5\_mmgHashTria}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\ MMG5\_int\ *adjt,\ \mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ *hash,\ \textcolor{keywordtype}{int}\ chkISO)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00059}00059\ \ \ \mbox{\hyperlink{structMMG5__Tria}{MMG5\_pTria}}\ \ \ \ \ pt,pt1,pt2;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00060}00060\ \ \ \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}\ \ \ \ \ *ph;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00061}00061\ \ \ MMG5\_int\ \ \ \ \ \ \ kk;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00062}00062\ \ \ MMG5\_int\ \ \ \ \ \ \ *adja,hmax,k,ia,ib,jel,lel,dup,nmf;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00063}00063\ \ \ int8\_t\ \ \ \ \ \ \ \ \ i,i1,i2,j,l;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00064}00064\ \ \ MMG5\_int\ \ \ \ \ \ \ key;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00066}00066\ \ \ \textcolor{comment}{/*\ adjust\ hash\ table\ params\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00067}00067\ \ \ hmax\ =(MMG5\_int)(3.71*\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00068}00068\ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}}\ \ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac32e68b2523d554f3851cc7229a377e2}{np}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00069}00069\ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}\ \ =\ hmax\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00070}00070\ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ \ =\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00071}00071\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1)*\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}),\textcolor{stringliteral}{"{}hash\ table"{}},\textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00072}00072\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1,\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},\textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00074}00074\ \ \ \textcolor{keywordflow}{for}\ (k=hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};\ k<hash-\/>max;\ k++)}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00075}00075\ \ \ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[k].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ k+1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00077}00077\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}}\ )\ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ h-\/\ stage\ 1:\ init\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00079}00079\ \ \ \textcolor{comment}{/*\ hash\ triangles\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00080}00080\ \ \ ++\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00081}00081\ \ \ dup\ =\ nmf\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00082}00082\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}};\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00083}00083\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00086}00086\ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_a6b188066f24738473865292223c9c320}{flag}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00087}00087\ \ \ \ \ \textcolor{comment}{//\ base\ field\ of\ triangles\ has\ to\ be\ setted\ because\ it\ is\ used\ in\ setadj\ (mmgs}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00088}00088\ \ \ \ \ \textcolor{comment}{//\ and\ mmg3d)\ to\ detect\ moebius\ strip\ and\ to\ flip\ tria\ orientation}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00089}00089\ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae0b0408e6217b085c741c8dae58068e8}{base}}\ =\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aab7d0acabeb8edd8645b8a9c07169888}{base}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00091}00091\ \ \ \ \ adja\ =\ \&adjt[3*(k-\/1)+1];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{for}\ (i=0;\ i<3;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00094}00094\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00096}00096\ \ \ \ \ \ \ \textcolor{comment}{/*\ Skip\ parallel\ edges\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00097}00097\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_a3ce2c9eede0b495fb73c8d1993ed965c}{MG\_PARBDY}})\ \&\&\ !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}})\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00099}00099\ \ \ \ \ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00100}00100\ \ \ \ \ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00102}00102\ \ \ \ \ \ \ \textcolor{comment}{/*\ compute\ key\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00103}00103\ \ \ \ \ \ \ ia\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00104}00104\ \ \ \ \ \ \ ib\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00105}00105\ \ \ \ \ \ \ key\ =\ (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia\ +\ \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib)\ \%\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00106}00106\ \ \ \ \ \ \ ph\ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00108}00108\ \ \ \ \ \ \ \textcolor{comment}{/*\ store\ edge\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00109}00109\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ 0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ =\ ia;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ =\ ib;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ =\ 3*k\ +\ i;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00116}00116\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00117}00117\ \ \ \ \ \ \ \textcolor{comment}{/*\ update\ info\ about\ adjacent\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00118}00118\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00119}00119\ \ \ \ \ \ \ int8\_t\ ok\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00120}00120\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00121}00121\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ jel\ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ j\ \ \ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ discard\ duplicate\ face\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[j]\ ==\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[0]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ dup++;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ update\ adjacent\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ !adjt[3*(jel-\/1)+1+j]\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ adja[i]\ =\ 3*jel\ +\ j;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ adjt[3*(jel-\/1)+1+j]\ =\ 3*k\ +\ i;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ non-\/manifold\ case\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ adja[i]\ !=\ 3*jel+j\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ lel\ =\ adjt[3*(jel-\/1)+1+j]/3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ l\ \ \ =\ adjt[3*(jel-\/1)+1+j]\%3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ pt2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[lel];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ chkISO\ \&\&\ (\ (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}}\ ==\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a8003c2f9ed8dc445cb2d577be01c3389}{isoref}})\ ||\ (pt-\/>\mbox{\hyperlink{structMMG5__Tria_a5a462e6e60cbc9f8943d55ac236f6f10}{ref}}\ <\ 0))\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ adjt[3*(lel-\/1)+1+l]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ adja[i]\ =\ 3*jel+j;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ adjt[3*(jel-\/1)+1+j]\ =\ 3*k\ +\ i;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j]\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ pt2-\/>tag[l]\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ nmf++;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00154}00154\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ ok\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00156}00156\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ assert(ph);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ >=\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}-\/1\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Warning:\ \%s:\ memory\ alloc\ problem\ (edge):"{}}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \%"{}}\ MMG5\_PRId\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\_\_func\_\_,hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{mmgcommon__private_8h_a50b381cd31a4a90064ce1d936a7c037d}{MMG5\_GAP}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MMG5\_edge"{}},}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_afcb0359c0182a916e54e9470e5dd7eea}{MMG5\_DEL\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (kk=ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};\ kk<hash-\/>max;\ kk++)}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[kk].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ kk+1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ =\ ia;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ =\ ib;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ =\ 3*k\ +\ i;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ ++ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00186}00186\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ ok\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00188}00188\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00193}00193\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00194}00194\ \ \ \ \ \ \ assert(ok);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00195}00195\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00196}00196\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00198}00198\ \ \ \textcolor{comment}{/*\ Now\ loop\ on\ "{}only"{}\ parallel\ edges\ in\ order\ to\ add\ a\ MG\_BDY\ tag\ on\ those}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00199}00199\ \textcolor{comment}{\ \ \ *\ that\ are\ found\ in\ the\ hash\ table\ and\ their\ adjacents\ (if\ manifold;\ in\ the}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00200}00200\ \textcolor{comment}{\ \ \ *\ non-\/manifold\ case\ the\ MG\_NOM\ tag\ suffices).}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00201}00201\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00202}00202\ \textcolor{comment}{\ \ \ *\ Rationale:}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00203}00203\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ put\ MG\_BDY\ tags\ on\ edges\ that\ are\ contact\ edges\ between\ a\ "{}true"{}}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00204}00204\ \textcolor{comment}{\ \ \ *\ \ \ \ \ geometrical\ boundary\ (!MG\_PARBDY\ ||\ (MG\_PARBDY\ \&\&\ MG\_PARBDYBDY)\ and\ a}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00205}00205\ \textcolor{comment}{\ \ \ *\ \ \ \ \ purele\ parallel\ (non-\/geometrical)\ one\ (MG\_PARBDY\ \&\&\ !MG\_PARBDYBDY);}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00206}00206\ \textcolor{comment}{\ \ \ *\ \ \ -\/\ add\ also\ a\ MG\_PARBDYBDY\ tag\ on\ those\ edges\ (as\ it\ cannot\ be\ inherited}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00207}00207\ \textcolor{comment}{\ \ \ *\ \ \ \ \ from\ any\ triangle\ there)\ and\ their\ extremities.}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00208}00208\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00209}00209\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}};\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00210}00210\ \ \ \ \ pt\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00211}00211\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\mbox{\hyperlink{mmgcommon__private_8h_a277e70018dbfbb4e2f2fc8b7ca1531de}{MG\_EOK}}(pt)\ )\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00212}00212\ \ \ \ \ \textcolor{keywordflow}{for}\ (i=0;\ i<3;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00213}00213\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ !(pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_a3ce2c9eede0b495fb73c8d1993ed965c}{MG\_PARBDY}})\ ||\ (pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}})\ )\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00214}00214\ \ \ \ \ \ \ i1\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00215}00215\ \ \ \ \ \ \ i2\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00217}00217\ \ \ \ \ \ \ \textcolor{comment}{/*\ compute\ key\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00218}00218\ \ \ \ \ \ \ ia\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00219}00219\ \ \ \ \ \ \ ib\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i1],pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[i2]);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00220}00220\ \ \ \ \ \ \ key\ =\ (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia\ +\ \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib)\ \%\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00221}00221\ \ \ \ \ \ \ ph\ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00223}00223\ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ 0\ )\ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00224}00224\ \ \ \ \ \ \ \textcolor{keywordflow}{while}(\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ jel\ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ /\ 3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ j\ \ \ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ \%\ 3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ pt1\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[jel];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ pt1-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[j]\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}}\ +\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ia].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ib].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ update\ adjacent\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ lel\ =\ adjt[3*(jel-\/1)+1+j]/3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ l\ \ \ =\ adjt[3*(jel-\/1)+1+j]\%3;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ lel\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ pt2\ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[lel];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ pt2-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[l]\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_ac6618718097b74907db2442d75e062f3}{MG\_BDY}}\ +\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ia].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[ib].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_af04b86cb859c0e2a8f20abeda5446ddb}{MG\_PARBDYBDY}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00244}00244\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00247}00247\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00248}00248\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00249}00249\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00251}00251\ \ \ \textcolor{comment}{/*\ set\ tag\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00252}00252\ \ \ \textcolor{keywordflow}{for}\ (k=1;\ k<=\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac2b242eb440476131b4dee4b6bcc1ec4}{nt}};\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00253}00253\ \ \ \ \ pt\ \ =\ \&\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_ac316cb685f82f5bae1d52eea1cd5629b}{tria}}[k];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00254}00254\ \ \ \ \ \textcolor{keywordflow}{for}\ (i=0;\ i<3;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00255}00255\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ pt-\/>\mbox{\hyperlink{structMMG5__Tria_acc8266858b794defe3cd35b132c1ec46}{tag}}[i]\ \&\ \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00256}00256\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a9e3354edd5a0c18b014fc8b430653425}{MMG5\_inxt2}}[i]]].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a42b1992e7843683d2e8ee206b582dedb}{point}}[pt-\/>\mbox{\hyperlink{structMMG5__Tria_ae57444f2935d1896aa9f080c24d7686f}{v}}[\mbox{\hyperlink{mmgcommon__private_8h_a62d1fa220f2d1c9a4d9961eacc29c528}{MMG5\_iprv2}}[i]]].\mbox{\hyperlink{structMMG5__Point_a7bd40a12eb062ead46954c09c3813ae2}{tag}}\ |=\ \mbox{\hyperlink{mmgcommon__private_8h_ad4f5aeeaf0e3b7260e75d2d90df0de57}{MG\_NOM}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00258}00258\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00259}00259\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00260}00260\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00262}00262\ \ \ \textcolor{keywordflow}{if}\ (\ abs(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_af1794c6c54daf4eb98cac8e0248398fb}{imprim}})\ >\ 5\ \&\&\ dup+nmf\ >\ 0\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00263}00263\ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ \#\#\ "{}});\ \ fflush(stdout);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ nmf\ >\ 0\ )\ \ fprintf(stdout,\textcolor{stringliteral}{"{}[non-\/manifold\ model]\ \ "{}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00265}00265\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ dup\ >\ 0\ )\ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \%"{}}\ MMG5\_PRId\ \textcolor{stringliteral}{"{}\ duplicate\ removed"{}},dup);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00266}00266\ \ \ \ \ fprintf(stdout,\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00267}00267\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00268}00268\ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}}\ )\ \ fprintf(stdout,\textcolor{stringliteral}{"{}\ \ h-\/\ completed.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00270}00270\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00271}00271\ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00286}\mbox{\hyperlink{hash_8c_a1ae4cce82722658e88253895a214a815}{00286}}\ MMG5\_int\ \mbox{\hyperlink{hash_8c_a1ae4cce82722658e88253895a214a815}{MMG5\_hashFace}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ *hash,MMG5\_int\ ia,MMG5\_int\ ib,MMG5\_int\ ic,MMG5\_int\ k)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00287}00287\ \ \ \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}\ \ \ \ \ *ph;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00288}00288\ \ \ MMG5\_int\ \ \ \ \ \ \ key;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00289}00289\ \ \ MMG5\_int\ \ \ \ \ \ \ mins,maxs,sum,j;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00291}00291\ \ \ mins\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(ia,\mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(ib,ic));}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00292}00292\ \ \ maxs\ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(ia,\mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(ib,ic));}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00294}00294\ \ \ \textcolor{comment}{/*\ compute\ key\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00295}00295\ \ \ sum\ =\ ia\ +\ ib\ +\ ic;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00296}00296\ \ \ key\ =\ (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)mins\ +\ \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)maxs)\ \%\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00297}00297\ \ \ ph\ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00299}00299\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00300}00300\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ mins\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ maxs\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}}\ ==\ sum\ )}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00301}00301\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00302}00302\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00303}00303\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ <\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00305}00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ mins\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ maxs\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}}\ ==\ sum\ )\ \ \textcolor{keywordflow}{return}\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00306}00306\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00308}00308\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00309}00309\ \ \ \ \ ph\ \ \ \ \ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00310}00310\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ \ \ =\ mins;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00311}00311\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ \ \ =\ maxs;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00312}00312\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}}\ \ \ =\ sum;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00313}00313\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ \ \ =\ k;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00314}00314\ \ \ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00315}00315\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00317}00317\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ >=\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00318}00318\ \ \ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{mmgcommon__private_8h_a50b381cd31a4a90064ce1d936a7c037d}{MMG5\_GAP}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},\textcolor{stringliteral}{"{}face"{}},\textcolor{keywordflow}{return}\ 0;);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00319}00319\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j=hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};\ j<hash-\/>max;\ j++)\ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[j].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ j+1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00320}00320\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00321}00321\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00322}00322\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00324}00324\ \ \ \textcolor{comment}{/*\ insert\ new\ face\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00325}00325\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ =\ mins;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00326}00326\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ =\ maxs;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00327}00327\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a4074de7955c2b2f712b6bf17d18a6994}{s}}\ =\ sum;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00328}00328\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ =\ k;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00329}00329\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00331}00331\ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00332}00332\ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00346}\mbox{\hyperlink{hash_8c_abf9ecdc9c796612c38768d7d15d28642}{00346}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{hash_8c_abf9ecdc9c796612c38768d7d15d28642}{MMG5\_hashEdge}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ *hash,\ MMG5\_int\ a,MMG5\_int\ b,MMG5\_int\ k)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00347}00347\ \ \ \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}\ \ *ph;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00348}00348\ \ \ MMG5\_int\ \ \ \ \ key;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00349}00349\ \ \ MMG5\_int\ \ \ \ ia,ib,j;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00351}00351\ \ \ ia\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00352}00352\ \ \ ib\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00353}00353\ \ \ key\ =\ (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia\ +\ \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib)\ \%\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00354}00354\ \ \ ph\ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00356}00356\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00357}00357\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00358}00358\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00359}00359\ \ \ \ \ \textcolor{keywordflow}{while}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ <\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00360}00360\ \ \ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00361}00361\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00362}00362\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00363}00363\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ \ \ =\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00364}00364\ \ \ \ \ ph\ \ \ \ \ \ \ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00366}00366\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ >=\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}-\/1\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00367}00367\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_a25b93ad96d37e2f4f31e140ebab15a12}{info}}.\mbox{\hyperlink{structMMG5__Info_a09d107800b5717ee5dd96a26a03eed02}{ddebug}}\ )}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00368}00368\ \ \ \ \ \ \ \ \ fprintf(stderr,\textcolor{stringliteral}{"{}\(\backslash\)n\ \ \#\#\ Warning:\ \%s:\ memory\ alloc\ problem\ (edge):"{}}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \%"{}}\ MMG5\_PRId\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\_\_func\_\_,hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}});}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00371}00371\ \ \ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{mmgcommon__private_8h_a50b381cd31a4a90064ce1d936a7c037d}{MMG5\_GAP}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MMG5\_edge"{}},\textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00373}00373\ \ \ \ \ \ \ \textcolor{comment}{/*\ ph\ pointer\ may\ be\ false\ after\ realloc\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00374}00374\ \ \ \ \ \ \ ph\ \ \ \ \ \ \ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00376}00376\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j=ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};\ j<hash-\/>max;\ j++)\ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[j].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ j+1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00377}00377\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00378}00378\ \ \ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00379}00379\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00381}00381\ \ \ \textcolor{comment}{/*\ insert\ new\ edge\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00382}00382\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ =\ ia;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00383}00383\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ =\ ib;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00384}00384\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ =\ k;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00385}00385\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00387}00387\ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00388}00388\ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00404}\mbox{\hyperlink{hash_8c_a664448f735b3d71e4e122a1874b2ebd1}{00404}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{hash_8c_a664448f735b3d71e4e122a1874b2ebd1}{MMG5\_hashUpdate}}(\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ *hash,\ MMG5\_int\ a,MMG5\_int\ b,MMG5\_int\ k)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00405}00405\ \ \ \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}\ \ *ph;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00406}00406\ \ \ MMG5\_int\ \ \ \ \ key;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00407}00407\ \ \ MMG5\_int\ \ \ \ ia,ib;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00409}00409\ \ \ ia\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00410}00410\ \ \ ib\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00411}00411\ \ \ key\ =\ (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia\ +\ \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib)\ \%\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00412}00412\ \ \ ph\ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00414}00414\ \ \ while\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00415}00415\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00416}00416\ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ =\ k;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00417}00417\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00418}00418\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00420}00420\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00422}00422\ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00424}00424\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00426}00426\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00427}00427\ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00441}\mbox{\hyperlink{hash_8c_a3302db93cf4d264da9fc336076074ac7}{00441}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{hash_8c_a3302db93cf4d264da9fc336076074ac7}{MMG5\_hashEdgeTag}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ *hash,\ MMG5\_int\ a,MMG5\_int\ b,uint16\_t\ tag)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00442}00442\ \ \ \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}\ \ *ph;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00443}00443\ \ \ MMG5\_int\ \ \ \ \ key;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00444}00444\ \ \ MMG5\_int\ \ \ \ ia,ib,j;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00445}00445\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00446}00446\ \ \ ia\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00447}00447\ \ \ ib\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00448}00448\ \ \ key\ =\ (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia\ +\ \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib)\ \%\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00449}00449\ \ \ ph\ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00451}00451\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00452}00452\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00453}00453\ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ |=\ tag;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00454}00454\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00455}00455\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00456}00456\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00457}00457\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ <\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00458}00458\ \ \ \ \ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00459}00459\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ |=\ tag;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00462}00462\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00463}00463\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00464}00464\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00465}00465\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ \ \ =\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00466}00466\ \ \ \ \ ph\ \ \ \ \ \ \ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00467}00467\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ \ \ \ \ =\ ia;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00468}00468\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ \ \ \ \ =\ ib;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00469}00469\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ \ \ \ \ =\ tag;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00470}00470\ \ \ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ =\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00471}00471\ \ \ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00472}00472\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00473}00473\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ >=\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00474}00474\ \ \ \ \ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a7c5021138095892cf2699f36a7c526ae}{MMG5\_TAB\_RECALLOC}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}},\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}}-\/>\mbox{\hyperlink{structMMG5__Mesh_aa236af3993812da0fae647a11e9088b9}{gap}},\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}edge\ hash\ table"{}},\textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00476}00476\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j=hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}};\ j<hash-\/>max;\ j++)\ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[j].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ j+1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00477}00477\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00478}00478\ \ \ \ \ \textcolor{keywordflow}{return}\ tag;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00479}00479\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00480}00480\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00481}00481\ \ \ \textcolor{comment}{/*\ insert\ new\ edge\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00482}00482\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ \ \ \ \ =\ ia;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00483}00483\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ \ \ \ \ =\ ib;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00484}00484\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}}\ \ \ \ \ =\ tag;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00485}00485\ \ \ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00486}00486\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00487}00487\ \ \ \textcolor{keywordflow}{return}\ tag;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00488}00488\ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00501}\mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{00501}}\ MMG5\_int\ \mbox{\hyperlink{hash_8c_ab5de9343b5c738f6614f3a1598faa338}{MMG5\_hashGet}}(\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ *hash,MMG5\_int\ a,MMG5\_int\ b)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00502}00502\ \ \ \mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}\ \ *ph;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00503}00503\ \ \ MMG5\_int\ \ \ \ key;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00504}00504\ \ \ MMG5\_int\ \ \ \ ia,ib;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00506}00506\ \ \ \textcolor{keywordflow}{if}\ (\ !hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00508}00508\ \ \ ia\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a47564b6d8ab05c15ec56c2717be4c539}{MG\_MIN}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00509}00509\ \ \ ib\ \ =\ \mbox{\hyperlink{mmgcommon__private_8h_a48e51dff4e4dda331a2bfff4c0c70c54}{MG\_MAX}}(a,b);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00510}00510\ \ \ key\ =\ (\mbox{\hyperlink{mmgcommon__private_8h_aecf913569a22d54464e50360a7c803c4}{MMG5\_KA}}*(int64\_t)ia\ +\ \mbox{\hyperlink{mmgcommon__private_8h_a6dab4e22c6af3a81e864dcf124828602}{MMG5\_KB}}*(int64\_t)ib)\ \%\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00511}00511\ \ \ ph\ \ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[key];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00512}00512\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00513}00513\ \ \ \mbox{\hyperlink{API__functionsf__2d_8c_a8fa1e72d65c006f7a41f14c6fd681a9d}{if}}\ (\ !ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ )\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00514}00514\ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \ \textcolor{keywordflow}{return}\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00515}00515\ \ \ \textcolor{keywordflow}{while}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00516}00516\ \ \ \ \ ph\ =\ \&hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[ph-\/>\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}];}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00517}00517\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a6d1e0d33c7d05c896daffcb4b066c8b2}{a}}\ ==\ ia\ \&\&\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a51cff7c0bb88263e04d056d08061ae6b}{b}}\ ==\ ib\ )\ \ \textcolor{keywordflow}{return}\ ph-\/>\mbox{\hyperlink{structMMG5__hedge_a85c715ed98fa0c0958847bf327291477}{k}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00518}00518\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00519}00519\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00520}00520\ \}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00532}\mbox{\hyperlink{hash_8c_a8dafcb56c527c1ed983952055b52668c}{00532}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{hash_8c_a8dafcb56c527c1ed983952055b52668c}{MMG5\_hashNew}}(\mbox{\hyperlink{structMMG5__Mesh}{MMG5\_pMesh}}\ \mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},\mbox{\hyperlink{structMMG5__Hash}{MMG5\_Hash}}\ *hash,MMG5\_int\ hsiz,MMG5\_int\ hmax)\ \{}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00533}00533\ \ \ MMG5\_int\ \ \ k;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00534}00534\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00535}00535\ \ \ \textcolor{comment}{/*\ adjust\ hash\ table\ params\ */}}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00536}00536\ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}}\ \ =\ hsiz+1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00537}00537\ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}\ \ =\ hmax\ +\ 2;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00538}00538\ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a2b6c799b48bad7f0afdb375556ab4f17}{nxt}}\ \ =\ hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00540}00540\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a5119d3bed2b1273e7741600bb22b2088}{MMG5\_ADD\_MEM}}(\mbox{\hyperlink{API__functionsf__2d_8c_ada14f706b6d7a565d1eeb593fa0ae492}{mesh}},(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1)*\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}}),\textcolor{stringliteral}{"{}hash\ table"{}},}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00542}00542\ \ \ \mbox{\hyperlink{mmgcommon__private_8h_a08f3c7818d5a7de38d88dd83b622c99f}{MMG5\_SAFE\_CALLOC}}(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}},(hash-\/>\mbox{\hyperlink{structMMG5__Hash_a1392b1a5b0964d3124a324f243629ce9}{max}}+1),\mbox{\hyperlink{structMMG5__hedge}{MMG5\_hedge}},\textcolor{keywordflow}{return}\ 0);}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00543}00543\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00544}00544\ \ \ \textcolor{keywordflow}{for}\ (k=hash-\/>\mbox{\hyperlink{structMMG5__Hash_ab9964a6eb3dae0f66bee43b7032eafe2}{siz}};\ k<hash-\/>max;\ k++)}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00545}00545\ \ \ \ \ hash-\/>\mbox{\hyperlink{structMMG5__Hash_a6417f85daece68afaa4b146d5eb28b3b}{item}}[k].\mbox{\hyperlink{structMMG5__hedge_a9f23e9d33ee5b0f27adae9288ed90ca6}{nxt}}\ =\ k+1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00547}00547\ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{hash_8c_source_l00548}00548\ \}}
 
 \end{DoxyCode}
